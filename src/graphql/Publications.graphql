@@ -1,0 +1,15 @@
+query Snapshot($request: ExplorePublicationRequest!) {
+  explorePublications(request: $request) {
+    items {
+      ... on Post {
+        id
+      }
+      ... on Comment {
+        id
+      }
+      ... on Mirror {
+        id
+      }
+    }
+  }
+}
