@@ -4224,11 +4224,11 @@ export type WorldcoinPhoneVerifyWebhookRequest = {
   signalType: WorldcoinPhoneVerifyType;
 };
 
-export type SnapshotQueryVariables = Exact<{
+export type PublicationsQueryVariables = Exact<{
   request: ExplorePublicationRequest;
 }>;
 
-export type SnapshotQuery = {
+export type PublicationsQuery = {
   __typename?: 'Query';
   explorePublications: {
     __typename?: 'ExplorePublicationResult';
@@ -4296,8 +4296,8 @@ const result: PossibleTypesResultData = {
 };
 export default result;
 
-export const SnapshotDocument = gql`
-  query Snapshot($request: ExplorePublicationRequest!) {
+export const PublicationsDocument = gql`
+  query Publications($request: ExplorePublicationRequest!) {
     explorePublications(request: $request) {
       items {
         ... on Post {
@@ -4315,33 +4315,33 @@ export const SnapshotDocument = gql`
 `;
 
 /**
- * __useSnapshotQuery__
+ * __usePublicationsQuery__
  *
- * To run a query within a React component, call `useSnapshotQuery` and pass it any options that fit your needs.
- * When your component renders, `useSnapshotQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `usePublicationsQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePublicationsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useSnapshotQuery({
+ * const { data, loading, error } = usePublicationsQuery({
  *   variables: {
  *      request: // value for 'request'
  *   },
  * });
  */
-export function useSnapshotQuery(
-  baseOptions: Apollo.QueryHookOptions<SnapshotQuery, SnapshotQueryVariables>
+export function usePublicationsQuery(
+  baseOptions: Apollo.QueryHookOptions<PublicationsQuery, PublicationsQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<SnapshotQuery, SnapshotQueryVariables>(SnapshotDocument, options);
+  return Apollo.useQuery<PublicationsQuery, PublicationsQueryVariables>(PublicationsDocument, options);
 }
-export function useSnapshotLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<SnapshotQuery, SnapshotQueryVariables>
+export function usePublicationsLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<PublicationsQuery, PublicationsQueryVariables>
 ) {
   const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<SnapshotQuery, SnapshotQueryVariables>(SnapshotDocument, options);
+  return Apollo.useLazyQuery<PublicationsQuery, PublicationsQueryVariables>(PublicationsDocument, options);
 }
-export type SnapshotQueryHookResult = ReturnType<typeof useSnapshotQuery>;
-export type SnapshotLazyQueryHookResult = ReturnType<typeof useSnapshotLazyQuery>;
-export type SnapshotQueryResult = Apollo.QueryResult<SnapshotQuery, SnapshotQueryVariables>;
+export type PublicationsQueryHookResult = ReturnType<typeof usePublicationsQuery>;
+export type PublicationsLazyQueryHookResult = ReturnType<typeof usePublicationsLazyQuery>;
+export type PublicationsQueryResult = Apollo.QueryResult<PublicationsQuery, PublicationsQueryVariables>;

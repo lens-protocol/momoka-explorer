@@ -1,4 +1,4 @@
-query Snapshot($request: ExplorePublicationRequest!) {
+query Publications($request: ExplorePublicationRequest!) {
   explorePublications(request: $request) {
     items {
       ... on Post {
