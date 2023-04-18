@@ -8,6 +8,8 @@ import Link from 'next/link';
 import type { FC } from 'react';
 
 import { PublicationSortCriteria, usePublicationsQuery } from '@/generated';
+import getProfilePicture from '@/utils/getpfp';
+import truncate from '@/utils/truncate';
 
 import TransactionsShimmer from '../shimmers/TransactionsShimmer';
 
@@ -33,36 +35,55 @@ const AllTransactions: FC<Props> = () => {
         </div>
       </div>
       <div className="overflow-x-auto">
-        {loading && <TransactionsShimmer />}
-        <table className="min-w-full table-auto border-separate border-spacing-y-3">
-          <tbody>
-            {data?.explorePublications.items.map((publication) => (
-              <tr key={publication.id} className="overflow-hidden bg-white">
-                <td className="w-48 whitespace-nowrap rounded-l-xl px-3 py-5 text-sm text-gray-900">
-                  <div className="flex items-center space-x-2">
-                    <span className="rounded-xl bg-gray-100 p-2">
-                      <ArrowsRightLeftIcon className="h-4 w-4 text-green-700" />
-                    </span>
-                    <div className="flex flex-col">
-                      <Link
-                        href={`/tx/CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc`}
-                        className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
-                      >
-                        CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc
-                      </Link>
-                      <span className="text-xs opacity-50">6 secs ago</span>
+        {loading ? (
+          <TransactionsShimmer />
+        ) : (
+          <table className="min-w-full table-auto border-separate border-spacing-y-3">
+            <thead className="text-left">
+              <tr>
+                <th className="px-3 text-sm font-normal">Txn Id</th>
+                <th className="w-20 px-3 text-sm font-normal">Action</th>
+                <th className="px-3 text-sm font-normal">Age</th>
+                <th className="px-3 text-sm font-normal">From</th>
+                <th className="px-3 text-sm font-normal">Via</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data?.explorePublications.items.map((publication) => (
+                <tr key={publication.id} className="overflow-hidden bg-white">
+                  <td className="rounded-l-xl px-3 py-2 text-sm text-gray-900">
+                    <div className="flex items-center space-x-2">
+                      <span className="rounded-xl bg-gray-100 p-2">
+                        <ArrowsRightLeftIcon className="h-4 w-4 text-green-700" />
+                      </span>
+                      <div className="flex flex-col truncate">
+                        <Link
+                          href={`/tx/CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc`}
+                          className="truncate text-indigo-400 text-opacity-80 hover:text-opacity-100"
+                        >
+                          {truncate('CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc', 30)}
+                        </Link>
+                      </div>
                     </div>
-                  </div>
-                </td>
-                <td className="whitespace-nowrap rounded-r-xl px-3 py-5 text-center text-sm text-gray-500">
-                  <span className="inline-flex w-20 items-center justify-center space-x-1 rounded-lg border bg-gray-50 px-3 py-1.5 text-xs">
-                    {publication.__typename}
-                  </span>
-                </td>
-                <td className="whitespace-nowrap px-3 py-5 text-gray-500">
-                  <div className="flex flex-col">
-                    <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-sm">
-                      <span className="text-xs">From</span>
+                  </td>
+                  <td className="w-20 whitespace-nowrap rounded-r-xl px-3 py-2 text-sm text-gray-500">
+                    <span className="inline-flex w-20 items-center justify-center space-x-1 rounded-lg border bg-gray-50 px-3 py-1.5 text-xs">
+                      {publication.__typename}
+                    </span>
+                  </td>
+                  <td className="whitespace-nowrap rounded-r-xl px-3 py-2 text-sm text-gray-500">
+                    6 secs ago
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-2 text-gray-500">
+                    <span className="inline-flex items-center space-x-1.5 px-2 py-0.5 text-sm">
+                      <span>
+                        <img
+                          className="h-4 w-4 rounded-2xl"
+                          src={getProfilePicture('0x01d79BcEaEaaDfb8fD2F2f53005289CFcF483464')}
+                          alt="pfp"
+                          draggable={false}
+                        />
+                      </span>
                       <Link
                         href={`https://lensfrens.xyz/sasicodes.lens`}
                         target="_blank"
@@ -71,29 +92,28 @@ const AllTransactions: FC<Props> = () => {
                         sasicodes.lens
                       </Link>
                     </span>
-                    <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-sm">
-                      <span className="text-xs">via</span>
-                      <Link
-                        href={`/submitter/CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc`}
-                        className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
-                      >
-                        submitter::lens::CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-2 text-gray-500">
+                    <Link
+                      href={`/submitter/CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc`}
+                      className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
+                    >
+                      submitter::lens::CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc
+                    </Link>
+                  </td>
+                  <td className="whitespace-nowrap rounded-r-xl px-3 py-2 text-right text-sm text-gray-500">
+                    <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-xs">
+                      <span>View</span>
+                      <Link href={`https://lenster.xyz/posts/0x01-0x01`} target="_blank">
+                        <ArrowTopRightOnSquareIcon className="h-3.5 w-3.5 text-green-700" />
                       </Link>
                     </span>
-                  </div>
-                </td>
-                <td className="whitespace-nowrap rounded-r-xl px-3 py-5 text-right text-sm text-gray-500">
-                  <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-xs">
-                    <span>View</span>
-                    <Link href={`https://lenster.xyz/posts/0x01-0x01`} target="_blank">
-                      <ArrowTopRightOnSquareIcon className="h-3.5 w-3.5 text-green-700" />
-                    </Link>
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </div>
   );
