@@ -21,7 +21,7 @@ const AllTransactions: FC<Props> = () => {
   });
 
   return (
-    <div className="relative space-y-4 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 md:p-5">
+    <div className="relative mt-6 space-y-4 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 md:p-5">
       <div className="left-0 right-0 flex flex-wrap items-center justify-between gap-y-3">
         <div>
           <h1 className="font-medium opacity-80">All Transactions</h1>
