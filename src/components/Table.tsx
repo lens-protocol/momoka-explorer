@@ -2,42 +2,40 @@ import { ArrowRightIcon, ArrowsRightLeftIcon, ArrowTopRightOnSquareIcon } from '
 import clsx from 'clsx';
 import Link from 'next/link';
 import type { FC } from 'react';
-import { useEffect, useState } from 'react';
 
-import type { Publication } from '@/generated';
 import { PublicationSortCriteria, usePublicationsQuery } from '@/generated';
 
+import TableShimmer from './TableShimmer';
+
 const Table: FC = () => {
-  const [newlyAddedItemIds, setNewlyAddedItemIds] = useState<string[]>([]);
-  const [previousData, setPreviousData] = useState<any>(null);
-  const { data, refetch } = usePublicationsQuery({
+  const { data, loading } = usePublicationsQuery({
     variables: { request: { sortCriteria: PublicationSortCriteria.Latest, limit: 10 } }
   });
 
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      refetch().then(({ data }) => {
-        const newItems = data?.explorePublications.items.filter((item) => {
-          return (
-            !previousData?.explorePublications.items.some(
-              (prevItem: Publication) => prevItem.id === item.id
-            ) && !newlyAddedItemIds.includes(item.id)
-          );
-        });
+  // useEffect(() => {
+  //   const intervalId = setInterval(() => {
+  //     refetch().then(({ data }) => {
+  //       const newItems = data?.explorePublications.items.filter((item) => {
+  //         return (
+  //           !previousData?.explorePublications.items.some(
+  //             (prevItem: Publication) => prevItem.id === item.id
+  //           ) && !newlyAddedItemIds.includes(item.id)
+  //         );
+  //       });
 
-        setNewlyAddedItemIds(newlyAddedItemIds.concat(newItems.map((item) => item.id)));
+  //       setNewlyAddedItemIds(newlyAddedItemIds.concat(newItems.map((item) => item.id)));
 
-        setTimeout(() => {
-          setNewlyAddedItemIds([]);
-        }, 500);
+  //       setTimeout(() => {
+  //         setNewlyAddedItemIds([]);
+  //       }, 500);
 
-        setPreviousData(data);
-      });
-    }, 5000);
+  //       setPreviousData(data);
+  //     });
+  //   }, 5000);
 
-    return () => clearInterval(intervalId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [newlyAddedItemIds, previousData]);
+  //   return () => clearInterval(intervalId);
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [newlyAddedItemIds, previousData]);
 
   return (
     <div className="overflow-x-auto rounded-xl bg-gray-50 p-5">
@@ -52,14 +50,15 @@ const Table: FC = () => {
         </Link>
       </div>
       <div className="inline-block min-w-full pt-5">
+        {loading && <TableShimmer />}
         <table className="min-w-full table-auto border-separate border-spacing-y-3">
           <tbody>
             {data?.explorePublications.items.map((publication) => (
               <tr
                 key={publication.id}
                 className={clsx(
-                  'overflow-hidden bg-white',
-                  newlyAddedItemIds.includes(publication.id) && 'bg-yellow-100'
+                  'overflow-hidden bg-white'
+                  // newlyAddedItemIds.includes(publication.id) && 'bg-yellow-100'
                 )}
               >
                 <td className="whitespace-nowrap rounded-l-xl px-3 py-5 text-sm text-gray-900">
@@ -101,7 +100,7 @@ const Table: FC = () => {
                     </span>
                   </div>
                 </td>
-                <td className="whitespace-nowrap rounded-r-xl px-3 py-5 text-sm text-gray-500">
+                <td className="whitespace-nowrap rounded-r-xl px-3 py-5 text-right text-sm text-gray-500">
                   <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-xs">
                     <span>View Publication</span>
                     <Link href={`https://lenster.xyz/posts/0x01-0x01`} target="_blank">
