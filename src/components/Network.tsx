@@ -13,7 +13,7 @@ const Network = () => {
 
   return (
     <Listbox value={selected} onChange={setSelected}>
-      <div className="relative mt-1">
+      <div className="relative">
         <Listbox.Button className="relative w-full rounded-lg py-2 pl-3 pr-8 text-left text-sm focus:outline-none">
           <span className="block truncate">{selected.name}</span>
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
@@ -26,7 +26,7 @@ const Network = () => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="absolute right-0 mt-4 w-36 overflow-auto rounded-xl bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+          <Listbox.Options className="absolute right-0 mt-2 w-36 overflow-auto rounded-xl bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
             {networks.map((network, idx) => (
               <Listbox.Option
                 key={idx}

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-const TableShimmer = () => {
+const TransactionsShimmer = () => {
   const txns = useMemo(() => Array(10).fill(1), []);
 
   return (
@@ -12,4 +12,4 @@ const TableShimmer = () => {
   );
 };
 
-export default TableShimmer;
+export default TransactionsShimmer;

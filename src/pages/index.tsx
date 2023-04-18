@@ -1,12 +1,12 @@
 import Head from 'next/head';
 
-import SearchBar from '@/components/SearchBar';
+import LatestTransactions from '@/components/home/LatestTransactions';
+import SearchBar from '@/components/home/SearchBar';
 import Stats from '@/components/Stats';
-import Table from '@/components/Table';
 
-export default function Home() {
+const index = () => {
   return (
-    <div className="container mx-auto max-w-[100rem] px-2 sm:px-6 lg:px-14">
+    <>
       <Head>
         <title>Lens DA Explorer</title>
       </Head>
@@ -15,8 +15,10 @@ export default function Home() {
       </div>
       <div className="mb-10 space-y-4">
         <Stats />
-        <Table />
+        <LatestTransactions />
       </div>
-    </div>
+    </>
   );
-}
+};
+
+export default index;

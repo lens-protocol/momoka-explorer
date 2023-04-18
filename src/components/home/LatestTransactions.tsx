@@ -5,9 +5,13 @@ import type { FC } from 'react';
 
 import { PublicationSortCriteria, usePublicationsQuery } from '@/generated';
 
-import TableShimmer from './TableShimmer';
+import TransactionsShimmer from '../shimmers/TransactionsShimmer';
 
-const Table: FC = () => {
+type Props = {
+  hideViewAll?: boolean;
+};
+
+const LatestTransactions: FC<Props> = ({ hideViewAll = false }) => {
   const { data, loading } = usePublicationsQuery({
     variables: { request: { sortCriteria: PublicationSortCriteria.Latest, limit: 10 } }
   });
@@ -38,19 +42,21 @@ const Table: FC = () => {
   // }, [newlyAddedItemIds, previousData]);
 
   return (
-    <div className="relative space-y-5 rounded-xl bg-gray-50 px-2 py-4 md:p-5">
+    <div className="relative space-y-6 rounded-xl bg-gray-50 px-2 py-4 md:p-5">
       <div className="absolute left-0 right-0 flex items-center justify-between px-6">
         <h1 className="text-sm font-medium opacity-80">Latest Transactions</h1>
-        <Link
-          href="/txns"
-          className="flex items-center space-x-1 text-sm opacity-80 hover:text-indigo-400 hover:opacity-100"
-        >
-          <span>View all</span>
-          <ArrowRightIcon className="h-3.5 w-3.5" />
-        </Link>
+        {!hideViewAll && (
+          <Link
+            href="/txns"
+            className="flex items-center space-x-1 text-sm opacity-80 hover:text-indigo-400 hover:opacity-100"
+          >
+            <span>View all</span>
+            <ArrowRightIcon className="h-3.5 w-3.5" />
+          </Link>
+        )}
       </div>
       <div className="overflow-x-auto">
-        {loading && <TableShimmer />}
+        {loading && <TransactionsShimmer />}
         <table className="min-w-full table-auto border-separate border-spacing-y-3">
           <tbody>
             {data?.explorePublications.items.map((publication) => (
@@ -122,4 +128,4 @@ const Table: FC = () => {
   );
 };
 
-export default Table;
+export default LatestTransactions;
