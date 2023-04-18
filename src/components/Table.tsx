@@ -61,7 +61,7 @@ const Table: FC = () => {
                   // newlyAddedItemIds.includes(publication.id) && 'bg-yellow-100'
                 )}
               >
-                <td className="whitespace-nowrap rounded-l-xl px-3 py-5 text-sm text-gray-900">
+                <td className="w-48 whitespace-nowrap rounded-l-xl px-3 py-5 text-sm text-gray-900">
                   <div className="flex items-center space-x-2">
                     <span className="rounded-xl bg-gray-100 p-2">
                       <ArrowsRightLeftIcon className="h-4 w-4 text-green-700" />
@@ -76,6 +76,11 @@ const Table: FC = () => {
                       <span className="text-xs opacity-50">6 secs ago</span>
                     </div>
                   </div>
+                </td>
+                <td className="whitespace-nowrap rounded-r-xl px-3 py-5 text-center text-sm text-gray-500">
+                  <span className="inline-flex w-20 items-center justify-center space-x-1 rounded-lg border bg-gray-50 px-3 py-1.5 text-xs">
+                    {publication.__typename}
+                  </span>
                 </td>
                 <td className="whitespace-nowrap px-3 py-5 text-gray-500">
                   <div className="flex flex-col">
@@ -102,7 +107,7 @@ const Table: FC = () => {
                 </td>
                 <td className="whitespace-nowrap rounded-r-xl px-3 py-5 text-right text-sm text-gray-500">
                   <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-xs">
-                    <span>View Publication</span>
+                    <span>View</span>
                     <Link href={`https://lenster.xyz/posts/0x01-0x01`} target="_blank">
                       <ArrowTopRightOnSquareIcon className="h-3.5 w-3.5 text-green-700" />
                     </Link>

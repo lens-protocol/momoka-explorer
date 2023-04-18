@@ -19,7 +19,7 @@ const SearchBar = () => {
         ref={inputElement}
         type="text"
         className="flex-1 bg-transparent px-6 py-4 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none sm:leading-6 md:text-lg"
-        placeholder="Search transactions"
+        placeholder="Search transaction Id"
         autoComplete="off"
         autoFocus
       />
