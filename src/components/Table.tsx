@@ -1,3 +1,6 @@
+import { ArrowRightIcon, ArrowsRightLeftIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+import clsx from 'clsx';
+import Link from 'next/link';
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 
@@ -8,7 +11,7 @@ const Table: FC = () => {
   const [newlyAddedItemIds, setNewlyAddedItemIds] = useState<string[]>([]);
   const [previousData, setPreviousData] = useState<any>(null);
   const { data, refetch } = usePublicationsQuery({
-    variables: { request: { sortCriteria: PublicationSortCriteria.Latest, limit: 50 } }
+    variables: { request: { sortCriteria: PublicationSortCriteria.Latest, limit: 10 } }
   });
 
   useEffect(() => {
@@ -37,67 +40,81 @@ const Table: FC = () => {
   }, [newlyAddedItemIds, previousData]);
 
   return (
-    <>
-      <div className="sm:flex sm:items-center">
-        <div className="sm:flex-auto">
-          <h1 className="text-base font-semibold leading-6 text-gray-900">Title</h1>
-          <p className="mt-2 text-sm text-gray-700">Some copy here</p>
-        </div>
-        <div className="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-          <div>Stats here</div>
-        </div>
+    <div className="overflow-x-auto rounded-xl bg-gray-50 p-5">
+      <div className="flex items-center justify-between">
+        <h1 className="text-sm font-medium opacity-80">Latest Transactions</h1>
+        <Link
+          href="/txns"
+          className="flex items-center space-x-1 text-sm opacity-80 hover:text-indigo-400 hover:opacity-100"
+        >
+          <span>View all</span>
+          <ArrowRightIcon className="h-3.5 w-3.5" />
+        </Link>
       </div>
-      <div className="mt-8 flow-root">
-        <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-            <div className="overflow-hidden shadow ring-1 ring-black ring-opacity-5 sm:rounded-lg">
-              <table className="min-w-full divide-y divide-gray-300">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th
-                      scope="col"
-                      className="py-3.5 pl-4 pr-3 text-center text-sm font-semibold text-gray-900 sm:pl-6"
-                    >
-                      Post ID
-                    </th>
-                    <th scope="col" className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
-                      User
-                    </th>
-                    <th scope="col" className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
-                      App
-                    </th>
-                    <th scope="col" className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900">
-                      Tags
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200 bg-white">
-                  {data?.explorePublications.items.map((publication) => (
-                    <tr
-                      key={publication.id}
-                      className={newlyAddedItemIds.includes(publication.id) ? 'bg-yellow-100' : ''}
-                    >
-                      <td className="whitespace-nowrap py-4 pl-4 pr-3 text-center text-sm font-medium text-gray-900 sm:pl-6">
-                        {publication.id}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-center text-sm text-gray-500">
-                        {publication.id}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-center text-sm text-gray-500">
-                        {publication.id}
-                      </td>
-                      <td className="whitespace-nowrap px-3 py-4 text-center text-sm text-gray-500">
-                        {publication.id}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+      <div className="inline-block min-w-full pt-5">
+        <table className="min-w-full table-auto border-separate border-spacing-y-3">
+          <tbody>
+            {data?.explorePublications.items.map((publication) => (
+              <tr
+                key={publication.id}
+                className={clsx(
+                  'overflow-hidden bg-white',
+                  newlyAddedItemIds.includes(publication.id) && 'bg-yellow-100'
+                )}
+              >
+                <td className="whitespace-nowrap rounded-l-xl px-3 py-5 text-sm text-gray-900">
+                  <div className="flex items-center space-x-2">
+                    <span className="rounded-xl bg-gray-100 p-2">
+                      <ArrowsRightLeftIcon className="h-4 w-4 text-green-700" />
+                    </span>
+                    <div className="flex flex-col">
+                      <Link
+                        href={`/tx/CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc`}
+                        className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
+                      >
+                        CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc
+                      </Link>
+                      <span className="text-xs opacity-50">6 secs ago</span>
+                    </div>
+                  </div>
+                </td>
+                <td className="whitespace-nowrap px-3 py-5 text-gray-500">
+                  <div className="flex flex-col">
+                    <span className="inline-flex space-x-1 px-2 py-0.5 text-xs">
+                      <span>From</span>
+                      <Link
+                        href={`https://lensfrens.xyz/sasicodes.lens`}
+                        target="_blank"
+                        className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
+                      >
+                        sasicodes.lens
+                      </Link>
+                    </span>
+                    <span className="inline-flex space-x-1 px-2 py-0.5 text-xs">
+                      <span>Via</span>
+                      <Link
+                        href={`/submitter/CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc`}
+                        className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
+                      >
+                        submitter::lens::CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc
+                      </Link>
+                    </span>
+                  </div>
+                </td>
+                <td className="whitespace-nowrap rounded-r-xl px-3 py-5 text-sm text-gray-500">
+                  <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-xs">
+                    <span>Lenster</span>
+                    <Link href={`https://lenster.xyz/posts/0x01-0x01`} target="_blank">
+                      <ArrowTopRightOnSquareIcon className="h-4 w-4 text-green-700" />
+                    </Link>
+                  </span>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-    </>
+    </div>
   );
 };
 

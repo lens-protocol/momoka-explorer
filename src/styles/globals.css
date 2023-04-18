@@ -1,9 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+html {
+  font-family: 'Rubik', sans-serif;
+}
+
 body {
-  @apply bg-gray-50;
+  @apply bg-fixed bg-white min-h-screen;
 }
 
 .fade-enter {
