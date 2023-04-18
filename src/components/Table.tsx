@@ -38,8 +38,8 @@ const Table: FC = () => {
   // }, [newlyAddedItemIds, previousData]);
 
   return (
-    <div className="overflow-x-auto rounded-xl bg-gray-50 p-5">
-      <div className="flex items-center justify-between">
+    <div className="relative space-y-5 rounded-xl bg-gray-50 px-2 py-4 md:p-5">
+      <div className="absolute left-0 right-0 flex items-center justify-between px-6">
         <h1 className="text-sm font-medium opacity-80">Latest Transactions</h1>
         <Link
           href="/txns"
@@ -49,7 +49,7 @@ const Table: FC = () => {
           <ArrowRightIcon className="h-3.5 w-3.5" />
         </Link>
       </div>
-      <div className="inline-block min-w-full pt-5">
+      <div className="overflow-x-auto">
         {loading && <TableShimmer />}
         <table className="min-w-full table-auto border-separate border-spacing-y-3">
           <tbody>
