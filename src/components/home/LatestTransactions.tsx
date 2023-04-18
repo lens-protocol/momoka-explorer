@@ -40,8 +40,8 @@ const LatestTransactions: FC<Props> = () => {
   // }, [newlyAddedItemIds, previousData]);
 
   return (
-    <div className="relative space-y-6 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 md:p-5">
-      <div className="absolute left-0 right-0 flex items-center justify-between px-6">
+    <div className="relative rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 md:space-y-2 md:p-5">
+      <div className="left-0 right-0 flex items-center justify-between gap-y-3">
         <h1 className="text-sm font-medium opacity-80">Latest Transactions</h1>
         <Link
           href="/txns"
