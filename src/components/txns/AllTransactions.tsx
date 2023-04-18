@@ -97,10 +97,7 @@ const AllTransactions: FC<Props> = () => {
                     </span>
                   </td>
                   <td className="whitespace-nowrap px-3 py-2 text-gray-500">
-                    <Link
-                      href={`/submitter/CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc`}
-                      className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
-                    >
+                    <Link href="/" className="text-indigo-400 text-opacity-80 hover:text-opacity-100">
                       submitter::lens::CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc
                     </Link>
                   </td>

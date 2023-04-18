@@ -98,10 +98,7 @@ const LatestTransactions: FC<Props> = () => {
                     </span>
                     <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-sm">
                       <span className="text-xs">via</span>
-                      <Link
-                        href={`/submitter/CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc`}
-                        className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
-                      >
+                      <Link href="/" className="text-indigo-400 text-opacity-80 hover:text-opacity-100">
                         submitter::lens::CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc
                       </Link>
                     </span>
