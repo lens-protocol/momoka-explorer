@@ -7,11 +7,9 @@ import { PublicationSortCriteria, usePublicationsQuery } from '@/generated';
 
 import TransactionsShimmer from '../shimmers/TransactionsShimmer';
 
-type Props = {
-  hideViewAll?: boolean;
-};
+type Props = {};
 
-const LatestTransactions: FC<Props> = ({ hideViewAll = false }) => {
+const LatestTransactions: FC<Props> = () => {
   const { data, loading } = usePublicationsQuery({
     variables: { request: { sortCriteria: PublicationSortCriteria.Latest, limit: 10 } }
   });
@@ -42,18 +40,16 @@ const LatestTransactions: FC<Props> = ({ hideViewAll = false }) => {
   // }, [newlyAddedItemIds, previousData]);
 
   return (
-    <div className="relative space-y-6 rounded-xl bg-gray-50 px-2 py-4 md:p-5">
+    <div className="relative space-y-6 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 md:p-5">
       <div className="absolute left-0 right-0 flex items-center justify-between px-6">
         <h1 className="text-sm font-medium opacity-80">Latest Transactions</h1>
-        {!hideViewAll && (
-          <Link
-            href="/txns"
-            className="flex items-center space-x-1 text-sm opacity-80 hover:text-indigo-400 hover:opacity-100"
-          >
-            <span>View all</span>
-            <ArrowRightIcon className="h-3.5 w-3.5" />
-          </Link>
-        )}
+        <Link
+          href="/txns"
+          className="flex items-center space-x-2 text-sm opacity-80 hover:text-indigo-400 hover:opacity-100"
+        >
+          <span>View all</span>
+          <ArrowRightIcon className="h-3.5 w-3.5" />
+        </Link>
       </div>
       <div className="overflow-x-auto">
         {loading && <TransactionsShimmer />}
