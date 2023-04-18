@@ -21,9 +21,12 @@ const AllTransactions: FC<Props> = () => {
   });
 
   return (
-    <div className="relative space-y-8 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 md:p-5">
+    <div className="relative space-y-14 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 md:p-5">
       <div className="absolute left-0 right-0 flex items-center justify-between px-6">
-        <h1 className="font-medium opacity-80">All Transactions</h1>
+        <div>
+          <h1 className="font-medium opacity-80">All Transactions</h1>
+          <p className="text-sm opacity-60">More than 1,939,672,686 transactions found</p>
+        </div>
         <div className="flex items-center space-x-3">
           <button type="button" className="rounded-lg border p-1 hover:bg-gray-50">
             <ArrowLeftIcon className="h-4 w-4" />
