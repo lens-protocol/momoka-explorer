@@ -84,8 +84,8 @@ const Table: FC = () => {
                 </td>
                 <td className="whitespace-nowrap px-3 py-5 text-gray-500">
                   <div className="flex flex-col">
-                    <span className="inline-flex space-x-1 px-2 py-0.5 text-xs">
-                      <span>From</span>
+                    <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-sm">
+                      <span className="text-xs">From</span>
                       <Link
                         href={`https://lensfrens.xyz/sasicodes.lens`}
                         target="_blank"
@@ -94,8 +94,8 @@ const Table: FC = () => {
                         sasicodes.lens
                       </Link>
                     </span>
-                    <span className="inline-flex space-x-1 px-2 py-0.5 text-xs">
-                      <span>Via</span>
+                    <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-sm">
+                      <span className="text-xs">via</span>
                       <Link
                         href={`/submitter/CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc`}
                         className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
