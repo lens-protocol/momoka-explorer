@@ -107,13 +107,17 @@ const LatestTransactions: FC<Props> = () => {
                     </span>
                   </div>
                 </td>
-                <td className="whitespace-nowrap rounded-r-xl px-3 py-5 text-right text-sm text-gray-500">
-                  <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-xs">
-                    <span>View</span>
-                    <Link href={`https://lenster.xyz/posts/0x01-0x01`} target="_blank">
+                <td className="whitespace-nowrap rounded-r-xl px-3 py-5 text-right text-sm">
+                  <Link
+                    href={`https://lenster.xyz/posts/0x01-0x01`}
+                    target="_blank"
+                    className="opacity-60 hover:opacity-100"
+                  >
+                    <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-xs">
+                      <span>View</span>
                       <ArrowTopRightOnSquareIcon className="h-3.5 w-3.5 text-green-700" />
-                    </Link>
-                  </span>
+                    </span>
+                  </Link>
                 </td>
               </tr>
             ))}
