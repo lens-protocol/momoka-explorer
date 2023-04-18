@@ -69,14 +69,12 @@ const AllTransactions: FC<Props> = () => {
                       </div>
                     </div>
                   </td>
-                  <td className="w-20 whitespace-nowrap rounded-r-xl px-3 py-2 text-sm text-gray-500">
+                  <td className="w-20 whitespace-nowrap px-3 py-2 text-sm text-gray-500">
                     <span className="inline-flex w-20 items-center justify-center space-x-1 rounded-lg border bg-gray-50 px-3 py-1.5 text-xs">
                       {publication.__typename}
                     </span>
                   </td>
-                  <td className="whitespace-nowrap rounded-r-xl px-3 py-2 text-sm text-gray-500">
-                    6 secs ago
-                  </td>
+                  <td className="whitespace-nowrap px-3 py-2 text-sm text-gray-500">6 secs ago</td>
                   <td className="whitespace-nowrap px-3 py-2 text-gray-500">
                     <span className="inline-flex items-center space-x-1.5 px-2 py-0.5 text-sm">
                       <span>
@@ -107,7 +105,7 @@ const AllTransactions: FC<Props> = () => {
                       target="_blank"
                       className="opacity-60 hover:opacity-100"
                     >
-                      <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-xs">
+                      <span className="inline-flex items-center space-x-1 text-xs">
                         <span>View</span>
                         <ArrowTopRightOnSquareIcon className="h-3.5 w-3.5 text-green-700" />
                       </span>
