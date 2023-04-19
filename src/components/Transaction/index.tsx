@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import type { FC, ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 
+import { apps } from '@/data/apps';
 import type { Profile as TProfile } from '@/generated';
 import { useDataAvailabilityTransactionQuery } from '@/generated';
 import capitalizeCase from '@/utils/capitalizeCase';
@@ -89,7 +90,7 @@ const Transaction: FC = () => {
           }
         />
         <Meta
-          title={`${capitalizeCase(dataAvailabilityTransaction?.__typename as string).replace(
+          title={`${capitalizeCase(dataAvailabilityTransaction?.__typename as string)?.replace(
             'DataAvailability',
             ''
           )}ed by`}
@@ -153,6 +154,21 @@ const Transaction: FC = () => {
             <div className="border-b-[0.5px] border-b-gray-100 dark:border-gray-950" />
           </>
         )}
+        <Meta
+          title="Posted via"
+          value={
+            <div className="flex items-center space-x-2">
+              {apps.includes(dataAvailabilityTransaction?.appId) && (
+                <img
+                  src={`https://static-assets.lenster.xyz/images/source/${dataAvailabilityTransaction?.appId}.jpeg`}
+                  className="h-5 w-5 rounded-full"
+                  alt={dataAvailabilityTransaction?.appId}
+                />
+              )}
+              <span>{capitalizeCase(dataAvailabilityTransaction?.appId)}</span>
+            </div>
+          }
+        />
       </div>
     </div>
   );
