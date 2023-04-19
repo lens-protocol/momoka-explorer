@@ -62,8 +62,8 @@ const AllTransactions: FC<Props> = () => {
               </tr>
             </thead>
             <tbody>
-              {data?.dataAvailabilityTransactions.items.map((txn) => (
-                <tr key={txn.createdAt} className="overflow-hidden bg-white dark:bg-gray-900">
+              {data?.dataAvailabilityTransactions.items.map((txn, i) => (
+                <tr key={i} className="overflow-hidden bg-white dark:bg-gray-900">
                   <td className="rounded-l-xl px-3 py-2 text-sm text-gray-900">
                     <div className="flex items-center space-x-2">
                       <span className="rounded-xl bg-gray-100 p-2 dark:bg-gray-800">

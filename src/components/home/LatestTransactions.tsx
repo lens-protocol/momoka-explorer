@@ -2,20 +2,32 @@ import { ArrowRightIcon, ArrowsRightLeftIcon, ArrowTopRightOnSquareIcon } from '
 import clsx from 'clsx';
 import Link from 'next/link';
 import type { FC } from 'react';
+import { useState } from 'react';
 
-import { useDaTransactionsQuery } from '@/generated';
+import type { DataAvailabilityTransactionUnion, Profile } from '@/generated';
+import { useDaTransactionsQuery, useNewTransactionSubscription } from '@/generated';
 import { getRelativeTime } from '@/utils/formatTime';
 import getDAActionType from '@/utils/getDAActionType';
 import getPostAppLink from '@/utils/getPostAppLink';
+import getProfilePicture from '@/utils/getProfilePicture';
 
 import TransactionsShimmer from '../shimmers/TransactionsShimmer';
 
 type Props = {};
 
 const LatestTransactions: FC<Props> = () => {
-  const { data, loading } = useDaTransactionsQuery({
-    variables: { request: { limit: 10 } }
+  const [latestTransactions, setLatestTransactions] = useState<Array<DataAvailabilityTransactionUnion>>();
+
+  const { loading } = useDaTransactionsQuery({
+    variables: { request: { limit: 10 } },
+    onCompleted: (data) => {
+      const txns = data?.dataAvailabilityTransactions.items;
+      setLatestTransactions(txns as Array<DataAvailabilityTransactionUnion>);
+    }
   });
+
+  const { data } = useNewTransactionSubscription();
+  console.log('🚀 ~ file: LatestTransactions.tsx:30 ~ data:', data);
 
   // useEffect(() => {
   //   const intervalId = setInterval(() => {
@@ -58,9 +70,9 @@ const LatestTransactions: FC<Props> = () => {
         {loading && <TransactionsShimmer />}
         <table className="min-w-full table-auto border-separate border-spacing-y-3">
           <tbody>
-            {data?.dataAvailabilityTransactions.items.map((txn) => (
+            {latestTransactions?.map((txn, i) => (
               <tr
-                key={txn.createdAt}
+                key={i}
                 className={clsx(
                   'overflow-hidden bg-white dark:bg-gray-900'
                   // newlyAddedItemIds.includes(publication.id) && 'bg-yellow-100'
@@ -91,15 +103,23 @@ const LatestTransactions: FC<Props> = () => {
                 </td>
                 <td className="whitespace-nowrap px-3 py-4 text-gray-500">
                   <div className="flex flex-col">
-                    <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-sm">
+                    <span className="inline-flex items-center space-x-2 px-2 py-0.5 text-sm">
                       <span className="text-xs text-gray-500">From</span>
-                      <Link
-                        href={`https://lensfrens.xyz/${txn.profile.handle}`}
-                        target="_blank"
-                        className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
-                      >
-                        {txn.profile.handle}
-                      </Link>
+                      <span className="inline-flex items-center space-x-1">
+                        <img
+                          className="h-3 w-3 rounded-2xl"
+                          src={getProfilePicture(txn.profile as Profile)}
+                          alt="pfp"
+                          draggable={false}
+                        />
+                        <Link
+                          href={`https://lensfrens.xyz/${txn.profile.handle}`}
+                          target="_blank"
+                          className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
+                        >
+                          {txn.profile.handle}
+                        </Link>
+                      </span>
                     </span>
                     <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-sm">
                       <span className="text-xs text-gray-500">via</span>
