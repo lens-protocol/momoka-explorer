@@ -6,7 +6,9 @@ import { useRouter } from 'next/router';
 import type { FC, ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 
+import type { Profile } from '@/generated';
 import { useDataAvailabilityTransactionQuery } from '@/generated';
+import getProfilePicture from '@/utils/getProfilePicture';
 import isDataVerified from '@/utils/isDataVerified';
 
 interface MetaProps {
@@ -83,6 +85,28 @@ const Transaction: FC = () => {
               {daVerified ? <CheckCircleIcon className="w- h-4" /> : <XCircleIcon className="h-4 w-4" />}
               <span>{daVerified ? 'Verified' : 'Not Verified'}</span>
             </div>
+          }
+        />
+        <Meta
+          title="Created by"
+          value={
+            <Link
+              className="inline-flex items-center space-x-2 rounded-lg text-sm"
+              href={`https://lenster.xyz/u/${dataAvailabilityTransaction?.profile.handle}`}
+              target="_blank"
+            >
+              <img
+                className="h-8 w-8 rounded-full"
+                src={getProfilePicture(dataAvailabilityTransaction?.profile as Profile)}
+                alt={dataAvailabilityTransaction?.profile.handle}
+              />
+              <div>
+                <div className="font-bold">
+                  {dataAvailabilityTransaction?.profile.name ?? dataAvailabilityTransaction?.profile.ownedBy}
+                </div>
+                <div className="text-xs">@{dataAvailabilityTransaction?.profile.handle}</div>
+              </div>
+            </Link>
           }
         />
       </div>
