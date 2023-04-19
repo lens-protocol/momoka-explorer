@@ -11,5 +11,9 @@ query DATransactions($request: DataAvailabilityTransactionsRequest!) {
         ...DAMirrorFields
       }
     }
+    pageInfo {
+      prev
+      next
+    }
   }
 }

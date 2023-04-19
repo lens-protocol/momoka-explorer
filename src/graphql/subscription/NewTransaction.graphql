@@ -1,0 +1,13 @@
+subscription NewTransaction {
+  newDataAvailabilityTransaction {
+    ... on DataAvailabilityPost {
+      ...DAPostFields
+    }
+    ... on DataAvailabilityComment {
+      ...DACommentFields
+    }
+    ... on DataAvailabilityMirror {
+      ...DAMirrorFields
+    }
+  }
+}
