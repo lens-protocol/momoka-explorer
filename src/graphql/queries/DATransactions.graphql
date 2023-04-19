@@ -2,37 +2,13 @@ query DATransactions($request: DataAvailabilityTransactionsRequest!) {
   dataAvailabilityTransactions(request: $request) {
     items {
       ... on DataAvailabilityPost {
-        transactionId
-        submitter
-        createdAt
-        appId
-        profile {
-          id
-          handle
-        }
-        publicationId
-      }
-      ... on DataAvailabilityMirror {
-        transactionId
-        submitter
-        createdAt
-        appId
-        profile {
-          id
-          handle
-        }
-        publicationId
+        ...DAPostFields
       }
       ... on DataAvailabilityComment {
-        transactionId
-        submitter
-        createdAt
-        appId
-        profile {
-          id
-          handle
-        }
-        publicationId
+        ...DACommentFields
+      }
+      ... on DataAvailabilityMirror {
+        ...DAMirrorFields
       }
     }
   }

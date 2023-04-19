@@ -1,47 +1,13 @@
 query DataAvailabilityTransaction($request: DataAvailabilityTransactionRequest!) {
   dataAvailabilityTransaction(request: $request) {
     ... on DataAvailabilityPost {
-      transactionId
-      submitter
-      createdAt
-      appId
-      profile {
-        id
-        handle
-      }
-      publicationId
+      ...DAPostFields
     }
     ... on DataAvailabilityComment {
-      transactionId
-      submitter
-      createdAt
-      appId
-      profile {
-        id
-        handle
-      }
-      publicationId
-      commentedOnProfile {
-        id
-        handle
-      }
-      commentedOnPublicationId
+      ...DACommentFields
     }
     ... on DataAvailabilityMirror {
-      transactionId
-      submitter
-      createdAt
-      appId
-      profile {
-        id
-        handle
-      }
-      publicationId
-      mirrorOfProfile {
-        id
-        handle
-      }
-      mirrorOfPublicationId
+      ...DAMirrorFields
     }
   }
 }

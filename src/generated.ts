@@ -4466,8 +4466,36 @@ export type DataAvailabilityTransactionQuery = {
         appId?: any | null;
         publicationId: any;
         commentedOnPublicationId: any;
-        profile: { __typename?: 'Profile'; id: any; handle: any };
-        commentedOnProfile: { __typename?: 'Profile'; id: any; handle: any };
+        profile: {
+          __typename?: 'Profile';
+          id: any;
+          name?: string | null;
+          handle: any;
+          bio?: string | null;
+          ownedBy: any;
+          isFollowedByMe: boolean;
+          stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+          attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+          picture?:
+            | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+            | { __typename?: 'NftImage'; uri: any }
+            | null;
+        };
+        commentedOnProfile: {
+          __typename?: 'Profile';
+          id: any;
+          name?: string | null;
+          handle: any;
+          bio?: string | null;
+          ownedBy: any;
+          isFollowedByMe: boolean;
+          stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+          attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+          picture?:
+            | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+            | { __typename?: 'NftImage'; uri: any }
+            | null;
+        };
       }
     | {
         __typename?: 'DataAvailabilityMirror';
@@ -4477,8 +4505,36 @@ export type DataAvailabilityTransactionQuery = {
         appId?: any | null;
         publicationId: any;
         mirrorOfPublicationId: any;
-        profile: { __typename?: 'Profile'; id: any; handle: any };
-        mirrorOfProfile: { __typename?: 'Profile'; id: any; handle: any };
+        profile: {
+          __typename?: 'Profile';
+          id: any;
+          name?: string | null;
+          handle: any;
+          bio?: string | null;
+          ownedBy: any;
+          isFollowedByMe: boolean;
+          stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+          attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+          picture?:
+            | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+            | { __typename?: 'NftImage'; uri: any }
+            | null;
+        };
+        mirrorOfProfile: {
+          __typename?: 'Profile';
+          id: any;
+          name?: string | null;
+          handle: any;
+          bio?: string | null;
+          ownedBy: any;
+          isFollowedByMe: boolean;
+          stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+          attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+          picture?:
+            | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+            | { __typename?: 'NftImage'; uri: any }
+            | null;
+        };
       }
     | {
         __typename?: 'DataAvailabilityPost';
@@ -4487,7 +4543,21 @@ export type DataAvailabilityTransactionQuery = {
         createdAt: any;
         appId?: any | null;
         publicationId: any;
-        profile: { __typename?: 'Profile'; id: any; handle: any };
+        profile: {
+          __typename?: 'Profile';
+          id: any;
+          name?: string | null;
+          handle: any;
+          bio?: string | null;
+          ownedBy: any;
+          isFollowedByMe: boolean;
+          stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+          attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+          picture?:
+            | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+            | { __typename?: 'NftImage'; uri: any }
+            | null;
+        };
       }
     | null;
 };
@@ -4508,7 +4578,37 @@ export type DaTransactionsQuery = {
           createdAt: any;
           appId?: any | null;
           publicationId: any;
-          profile: { __typename?: 'Profile'; id: any; handle: any };
+          commentedOnPublicationId: any;
+          profile: {
+            __typename?: 'Profile';
+            id: any;
+            name?: string | null;
+            handle: any;
+            bio?: string | null;
+            ownedBy: any;
+            isFollowedByMe: boolean;
+            stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+            attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+            picture?:
+              | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+              | { __typename?: 'NftImage'; uri: any }
+              | null;
+          };
+          commentedOnProfile: {
+            __typename?: 'Profile';
+            id: any;
+            name?: string | null;
+            handle: any;
+            bio?: string | null;
+            ownedBy: any;
+            isFollowedByMe: boolean;
+            stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+            attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+            picture?:
+              | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+              | { __typename?: 'NftImage'; uri: any }
+              | null;
+          };
         }
       | {
           __typename?: 'DataAvailabilityMirror';
@@ -4517,7 +4617,37 @@ export type DaTransactionsQuery = {
           createdAt: any;
           appId?: any | null;
           publicationId: any;
-          profile: { __typename?: 'Profile'; id: any; handle: any };
+          mirrorOfPublicationId: any;
+          profile: {
+            __typename?: 'Profile';
+            id: any;
+            name?: string | null;
+            handle: any;
+            bio?: string | null;
+            ownedBy: any;
+            isFollowedByMe: boolean;
+            stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+            attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+            picture?:
+              | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+              | { __typename?: 'NftImage'; uri: any }
+              | null;
+          };
+          mirrorOfProfile: {
+            __typename?: 'Profile';
+            id: any;
+            name?: string | null;
+            handle: any;
+            bio?: string | null;
+            ownedBy: any;
+            isFollowedByMe: boolean;
+            stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+            attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+            picture?:
+              | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+              | { __typename?: 'NftImage'; uri: any }
+              | null;
+          };
         }
       | {
           __typename?: 'DataAvailabilityPost';
@@ -4526,7 +4656,21 @@ export type DaTransactionsQuery = {
           createdAt: any;
           appId?: any | null;
           publicationId: any;
-          profile: { __typename?: 'Profile'; id: any; handle: any };
+          profile: {
+            __typename?: 'Profile';
+            id: any;
+            name?: string | null;
+            handle: any;
+            bio?: string | null;
+            ownedBy: any;
+            isFollowedByMe: boolean;
+            stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+            attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+            picture?:
+              | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+              | { __typename?: 'NftImage'; uri: any }
+              | null;
+          };
         }
     >;
   };
@@ -4788,50 +4932,19 @@ export const DataAvailabilityTransactionDocument = gql`
   query DataAvailabilityTransaction($request: DataAvailabilityTransactionRequest!) {
     dataAvailabilityTransaction(request: $request) {
       ... on DataAvailabilityPost {
-        transactionId
-        submitter
-        createdAt
-        appId
-        profile {
-          id
-          handle
-        }
-        publicationId
+        ...DAPostFields
       }
       ... on DataAvailabilityComment {
-        transactionId
-        submitter
-        createdAt
-        appId
-        profile {
-          id
-          handle
-        }
-        publicationId
-        commentedOnProfile {
-          id
-          handle
-        }
-        commentedOnPublicationId
+        ...DACommentFields
       }
       ... on DataAvailabilityMirror {
-        transactionId
-        submitter
-        createdAt
-        appId
-        profile {
-          id
-          handle
-        }
-        publicationId
-        mirrorOfProfile {
-          id
-          handle
-        }
-        mirrorOfPublicationId
+        ...DAMirrorFields
       }
     }
   }
+  ${DaPostFieldsFragmentDoc}
+  ${DaCommentFieldsFragmentDoc}
+  ${DaMirrorFieldsFragmentDoc}
 `;
 
 /**
@@ -4889,41 +5002,20 @@ export const DaTransactionsDocument = gql`
     dataAvailabilityTransactions(request: $request) {
       items {
         ... on DataAvailabilityPost {
-          transactionId
-          submitter
-          createdAt
-          appId
-          profile {
-            id
-            handle
-          }
-          publicationId
-        }
-        ... on DataAvailabilityMirror {
-          transactionId
-          submitter
-          createdAt
-          appId
-          profile {
-            id
-            handle
-          }
-          publicationId
+          ...DAPostFields
         }
         ... on DataAvailabilityComment {
-          transactionId
-          submitter
-          createdAt
-          appId
-          profile {
-            id
-            handle
-          }
-          publicationId
+          ...DACommentFields
+        }
+        ... on DataAvailabilityMirror {
+          ...DAMirrorFields
         }
       }
     }
   }
+  ${DaPostFieldsFragmentDoc}
+  ${DaCommentFieldsFragmentDoc}
+  ${DaMirrorFieldsFragmentDoc}
 `;
 
 /**
