@@ -21,18 +21,24 @@ const AllTransactions: FC<Props> = () => {
   });
 
   return (
-    <div className="relative mt-6 space-y-4 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 md:p-5">
+    <div className="relative mt-6 space-y-4 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 dark:border-gray-950 dark:bg-gray-800 md:p-5">
       <div className="left-0 right-0 flex flex-wrap items-center justify-between gap-y-3">
         <div>
           <h1 className="font-medium opacity-80">All Transactions</h1>
           <p className="text-sm opacity-60">More than 1,939,672,686 transactions found</p>
         </div>
         <div className="flex flex-1 items-center justify-end space-x-3">
-          <button type="button" className="rounded-lg border p-1 hover:bg-gray-50">
+          <button
+            type="button"
+            className="rounded-lg border p-1 hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-gray-900"
+          >
             <ArrowLeftIcon className="h-4 w-4" />
           </button>
           <span className="text-sm">Page 1</span>
-          <button type="button" className="rounded-lg border p-1 hover:bg-gray-50">
+          <button
+            type="button"
+            className="rounded-lg border p-1 hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-gray-900"
+          >
             <ArrowRightIcon className="h-4 w-4" />
           </button>
         </div>
@@ -53,10 +59,10 @@ const AllTransactions: FC<Props> = () => {
             </thead>
             <tbody>
               {data?.explorePublications.items.map((publication) => (
-                <tr key={publication.id} className="overflow-hidden bg-white">
+                <tr key={publication.id} className="overflow-hidden bg-white dark:bg-gray-900">
                   <td className="rounded-l-xl px-3 py-2 text-sm text-gray-900">
                     <div className="flex items-center space-x-2">
-                      <span className="rounded-xl bg-gray-100 p-2">
+                      <span className="rounded-xl bg-gray-100 p-2 dark:bg-gray-800">
                         <ArrowsRightLeftIcon className="h-4 w-4 text-green-700" />
                       </span>
                       <div className="flex flex-col truncate">
@@ -69,8 +75,8 @@ const AllTransactions: FC<Props> = () => {
                       </div>
                     </div>
                   </td>
-                  <td className="w-20 whitespace-nowrap px-3 py-2 text-sm text-gray-500">
-                    <span className="inline-flex w-20 items-center justify-center space-x-1 rounded-lg border bg-gray-50 px-3 py-1.5 text-xs">
+                  <td className="w-20 whitespace-nowrap px-3 py-2 text-sm text-gray-700 dark:text-gray-300">
+                    <span className="inline-flex w-20 items-center justify-center space-x-1 rounded-lg border bg-gray-50 px-3 py-1.5 text-xs dark:border-gray-950 dark:bg-gray-800">
                       {publication.__typename}
                     </span>
                   </td>
