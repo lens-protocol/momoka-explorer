@@ -42,10 +42,10 @@ const LatestTransactions: FC<Props> = () => {
   return (
     <div className="relative rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 dark:border-gray-950 dark:bg-gray-800 md:space-y-2 md:p-5">
       <div className="left-0 right-0 flex items-center justify-between gap-y-3">
-        <h1 className="text-sm font-medium opacity-80">Latest Transactions</h1>
+        <h1 className="text-sm font-medium opacity-90">Latest Transactions</h1>
         <Link
           href="/txns"
-          className="flex items-center space-x-2 text-sm opacity-80 hover:text-indigo-400 hover:opacity-100"
+          className="flex items-center space-x-2 text-sm opacity-90 hover:text-indigo-400 hover:opacity-100"
         >
           <span>View all</span>
           <ArrowRightIcon className="h-3.5 w-3.5" />
@@ -75,7 +75,7 @@ const LatestTransactions: FC<Props> = () => {
                       >
                         CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc
                       </Link>
-                      <span className="text-xs text-gray-500">6 secs ago</span>
+                      <span className="text-xs text-gray-600 dark:text-gray-400">6 secs ago</span>
                     </div>
                   </div>
                 </td>
@@ -108,11 +108,11 @@ const LatestTransactions: FC<Props> = () => {
                   <Link
                     href={`https://lenster.xyz/posts/0x01-0x01`}
                     target="_blank"
-                    className="opacity-60 hover:opacity-100"
+                    className="opacity-70 hover:opacity-100"
                   >
                     <span className="inline-flex items-center space-x-1 text-xs">
                       <span>View</span>
-                      <ArrowTopRightOnSquareIcon className="h-3.5 w-3.5 text-green-700" />
+                      <ArrowTopRightOnSquareIcon className="h-3.5 w-3.5 text-gray-700 dark:text-gray-300" />
                     </span>
                   </Link>
                 </td>
