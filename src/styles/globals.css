@@ -9,7 +9,8 @@ html {
 }
 
 body {
-  @apply bg-fixed bg-white min-h-screen;
+  @apply min-h-screen bg-white bg-fixed;
+  @apply dark:bg-gray-900;
 }
 
 .fade-enter {
