@@ -3,15 +3,15 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import type { FC } from 'react';
 
-import { PublicationSortCriteria, usePublicationsQuery } from '@/generated';
+import { useDaTransactionsQuery } from '@/generated';
 
 import TransactionsShimmer from '../shimmers/TransactionsShimmer';
 
 type Props = {};
 
 const LatestTransactions: FC<Props> = () => {
-  const { data, loading } = usePublicationsQuery({
-    variables: { request: { sortCriteria: PublicationSortCriteria.Latest, limit: 10 } }
+  const { data, loading } = useDaTransactionsQuery({
+    variables: { request: { limit: 10 } }
   });
 
   // useEffect(() => {
@@ -55,9 +55,9 @@ const LatestTransactions: FC<Props> = () => {
         {loading && <TransactionsShimmer />}
         <table className="min-w-full table-auto border-separate border-spacing-y-3">
           <tbody>
-            {data?.explorePublications.items.map((publication) => (
+            {data?.dataAvailabilityTransactions.items.map((txn) => (
               <tr
-                key={publication.id}
+                key={txn.createdAt}
                 className={clsx(
                   'overflow-hidden bg-white dark:bg-gray-900'
                   // newlyAddedItemIds.includes(publication.id) && 'bg-yellow-100'
@@ -81,7 +81,7 @@ const LatestTransactions: FC<Props> = () => {
                 </td>
                 <td className="whitespace-nowrap px-3 py-4 text-center text-sm text-gray-700 dark:text-gray-300">
                   <span className="inline-flex w-20 items-center justify-center space-x-1 rounded-lg border bg-gray-50 px-3 py-1.5 text-xs dark:border-gray-950 dark:bg-gray-800">
-                    {publication.__typename}
+                    {txn.__typename}
                   </span>
                 </td>
                 <td className="whitespace-nowrap px-3 py-4 text-gray-500">

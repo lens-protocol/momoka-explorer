@@ -1,7 +1,7 @@
 import { HttpLink } from '@apollo/client';
 
 const httpLink = new HttpLink({
-  uri: 'https://api.lens.dev',
+  uri: 'https://staging-api-social-mumbai.lens.crtlkey.com',
   fetchOptions: 'no-cors',
   fetch
 });

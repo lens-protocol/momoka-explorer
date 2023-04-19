@@ -291,17 +291,7 @@ export type CollectConditionOutput = {
   thisPublication?: Maybe<Scalars['Boolean']>;
 };
 
-export type CollectModule =
-  | AaveFeeCollectModuleSettings
-  | Erc4626FeeCollectModuleSettings
-  | FeeCollectModuleSettings
-  | FreeCollectModuleSettings
-  | LimitedFeeCollectModuleSettings
-  | LimitedTimedFeeCollectModuleSettings
-  | MultirecipientFeeCollectModuleSettings
-  | RevertCollectModuleSettings
-  | TimedFeeCollectModuleSettings
-  | UnknownCollectModuleSettings;
+export type CollectModule = AaveFeeCollectModuleSettings | Erc4626FeeCollectModuleSettings | FeeCollectModuleSettings | FreeCollectModuleSettings | LimitedFeeCollectModuleSettings | LimitedTimedFeeCollectModuleSettings | MultirecipientFeeCollectModuleSettings | RevertCollectModuleSettings | TimedFeeCollectModuleSettings | UnknownCollectModuleSettings;
 
 export type CollectModuleParams = {
   /** The collect aave fee collect module */
@@ -399,10 +389,12 @@ export type Comment = {
   stats: PublicationStats;
 };
 
+
 /** The social comment */
 export type CommentCanCommentArgs = {
   profileId?: InputMaybe<Scalars['ProfileId']>;
 };
+
 
 /** The social comment */
 export type CommentCanDecryptArgs = {
@@ -410,20 +402,24 @@ export type CommentCanDecryptArgs = {
   profileId?: InputMaybe<Scalars['ProfileId']>;
 };
 
+
 /** The social comment */
 export type CommentCanMirrorArgs = {
   profileId?: InputMaybe<Scalars['ProfileId']>;
 };
+
 
 /** The social comment */
 export type CommentHasCollectedByMeArgs = {
   isFinalisedOnChain?: InputMaybe<Scalars['Boolean']>;
 };
 
+
 /** The social comment */
 export type CommentMirrorsArgs = {
   by?: InputMaybe<Scalars['ProfileId']>;
 };
+
 
 /** The social comment */
 export type CommentReactionArgs = {
@@ -1044,6 +1040,76 @@ export enum CustomFiltersTypes {
   Gardeners = 'GARDENERS'
 }
 
+export type DataAvailabilityComment = {
+  __typename?: 'DataAvailabilityComment';
+  appId?: Maybe<Scalars['Sources']>;
+  commentedOnProfile: Profile;
+  commentedOnPublicationId: Scalars['InternalPublicationId'];
+  createdAt: Scalars['DateTime'];
+  profile: Profile;
+  publicationId: Scalars['InternalPublicationId'];
+  submitter: Scalars['EthereumAddress'];
+  transactionId: Scalars['String'];
+};
+
+export type DataAvailabilityMirror = {
+  __typename?: 'DataAvailabilityMirror';
+  appId?: Maybe<Scalars['Sources']>;
+  createdAt: Scalars['DateTime'];
+  mirrorOfProfile: Profile;
+  mirrorOfPublicationId: Scalars['InternalPublicationId'];
+  profile: Profile;
+  publicationId: Scalars['InternalPublicationId'];
+  submitter: Scalars['EthereumAddress'];
+  transactionId: Scalars['String'];
+};
+
+export type DataAvailabilityPost = {
+  __typename?: 'DataAvailabilityPost';
+  appId?: Maybe<Scalars['Sources']>;
+  createdAt: Scalars['DateTime'];
+  profile: Profile;
+  publicationId: Scalars['InternalPublicationId'];
+  submitter: Scalars['EthereumAddress'];
+  transactionId: Scalars['String'];
+};
+
+export type DataAvailabilitySubmitterResult = {
+  __typename?: 'DataAvailabilitySubmitterResult';
+  address: Scalars['EthereumAddress'];
+};
+
+/** The paginated submitter results */
+export type DataAvailabilitySubmittersResult = {
+  __typename?: 'DataAvailabilitySubmittersResult';
+  items: Array<DataAvailabilitySubmitterResult>;
+  pageInfo: PaginatedResultInfo;
+};
+
+export type DataAvailabilitySummaryResult = {
+  __typename?: 'DataAvailabilitySummaryResult';
+  lastFinalisedTransaction: Scalars['String'];
+  totalTransactions: Scalars['Int'];
+};
+
+export type DataAvailabilityTransactionRequest = {
+  /** The DA transaction id */
+  transactionId: Scalars['String'];
+};
+
+export type DataAvailabilityTransactionUnion = DataAvailabilityComment | DataAvailabilityMirror | DataAvailabilityPost;
+
+export type DataAvailabilityTransactionsRequest = {
+  cursor?: InputMaybe<Scalars['Cursor']>;
+  limit?: InputMaybe<Scalars['LimitScalar']>;
+};
+
+export type DataAvailabilityTransactionsResult = {
+  __typename?: 'DataAvailabilityTransactionsResult';
+  items: Array<DataAvailabilityTransactionUnion>;
+  pageInfo: PaginatedResultInfo;
+};
+
 /** The reason why a profile cannot decrypt a publication */
 export enum DecryptFailReason {
   CanNotDecrypt = 'CAN_NOT_DECRYPT',
@@ -1499,11 +1565,7 @@ export type FollowConditionOutput = {
   profileId: Scalars['ProfileId'];
 };
 
-export type FollowModule =
-  | FeeFollowModuleSettings
-  | ProfileFollowModuleSettings
-  | RevertFollowModuleSettings
-  | UnknownFollowModuleSettings;
+export type FollowModule = FeeFollowModuleSettings | ProfileFollowModuleSettings | RevertFollowModuleSettings | UnknownFollowModuleSettings;
 
 export type FollowModuleParams = {
   /** The follower fee follower module */
@@ -1978,10 +2040,12 @@ export type Mirror = {
   stats: PublicationStats;
 };
 
+
 /** The social mirror */
 export type MirrorCanCommentArgs = {
   profileId?: InputMaybe<Scalars['ProfileId']>;
 };
+
 
 /** The social mirror */
 export type MirrorCanDecryptArgs = {
@@ -1989,15 +2053,18 @@ export type MirrorCanDecryptArgs = {
   profileId?: InputMaybe<Scalars['ProfileId']>;
 };
 
+
 /** The social mirror */
 export type MirrorCanMirrorArgs = {
   profileId?: InputMaybe<Scalars['ProfileId']>;
 };
 
+
 /** The social mirror */
 export type MirrorHasCollectedByMeArgs = {
   isFinalisedOnChain?: InputMaybe<Scalars['Boolean']>;
 };
+
 
 /** The social mirror */
 export type MirrorReactionArgs = {
@@ -2130,223 +2197,275 @@ export type Mutation = {
   updateNftGalleryOrder?: Maybe<Scalars['Void']>;
 };
 
+
 export type MutationAchArgs = {
   request: AchRequest;
 };
+
 
 export type MutationAddProfileInterestsArgs = {
   request: AddProfileInterestsRequest;
 };
 
+
 export type MutationAddReactionArgs = {
   request: ReactionRequest;
 };
+
 
 export type MutationAuthenticateArgs = {
   request: SignedAuthChallenge;
 };
 
+
 export type MutationBroadcastArgs = {
   request: BroadcastRequest;
 };
+
 
 export type MutationBroadcastDataAvailabilityArgs = {
   request: BroadcastRequest;
 };
 
+
 export type MutationClaimArgs = {
   request: ClaimHandleRequest;
 };
 
+
 export type MutationCreateAttachMediaDataArgs = {
   request: PublicMediaRequest;
 };
+
 
 export type MutationCreateBurnProfileTypedDataArgs = {
   options?: InputMaybe<TypedDataOptions>;
   request: BurnProfileRequest;
 };
 
+
 export type MutationCreateCollectTypedDataArgs = {
   options?: InputMaybe<TypedDataOptions>;
   request: CreateCollectRequest;
 };
+
 
 export type MutationCreateCommentTypedDataArgs = {
   options?: InputMaybe<TypedDataOptions>;
   request: CreatePublicCommentRequest;
 };
 
+
 export type MutationCreateCommentViaDispatcherArgs = {
   request: CreatePublicCommentRequest;
 };
+
 
 export type MutationCreateDataAvailabilityCommentTypedDataArgs = {
   request: CreateDataAvailabilityCommentRequest;
 };
 
+
 export type MutationCreateDataAvailabilityCommentViaDispatcherArgs = {
   request: CreateDataAvailabilityCommentRequest;
 };
+
 
 export type MutationCreateDataAvailabilityMirrorTypedDataArgs = {
   request: CreateDataAvailabilityMirrorRequest;
 };
 
+
 export type MutationCreateDataAvailabilityMirrorViaDispatcherArgs = {
   request: CreateDataAvailabilityMirrorRequest;
 };
+
 
 export type MutationCreateDataAvailabilityPostTypedDataArgs = {
   request: CreateDataAvailabilityPostRequest;
 };
 
+
 export type MutationCreateDataAvailabilityPostViaDispatcherArgs = {
   request: CreateDataAvailabilityPostRequest;
 };
+
 
 export type MutationCreateFollowTypedDataArgs = {
   options?: InputMaybe<TypedDataOptions>;
   request: FollowRequest;
 };
 
+
 export type MutationCreateMirrorTypedDataArgs = {
   options?: InputMaybe<TypedDataOptions>;
   request: CreateMirrorRequest;
 };
 
+
 export type MutationCreateMirrorViaDispatcherArgs = {
   request: CreateMirrorRequest;
 };
 
+
 export type MutationCreateNftGalleryArgs = {
   request: NftGalleryCreateRequest;
 };
+
 
 export type MutationCreatePostTypedDataArgs = {
   options?: InputMaybe<TypedDataOptions>;
   request: CreatePublicPostRequest;
 };
 
+
 export type MutationCreatePostViaDispatcherArgs = {
   request: CreatePublicPostRequest;
 };
 
+
 export type MutationCreateProfileArgs = {
   request: CreateProfileRequest;
 };
+
 
 export type MutationCreateSetDefaultProfileTypedDataArgs = {
   options?: InputMaybe<TypedDataOptions>;
   request: CreateSetDefaultProfileRequest;
 };
 
+
 export type MutationCreateSetDispatcherTypedDataArgs = {
   options?: InputMaybe<TypedDataOptions>;
   request: SetDispatcherRequest;
 };
+
 
 export type MutationCreateSetFollowModuleTypedDataArgs = {
   options?: InputMaybe<TypedDataOptions>;
   request: CreateSetFollowModuleRequest;
 };
 
+
 export type MutationCreateSetFollowNftUriTypedDataArgs = {
   options?: InputMaybe<TypedDataOptions>;
   request: CreateSetFollowNftUriRequest;
 };
 
+
 export type MutationCreateSetFollowNftUriViaDispatcherArgs = {
   request: CreateSetFollowNftUriRequest;
 };
+
 
 export type MutationCreateSetProfileImageUriTypedDataArgs = {
   options?: InputMaybe<TypedDataOptions>;
   request: UpdateProfileImageRequest;
 };
 
+
 export type MutationCreateSetProfileImageUriViaDispatcherArgs = {
   request: UpdateProfileImageRequest;
 };
+
 
 export type MutationCreateSetProfileMetadataTypedDataArgs = {
   options?: InputMaybe<TypedDataOptions>;
   request: CreatePublicSetProfileMetadataUriRequest;
 };
 
+
 export type MutationCreateSetProfileMetadataViaDispatcherArgs = {
   request: CreatePublicSetProfileMetadataUriRequest;
 };
+
 
 export type MutationCreateToggleFollowTypedDataArgs = {
   options?: InputMaybe<TypedDataOptions>;
   request: CreateToggleFollowRequest;
 };
 
+
 export type MutationCreateUnfollowTypedDataArgs = {
   options?: InputMaybe<TypedDataOptions>;
   request: UnfollowRequest;
 };
 
+
 export type MutationDeleteNftGalleryArgs = {
   request: NftGalleryDeleteRequest;
 };
+
 
 export type MutationDismissRecommendedProfilesArgs = {
   request: DismissRecommendedProfilesRequest;
 };
 
+
 export type MutationGciArgs = {
   request: GciRequest;
 };
+
 
 export type MutationGcrArgs = {
   request: GcrRequest;
 };
 
+
 export type MutationGdiArgs = {
   request: GddRequest;
 };
+
 
 export type MutationHelArgs = {
   request: HelRequest;
 };
 
+
 export type MutationHidePublicationArgs = {
   request: HidePublicationRequest;
 };
+
 
 export type MutationIdKitPhoneVerifyWebhookArgs = {
   request: IdKitPhoneVerifyWebhookRequest;
 };
 
+
 export type MutationProxyActionArgs = {
   request: ProxyActionRequest;
 };
+
 
 export type MutationRefreshArgs = {
   request: RefreshRequest;
 };
 
+
 export type MutationRemoveProfileInterestsArgs = {
   request: RemoveProfileInterestsRequest;
 };
+
 
 export type MutationRemoveReactionArgs = {
   request: ReactionRequest;
 };
 
+
 export type MutationReportPublicationArgs = {
   request: ReportPublicationRequest;
 };
+
 
 export type MutationUpdateNftGalleryInfoArgs = {
   request: NftGalleryUpdateInfoRequest;
 };
 
+
 export type MutationUpdateNftGalleryItemsArgs = {
   request: NftGalleryUpdateItemsRequest;
 };
+
 
 export type MutationUpdateNftGalleryOrderArgs = {
   request: NftGalleryUpdateItemOrderRequest;
@@ -2635,20 +2754,14 @@ export type NftUpdateItemOrder = {
   tokenId: Scalars['String'];
 };
 
-export type Notification =
-  | NewCollectNotification
-  | NewCommentNotification
-  | NewFollowerNotification
-  | NewMentionNotification
-  | NewMirrorNotification
-  | NewReactionNotification;
+export type Notification = NewCollectNotification | NewCommentNotification | NewFollowerNotification | NewMentionNotification | NewMirrorNotification | NewReactionNotification;
 
 export type NotificationRequest = {
   cursor?: InputMaybe<Scalars['Cursor']>;
   customFilters?: InputMaybe<Array<CustomFiltersTypes>>;
   highSignalFilter?: InputMaybe<Scalars['Boolean']>;
   limit?: InputMaybe<Scalars['LimitScalar']>;
-  /** The profile id */
+  /** The notification types */
   notificationTypes?: InputMaybe<Array<NotificationTypes>>;
   /** The profile id */
   profileId: Scalars['ProfileId'];
@@ -2848,10 +2961,12 @@ export type Post = {
   stats: PublicationStats;
 };
 
+
 /** The social post */
 export type PostCanCommentArgs = {
   profileId?: InputMaybe<Scalars['ProfileId']>;
 };
+
 
 /** The social post */
 export type PostCanDecryptArgs = {
@@ -2859,20 +2974,24 @@ export type PostCanDecryptArgs = {
   profileId?: InputMaybe<Scalars['ProfileId']>;
 };
 
+
 /** The social post */
 export type PostCanMirrorArgs = {
   profileId?: InputMaybe<Scalars['ProfileId']>;
 };
+
 
 /** The social post */
 export type PostHasCollectedByMeArgs = {
   isFinalisedOnChain?: InputMaybe<Scalars['Boolean']>;
 };
 
+
 /** The social post */
 export type PostMirrorsArgs = {
   by?: InputMaybe<Scalars['ProfileId']>;
 };
+
 
 /** The social post */
 export type PostReactionArgs = {
@@ -2918,10 +3037,12 @@ export type Profile = {
   stats: ProfileStats;
 };
 
+
 /** The Profile */
 export type ProfileIsFollowedByMeArgs = {
   isFinalisedOnChain?: InputMaybe<Scalars['Boolean']>;
 };
+
 
 /** The Profile */
 export type ProfileIsFollowingArgs = {
@@ -3055,20 +3176,24 @@ export type ProfileStats = {
   totalPublications: Scalars['Int'];
 };
 
+
 /** The Profile Stats */
 export type ProfileStatsCommentsTotalArgs = {
   forSources: Array<Scalars['Sources']>;
 };
+
 
 /** The Profile Stats */
 export type ProfileStatsMirrorsTotalArgs = {
   forSources: Array<Scalars['Sources']>;
 };
 
+
 /** The Profile Stats */
 export type ProfileStatsPostsTotalArgs = {
   forSources: Array<Scalars['Sources']>;
 };
+
 
 /** The Profile Stats */
 export type ProfileStatsPublicationsTotalArgs = {
@@ -3400,6 +3525,7 @@ export type PublicationStats = {
   totalUpvotes: Scalars['Int'];
 };
 
+
 /** The publication stats */
 export type PublicationStatsCommentsTotalArgs = {
   forSources: Array<Scalars['Sources']>;
@@ -3452,6 +3578,10 @@ export type Query = {
   claimableHandles: ClaimableHandles;
   claimableStatus: ClaimStatus;
   cur: Array<Scalars['String']>;
+  dataAvailabilitySubmitters: DataAvailabilitySubmittersResult;
+  dataAvailabilitySummary: DataAvailabilitySummaryResult;
+  dataAvailabilityTransaction: DataAvailabilityTransactionUnion;
+  dataAvailabilityTransactions: DataAvailabilityTransactionsResult;
   defaultProfile?: Maybe<Profile>;
   doesFollow: Array<DoesFollowResponse>;
   enabledModuleCurrencies: Array<Erc20>;
@@ -3505,181 +3635,236 @@ export type Query = {
   whoReactedPublication: PaginatedWhoReactedResult;
 };
 
+
 export type QueryAllPublicationsTagsArgs = {
   request: AllPublicationsTagsRequest;
 };
+
 
 export type QueryApprovedModuleAllowanceAmountArgs = {
   request: ApprovedModuleAllowanceAmountRequest;
 };
 
+
 export type QueryChallengeArgs = {
   request: ChallengeRequest;
 };
+
 
 export type QueryCurArgs = {
   request: CurRequest;
 };
 
+
+export type QueryDataAvailabilityTransactionArgs = {
+  request: DataAvailabilityTransactionRequest;
+};
+
+
+export type QueryDataAvailabilityTransactionsArgs = {
+  request: DataAvailabilityTransactionsRequest;
+};
+
+
 export type QueryDefaultProfileArgs = {
   request: DefaultProfileRequest;
 };
+
 
 export type QueryDoesFollowArgs = {
   request: DoesFollowRequest;
 };
 
+
 export type QueryExploreProfilesArgs = {
   request: ExploreProfilesRequest;
 };
+
 
 export type QueryExplorePublicationsArgs = {
   request: ExplorePublicationRequest;
 };
 
+
 export type QueryFeedArgs = {
   request: FeedRequest;
 };
+
 
 export type QueryFeedHighlightsArgs = {
   request: FeedHighlightsRequest;
 };
 
+
 export type QueryFollowerNftOwnedTokenIdsArgs = {
   request: FollowerNftOwnedTokenIdsRequest;
 };
+
 
 export type QueryFollowersArgs = {
   request: FollowersRequest;
 };
 
+
 export type QueryFollowingArgs = {
   request: FollowingRequest;
 };
+
 
 export type QueryGctArgs = {
   request: GctRequest;
 };
 
+
 export type QueryGdmArgs = {
   request: GdmRequest;
 };
+
 
 export type QueryGenerateModuleCurrencyApprovalDataArgs = {
   request: GenerateModuleCurrencyApprovalDataRequest;
 };
 
+
 export type QueryGlobalProtocolStatsArgs = {
   request?: InputMaybe<GlobalProtocolStatsRequest>;
 };
+
 
 export type QueryHasTxHashBeenIndexedArgs = {
   request: HasTxHashBeenIndexedRequest;
 };
 
+
 export type QueryInternalPublicationFilterArgs = {
   request: InternalPublicationsFilterRequest;
 };
+
 
 export type QueryMutualFollowersProfilesArgs = {
   request: MutualFollowersProfilesQueryRequest;
 };
 
+
 export type QueryNftGalleriesArgs = {
   request: NftGalleriesRequest;
 };
+
 
 export type QueryNftOwnershipChallengeArgs = {
   request: NftOwnershipChallengeRequest;
 };
 
+
 export type QueryNftsArgs = {
   request: NfTsRequest;
 };
+
 
 export type QueryNotificationsArgs = {
   request: NotificationRequest;
 };
 
+
 export type QueryPendingApprovalFollowsArgs = {
   request: PendingApprovalFollowsRequest;
 };
+
 
 export type QueryProfileArgs = {
   request: SingleProfileQueryRequest;
 };
 
+
 export type QueryProfileFollowModuleBeenRedeemedArgs = {
   request: ProfileFollowModuleBeenRedeemedRequest;
 };
+
 
 export type QueryProfileFollowRevenueArgs = {
   request: ProfileFollowRevenueQueryRequest;
 };
 
+
 export type QueryProfileOnChainIdentityArgs = {
   request: ProfileOnChainIdentityRequest;
 };
+
 
 export type QueryProfilePublicationRevenueArgs = {
   request: ProfilePublicationRevenueQueryRequest;
 };
 
+
 export type QueryProfilePublicationsForSaleArgs = {
   request: ProfilePublicationsForSaleRequest;
 };
+
 
 export type QueryProfilesArgs = {
   request: ProfileQueryRequest;
 };
 
+
 export type QueryProxyActionStatusArgs = {
   proxyActionId: Scalars['ProxyActionId'];
 };
+
 
 export type QueryPublicationArgs = {
   request: PublicationQueryRequest;
 };
 
+
 export type QueryPublicationMetadataStatusArgs = {
   request: GetPublicationMetadataStatusRequest;
 };
+
 
 export type QueryPublicationRevenueArgs = {
   request: PublicationRevenueQueryRequest;
 };
 
+
 export type QueryPublicationsArgs = {
   request: PublicationsQueryRequest;
 };
+
 
 export type QueryRecommendedProfilesArgs = {
   options?: InputMaybe<RecommendedProfileOptions>;
 };
 
+
 export type QueryRelArgs = {
   request: RelRequest;
 };
+
 
 export type QuerySearchArgs = {
   request: SearchQueryRequest;
 };
 
+
 export type QueryTxIdToTxHashArgs = {
   txId: Scalars['TxId'];
 };
+
 
 export type QueryValidatePublicationMetadataArgs = {
   request: ValidatePublicationMetadataRequest;
 };
 
+
 export type QueryVerifyArgs = {
   request: VerifyRequest;
 };
 
+
 export type QueryWhoCollectedPublicationArgs = {
   request: WhoCollectedPublicationRequest;
 };
+
 
 export type QueryWhoReactedPublicationArgs = {
   request: WhoReactedPublicationRequest;
@@ -3734,10 +3919,7 @@ export type RecommendedProfileOptions = {
   shuffle?: InputMaybe<Scalars['Boolean']>;
 };
 
-export type ReferenceModule =
-  | DegreesOfSeparationReferenceModuleSettings
-  | FollowOnlyReferenceModuleSettings
-  | UnknownReferenceModuleSettings;
+export type ReferenceModule = DegreesOfSeparationReferenceModuleSettings | FollowOnlyReferenceModuleSettings | UnknownReferenceModuleSettings;
 
 export type ReferenceModuleParams = {
   /** The degrees of separation reference module */
@@ -4224,95 +4406,342 @@ export type WorldcoinPhoneVerifyWebhookRequest = {
   signalType: WorldcoinPhoneVerifyType;
 };
 
+export type DataAvailabilitySubmittersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type DataAvailabilitySubmittersQuery = { __typename?: 'Query', dataAvailabilitySubmitters: { __typename?: 'DataAvailabilitySubmittersResult', items: Array<{ __typename?: 'DataAvailabilitySubmitterResult', address: any }>, pageInfo: { __typename?: 'PaginatedResultInfo', prev?: any | null, next?: any | null } } };
+
+export type DataAvailabilityTransactionQueryVariables = Exact<{
+  request: DataAvailabilityTransactionRequest;
+}>;
+
+
+export type DataAvailabilityTransactionQuery = { __typename?: 'Query', dataAvailabilityTransaction: { __typename?: 'DataAvailabilityComment', transactionId: string, submitter: any, createdAt: any, appId?: any | null, publicationId: any, commentedOnPublicationId: any, profile: { __typename?: 'Profile', id: any, handle: any }, commentedOnProfile: { __typename?: 'Profile', id: any, handle: any } } | { __typename?: 'DataAvailabilityMirror', transactionId: string, submitter: any, createdAt: any, appId?: any | null, publicationId: any, mirrorOfPublicationId: any, profile: { __typename?: 'Profile', id: any, handle: any }, mirrorOfProfile: { __typename?: 'Profile', id: any, handle: any } } | { __typename?: 'DataAvailabilityPost', transactionId: string, submitter: any, createdAt: any, appId?: any | null, publicationId: any, profile: { __typename?: 'Profile', id: any, handle: any } } };
+
+export type DaTransactionsQueryVariables = Exact<{
+  request: DataAvailabilityTransactionsRequest;
+}>;
+
+
+export type DaTransactionsQuery = { __typename?: 'Query', dataAvailabilityTransactions: { __typename?: 'DataAvailabilityTransactionsResult', items: Array<{ __typename?: 'DataAvailabilityComment', transactionId: string, submitter: any, createdAt: any, appId?: any | null, publicationId: any, profile: { __typename?: 'Profile', id: any, handle: any } } | { __typename?: 'DataAvailabilityMirror', transactionId: string, submitter: any, createdAt: any, appId?: any | null, publicationId: any, profile: { __typename?: 'Profile', id: any, handle: any } } | { __typename?: 'DataAvailabilityPost', transactionId: string, submitter: any, createdAt: any, appId?: any | null, publicationId: any, profile: { __typename?: 'Profile', id: any, handle: any } }> } };
+
 export type PublicationsQueryVariables = Exact<{
   request: ExplorePublicationRequest;
 }>;
 
-export type PublicationsQuery = {
-  __typename?: 'Query';
-  explorePublications: {
-    __typename?: 'ExplorePublicationResult';
-    items: Array<
-      | { __typename?: 'Comment'; id: any }
-      | { __typename?: 'Mirror'; id: any }
-      | { __typename?: 'Post'; id: any }
-    >;
-  };
-};
 
-export interface PossibleTypesResultData {
-  possibleTypes: {
-    [key: string]: string[];
-  };
-}
-const result: PossibleTypesResultData = {
-  possibleTypes: {
-    BroadcastDataAvailabilityUnion: ['CreateDataAvailabilityPublicationResult', 'RelayError'],
-    CollectModule: [
-      'AaveFeeCollectModuleSettings',
-      'ERC4626FeeCollectModuleSettings',
-      'FeeCollectModuleSettings',
-      'FreeCollectModuleSettings',
-      'LimitedFeeCollectModuleSettings',
-      'LimitedTimedFeeCollectModuleSettings',
-      'MultirecipientFeeCollectModuleSettings',
-      'RevertCollectModuleSettings',
-      'TimedFeeCollectModuleSettings',
-      'UnknownCollectModuleSettings'
+export type PublicationsQuery = { __typename?: 'Query', explorePublications: { __typename?: 'ExplorePublicationResult', items: Array<{ __typename?: 'Comment', id: any } | { __typename?: 'Mirror', id: any } | { __typename?: 'Post', id: any }> } };
+
+
+      export interface PossibleTypesResultData {
+        possibleTypes: {
+          [key: string]: string[]
+        }
+      }
+      const result: PossibleTypesResultData = {
+  "possibleTypes": {
+    "BroadcastDataAvailabilityUnion": [
+      "CreateDataAvailabilityPublicationResult",
+      "RelayError"
     ],
-    FeedItemRoot: ['Comment', 'Post'],
-    FollowModule: [
-      'FeeFollowModuleSettings',
-      'ProfileFollowModuleSettings',
-      'RevertFollowModuleSettings',
-      'UnknownFollowModuleSettings'
+    "CollectModule": [
+      "AaveFeeCollectModuleSettings",
+      "ERC4626FeeCollectModuleSettings",
+      "FeeCollectModuleSettings",
+      "FreeCollectModuleSettings",
+      "LimitedFeeCollectModuleSettings",
+      "LimitedTimedFeeCollectModuleSettings",
+      "MultirecipientFeeCollectModuleSettings",
+      "RevertCollectModuleSettings",
+      "TimedFeeCollectModuleSettings",
+      "UnknownCollectModuleSettings"
     ],
-    MainPostReference: ['Mirror', 'Post'],
-    MentionPublication: ['Comment', 'Post'],
-    MirrorablePublication: ['Comment', 'Post'],
-    Notification: [
-      'NewCollectNotification',
-      'NewCommentNotification',
-      'NewFollowerNotification',
-      'NewMentionNotification',
-      'NewMirrorNotification',
-      'NewReactionNotification'
+    "DataAvailabilityTransactionUnion": [
+      "DataAvailabilityComment",
+      "DataAvailabilityMirror",
+      "DataAvailabilityPost"
     ],
-    ProfileMedia: ['MediaSet', 'NftImage'],
-    ProxyActionStatusResultUnion: ['ProxyActionError', 'ProxyActionQueued', 'ProxyActionStatusResult'],
-    Publication: ['Comment', 'Mirror', 'Post'],
-    PublicationForSale: ['Comment', 'Post'],
-    PublicationSearchResultItem: ['Comment', 'Post'],
-    ReferenceModule: [
-      'DegreesOfSeparationReferenceModuleSettings',
-      'FollowOnlyReferenceModuleSettings',
-      'UnknownReferenceModuleSettings'
+    "FeedItemRoot": [
+      "Comment",
+      "Post"
     ],
-    RelayDataAvailabilityResult: ['CreateDataAvailabilityPublicationResult', 'RelayError'],
-    RelayResult: ['RelayError', 'RelayerResult'],
-    SearchResult: ['ProfileSearchResult', 'PublicationSearchResult'],
-    TransactionResult: ['TransactionError', 'TransactionIndexedResult']
+    "FollowModule": [
+      "FeeFollowModuleSettings",
+      "ProfileFollowModuleSettings",
+      "RevertFollowModuleSettings",
+      "UnknownFollowModuleSettings"
+    ],
+    "MainPostReference": [
+      "Mirror",
+      "Post"
+    ],
+    "MentionPublication": [
+      "Comment",
+      "Post"
+    ],
+    "MirrorablePublication": [
+      "Comment",
+      "Post"
+    ],
+    "Notification": [
+      "NewCollectNotification",
+      "NewCommentNotification",
+      "NewFollowerNotification",
+      "NewMentionNotification",
+      "NewMirrorNotification",
+      "NewReactionNotification"
+    ],
+    "ProfileMedia": [
+      "MediaSet",
+      "NftImage"
+    ],
+    "ProxyActionStatusResultUnion": [
+      "ProxyActionError",
+      "ProxyActionQueued",
+      "ProxyActionStatusResult"
+    ],
+    "Publication": [
+      "Comment",
+      "Mirror",
+      "Post"
+    ],
+    "PublicationForSale": [
+      "Comment",
+      "Post"
+    ],
+    "PublicationSearchResultItem": [
+      "Comment",
+      "Post"
+    ],
+    "ReferenceModule": [
+      "DegreesOfSeparationReferenceModuleSettings",
+      "FollowOnlyReferenceModuleSettings",
+      "UnknownReferenceModuleSettings"
+    ],
+    "RelayDataAvailabilityResult": [
+      "CreateDataAvailabilityPublicationResult",
+      "RelayError"
+    ],
+    "RelayResult": [
+      "RelayError",
+      "RelayerResult"
+    ],
+    "SearchResult": [
+      "ProfileSearchResult",
+      "PublicationSearchResult"
+    ],
+    "TransactionResult": [
+      "TransactionError",
+      "TransactionIndexedResult"
+    ]
   }
 };
-export default result;
+      export default result;
+    
 
-export const PublicationsDocument = gql`
-  query Publications($request: ExplorePublicationRequest!) {
-    explorePublications(request: $request) {
-      items {
-        ... on Post {
-          id
+export const DataAvailabilitySubmittersDocument = gql`
+    query DataAvailabilitySubmitters {
+  dataAvailabilitySubmitters {
+    items {
+      address
+    }
+    pageInfo {
+      prev
+      next
+    }
+  }
+}
+    `;
+
+/**
+ * __useDataAvailabilitySubmittersQuery__
+ *
+ * To run a query within a React component, call `useDataAvailabilitySubmittersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDataAvailabilitySubmittersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDataAvailabilitySubmittersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useDataAvailabilitySubmittersQuery(baseOptions?: Apollo.QueryHookOptions<DataAvailabilitySubmittersQuery, DataAvailabilitySubmittersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<DataAvailabilitySubmittersQuery, DataAvailabilitySubmittersQueryVariables>(DataAvailabilitySubmittersDocument, options);
+      }
+export function useDataAvailabilitySubmittersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DataAvailabilitySubmittersQuery, DataAvailabilitySubmittersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<DataAvailabilitySubmittersQuery, DataAvailabilitySubmittersQueryVariables>(DataAvailabilitySubmittersDocument, options);
         }
-        ... on Comment {
-          id
+export type DataAvailabilitySubmittersQueryHookResult = ReturnType<typeof useDataAvailabilitySubmittersQuery>;
+export type DataAvailabilitySubmittersLazyQueryHookResult = ReturnType<typeof useDataAvailabilitySubmittersLazyQuery>;
+export type DataAvailabilitySubmittersQueryResult = Apollo.QueryResult<DataAvailabilitySubmittersQuery, DataAvailabilitySubmittersQueryVariables>;
+export const DataAvailabilityTransactionDocument = gql`
+    query DataAvailabilityTransaction($request: DataAvailabilityTransactionRequest!) {
+  dataAvailabilityTransaction(request: $request) {
+    ... on DataAvailabilityPost {
+      transactionId
+      submitter
+      createdAt
+      appId
+      profile {
+        id
+        handle
+      }
+      publicationId
+    }
+    ... on DataAvailabilityComment {
+      transactionId
+      submitter
+      createdAt
+      appId
+      profile {
+        id
+        handle
+      }
+      publicationId
+      commentedOnProfile {
+        id
+        handle
+      }
+      commentedOnPublicationId
+    }
+    ... on DataAvailabilityMirror {
+      transactionId
+      submitter
+      createdAt
+      appId
+      profile {
+        id
+        handle
+      }
+      publicationId
+      mirrorOfProfile {
+        id
+        handle
+      }
+      mirrorOfPublicationId
+    }
+  }
+}
+    `;
+
+/**
+ * __useDataAvailabilityTransactionQuery__
+ *
+ * To run a query within a React component, call `useDataAvailabilityTransactionQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDataAvailabilityTransactionQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDataAvailabilityTransactionQuery({
+ *   variables: {
+ *      request: // value for 'request'
+ *   },
+ * });
+ */
+export function useDataAvailabilityTransactionQuery(baseOptions: Apollo.QueryHookOptions<DataAvailabilityTransactionQuery, DataAvailabilityTransactionQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<DataAvailabilityTransactionQuery, DataAvailabilityTransactionQueryVariables>(DataAvailabilityTransactionDocument, options);
+      }
+export function useDataAvailabilityTransactionLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DataAvailabilityTransactionQuery, DataAvailabilityTransactionQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<DataAvailabilityTransactionQuery, DataAvailabilityTransactionQueryVariables>(DataAvailabilityTransactionDocument, options);
         }
-        ... on Mirror {
+export type DataAvailabilityTransactionQueryHookResult = ReturnType<typeof useDataAvailabilityTransactionQuery>;
+export type DataAvailabilityTransactionLazyQueryHookResult = ReturnType<typeof useDataAvailabilityTransactionLazyQuery>;
+export type DataAvailabilityTransactionQueryResult = Apollo.QueryResult<DataAvailabilityTransactionQuery, DataAvailabilityTransactionQueryVariables>;
+export const DaTransactionsDocument = gql`
+    query DATransactions($request: DataAvailabilityTransactionsRequest!) {
+  dataAvailabilityTransactions(request: $request) {
+    items {
+      ... on DataAvailabilityPost {
+        transactionId
+        submitter
+        createdAt
+        appId
+        profile {
           id
+          handle
         }
+        publicationId
+      }
+      ... on DataAvailabilityMirror {
+        transactionId
+        submitter
+        createdAt
+        appId
+        profile {
+          id
+          handle
+        }
+        publicationId
+      }
+      ... on DataAvailabilityComment {
+        transactionId
+        submitter
+        createdAt
+        appId
+        profile {
+          id
+          handle
+        }
+        publicationId
       }
     }
   }
-`;
+}
+    `;
+
+/**
+ * __useDaTransactionsQuery__
+ *
+ * To run a query within a React component, call `useDaTransactionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDaTransactionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDaTransactionsQuery({
+ *   variables: {
+ *      request: // value for 'request'
+ *   },
+ * });
+ */
+export function useDaTransactionsQuery(baseOptions: Apollo.QueryHookOptions<DaTransactionsQuery, DaTransactionsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<DaTransactionsQuery, DaTransactionsQueryVariables>(DaTransactionsDocument, options);
+      }
+export function useDaTransactionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DaTransactionsQuery, DaTransactionsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<DaTransactionsQuery, DaTransactionsQueryVariables>(DaTransactionsDocument, options);
+        }
+export type DaTransactionsQueryHookResult = ReturnType<typeof useDaTransactionsQuery>;
+export type DaTransactionsLazyQueryHookResult = ReturnType<typeof useDaTransactionsLazyQuery>;
+export type DaTransactionsQueryResult = Apollo.QueryResult<DaTransactionsQuery, DaTransactionsQueryVariables>;
+export const PublicationsDocument = gql`
+    query Publications($request: ExplorePublicationRequest!) {
+  explorePublications(request: $request) {
+    items {
+      ... on Post {
+        id
+      }
+      ... on Comment {
+        id
+      }
+      ... on Mirror {
+        id
+      }
+    }
+  }
+}
+    `;
 
 /**
  * __usePublicationsQuery__
@@ -4330,18 +4759,14 @@ export const PublicationsDocument = gql`
  *   },
  * });
  */
-export function usePublicationsQuery(
-  baseOptions: Apollo.QueryHookOptions<PublicationsQuery, PublicationsQueryVariables>
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<PublicationsQuery, PublicationsQueryVariables>(PublicationsDocument, options);
-}
-export function usePublicationsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<PublicationsQuery, PublicationsQueryVariables>
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<PublicationsQuery, PublicationsQueryVariables>(PublicationsDocument, options);
-}
+export function usePublicationsQuery(baseOptions: Apollo.QueryHookOptions<PublicationsQuery, PublicationsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PublicationsQuery, PublicationsQueryVariables>(PublicationsDocument, options);
+      }
+export function usePublicationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PublicationsQuery, PublicationsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PublicationsQuery, PublicationsQueryVariables>(PublicationsDocument, options);
+        }
 export type PublicationsQueryHookResult = ReturnType<typeof usePublicationsQuery>;
 export type PublicationsLazyQueryHookResult = ReturnType<typeof usePublicationsLazyQuery>;
 export type PublicationsQueryResult = Apollo.QueryResult<PublicationsQuery, PublicationsQueryVariables>;

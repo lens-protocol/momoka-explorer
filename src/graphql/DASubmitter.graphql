@@ -1,0 +1,11 @@
+query DataAvailabilitySubmitters {
+  dataAvailabilitySubmitters {
+    items {
+      address
+    }
+    pageInfo {
+      prev
+      next
+    }
+  }
+}
