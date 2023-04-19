@@ -3603,7 +3603,7 @@ export type QueryDataAvailabilityTransactionArgs = {
 };
 
 export type QueryDataAvailabilityTransactionsArgs = {
-  request: DataAvailabilityTransactionsRequest;
+  request?: InputMaybe<DataAvailabilityTransactionsRequest>;
 };
 
 export type QueryDefaultProfileArgs = {
@@ -4320,6 +4320,17 @@ export type DataAvailabilitySubmittersQuery = {
   };
 };
 
+export type DaSummaryQueryVariables = Exact<{ [key: string]: never }>;
+
+export type DaSummaryQuery = {
+  __typename?: 'Query';
+  dataAvailabilitySummary: {
+    __typename?: 'DataAvailabilitySummaryResult';
+    totalTransactions: number;
+    lastFinalisedTransaction: string;
+  };
+};
+
 export type DataAvailabilityTransactionQueryVariables = Exact<{
   request: DataAvailabilityTransactionRequest;
 }>;
@@ -4538,6 +4549,45 @@ export type DataAvailabilitySubmittersQueryResult = Apollo.QueryResult<
   DataAvailabilitySubmittersQuery,
   DataAvailabilitySubmittersQueryVariables
 >;
+export const DaSummaryDocument = gql`
+  query DASummary {
+    dataAvailabilitySummary {
+      totalTransactions
+      lastFinalisedTransaction
+    }
+  }
+`;
+
+/**
+ * __useDaSummaryQuery__
+ *
+ * To run a query within a React component, call `useDaSummaryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDaSummaryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDaSummaryQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useDaSummaryQuery(
+  baseOptions?: Apollo.QueryHookOptions<DaSummaryQuery, DaSummaryQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<DaSummaryQuery, DaSummaryQueryVariables>(DaSummaryDocument, options);
+}
+export function useDaSummaryLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<DaSummaryQuery, DaSummaryQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<DaSummaryQuery, DaSummaryQueryVariables>(DaSummaryDocument, options);
+}
+export type DaSummaryQueryHookResult = ReturnType<typeof useDaSummaryQuery>;
+export type DaSummaryLazyQueryHookResult = ReturnType<typeof useDaSummaryLazyQuery>;
+export type DaSummaryQueryResult = Apollo.QueryResult<DaSummaryQuery, DaSummaryQueryVariables>;
 export const DataAvailabilityTransactionDocument = gql`
   query DataAvailabilityTransaction($request: DataAvailabilityTransactionRequest!) {
     dataAvailabilityTransaction(request: $request) {
