@@ -4071,6 +4071,11 @@ export type SpamReasonInputParams = {
   subreason: PublicationReportingSpamSubreason;
 };
 
+export type Subscription = {
+  __typename?: 'Subscription';
+  newDataAvailabilityTransaction: DataAvailabilityTransactionUnion;
+};
+
 export type SybilDotOrgIdentity = {
   __typename?: 'SybilDotOrgIdentity';
   source: SybilDotOrgIdentitySource;
@@ -4692,6 +4697,114 @@ export type PublicationsQuery = {
   };
 };
 
+export type NewTransactionSubscriptionVariables = Exact<{ [key: string]: never }>;
+
+export type NewTransactionSubscription = {
+  __typename?: 'Subscription';
+  newDataAvailabilityTransaction:
+    | {
+        __typename?: 'DataAvailabilityComment';
+        transactionId: string;
+        submitter: any;
+        createdAt: any;
+        appId?: any | null;
+        publicationId: any;
+        commentedOnPublicationId: any;
+        profile: {
+          __typename?: 'Profile';
+          id: any;
+          name?: string | null;
+          handle: any;
+          bio?: string | null;
+          ownedBy: any;
+          isFollowedByMe: boolean;
+          stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+          attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+          picture?:
+            | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+            | { __typename?: 'NftImage'; uri: any }
+            | null;
+        };
+        commentedOnProfile: {
+          __typename?: 'Profile';
+          id: any;
+          name?: string | null;
+          handle: any;
+          bio?: string | null;
+          ownedBy: any;
+          isFollowedByMe: boolean;
+          stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+          attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+          picture?:
+            | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+            | { __typename?: 'NftImage'; uri: any }
+            | null;
+        };
+      }
+    | {
+        __typename?: 'DataAvailabilityMirror';
+        transactionId: string;
+        submitter: any;
+        createdAt: any;
+        appId?: any | null;
+        publicationId: any;
+        mirrorOfPublicationId: any;
+        profile: {
+          __typename?: 'Profile';
+          id: any;
+          name?: string | null;
+          handle: any;
+          bio?: string | null;
+          ownedBy: any;
+          isFollowedByMe: boolean;
+          stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+          attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+          picture?:
+            | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+            | { __typename?: 'NftImage'; uri: any }
+            | null;
+        };
+        mirrorOfProfile: {
+          __typename?: 'Profile';
+          id: any;
+          name?: string | null;
+          handle: any;
+          bio?: string | null;
+          ownedBy: any;
+          isFollowedByMe: boolean;
+          stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+          attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+          picture?:
+            | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+            | { __typename?: 'NftImage'; uri: any }
+            | null;
+        };
+      }
+    | {
+        __typename?: 'DataAvailabilityPost';
+        transactionId: string;
+        submitter: any;
+        createdAt: any;
+        appId?: any | null;
+        publicationId: any;
+        profile: {
+          __typename?: 'Profile';
+          id: any;
+          name?: string | null;
+          handle: any;
+          bio?: string | null;
+          ownedBy: any;
+          isFollowedByMe: boolean;
+          stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+          attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+          picture?:
+            | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+            | { __typename?: 'NftImage'; uri: any }
+            | null;
+        };
+      };
+};
+
 export interface PossibleTypesResultData {
   possibleTypes: {
     [key: string]: string[];
@@ -5101,3 +5214,51 @@ export function usePublicationsLazyQuery(
 export type PublicationsQueryHookResult = ReturnType<typeof usePublicationsQuery>;
 export type PublicationsLazyQueryHookResult = ReturnType<typeof usePublicationsLazyQuery>;
 export type PublicationsQueryResult = Apollo.QueryResult<PublicationsQuery, PublicationsQueryVariables>;
+export const NewTransactionDocument = gql`
+  subscription NewTransaction {
+    newDataAvailabilityTransaction {
+      ... on DataAvailabilityPost {
+        ...DAPostFields
+      }
+      ... on DataAvailabilityComment {
+        ...DACommentFields
+      }
+      ... on DataAvailabilityMirror {
+        ...DAMirrorFields
+      }
+    }
+  }
+  ${DaPostFieldsFragmentDoc}
+  ${DaCommentFieldsFragmentDoc}
+  ${DaMirrorFieldsFragmentDoc}
+`;
+
+/**
+ * __useNewTransactionSubscription__
+ *
+ * To run a query within a React component, call `useNewTransactionSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useNewTransactionSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useNewTransactionSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useNewTransactionSubscription(
+  baseOptions?: Apollo.SubscriptionHookOptions<
+    NewTransactionSubscription,
+    NewTransactionSubscriptionVariables
+  >
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useSubscription<NewTransactionSubscription, NewTransactionSubscriptionVariables>(
+    NewTransactionDocument,
+    options
+  );
+}
+export type NewTransactionSubscriptionHookResult = ReturnType<typeof useNewTransactionSubscription>;
+export type NewTransactionSubscriptionResult = Apollo.SubscriptionResult<NewTransactionSubscription>;

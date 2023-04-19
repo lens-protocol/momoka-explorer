@@ -1,5 +1,5 @@
 const getPostAppLink = (pubId: string) => {
-  return `https://lenster.xyz/posts/${pubId}`;
+  return `https://staging-da.lenster.xyz/posts/${pubId}`;
 };
 
 export default getPostAppLink;

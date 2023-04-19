@@ -10,7 +10,7 @@ const getProfilePicture = (channel: Profile): string => {
       : channel.picture?.__typename === 'NftImage'
       ? channel?.picture?.uri
       : getPfp(channel?.ownedBy);
-  const sanitized = sanitizeDStorageUrl(url);
+  const sanitized = url?.includes('ipfs://') ? sanitizeDStorageUrl(url) : getPfp(channel?.ownedBy);
   return sanitized;
 };
 
