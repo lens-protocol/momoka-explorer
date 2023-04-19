@@ -30,22 +30,14 @@ const AllTransactions: FC<Props> = () => {
         <div className="flex flex-1 items-center justify-end space-x-3">
           <button
             type="button"
-<<<<<<< HEAD
             className="rounded-lg border p-1 hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-gray-900"
-=======
-            className="rounded-lg border p-1 hover:bg-gray-50 dark:border-gray-600 hover:dark:bg-gray-700"
->>>>>>> ca6211c (feat: dark mode support for pagination arrow)
           >
             <ArrowLeftIcon className="h-4 w-4" />
           </button>
           <span className="text-sm">Page 1</span>
           <button
             type="button"
-<<<<<<< HEAD
             className="rounded-lg border p-1 hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-gray-900"
-=======
-            className="rounded-lg border p-1 hover:bg-gray-50 dark:border-gray-600 hover:dark:bg-gray-700"
->>>>>>> ca6211c (feat: dark mode support for pagination arrow)
           >
             <ArrowRightIcon className="h-4 w-4" />
           </button>
