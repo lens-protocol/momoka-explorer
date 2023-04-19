@@ -3,10 +3,12 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import type { FC } from 'react';
 
-import { useDaTransactionsQuery } from '@/generated';
+import { DataAvailabilityTransactionUnion, useDaTransactionsQuery } from '@/generated';
 import { getRelativeTime } from '@/utils/formatTime';
 
 import TransactionsShimmer from '../shimmers/TransactionsShimmer';
+import getDAActionType from '@/utils/getDAActionType';
+import getPostAppLink from '@/utils/getPostAppLink';
 
 type Props = {};
 
@@ -14,28 +16,6 @@ const LatestTransactions: FC<Props> = () => {
   const { data, loading } = useDaTransactionsQuery({
     variables: { request: { limit: 10 } }
   });
-
-  const getActionType = (
-    action: 'DataAvailabilityComment' | 'DataAvailabilityMirror' | 'DataAvailabilityPost' | undefined
-  ) => {
-    if (action === 'DataAvailabilityComment') {
-      return 'Comment';
-    } else if (action === 'DataAvailabilityMirror') {
-      return 'Mirror';
-    } else if (action === 'DataAvailabilityPost') {
-      return 'Post';
-    }
-    return '';
-  };
-
-  const getPostLink = (pubId: string, appId: string, type: string) => {
-    if (appId?.toLowerCase() === 'lenster') {
-      return `https://lenster.xyz/posts/${pubId}`;
-    } else if (appId?.toLowerCase() === 'lenstube' && type === 'DataAvailabilityPost') {
-      return `https://lenstube.xyz/watch/${pubId}`;
-    }
-    return `https://lenster.xyz/posts/${pubId}`;
-  };
 
   // useEffect(() => {
   //   const intervalId = setInterval(() => {
@@ -106,7 +86,7 @@ const LatestTransactions: FC<Props> = () => {
                 </td>
                 <td className="whitespace-nowrap px-3 py-4 text-center text-sm text-gray-700 dark:text-gray-300">
                   <span className="inline-flex w-20 items-center justify-center space-x-1 rounded-lg border bg-gray-50 px-3 py-1.5 text-xs dark:border-gray-950 dark:bg-gray-800">
-                    {getActionType(txn.__typename)}
+                    {getDAActionType(txn.__typename)}
                   </span>
                 </td>
                 <td className="whitespace-nowrap px-3 py-4 text-gray-500">
@@ -123,7 +103,10 @@ const LatestTransactions: FC<Props> = () => {
                     </span>
                     <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-sm">
                       <span className="text-xs text-gray-500">via</span>
-                      <Link href="/" className="text-indigo-400 text-opacity-80 hover:text-opacity-100">
+                      <Link
+                        href="/submitters"
+                        className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
+                      >
                         {txn.submitter}
                       </Link>
                     </span>
@@ -131,7 +114,7 @@ const LatestTransactions: FC<Props> = () => {
                 </td>
                 <td className="whitespace-nowrap rounded-r-xl px-3 py-4 text-right text-sm">
                   <Link
-                    href={getPostLink(txn.publicationId, txn.appId, txn.__typename as string)}
+                    href={getPostAppLink(txn.publicationId)}
                     target="_blank"
                     className="opacity-70 hover:opacity-100"
                   >

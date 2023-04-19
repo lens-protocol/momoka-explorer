@@ -7,17 +7,20 @@ import {
 import Link from 'next/link';
 import type { FC } from 'react';
 
-import { PublicationSortCriteria, usePublicationsQuery } from '@/generated';
-import getProfilePicture from '@/utils/getpfp';
+import { Profile, PublicationSortCriteria, useDaTransactionsQuery, usePublicationsQuery } from '@/generated';
 import truncate from '@/utils/truncate';
 
 import TransactionsShimmer from '../shimmers/TransactionsShimmer';
+import getDAActionType from '@/utils/getDAActionType';
+import { getRelativeTime } from '@/utils/formatTime';
+import getProfilePicture from '@/utils/getProfilePicture';
+import getPostAppLink from '@/utils/getPostAppLink';
 
 type Props = {};
 
 const AllTransactions: FC<Props> = () => {
-  const { data, loading } = usePublicationsQuery({
-    variables: { request: { sortCriteria: PublicationSortCriteria.Latest, limit: 50 } }
+  const { data, loading } = useDaTransactionsQuery({
+    variables: { request: { limit: 50 } }
   });
 
   return (
@@ -58,8 +61,8 @@ const AllTransactions: FC<Props> = () => {
               </tr>
             </thead>
             <tbody>
-              {data?.explorePublications.items.map((publication) => (
-                <tr key={publication.id} className="overflow-hidden bg-white dark:bg-gray-900">
+              {data?.dataAvailabilityTransactions.items.map((txn) => (
+                <tr key={txn.createdAt} className="overflow-hidden bg-white dark:bg-gray-900">
                   <td className="rounded-l-xl px-3 py-2 text-sm text-gray-900">
                     <div className="flex items-center space-x-2">
                       <span className="rounded-xl bg-gray-100 p-2 dark:bg-gray-800">
@@ -67,49 +70,52 @@ const AllTransactions: FC<Props> = () => {
                       </span>
                       <div className="flex flex-col truncate">
                         <Link
-                          href={`/tx/CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc`}
+                          href={`/tx/${txn.transactionId}`}
                           className="truncate text-indigo-400 text-opacity-80 hover:text-opacity-100"
                         >
-                          {truncate('CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc', 30)}
+                          {truncate(txn.transactionId, 30)}
                         </Link>
                       </div>
                     </div>
                   </td>
                   <td className="w-20 whitespace-nowrap px-3 py-2 text-sm text-gray-700 dark:text-gray-300">
                     <span className="inline-flex w-20 items-center justify-center space-x-1 rounded-lg border bg-gray-50 px-3 py-1.5 text-xs dark:border-gray-950 dark:bg-gray-800">
-                      {publication.__typename}
+                      {getDAActionType(txn.__typename)}
                     </span>
                   </td>
                   <td className="whitespace-nowrap px-3 py-2 text-sm text-gray-600 dark:text-gray-400">
-                    6 secs ago
+                    {getRelativeTime(txn.createdAt)}
                   </td>
                   <td className="whitespace-nowrap px-3 py-2 text-gray-500">
                     <span className="inline-flex items-center space-x-1.5 px-2 py-0.5 text-sm">
                       <span>
                         <img
                           className="h-4 w-4 rounded-2xl"
-                          src={getProfilePicture('0x01d79BcEaEaaDfb8fD2F2f53005289CFcF483464')}
+                          src={getProfilePicture(txn.profile as Profile)}
                           alt="pfp"
                           draggable={false}
                         />
                       </span>
                       <Link
-                        href={`https://lensfrens.xyz/sasicodes.lens`}
+                        href={`https://lensfrens.xyz/${txn.profile.handle}`}
                         target="_blank"
                         className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
                       >
-                        sasicodes.lens
+                        {txn.profile.handle}
                       </Link>
                     </span>
                   </td>
                   <td className="whitespace-nowrap px-3 py-2 text-gray-500">
-                    <Link href="/" className="text-indigo-400 text-opacity-80 hover:text-opacity-100">
-                      submitter::lens::CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc
+                    <Link
+                      href="/submitters"
+                      className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
+                    >
+                      {txn.submitter}
                     </Link>
                   </td>
                   <td className="whitespace-nowrap rounded-r-xl px-3 py-2 text-right text-sm">
                     <Link
-                      href={`https://lenster.xyz/posts/0x01-0x01`}
+                      href={getPostAppLink(txn.publicationId)}
                       target="_blank"
                       className="opacity-70 hover:opacity-100"
                     >
