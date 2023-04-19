@@ -19,12 +19,6 @@ const Stats = () => {
         <span className="text-xs font-medium uppercase tracking-wider opacity-50">Transactions</span>
         <span className="text-2xl font-medium">{formatNumber(stats.totalTransactions)}</span>
       </div>
-      <div className="flex flex-col space-y-1.5 rounded-xl border border-gray-100 bg-gray-50 px-6 py-5 dark:border-gray-950 dark:bg-gray-800">
-        <span className="text-xs font-medium uppercase tracking-wider opacity-50">
-          Transactions per second
-        </span>
-        <span className="text-2xl font-medium">38994</span>
-      </div>
       <div className="flex flex-col space-y-1.5 truncate rounded-xl border border-gray-100 bg-gray-50 px-6 py-5 dark:border-gray-950 dark:bg-gray-800">
         <span className="text-xs font-medium uppercase tracking-wider opacity-50">Last Finalized</span>
         <Link href={sanitizeDStorageUrl(stats.lastFinalisedTransaction)} target="_blank">
@@ -34,8 +28,14 @@ const Stats = () => {
         </Link>
       </div>
       <div className="flex flex-col space-y-1.5 rounded-xl border border-gray-100 bg-gray-50 px-6 py-5 dark:border-gray-950 dark:bg-gray-800">
+        <span className="text-xs font-medium uppercase tracking-wider opacity-50">
+          Transactions per second
+        </span>
+        <span className="text-2xl font-medium">WIP</span>
+      </div>
+      <div className="flex flex-col space-y-1.5 rounded-xl border border-gray-100 bg-gray-50 px-6 py-5 dark:border-gray-950 dark:bg-gray-800">
         <span className="text-xs font-medium uppercase tracking-wider opacity-50">All Submitters</span>
-        <span className="truncate text-2xl font-medium">Submitter:Lens 1</span>
+        <span className="truncate text-2xl font-medium">WIP</span>
       </div>
     </div>
   );

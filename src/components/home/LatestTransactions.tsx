@@ -4,6 +4,7 @@ import Link from 'next/link';
 import type { FC } from 'react';
 
 import { useDaTransactionsQuery } from '@/generated';
+import { getRelativeTime } from '@/utils/formatTime';
 
 import TransactionsShimmer from '../shimmers/TransactionsShimmer';
 
@@ -13,6 +14,28 @@ const LatestTransactions: FC<Props> = () => {
   const { data, loading } = useDaTransactionsQuery({
     variables: { request: { limit: 10 } }
   });
+
+  const getActionType = (
+    action: 'DataAvailabilityComment' | 'DataAvailabilityMirror' | 'DataAvailabilityPost' | undefined
+  ) => {
+    if (action === 'DataAvailabilityComment') {
+      return 'Comment';
+    } else if (action === 'DataAvailabilityMirror') {
+      return 'Mirror';
+    } else if (action === 'DataAvailabilityPost') {
+      return 'Post';
+    }
+    return '';
+  };
+
+  const getPostLink = (pubId: string, appId: string, type: string) => {
+    if (appId?.toLowerCase() === 'lenster') {
+      return `https://lenster.xyz/posts/${pubId}`;
+    } else if (appId?.toLowerCase() === 'lenstube' && type === 'DataAvailabilityPost') {
+      return `https://lenstube.xyz/watch/${pubId}`;
+    }
+    return `https://lenster.xyz/posts/${pubId}`;
+  };
 
   // useEffect(() => {
   //   const intervalId = setInterval(() => {
@@ -70,18 +93,20 @@ const LatestTransactions: FC<Props> = () => {
                     </span>
                     <div className="flex flex-col">
                       <Link
-                        href={`/tx/CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc`}
+                        href={`/tx/${txn.transactionId}`}
                         className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
                       >
-                        CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc
+                        {txn.transactionId}
                       </Link>
-                      <span className="text-xs text-gray-600 dark:text-gray-400">6 secs ago</span>
+                      <span className="text-xs text-gray-600 dark:text-gray-400">
+                        {getRelativeTime(txn.createdAt)}
+                      </span>
                     </div>
                   </div>
                 </td>
                 <td className="whitespace-nowrap px-3 py-4 text-center text-sm text-gray-700 dark:text-gray-300">
                   <span className="inline-flex w-20 items-center justify-center space-x-1 rounded-lg border bg-gray-50 px-3 py-1.5 text-xs dark:border-gray-950 dark:bg-gray-800">
-                    {txn.__typename}
+                    {getActionType(txn.__typename)}
                   </span>
                 </td>
                 <td className="whitespace-nowrap px-3 py-4 text-gray-500">
@@ -89,24 +114,24 @@ const LatestTransactions: FC<Props> = () => {
                     <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-sm">
                       <span className="text-xs text-gray-500">From</span>
                       <Link
-                        href={`https://lensfrens.xyz/sasicodes.lens`}
+                        href={`https://lensfrens.xyz/${txn.profile.handle}`}
                         target="_blank"
                         className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
                       >
-                        sasicodes.lens
+                        {txn.profile.handle}
                       </Link>
                     </span>
                     <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-sm">
                       <span className="text-xs text-gray-500">via</span>
                       <Link href="/" className="text-indigo-400 text-opacity-80 hover:text-opacity-100">
-                        submitter::lens::CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc
+                        {txn.submitter}
                       </Link>
                     </span>
                   </div>
                 </td>
                 <td className="whitespace-nowrap rounded-r-xl px-3 py-4 text-right text-sm">
                   <Link
-                    href={`https://lenster.xyz/posts/0x01-0x01`}
+                    href={getPostLink(txn.publicationId, txn.appId, txn.__typename as string)}
                     target="_blank"
                     className="opacity-70 hover:opacity-100"
                   >
