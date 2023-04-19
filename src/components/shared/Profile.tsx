@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { FC } from 'react';
 
 import type { Profile as TProfile } from '@/generated';
+import formatAddress from '@/utils/formatAddress';
 import getProfilePicture from '@/utils/getProfilePicture';
 
 interface ProfileProps {
@@ -20,7 +21,7 @@ const Profile: FC<ProfileProps> = ({ profile }) => (
       alt={profile?.handle}
     />
     <div>
-      <div className="font-bold">{profile?.name ?? profile?.ownedBy}</div>
+      <div className="font-bold">{profile?.name ?? formatAddress(profile?.ownedBy)}</div>
       <div className="text-xs">@{profile?.handle}</div>
     </div>
   </Link>
