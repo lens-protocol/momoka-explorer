@@ -40,7 +40,7 @@ const LatestTransactions: FC<Props> = () => {
   // }, [newlyAddedItemIds, previousData]);
 
   return (
-    <div className="relative rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 md:space-y-2 md:p-5">
+    <div className="relative rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 dark:border-gray-950 dark:bg-gray-800 md:space-y-2 md:p-5">
       <div className="left-0 right-0 flex items-center justify-between gap-y-3">
         <h1 className="text-sm font-medium opacity-80">Latest Transactions</h1>
         <Link
@@ -59,13 +59,13 @@ const LatestTransactions: FC<Props> = () => {
               <tr
                 key={publication.id}
                 className={clsx(
-                  'overflow-hidden bg-white'
+                  'overflow-hidden bg-white dark:bg-gray-900'
                   // newlyAddedItemIds.includes(publication.id) && 'bg-yellow-100'
                 )}
               >
                 <td className="w-48 whitespace-nowrap rounded-l-xl px-3 py-4 text-sm text-gray-900">
                   <div className="flex items-center space-x-2">
-                    <span className="rounded-xl bg-gray-100 p-2">
+                    <span className="rounded-xl bg-gray-100 p-2 dark:bg-gray-800">
                       <ArrowsRightLeftIcon className="h-4 w-4 text-green-700" />
                     </span>
                     <div className="flex flex-col">
@@ -75,19 +75,19 @@ const LatestTransactions: FC<Props> = () => {
                       >
                         CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc
                       </Link>
-                      <span className="text-xs opacity-50">6 secs ago</span>
+                      <span className="text-xs text-gray-600 opacity-50 dark:text-gray-300">6 secs ago</span>
                     </div>
                   </div>
                 </td>
                 <td className="whitespace-nowrap px-3 py-4 text-center text-sm text-gray-500">
-                  <span className="inline-flex w-20 items-center justify-center space-x-1 rounded-lg border bg-gray-50 px-3 py-1.5 text-xs">
+                  <span className="inline-flex w-20 items-center justify-center space-x-1 rounded-lg border bg-gray-50 px-3 py-1.5 text-xs dark:border-gray-950 dark:bg-gray-800">
                     {publication.__typename}
                   </span>
                 </td>
                 <td className="whitespace-nowrap px-3 py-4 text-gray-500">
                   <div className="flex flex-col">
                     <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-sm">
-                      <span className="text-xs">From</span>
+                      <span className="text-xs text-gray-600 opacity-50 dark:text-gray-300">From</span>
                       <Link
                         href={`https://lensfrens.xyz/sasicodes.lens`}
                         target="_blank"
@@ -97,7 +97,7 @@ const LatestTransactions: FC<Props> = () => {
                       </Link>
                     </span>
                     <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-sm">
-                      <span className="text-xs">via</span>
+                      <span className="text-xs text-gray-600 opacity-50 dark:text-gray-300">via</span>
                       <Link href="/" className="text-indigo-400 text-opacity-80 hover:text-opacity-100">
                         submitter::lens::CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc
                       </Link>
