@@ -107,7 +107,7 @@ const LatestTransactions: FC<Props> = () => {
                       <span className="text-xs text-gray-500">From</span>
                       <span className="inline-flex items-center space-x-1">
                         <img
-                          className="h-3 w-3 rounded-2xl"
+                          className="h-3 w-3 flex-none rounded-2xl"
                           src={getProfilePicture(txn.profile as Profile)}
                           alt="pfp"
                           draggable={false}
