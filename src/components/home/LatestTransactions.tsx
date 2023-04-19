@@ -79,7 +79,7 @@ const LatestTransactions: FC<Props> = () => {
                     </div>
                   </div>
                 </td>
-                <td className="whitespace-nowrap px-3 py-4 text-center text-sm text-gray-500">
+                <td className="whitespace-nowrap px-3 py-4 text-center text-sm text-gray-700 dark:text-gray-300">
                   <span className="inline-flex w-20 items-center justify-center space-x-1 rounded-lg border bg-gray-50 px-3 py-1.5 text-xs dark:border-gray-950 dark:bg-gray-800">
                     {publication.__typename}
                   </span>
