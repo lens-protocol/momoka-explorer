@@ -1,0 +1,14 @@
+fragment DAMirrorFields on DataAvailabilityMirror {
+  transactionId
+  submitter
+  createdAt
+  appId
+  profile {
+    ...ProfileFields
+  }
+  publicationId
+  mirrorOfProfile {
+    ...ProfileFields
+  }
+  mirrorOfPublicationId
+}

@@ -1,0 +1,14 @@
+fragment DACommentFields on DataAvailabilityComment {
+  transactionId
+  submitter
+  createdAt
+  appId
+  profile {
+    ...ProfileFields
+  }
+  publicationId
+  commentedOnProfile {
+    ...ProfileFields
+  }
+  commentedOnPublicationId
+}

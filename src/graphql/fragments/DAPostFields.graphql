@@ -1,0 +1,10 @@
+fragment DAPostFields on DataAvailabilityPost {
+  transactionId
+  submitter
+  createdAt
+  appId
+  profile {
+    ...ProfileFields
+  }
+  publicationId
+}
