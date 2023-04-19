@@ -1,11 +1,9 @@
-import { Profile } from '@/generated';
-import sanitizeDStorageUrl from './sanitizeDStorageUrl';
-import getPfp from './getpfp';
+import type { Profile } from '@/generated';
 
-const getProfilePicture = (
-  channel: Profile,
-  type: 'avatar' | 'avatar_lg' | 'thumbnail' = 'avatar'
-): string => {
+import getPfp from './getpfp';
+import sanitizeDStorageUrl from './sanitizeDStorageUrl';
+
+const getProfilePicture = (channel: Profile): string => {
   const url =
     channel.picture && channel.picture.__typename === 'MediaSet'
       ? channel?.picture?.original?.url

@@ -7,14 +7,15 @@ import {
 import Link from 'next/link';
 import type { FC } from 'react';
 
-import { Profile, PublicationSortCriteria, useDaTransactionsQuery, usePublicationsQuery } from '@/generated';
+import type { Profile } from '@/generated';
+import { useDaTransactionsQuery } from '@/generated';
+import { getRelativeTime } from '@/utils/formatTime';
+import getDAActionType from '@/utils/getDAActionType';
+import getPostAppLink from '@/utils/getPostAppLink';
+import getProfilePicture from '@/utils/getProfilePicture';
 import truncate from '@/utils/truncate';
 
 import TransactionsShimmer from '../shimmers/TransactionsShimmer';
-import getDAActionType from '@/utils/getDAActionType';
-import { getRelativeTime } from '@/utils/formatTime';
-import getProfilePicture from '@/utils/getProfilePicture';
-import getPostAppLink from '@/utils/getPostAppLink';
 
 type Props = {};
 

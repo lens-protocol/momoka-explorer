@@ -5,6 +5,7 @@ import { useDaSummaryQuery } from '@/generated';
 import formatNumber from '@/utils/formatNumber';
 import sanitizeDStorageUrl from '@/utils/sanitizeDStorageUrl';
 import truncate from '@/utils/truncate';
+
 import StatsShimmer from './shimmers/StatsShimmer';
 
 const Stats = () => {

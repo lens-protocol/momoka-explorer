@@ -3,12 +3,12 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import type { FC } from 'react';
 
-import { DataAvailabilityTransactionUnion, useDaTransactionsQuery } from '@/generated';
+import { useDaTransactionsQuery } from '@/generated';
 import { getRelativeTime } from '@/utils/formatTime';
-
-import TransactionsShimmer from '../shimmers/TransactionsShimmer';
 import getDAActionType from '@/utils/getDAActionType';
 import getPostAppLink from '@/utils/getPostAppLink';
+
+import TransactionsShimmer from '../shimmers/TransactionsShimmer';
 
 type Props = {};
 
