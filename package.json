@@ -15,6 +15,7 @@
     "@apollo/client": "^3.7.12",
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.17",
+    "@lens-protocol/data-availability-verifier": "^0.0.24",
     "@types/react": "18.0.35",
     "@types/react-dom": "18.0.11",
     "autoprefixer": "10.4.14",

@@ -5,14 +5,20 @@ import { useDaSummaryQuery } from '@/generated';
 import formatNumber from '@/utils/formatNumber';
 import sanitizeDStorageUrl from '@/utils/sanitizeDStorageUrl';
 import truncate from '@/utils/truncate';
+import StatsShimmer from './shimmers/StatsShimmer';
 
 const Stats = () => {
-  const { data } = useDaSummaryQuery();
+  const { data, loading } = useDaSummaryQuery();
   const stats = data?.dataAvailabilitySummary;
+
+  if (loading) {
+    return <StatsShimmer />;
+  }
 
   if (!stats) {
     return null;
   }
+
   return (
     <div className="md:grid-col-2 grid gap-4 lg:grid-cols-4">
       <div className="flex flex-col space-y-1.5 rounded-xl border border-gray-100 bg-gray-50 px-6 py-5 dark:border-gray-950 dark:bg-gray-800">
