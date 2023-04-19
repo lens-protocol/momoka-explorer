@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 
 import type { Profile as TProfile } from '@/generated';
 import { useDataAvailabilityTransactionQuery } from '@/generated';
+import getProfilePicture from '@/utils/getProfilePicture';
 import isDataVerified from '@/utils/isDataVerified';
 
 import Profile from '../shared/Profile';
