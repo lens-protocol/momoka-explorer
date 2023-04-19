@@ -75,7 +75,7 @@ const LatestTransactions: FC<Props> = () => {
                       >
                         CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc
                       </Link>
-                      <span className="text-xs text-gray-600 opacity-50 dark:text-gray-300">6 secs ago</span>
+                      <span className="text-xs text-gray-500">6 secs ago</span>
                     </div>
                   </div>
                 </td>
@@ -87,7 +87,7 @@ const LatestTransactions: FC<Props> = () => {
                 <td className="whitespace-nowrap px-3 py-4 text-gray-500">
                   <div className="flex flex-col">
                     <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-sm">
-                      <span className="text-xs text-gray-600 opacity-50 dark:text-gray-300">From</span>
+                      <span className="text-xs text-gray-500">From</span>
                       <Link
                         href={`https://lensfrens.xyz/sasicodes.lens`}
                         target="_blank"
@@ -97,7 +97,7 @@ const LatestTransactions: FC<Props> = () => {
                       </Link>
                     </span>
                     <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-sm">
-                      <span className="text-xs text-gray-600 opacity-50 dark:text-gray-300">via</span>
+                      <span className="text-xs text-gray-500">via</span>
                       <Link href="/" className="text-indigo-400 text-opacity-80 hover:text-opacity-100">
                         submitter::lens::CHqdhv_rIp4iJZnWRkQ6Vua4tGAMWvWxCt9v1asD5Kc
                       </Link>
