@@ -1,6 +1,7 @@
-import { ApolloClient, InMemoryCache, split } from '@apollo/client';
+import { ApolloClient, split } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
 
+import cache from './cache';
 import httpLink from './httpLink';
 import wsLink from './wsLink';
 
@@ -18,7 +19,7 @@ const splitLink =
 
 const client = new ApolloClient({
   link: splitLink,
-  cache: new InMemoryCache()
+  cache
 });
 
 export default client;

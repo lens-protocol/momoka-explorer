@@ -26,6 +26,8 @@ const LatestTransactions: FC<Props> = () => {
     }
   });
 
+  // const { data } = useSubscription(NewTransactionDocument);
+
   const { data } = useNewTransactionSubscription();
   console.log('🚀 ~ file: LatestTransactions.tsx:30 ~ data:', data);
 

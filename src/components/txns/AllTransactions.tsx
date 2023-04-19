@@ -1,13 +1,9 @@
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  ArrowsRightLeftIcon,
-  ArrowTopRightOnSquareIcon
-} from '@heroicons/react/24/outline';
+import { ArrowsRightLeftIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import type { FC } from 'react';
+import { useInView } from 'react-cool-inview';
 
-import type { Profile } from '@/generated';
+import type { DataAvailabilityTransactionUnion, Profile } from '@/generated';
 import { useDaTransactionsQuery } from '@/generated';
 import { getRelativeTime } from '@/utils/formatTime';
 import getDAActionType from '@/utils/getDAActionType';
@@ -20,8 +16,25 @@ import TransactionsShimmer from '../shimmers/TransactionsShimmer';
 type Props = {};
 
 const AllTransactions: FC<Props> = () => {
-  const { data, loading } = useDaTransactionsQuery({
+  const { data, loading, fetchMore } = useDaTransactionsQuery({
     variables: { request: { limit: 50 } }
+  });
+
+  const allTransactions = data?.dataAvailabilityTransactions?.items as DataAvailabilityTransactionUnion[];
+  const pageInfo = data?.dataAvailabilityTransactions.pageInfo;
+
+  const { observe } = useInView({
+    rootMargin: '60% 0px',
+    onEnter: async () => {
+      await fetchMore({
+        variables: {
+          request: {
+            limit: 50,
+            cursor: pageInfo?.next
+          }
+        }
+      });
+    }
   });
 
   return (
@@ -30,21 +43,6 @@ const AllTransactions: FC<Props> = () => {
         <div>
           <h1 className="font-medium opacity-90">All Transactions</h1>
           <p className="text-sm opacity-60">More than 1,939,672,686 transactions found</p>
-        </div>
-        <div className="flex flex-1 items-center justify-end space-x-3">
-          <button
-            type="button"
-            className="rounded-lg border p-1 hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-gray-900"
-          >
-            <ArrowLeftIcon className="h-4 w-4" />
-          </button>
-          <span className="text-sm">Page 1</span>
-          <button
-            type="button"
-            className="rounded-lg border p-1 hover:bg-gray-50 dark:border-gray-700 hover:dark:bg-gray-900"
-          >
-            <ArrowRightIcon className="h-4 w-4" />
-          </button>
         </div>
       </div>
       <div className="overflow-x-auto">
@@ -62,7 +60,7 @@ const AllTransactions: FC<Props> = () => {
               </tr>
             </thead>
             <tbody>
-              {data?.dataAvailabilityTransactions.items.map((txn, i) => (
+              {allTransactions?.map((txn, i) => (
                 <tr key={i} className="overflow-hidden bg-white dark:bg-gray-900">
                   <td className="rounded-l-xl px-3 py-2 text-sm text-gray-900">
                     <div className="flex items-center space-x-2">
@@ -128,6 +126,11 @@ const AllTransactions: FC<Props> = () => {
                   </td>
                 </tr>
               ))}
+              {pageInfo?.next && (
+                <span ref={observe} className="flex justify-center p-10">
+                  Loading...
+                </span>
+              )}
             </tbody>
           </table>
         )}

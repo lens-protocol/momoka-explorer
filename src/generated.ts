@@ -4678,6 +4678,7 @@ export type DaTransactionsQuery = {
           };
         }
     >;
+    pageInfo: { __typename?: 'PaginatedResultInfo'; prev?: any | null; next?: any | null };
   };
 };
 
@@ -5123,6 +5124,10 @@ export const DaTransactionsDocument = gql`
         ... on DataAvailabilityMirror {
           ...DAMirrorFields
         }
+      }
+      pageInfo {
+        prev
+        next
       }
     }
   }
