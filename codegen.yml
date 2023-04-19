@@ -1,5 +1,5 @@
 schema: https://staging-api-social-mumbai.lens.crtlkey.com
-documents: ['./src/graphql/*.graphql']
+documents: ['./src/graphql/queries/*.graphql', './src/graphql/fragments/*.graphql']
 
 hooks:
   afterAllFileWrite:

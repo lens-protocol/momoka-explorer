@@ -3527,7 +3527,7 @@ export type Query = {
   cur: Array<Scalars['String']>;
   dataAvailabilitySubmitters: DataAvailabilitySubmittersResult;
   dataAvailabilitySummary: DataAvailabilitySummaryResult;
-  dataAvailabilityTransaction: DataAvailabilityTransactionUnion;
+  dataAvailabilityTransaction?: Maybe<DataAvailabilityTransactionUnion>;
   dataAvailabilityTransactions: DataAvailabilityTransactionsResult;
   defaultProfile?: Maybe<Profile>;
   doesFollow: Array<DoesFollowResponse>;
@@ -4309,6 +4309,126 @@ export type WorldcoinPhoneVerifyWebhookRequest = {
   signalType: WorldcoinPhoneVerifyType;
 };
 
+export type DaCommentFieldsFragment = {
+  __typename?: 'DataAvailabilityComment';
+  transactionId: string;
+  submitter: any;
+  createdAt: any;
+  appId?: any | null;
+  publicationId: any;
+  commentedOnPublicationId: any;
+  profile: {
+    __typename?: 'Profile';
+    id: any;
+    name?: string | null;
+    handle: any;
+    bio?: string | null;
+    ownedBy: any;
+    isFollowedByMe: boolean;
+    stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+    attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+    picture?:
+      | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+      | { __typename?: 'NftImage'; uri: any }
+      | null;
+  };
+  commentedOnProfile: {
+    __typename?: 'Profile';
+    id: any;
+    name?: string | null;
+    handle: any;
+    bio?: string | null;
+    ownedBy: any;
+    isFollowedByMe: boolean;
+    stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+    attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+    picture?:
+      | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+      | { __typename?: 'NftImage'; uri: any }
+      | null;
+  };
+};
+
+export type DaMirrorFieldsFragment = {
+  __typename?: 'DataAvailabilityMirror';
+  transactionId: string;
+  submitter: any;
+  createdAt: any;
+  appId?: any | null;
+  publicationId: any;
+  mirrorOfPublicationId: any;
+  profile: {
+    __typename?: 'Profile';
+    id: any;
+    name?: string | null;
+    handle: any;
+    bio?: string | null;
+    ownedBy: any;
+    isFollowedByMe: boolean;
+    stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+    attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+    picture?:
+      | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+      | { __typename?: 'NftImage'; uri: any }
+      | null;
+  };
+  mirrorOfProfile: {
+    __typename?: 'Profile';
+    id: any;
+    name?: string | null;
+    handle: any;
+    bio?: string | null;
+    ownedBy: any;
+    isFollowedByMe: boolean;
+    stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+    attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+    picture?:
+      | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+      | { __typename?: 'NftImage'; uri: any }
+      | null;
+  };
+};
+
+export type DaPostFieldsFragment = {
+  __typename?: 'DataAvailabilityPost';
+  transactionId: string;
+  submitter: any;
+  createdAt: any;
+  appId?: any | null;
+  publicationId: any;
+  profile: {
+    __typename?: 'Profile';
+    id: any;
+    name?: string | null;
+    handle: any;
+    bio?: string | null;
+    ownedBy: any;
+    isFollowedByMe: boolean;
+    stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+    attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+    picture?:
+      | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+      | { __typename?: 'NftImage'; uri: any }
+      | null;
+  };
+};
+
+export type ProfileFieldsFragment = {
+  __typename?: 'Profile';
+  id: any;
+  name?: string | null;
+  handle: any;
+  bio?: string | null;
+  ownedBy: any;
+  isFollowedByMe: boolean;
+  stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+  attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+  picture?:
+    | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+    | { __typename?: 'NftImage'; uri: any }
+    | null;
+};
+
 export type DataAvailabilitySubmittersQueryVariables = Exact<{ [key: string]: never }>;
 
 export type DataAvailabilitySubmittersQuery = {
@@ -4337,7 +4457,7 @@ export type DataAvailabilityTransactionQueryVariables = Exact<{
 
 export type DataAvailabilityTransactionQuery = {
   __typename?: 'Query';
-  dataAvailabilityTransaction:
+  dataAvailabilityTransaction?:
     | {
         __typename?: 'DataAvailabilityComment';
         transactionId: string;
@@ -4368,7 +4488,8 @@ export type DataAvailabilityTransactionQuery = {
         appId?: any | null;
         publicationId: any;
         profile: { __typename?: 'Profile'; id: any; handle: any };
-      };
+      }
+    | null;
 };
 
 export type DaTransactionsQueryVariables = Exact<{
@@ -4488,6 +4609,81 @@ const result: PossibleTypesResultData = {
 };
 export default result;
 
+export const ProfileFieldsFragmentDoc = gql`
+  fragment ProfileFields on Profile {
+    id
+    name
+    handle
+    bio
+    ownedBy
+    isFollowedByMe
+    stats {
+      totalFollowers
+      totalFollowing
+    }
+    attributes {
+      key
+      value
+    }
+    picture {
+      ... on MediaSet {
+        original {
+          url
+        }
+      }
+      ... on NftImage {
+        uri
+      }
+    }
+  }
+`;
+export const DaCommentFieldsFragmentDoc = gql`
+  fragment DACommentFields on DataAvailabilityComment {
+    transactionId
+    submitter
+    createdAt
+    appId
+    profile {
+      ...ProfileFields
+    }
+    publicationId
+    commentedOnProfile {
+      ...ProfileFields
+    }
+    commentedOnPublicationId
+  }
+  ${ProfileFieldsFragmentDoc}
+`;
+export const DaMirrorFieldsFragmentDoc = gql`
+  fragment DAMirrorFields on DataAvailabilityMirror {
+    transactionId
+    submitter
+    createdAt
+    appId
+    profile {
+      ...ProfileFields
+    }
+    publicationId
+    mirrorOfProfile {
+      ...ProfileFields
+    }
+    mirrorOfPublicationId
+  }
+  ${ProfileFieldsFragmentDoc}
+`;
+export const DaPostFieldsFragmentDoc = gql`
+  fragment DAPostFields on DataAvailabilityPost {
+    transactionId
+    submitter
+    createdAt
+    appId
+    profile {
+      ...ProfileFields
+    }
+    publicationId
+  }
+  ${ProfileFieldsFragmentDoc}
+`;
 export const DataAvailabilitySubmittersDocument = gql`
   query DataAvailabilitySubmitters {
     dataAvailabilitySubmitters {
