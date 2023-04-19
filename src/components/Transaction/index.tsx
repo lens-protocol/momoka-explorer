@@ -8,7 +8,7 @@ import { useEffect, useState } from 'react';
 
 import type { Profile as TProfile } from '@/generated';
 import { useDataAvailabilityTransactionQuery } from '@/generated';
-import getProfilePicture from '@/utils/getProfilePicture';
+import capitalizeCase from '@/utils/capitalizeCase';
 import isDataVerified from '@/utils/isDataVerified';
 
 import Profile from '../shared/Profile';
@@ -55,7 +55,6 @@ const Transaction: FC = () => {
 
   return (
     <div className="relative mt-6 space-y-4 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 dark:border-gray-950 dark:bg-gray-800 md:p-5">
-      {JSON.stringify(data)}
       <div className="px-4 sm:px-0">
         <h3 className="font-medium opacity-80">Transaction Details</h3>
         <p className="text-sm opacity-60">All Transaction related information will be displayed here.</p>
@@ -90,9 +89,70 @@ const Transaction: FC = () => {
           }
         />
         <Meta
-          title="Created by"
+          title={`${capitalizeCase(dataAvailabilityTransaction?.__typename as string).replace(
+            'DataAvailability',
+            ''
+          )}ed by`}
           value={<Profile profile={dataAvailabilityTransaction?.profile as TProfile} />}
         />
+        <Meta
+          title="Publication ID"
+          value={
+            <Link
+              className="flex items-center space-x-2 underline"
+              href={`https://lenster.xyz/posts/${dataAvailabilityTransaction?.publicationId}`}
+              target="_blank"
+            >
+              <span>{dataAvailabilityTransaction?.publicationId}</span>
+              <ArrowTopRightOnSquareIcon className="ml-2 h-4 w-4" />
+            </Link>
+          }
+        />
+        {dataAvailabilityTransaction?.__typename === 'DataAvailabilityMirror' && (
+          <>
+            <div className="border-b-[0.5px] border-b-gray-100 dark:border-gray-950" />
+            <Meta
+              title="Mirror Parent ID"
+              value={
+                <div className="space-y-4">
+                  <Link
+                    className="flex items-center space-x-2 underline"
+                    href={`https://lenster.xyz/posts/${dataAvailabilityTransaction?.mirrorOfPublicationId}`}
+                    target="_blank"
+                  >
+                    <span>{dataAvailabilityTransaction?.mirrorOfPublicationId}</span>
+                    <ArrowTopRightOnSquareIcon className="ml-2 h-4 w-4" />
+                  </Link>
+                  <Profile profile={dataAvailabilityTransaction?.mirrorOfProfile as TProfile} />
+                </div>
+              }
+            />
+            <div className="border-b-[0.5px] border-b-gray-100 dark:border-gray-950" />
+          </>
+        )}
+        {dataAvailabilityTransaction?.__typename === 'DataAvailabilityComment' && (
+          <>
+            <div className="border-b-[0.5px] border-b-gray-100 dark:border-gray-950" />
+
+            <Meta
+              title="Comment Parent ID"
+              value={
+                <div className="space-y-4">
+                  <Link
+                    className="flex items-center space-x-2 underline"
+                    href={`https://lenster.xyz/posts/${dataAvailabilityTransaction?.commentedOnPublicationId}`}
+                    target="_blank"
+                  >
+                    <span>{dataAvailabilityTransaction?.commentedOnPublicationId}</span>
+                    <ArrowTopRightOnSquareIcon className="ml-2 h-4 w-4" />
+                  </Link>
+                  <Profile profile={dataAvailabilityTransaction?.commentedOnProfile as TProfile} />
+                </div>
+              }
+            />
+            <div className="border-b-[0.5px] border-b-gray-100 dark:border-gray-950" />
+          </>
+        )}
       </div>
     </div>
   );
