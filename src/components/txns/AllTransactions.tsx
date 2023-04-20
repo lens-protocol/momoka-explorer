@@ -34,7 +34,7 @@ const AllTransactions: FC<Props> = () => {
   });
 
   const { observe } = useInView({
-    rootMargin: '60% 0px',
+    rootMargin: '200% 0px',
     onChange: async ({ inView }) => {
       if (!inView || !hasMore) {
         return;
@@ -75,15 +75,9 @@ const AllTransactions: FC<Props> = () => {
               </tr>
             </thead>
             <tbody>
-              {transactions?.map((txn, index, items) => {
-                const isLast = index === items.length - 1;
-
+              {transactions?.map((txn) => {
                 return (
-                  <tr
-                    key={txn.transactionId}
-                    className="overflow-hidden bg-white dark:bg-gray-900"
-                    ref={isLast ? observe : undefined}
-                  >
+                  <tr key={txn.transactionId} className="overflow-hidden bg-white dark:bg-gray-900">
                     <td className="rounded-l-xl px-3 py-2 text-sm text-gray-900">
                       <div className="flex items-center space-x-2">
                         <span className="rounded-xl bg-gray-100 p-2 dark:bg-gray-800">
@@ -162,6 +156,13 @@ const AllTransactions: FC<Props> = () => {
             </tbody>
           </table>
         )}
+        {hasMore && transactions.length ? (
+          <div className="space-y-1" ref={observe}>
+            <div className="h-14 w-full animate-pulse overflow-hidden rounded-xl bg-white dark:bg-gray-900" />
+            <div className="h-14 w-full animate-pulse overflow-hidden rounded-xl bg-white dark:bg-gray-900" />
+            <div className="h-14 w-full animate-pulse overflow-hidden rounded-xl bg-white dark:bg-gray-900" />
+          </div>
+        ) : null}
       </div>
     </div>
   );
