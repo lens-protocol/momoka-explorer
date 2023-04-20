@@ -30,7 +30,7 @@ interface MetaProps {
   copyValue?: string;
 }
 
-export const Meta: FC<MetaProps> = ({ tooltip = null, title, value, copyValue = null }) => {
+export const Meta: FC<MetaProps> = ({ title, value, copyValue = null }) => {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {

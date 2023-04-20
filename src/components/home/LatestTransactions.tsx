@@ -6,6 +6,7 @@ import { useState } from 'react';
 
 import type { DataAvailabilityTransactionUnion, Profile } from '@/generated';
 import { useDaTransactionsQuery, useNewTransactionSubscription } from '@/generated';
+import useAppStore from '@/store/app';
 import { getRelativeTime } from '@/utils/formatTime';
 import getDAActionType from '@/utils/getDAActionType';
 import getPostAppLink from '@/utils/getPostAppLink';
@@ -17,12 +18,14 @@ import TransactionsShimmer from '../shimmers/TransactionsShimmer';
 type Props = {};
 
 const LatestTransactions: FC<Props> = () => {
+  const setLastFinalizedTransaction = useAppStore((state) => state.setLastFinalizedTransaction);
   const [latestTransactions, setLatestTransactions] = useState<Array<DataAvailabilityTransactionUnion>>();
 
   const { loading } = useDaTransactionsQuery({
     variables: { request: { limit: 10 } },
     onCompleted: (data) => {
       const txns = data?.dataAvailabilityTransactions.items;
+      setLastFinalizedTransaction(txns[0]?.transactionId);
       setLatestTransactions(txns as Array<DataAvailabilityTransactionUnion>);
     }
   });
@@ -39,6 +42,7 @@ const LatestTransactions: FC<Props> = () => {
         return;
       }
       const txn = data?.newDataAvailabilityTransaction as DataAvailabilityTransactionUnion;
+      setLastFinalizedTransaction(txn?.transactionId);
       let oldTxns = [...(latestTransactions as DataAvailabilityTransactionUnion[])];
       oldTxns.unshift(txn);
       oldTxns.pop();

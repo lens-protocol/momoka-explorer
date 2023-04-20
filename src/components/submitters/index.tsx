@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useDataAvailabilitySubmittersQuery } from '@/generated';
+import getSubmitterName from '@/utils/getSubmitterName';
 
 import TransactionsShimmer from '../shimmers/TransactionsShimmer';
 
@@ -19,7 +20,7 @@ const Submitters = () => {
             {data?.dataAvailabilitySubmitters.items?.map((submitter, i) => (
               <tr key={i} className="overflow-hidden bg-white dark:bg-gray-900">
                 <td className="whitespace-nowrap rounded-xl px-3 py-4 text-sm text-gray-700 dark:text-gray-300">
-                  {submitter.address}
+                  {getSubmitterName(submitter.address)}
                 </td>
               </tr>
             ))}
