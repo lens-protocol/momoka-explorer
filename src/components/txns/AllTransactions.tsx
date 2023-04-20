@@ -126,7 +126,7 @@ const AllTransactions: FC<Props> = () => {
                         </Link>
                       </span>
                     </td>
-                    <td className="whitespace-nowrap px-3 py-2 text-gray-500">
+                    <td className="whitespace-nowrap px-3 py-2 text-sm text-gray-500">
                       <Link
                         href="/submitters"
                         className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
