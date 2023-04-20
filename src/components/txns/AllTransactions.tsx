@@ -18,14 +18,18 @@ type Props = {};
 
 const AllTransactions: FC<Props> = () => {
   const [hasMore, setHasMore] = useState(true);
-  const { data, loading, fetchMore } = useDaTransactionsQuery({
-    variables: { request: { cursor: null, limit: 50 } }
+  const [transactions, setTransactions] = useState<any[]>([]);
+  const [pageInfo, setPageInfo] = useState<any>(null);
+  const { loading, fetchMore } = useDaTransactionsQuery({
+    variables: { request: { cursor: null, limit: 50 } },
+    onCompleted: ({ dataAvailabilityTransactions }) => {
+      setTransactions(dataAvailabilityTransactions?.items);
+      setPageInfo(dataAvailabilityTransactions?.pageInfo);
+    }
   });
 
-  const allTransactions = data?.dataAvailabilityTransactions?.items;
-  const pageInfo = data?.dataAvailabilityTransactions.pageInfo;
-
   const { observe } = useInView({
+    rootMargin: '60% 0px',
     onChange: async ({ inView }) => {
       if (!inView || !hasMore) {
         return;
@@ -34,6 +38,8 @@ const AllTransactions: FC<Props> = () => {
       await fetchMore({
         variables: { request: { limit: 50, cursor: pageInfo?.next } }
       }).then(({ data }) => {
+        setTransactions((prev) => [...prev, ...(data?.dataAvailabilityTransactions?.items || [])]);
+        setPageInfo(data?.dataAvailabilityTransactions?.pageInfo);
         setHasMore(data?.dataAvailabilityTransactions?.items?.length > 0);
       });
     }
@@ -62,7 +68,7 @@ const AllTransactions: FC<Props> = () => {
               </tr>
             </thead>
             <tbody>
-              {allTransactions?.map((txn, index, items) => {
+              {transactions?.map((txn, index, items) => {
                 const isLast = index === items.length - 1;
 
                 return (

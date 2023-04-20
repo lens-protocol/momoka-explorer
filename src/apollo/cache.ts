@@ -1,15 +1,5 @@
 import { InMemoryCache } from '@apollo/client';
 
-import cursorBasedPagination from './cursorBasedPagination';
-
-const cache = new InMemoryCache({
-  typePolicies: {
-    Query: {
-      fields: {
-        dataAvailabilityTransactions: cursorBasedPagination(['request', ['cursor', 'limit']])
-      }
-    }
-  }
-});
+const cache = new InMemoryCache({});
 
 export default cache;
