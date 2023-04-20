@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import ReactJson from 'react-json-view';
 
 import type { DataAvailabilityTransactionUnion } from '@/generated';
+import { usePublicationQuery } from '@/generated';
 
 import { Meta } from '.';
 
@@ -14,6 +15,11 @@ interface MoreDetailsProps {
 
 const MoreDetails: FC<MoreDetailsProps> = ({ dataAvailabilityTransaction }) => {
   const [transactionData, setTransactionData] = useState<any>(null);
+
+  const { data } = usePublicationQuery({
+    variables: { request: { publicationId: dataAvailabilityTransaction.publicationId } },
+    skip: !dataAvailabilityTransaction.publicationId
+  });
 
   useEffect(() => {
     const getData = async () => {
@@ -36,6 +42,7 @@ const MoreDetails: FC<MoreDetailsProps> = ({ dataAvailabilityTransaction }) => {
               <ChevronUpIcon className={`${open ? 'rotate-180 transform' : ''} h-5 w-5`} />
             </Disclosure.Button>
             <Disclosure.Panel className="pb-2 text-sm">
+              <Meta title="On-chain Content URI" value={data?.publication?.onChainContentURI} />
               <Meta
                 title="Transaction Data"
                 value={
