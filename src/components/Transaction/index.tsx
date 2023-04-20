@@ -81,8 +81,8 @@ const Transaction: FC = () => {
             value={
               <div
                 className={clsx(
-                  { 'border-green-300 bg-green-400 text-green-400': daVerified },
-                  { 'border-yellow-300 bg-yellow-400 text-yellow-400': !daVerified },
+                  { 'border-green-300 bg-green-400 text-green-500 dark:text-green-400': daVerified },
+                  { 'border-yellow-300 bg-yellow-400 text-yellow-500 dark:text-yellow-400': !daVerified },
                   'inline-flex items-center space-x-2 rounded-lg border bg-opacity-25 px-1.5 py-1 text-xs'
                 )}
               >
