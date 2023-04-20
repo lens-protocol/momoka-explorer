@@ -1092,7 +1092,6 @@ export type DataAvailabilitySubmittersResult = {
 
 export type DataAvailabilitySummaryResult = {
   __typename?: 'DataAvailabilitySummaryResult';
-  lastFinalisedTransaction: Scalars['String'];
   totalTransactions: Scalars['Int'];
 };
 
@@ -4449,11 +4448,7 @@ export type DaSummaryQueryVariables = Exact<{ [key: string]: never }>;
 
 export type DaSummaryQuery = {
   __typename?: 'Query';
-  dataAvailabilitySummary: {
-    __typename?: 'DataAvailabilitySummaryResult';
-    totalTransactions: number;
-    lastFinalisedTransaction: string;
-  };
+  dataAvailabilitySummary: { __typename?: 'DataAvailabilitySummaryResult'; totalTransactions: number };
 };
 
 export type DataAvailabilityTransactionQueryVariables = Exact<{
@@ -5019,7 +5014,6 @@ export const DaSummaryDocument = gql`
   query DASummary {
     dataAvailabilitySummary {
       totalTransactions
-      lastFinalisedTransaction
     }
   }
 `;

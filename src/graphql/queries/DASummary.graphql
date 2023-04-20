@@ -1,6 +1,5 @@
 query DASummary {
   dataAvailabilitySummary {
     totalTransactions
-    lastFinalisedTransaction
   }
 }
