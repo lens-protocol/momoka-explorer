@@ -164,7 +164,7 @@ const LatestTransactions: FC<Props> = () => {
                 </td>
                 <td className="rounded-r-xl px-3 py-4">
                   <Link
-                    className="flex justify-center opacity-70 hover:opacity-100"
+                    className="flex flex-none justify-center opacity-70 hover:opacity-100"
                     href={getPostAppLink(txn.publicationId)}
                     target="_blank"
                   >
