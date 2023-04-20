@@ -4,7 +4,6 @@ query DataAvailabilitySubmitters {
       address
     }
     pageInfo {
-      prev
       next
     }
   }

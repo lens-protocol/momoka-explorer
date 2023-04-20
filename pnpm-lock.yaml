@@ -3,7 +3,7 @@ lockfileVersion: '6.0'
 dependencies:
   '@apollo/client':
     specifier: ^3.7.12
-    version: 3.7.12(graphql@16.6.0)(react-dom@18.2.0)(react@18.2.0)
+    version: 3.7.12(graphql-ws@5.12.1)(graphql@16.6.0)(react-dom@18.2.0)(react@18.2.0)
   '@headlessui/react':
     specifier: ^1.7.14
     version: 1.7.14(react-dom@18.2.0)(react@18.2.0)
@@ -23,14 +23,17 @@ dependencies:
     specifier: 10.4.14
     version: 10.4.14(postcss@8.4.21)
   axios:
-    specifier: ^1.3.5
-    version: 1.3.5
+    specifier: ^1.3.6
+    version: 1.3.6
   clsx:
     specifier: ^1.2.1
     version: 1.2.1
   dayjs:
     specifier: ^1.11.7
     version: 1.11.7
+  graphql-ws:
+    specifier: ^5.12.1
+    version: 5.12.1(graphql@16.6.0)
   next:
     specifier: 13.3.0
     version: 13.3.0(@babel/core@7.21.4)(react-dom@18.2.0)(react@18.2.0)
@@ -46,6 +49,9 @@ dependencies:
   react:
     specifier: 18.2.0
     version: 18.2.0
+  react-cool-inview:
+    specifier: ^3.0.1
+    version: 3.0.1(react@18.2.0)
   react-dom:
     specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
@@ -58,6 +64,9 @@ dependencies:
   typescript:
     specifier: 5.0.4
     version: 5.0.4
+  ws:
+    specifier: ^8.13.0
+    version: 8.13.0
 
 devDependencies:
   '@graphql-codegen/cli':
@@ -79,7 +88,7 @@ devDependencies:
     specifier: 18.15.11
     version: 18.15.11
   '@typescript-eslint/eslint-plugin':
-    specifier: ^5.58.0
+    specifier: ^5.59.0
     version: 5.59.0(@typescript-eslint/parser@5.59.0)(eslint@8.38.0)(typescript@5.0.4)
   eslint:
     specifier: 8.38.0
@@ -112,7 +121,7 @@ packages:
       '@jridgewell/gen-mapping': 0.3.3
       '@jridgewell/trace-mapping': 0.3.18
 
-  /@apollo/client@3.7.12(graphql@16.6.0)(react-dom@18.2.0)(react@18.2.0):
+  /@apollo/client@3.7.12(graphql-ws@5.12.1)(graphql@16.6.0)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-XvH8ssDibx5hR92Tet8CHtUxhiIs+RbYjyxkflAcnF85QT3VacUdNAhjj0OcA2kcZ+5KyceJmilmBNjj6+rJFg==}
     peerDependencies:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0
@@ -136,6 +145,7 @@ packages:
       '@wry/trie': 0.3.2
       graphql: 16.6.0
       graphql-tag: 2.12.6(graphql@16.6.0)
+      graphql-ws: 5.12.1(graphql@16.6.0)
       hoist-non-react-statics: 3.3.2
       optimism: 0.16.2
       prop-types: 15.8.1
@@ -1738,8 +1748,8 @@ packages:
       '@ethersproject/bytes': 5.7.0
       '@graphql-typed-document-node/core': 3.2.0(graphql@16.6.0)
       '@urql/core': 3.2.2(graphql@16.6.0)
-      arweave: 1.13.6
-      axios: 1.3.5
+      arweave: 1.13.7
+      axios: 1.3.6
       bluebird: 3.7.2
       ethereum-multicall: 2.16.1
       ethers: 5.7.2
@@ -2322,7 +2332,7 @@ packages:
   /arconnect@0.4.2:
     resolution: {integrity: sha512-Jkpd4QL3TVqnd3U683gzXmZUVqBUy17DdJDuL/3D9rkysLgX6ymJ2e+sR+xyZF5Rh42CBqDXWNMmCjBXeP7Gbw==}
     dependencies:
-      arweave: 1.13.6
+      arweave: 1.13.7
     dev: false
 
   /are-we-there-yet@2.0.0:
@@ -2408,8 +2418,8 @@ packages:
       get-intrinsic: 1.2.0
     dev: true
 
-  /arweave@1.13.6:
-    resolution: {integrity: sha512-8IP0SQhithb+n/lu9Vfyyem97F+twQaELm+DspWC520X0DBwm2eMYI7lwT+eCzI2HjP/tsyc0lDxhokkFgo4IQ==}
+  /arweave@1.13.7:
+    resolution: {integrity: sha512-Hv+x2bSI6UyBHpuVbUDMMpMje1ETfpJWj52kKfz44O0IqDRi/LukOkkDUptup1p6OT6KP1/DdpnUnsNHoskFeA==}
     engines: {node: '>=16.15.0'}
     dependencies:
       arconnect: 0.4.2
@@ -2483,8 +2493,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /axios@1.3.5:
-    resolution: {integrity: sha512-glL/PvG/E+xCWwV8S6nCHcrfg1exGx7vxyUIivIA1iL7BIh6bePylCfVHwp6k13ao7SATxB6imau2kqY+I67kw==}
+  /axios@1.3.6:
+    resolution: {integrity: sha512-PEcdkk7JcdPiMDkvM4K6ZBRYq9keuVJsToxm2zQIM70Qqo2WHTdJZMXcG9X+RmRp2VPNUQC8W1RAGbgt6b1yMg==}
     dependencies:
       follow-redirects: 1.15.2
       form-data: 4.0.0
@@ -3197,8 +3207,8 @@ packages:
     dev: false
     optional: true
 
-  /enhanced-resolve@5.12.0:
-    resolution: {integrity: sha512-QHTXI/sZQmko1cbDoNAa3mJ5qhWUUNAq3vR0/YiD379fWQrcfuoX1+HW2S0MTt7XmoPLapdaDKUtelUSPic7hQ==}
+  /enhanced-resolve@5.13.0:
+    resolution: {integrity: sha512-eyV8f0y1+bzyfh8xAwW/WTSZpLbjhqc4ne9eGSH4Zo2ejdyiNG9pU6mf9DG8a7+Auk6MFTlNOT4Y2y/9k8GKVg==}
     engines: {node: '>=10.13.0'}
     dependencies:
       graceful-fs: 4.2.11
@@ -3354,7 +3364,7 @@ packages:
       eslint-plugin-import: '*'
     dependencies:
       debug: 4.3.4
-      enhanced-resolve: 5.12.0
+      enhanced-resolve: 5.13.0
       eslint: 8.38.0
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@5.59.0)(eslint-import-resolver-node@0.3.7)(eslint-import-resolver-typescript@3.5.5)(eslint@8.38.0)
       eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.59.0)(eslint-import-resolver-typescript@3.5.5)(eslint@8.38.0)
@@ -4162,7 +4172,6 @@ packages:
       graphql: '>=0.11 <=16'
     dependencies:
       graphql: 16.6.0
-    dev: true
 
   /graphql@16.6.0:
     resolution: {integrity: sha512-KPIBPDlW7NxrbT/eh4qPXz5FiFdL5UbaA0XUNz2Rp3Z3hqBSkbj0GVjwFDztsWVauZUWsbKHgMg++sk8UX0bkw==}
@@ -5802,6 +5811,14 @@ packages:
       pure-color: 1.3.0
     dev: false
 
+  /react-cool-inview@3.0.1(react@18.2.0):
+    resolution: {integrity: sha512-ly6i3Pv5p0fvm12NmJGfKS34eOhA+iU43Th+gZ6t3G6UwsxQsWoITHTHzA9pdkOc/3VmnReqvC/hJkQUDGhQFA==}
+    peerDependencies:
+      react: '>= 16.8.0'
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /react-dom@18.2.0(react@18.2.0):
     resolution: {integrity: sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g==}
     peerDependencies:
@@ -6831,7 +6848,6 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
-    dev: true
 
   /y18n@4.0.3:
     resolution: {integrity: sha512-JKhqTOwSrqNA1NY5lSztJ1GrBiUodLMmIZuLiDaMRJ+itFd+ABVE8XBjOvIWL+rSqNDC74LCSFmlb/U4UZ4hJQ==}

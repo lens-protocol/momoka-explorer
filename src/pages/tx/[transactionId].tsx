@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Lens DA Explorer</title>
+        <title>DA Transaction</title>
       </Head>
       <div className="mb-10">
         <DTransactionNoSSR />

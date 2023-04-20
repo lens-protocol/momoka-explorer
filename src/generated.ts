@@ -4441,7 +4441,7 @@ export type DataAvailabilitySubmittersQuery = {
   dataAvailabilitySubmitters: {
     __typename?: 'DataAvailabilitySubmittersResult';
     items: Array<{ __typename?: 'DataAvailabilitySubmitterResult'; address: any }>;
-    pageInfo: { __typename?: 'PaginatedResultInfo'; prev?: any | null; next?: any | null };
+    pageInfo: { __typename?: 'PaginatedResultInfo'; next?: any | null };
   };
 };
 
@@ -4962,7 +4962,6 @@ export const DataAvailabilitySubmittersDocument = gql`
         address
       }
       pageInfo {
-        prev
         next
       }
     }

@@ -1,15 +1,15 @@
 import Head from 'next/head';
 
-import AllTransactions from '@/components/txns/AllTransactions';
+import Submitters from '@/components/submitters';
 
 const index = () => {
   return (
     <>
       <Head>
-        <title>All Transactions</title>
+        <title>Lens DA Submitters</title>
       </Head>
       <div className="mb-10 space-y-4">
-        <AllTransactions />
+        <Submitters />
       </div>
     </>
   );

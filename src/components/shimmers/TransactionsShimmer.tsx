@@ -5,8 +5,8 @@ const TransactionsShimmer = () => {
 
   return (
     <div className="animate-pulse space-y-3 py-3">
-      {txns.map((txn) => (
-        <div key={txn} className="h-[88px] rounded-xl bg-white" />
+      {txns.map((_, i) => (
+        <div key={i} className="h-[88px] rounded-xl bg-white" />
       ))}
     </div>
   );
