@@ -1,21 +1,36 @@
 import { Listbox, Transition } from '@headlessui/react';
 import { BeakerIcon, ChevronUpDownIcon, CubeIcon, WrenchIcon } from '@heroicons/react/24/outline';
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect } from 'react';
 
-const networks = [
-  { name: 'Mainnet', icon: <CubeIcon className="h-4 w-4" /> },
-  { name: 'Staging', icon: <BeakerIcon className="h-4 w-4" /> },
-  { name: 'Testnet', icon: <WrenchIcon className="h-4 w-4" /> }
+import useAppStore from '@/store/app';
+
+export const networks = [
+  { name: 'Mainnet', id: 'mainnet', icon: <CubeIcon className="h-4 w-4" /> },
+  { name: 'Staging', id: 'staging', icon: <BeakerIcon className="h-4 w-4" /> },
+  { name: 'Testnet', id: 'testnet', icon: <WrenchIcon className="h-4 w-4" /> }
 ];
 
 const Network = () => {
-  const [selected, setSelected] = useState(networks[0]);
+  const selectedEnvironment = useAppStore((state) => state.selectedEnvironment);
+  const setSelectedEnvironment = useAppStore((state) => state.setSelectedEnvironment);
+
+  useEffect(() => {
+    // TEMP: default staging
+    setSelectedEnvironment(networks[1]);
+  }, []);
 
   return (
-    <Listbox value={selected} onChange={setSelected}>
+    <Listbox
+      name="network"
+      defaultValue={networks[0]}
+      value={selectedEnvironment}
+      onChange={(selected) => {
+        setSelectedEnvironment(selected);
+      }}
+    >
       <div className="relative">
         <Listbox.Button className="relative w-full rounded-lg py-2 pl-3 pr-8 text-left text-sm focus:outline-none">
-          <span className="block truncate">{selected.name}</span>
+          <span className="block truncate">{selectedEnvironment?.name ?? 'Mainnet'}</span>
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
           </span>
