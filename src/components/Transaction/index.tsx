@@ -17,6 +17,7 @@ import type { DataAvailabilityTransactionUnion, Profile as TProfile } from '@/ge
 import { useDataAvailabilityTransactionQuery } from '@/generated';
 import capitalizeCase from '@/utils/capitalizeCase';
 import { getRelativeTime } from '@/utils/formatTime';
+import getSubmitterName from '@/utils/getSubmitterName';
 import isDataVerified from '@/utils/isDataVerified';
 
 import Profile from '../shared/Profile';
@@ -143,7 +144,7 @@ const Transaction: FC = () => {
             value={
               <div className="flex items-center space-x-2">
                 <BoltIcon className="h-4 w-4" />
-                <b>{dataAvailabilityTransaction?.submitter}</b>
+                <b>{getSubmitterName(dataAvailabilityTransaction?.submitter)}</b>
               </div>
             }
             copyValue={dataAvailabilityTransaction?.submitter}
