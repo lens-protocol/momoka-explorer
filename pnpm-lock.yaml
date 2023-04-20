@@ -13,9 +13,9 @@ specifiers:
   '@types/node': 18.15.11
   '@types/react': 18.0.35
   '@types/react-dom': 18.0.11
-  '@typescript-eslint/eslint-plugin': ^5.58.0
+  '@typescript-eslint/eslint-plugin': ^5.59.0
   autoprefixer: 10.4.14
-  axios: ^1.3.5
+  axios: ^1.3.6
   clsx: ^1.2.1
   dayjs: ^1.11.7
   eslint: 8.38.0
@@ -45,7 +45,7 @@ dependencies:
   '@types/react': 18.0.35
   '@types/react-dom': 18.0.11
   autoprefixer: 10.4.14_postcss@8.4.21
-  axios: 1.3.5
+  axios: 1.3.6
   clsx: 1.2.1
   dayjs: 1.11.7
   graphql-ws: 5.12.1_graphql@16.6.0
@@ -1510,7 +1510,7 @@ packages:
       graphql: ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0
     dependencies:
       graphql: 16.6.0
-      tslib: 2.5.0
+      tslib: 2.4.1
     dev: true
 
   /@graphql-tools/prisma-loader/7.2.71_3q6avhgaaacez4ctqk4xik246q:
@@ -1553,7 +1553,7 @@ packages:
       '@ardatan/relay-compiler': 12.0.0_graphql@16.6.0
       '@graphql-tools/utils': 9.2.1_graphql@16.6.0
       graphql: 16.6.0
-      tslib: 2.5.0
+      tslib: 2.4.1
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -1713,8 +1713,8 @@ packages:
       '@ethersproject/bytes': 5.7.0
       '@graphql-typed-document-node/core': 3.2.0_graphql@16.6.0
       '@urql/core': 3.2.2_graphql@16.6.0
-      arweave: 1.13.6
-      axios: 1.3.5
+      arweave: 1.13.7
+      axios: 1.3.6
       bluebird: 3.7.2
       ethereum-multicall: 2.16.1
       ethers: 5.7.2
@@ -2297,7 +2297,7 @@ packages:
   /arconnect/0.4.2:
     resolution: {integrity: sha512-Jkpd4QL3TVqnd3U683gzXmZUVqBUy17DdJDuL/3D9rkysLgX6ymJ2e+sR+xyZF5Rh42CBqDXWNMmCjBXeP7Gbw==}
     dependencies:
-      arweave: 1.13.6
+      arweave: 1.13.7
     dev: false
 
   /are-we-there-yet/2.0.0:
@@ -2383,8 +2383,8 @@ packages:
       get-intrinsic: 1.2.0
     dev: true
 
-  /arweave/1.13.6:
-    resolution: {integrity: sha512-8IP0SQhithb+n/lu9Vfyyem97F+twQaELm+DspWC520X0DBwm2eMYI7lwT+eCzI2HjP/tsyc0lDxhokkFgo4IQ==}
+  /arweave/1.13.7:
+    resolution: {integrity: sha512-Hv+x2bSI6UyBHpuVbUDMMpMje1ETfpJWj52kKfz44O0IqDRi/LukOkkDUptup1p6OT6KP1/DdpnUnsNHoskFeA==}
     engines: {node: '>=16.15.0'}
     dependencies:
       arconnect: 0.4.2
@@ -2459,8 +2459,8 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
-  /axios/1.3.5:
-    resolution: {integrity: sha512-glL/PvG/E+xCWwV8S6nCHcrfg1exGx7vxyUIivIA1iL7BIh6bePylCfVHwp6k13ao7SATxB6imau2kqY+I67kw==}
+  /axios/1.3.6:
+    resolution: {integrity: sha512-PEcdkk7JcdPiMDkvM4K6ZBRYq9keuVJsToxm2zQIM70Qqo2WHTdJZMXcG9X+RmRp2VPNUQC8W1RAGbgt6b1yMg==}
     dependencies:
       follow-redirects: 1.15.2
       form-data: 4.0.0
