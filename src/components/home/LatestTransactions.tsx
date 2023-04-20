@@ -12,6 +12,7 @@ import getPostAppLink from '@/utils/getPostAppLink';
 import getProfilePicture from '@/utils/getProfilePicture';
 
 import TransactionsShimmer from '../shimmers/TransactionsShimmer';
+import getSubmitterName from '@/utils/getSubmitterName';
 
 type Props = {};
 
@@ -129,7 +130,7 @@ const LatestTransactions: FC<Props> = () => {
                         href="/submitters"
                         className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
                       >
-                        {txn.submitter}
+                        {getSubmitterName(txn.submitter)}
                       </Link>
                     </span>
                   </div>

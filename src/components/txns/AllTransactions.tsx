@@ -13,6 +13,7 @@ import getProfilePicture from '@/utils/getProfilePicture';
 import truncate from '@/utils/truncate';
 
 import TransactionsShimmer from '../shimmers/TransactionsShimmer';
+import getSubmitterName from '@/utils/getSubmitterName';
 
 type Props = {};
 
@@ -124,7 +125,7 @@ const AllTransactions: FC<Props> = () => {
                         href="/submitters"
                         className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
                       >
-                        {txn.submitter}
+                        {getSubmitterName(txn.submitter)}
                       </Link>
                     </td>
                     <td className="whitespace-nowrap rounded-r-xl px-3 py-2 text-right text-sm">
