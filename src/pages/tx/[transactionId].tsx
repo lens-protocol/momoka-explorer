@@ -1,6 +1,9 @@
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
-import Transaction from '@/components/Transaction';
+const DTransactionNoSSR = dynamic(() => import('@/components/Transaction'), {
+  ssr: false
+});
 
 export default function Home() {
   return (
@@ -9,7 +12,7 @@ export default function Home() {
         <title>DA Transaction</title>
       </Head>
       <div className="mb-10">
-        <Transaction />
+        <DTransactionNoSSR />
       </div>
     </>
   );

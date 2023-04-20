@@ -1,0 +1,13 @@
+query Publication($request: PublicationQueryRequest!) {
+  publication(request: $request) {
+    ... on Post {
+      onChainContentURI
+    }
+    ... on Comment {
+      onChainContentURI
+    }
+    ... on Mirror {
+      onChainContentURI
+    }
+  }
+}

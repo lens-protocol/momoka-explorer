@@ -4678,8 +4678,21 @@ export type DaTransactionsQuery = {
           };
         }
     >;
-    pageInfo: { __typename?: 'PaginatedResultInfo'; next?: any | null };
+    pageInfo: { __typename?: 'PaginatedResultInfo'; prev?: any | null; next?: any | null };
   };
+};
+
+export type PublicationQueryVariables = Exact<{
+  request: PublicationQueryRequest;
+}>;
+
+export type PublicationQuery = {
+  __typename?: 'Query';
+  publication?:
+    | { __typename?: 'Comment'; onChainContentURI: string }
+    | { __typename?: 'Mirror'; onChainContentURI: string }
+    | { __typename?: 'Post'; onChainContentURI: string }
+    | null;
 };
 
 export type PublicationsQueryVariables = Exact<{
@@ -5125,6 +5138,7 @@ export const DaTransactionsDocument = gql`
         }
       }
       pageInfo {
+        prev
         next
       }
     }
@@ -5168,6 +5182,53 @@ export function useDaTransactionsLazyQuery(
 export type DaTransactionsQueryHookResult = ReturnType<typeof useDaTransactionsQuery>;
 export type DaTransactionsLazyQueryHookResult = ReturnType<typeof useDaTransactionsLazyQuery>;
 export type DaTransactionsQueryResult = Apollo.QueryResult<DaTransactionsQuery, DaTransactionsQueryVariables>;
+export const PublicationDocument = gql`
+  query Publication($request: PublicationQueryRequest!) {
+    publication(request: $request) {
+      ... on Post {
+        onChainContentURI
+      }
+      ... on Comment {
+        onChainContentURI
+      }
+      ... on Mirror {
+        onChainContentURI
+      }
+    }
+  }
+`;
+
+/**
+ * __usePublicationQuery__
+ *
+ * To run a query within a React component, call `usePublicationQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePublicationQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePublicationQuery({
+ *   variables: {
+ *      request: // value for 'request'
+ *   },
+ * });
+ */
+export function usePublicationQuery(
+  baseOptions: Apollo.QueryHookOptions<PublicationQuery, PublicationQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<PublicationQuery, PublicationQueryVariables>(PublicationDocument, options);
+}
+export function usePublicationLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<PublicationQuery, PublicationQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<PublicationQuery, PublicationQueryVariables>(PublicationDocument, options);
+}
+export type PublicationQueryHookResult = ReturnType<typeof usePublicationQuery>;
+export type PublicationLazyQueryHookResult = ReturnType<typeof usePublicationLazyQuery>;
+export type PublicationQueryResult = Apollo.QueryResult<PublicationQuery, PublicationQueryVariables>;
 export const PublicationsDocument = gql`
   query Publications($request: ExplorePublicationRequest!) {
     explorePublications(request: $request) {
