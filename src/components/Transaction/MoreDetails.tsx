@@ -1,5 +1,6 @@
 import { Disclosure } from '@headlessui/react';
 import { ChevronUpIcon } from '@heroicons/react/20/solid';
+import { useTheme } from 'next-themes';
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import ReactJson from 'react-json-view';
@@ -8,7 +9,6 @@ import type { DataAvailabilityTransactionUnion } from '@/generated';
 import { usePublicationQuery } from '@/generated';
 
 import { Meta } from '.';
-import { useTheme } from 'next-themes';
 
 interface MoreDetailsProps {
   dataAvailabilityTransaction: DataAvailabilityTransactionUnion;
@@ -49,13 +49,13 @@ const MoreDetails: FC<MoreDetailsProps> = ({ dataAvailabilityTransaction }) => {
                 title="Transaction Data"
                 value={
                   transactionData ? (
-                    <div className="max-w-[90%] overflow-auto rounded-lg border bg-gray-100 leading-5 dark:border-gray-900 dark:bg-gray-700">
+                    <div className="overflow-auto rounded-lg border bg-gray-100 leading-5 dark:border-gray-900 dark:bg-gray-700">
                       <ReactJson
                         style={{ padding: 10 }}
                         theme={resolvedTheme === 'dark' ? 'apathy' : 'rjv-default'}
                         src={transactionData}
                         enableClipboard={false}
-                        collapsed={2}
+                        collapsed={1}
                         indentWidth={2}
                       />
                     </div>
