@@ -4678,7 +4678,7 @@ export type DaTransactionsQuery = {
           };
         }
     >;
-    pageInfo: { __typename?: 'PaginatedResultInfo'; prev?: any | null; next?: any | null };
+    pageInfo: { __typename?: 'PaginatedResultInfo'; next?: any | null };
   };
 };
 
@@ -5138,7 +5138,6 @@ export const DaTransactionsDocument = gql`
         }
       }
       pageInfo {
-        prev
         next
       }
     }
