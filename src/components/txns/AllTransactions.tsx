@@ -10,10 +10,10 @@ import { getRelativeTime } from '@/utils/formatTime';
 import getDAActionType from '@/utils/getDAActionType';
 import getPostAppLink from '@/utils/getPostAppLink';
 import getProfilePicture from '@/utils/getProfilePicture';
+import getSubmitterName from '@/utils/getSubmitterName';
 import truncate from '@/utils/truncate';
 
 import TransactionsShimmer from '../shimmers/TransactionsShimmer';
-import getSubmitterName from '@/utils/getSubmitterName';
 
 type Props = {};
 
