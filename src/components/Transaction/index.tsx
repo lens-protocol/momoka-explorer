@@ -1,6 +1,12 @@
-import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+import {
+  ArrowTopRightOnSquareIcon,
+  BoltIcon,
+  ClockIcon,
+  DocumentDuplicateIcon
+} from '@heroicons/react/24/outline';
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/solid';
 import clsx from 'clsx';
+import dayjs from 'dayjs';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type { FC, ReactNode } from 'react';
@@ -10,6 +16,7 @@ import { apps } from '@/data/apps';
 import type { DataAvailabilityTransactionUnion, Profile as TProfile } from '@/generated';
 import { useDataAvailabilityTransactionQuery } from '@/generated';
 import capitalizeCase from '@/utils/capitalizeCase';
+import { getRelativeTime } from '@/utils/formatTime';
 import isDataVerified from '@/utils/isDataVerified';
 
 import Profile from '../shared/Profile';
@@ -19,15 +26,43 @@ interface MetaProps {
   tooltip?: string;
   title: string;
   value: ReactNode;
-  canCopy?: boolean;
+  copyValue?: string;
 }
 
-export const Meta: FC<MetaProps> = ({ tooltip = null, title, value, canCopy = false }) => (
-  <div className="px-4 py-6 sm:grid sm:grid-cols-5 sm:gap-4 sm:px-0">
-    <dt className="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">{title}</dt>
-    <dd className="mt-1 text-sm leading-6 text-gray-700 dark:text-gray-200 sm:col-span-4 sm:mt-0">{value}</dd>
-  </div>
-);
+export const Meta: FC<MetaProps> = ({ tooltip = null, title, value, copyValue = null }) => {
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    if (copied) {
+      setTimeout(() => {
+        setCopied(false);
+      }, 2000);
+    }
+  }, [copied]);
+
+  return (
+    <div className="px-4 py-6 sm:grid sm:grid-cols-5 sm:gap-4 sm:px-0">
+      <dt className="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">{title}</dt>
+      <dd className="mt-1 flex items-center space-x-2 text-sm leading-6 text-gray-700 dark:text-gray-200 sm:col-span-4 sm:mt-0">
+        <span>{value}</span>
+        {copyValue ? (
+          <button
+            onClick={() => {
+              navigator.clipboard.writeText(copyValue);
+              setCopied(true);
+            }}
+          >
+            {copied ? (
+              <CheckCircleIcon className="h-4 w-4 text-green-500 dark:text-green-400" />
+            ) : (
+              <DocumentDuplicateIcon className="h-4 w-4 text-gray-500 dark:text-gray-400" />
+            )}
+          </button>
+        ) : null}
+      </dd>
+    </div>
+  );
+};
 
 const Transaction: FC = () => {
   const { query } = useRouter();
@@ -72,8 +107,20 @@ const Transaction: FC = () => {
                 target="_blank"
               >
                 <span>ar://{dataAvailabilityTransaction?.transactionId}</span>
-                <ArrowTopRightOnSquareIcon className="ml-2 h-4 w-4" />
+                <ArrowTopRightOnSquareIcon className="h-4 w-4" />
               </Link>
+            }
+          />
+          <Meta
+            title="Created At"
+            value={
+              <div className="flex items-center space-x-2">
+                <ClockIcon className="h-4 w-4" />
+                <span>
+                  <b>{getRelativeTime(dataAvailabilityTransaction?.createdAt)}</b> (
+                  {dayjs(new Date(dataAvailabilityTransaction?.createdAt)).format('MMM-DD-YYYY hh:mm A')})
+                </span>
+              </div>
             }
           />
           <Meta
@@ -92,6 +139,16 @@ const Transaction: FC = () => {
             }
           />
           <Meta
+            title="Created At"
+            value={
+              <div className="flex items-center space-x-2">
+                <BoltIcon className="h-4 w-4" />
+                <b>{dataAvailabilityTransaction?.submitter}</b>
+              </div>
+            }
+            copyValue={dataAvailabilityTransaction?.submitter}
+          />
+          <Meta
             title={`${capitalizeCase(dataAvailabilityTransaction?.__typename as string)?.replace(
               'DataAvailability',
               ''
@@ -107,7 +164,7 @@ const Transaction: FC = () => {
                 target="_blank"
               >
                 <span>{dataAvailabilityTransaction?.publicationId}</span>
-                <ArrowTopRightOnSquareIcon className="ml-2 h-4 w-4" />
+                <ArrowTopRightOnSquareIcon className="h-4 w-4" />
               </Link>
             }
           />
@@ -124,7 +181,7 @@ const Transaction: FC = () => {
                       target="_blank"
                     >
                       <span>{dataAvailabilityTransaction?.mirrorOfPublicationId}</span>
-                      <ArrowTopRightOnSquareIcon className="ml-2 h-4 w-4" />
+                      <ArrowTopRightOnSquareIcon className="h-4 w-4" />
                     </Link>
                     <Profile profile={dataAvailabilityTransaction?.mirrorOfProfile as TProfile} />
                   </div>
@@ -147,7 +204,7 @@ const Transaction: FC = () => {
                       target="_blank"
                     >
                       <span>{dataAvailabilityTransaction?.commentedOnPublicationId}</span>
-                      <ArrowTopRightOnSquareIcon className="ml-2 h-4 w-4" />
+                      <ArrowTopRightOnSquareIcon className="h-4 w-4" />
                     </Link>
                     <Profile profile={dataAvailabilityTransaction?.commentedOnProfile as TProfile} />
                   </div>
