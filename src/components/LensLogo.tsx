@@ -4,7 +4,6 @@ import * as React from 'react';
 
 const LensLogo = (props: SVGProps<SVGSVGElement>) => {
   const { resolvedTheme } = useTheme();
-  console.log('🚀 ~ file: LensLogo.tsx:7 ~ LensLogo ~ resolvedTheme:', resolvedTheme);
 
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 29" fill="none" {...props}>
