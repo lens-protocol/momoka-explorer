@@ -1,9 +1,10 @@
 import { ArrowsRightLeftIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import type { FC } from 'react';
+import { useState } from 'react';
 import { useInView } from 'react-cool-inview';
 
-import type { DataAvailabilityTransactionUnion, Profile } from '@/generated';
+import type { Profile } from '@/generated';
 import { useDaTransactionsQuery } from '@/generated';
 import { getRelativeTime } from '@/utils/formatTime';
 import getDAActionType from '@/utils/getDAActionType';
@@ -16,23 +17,24 @@ import TransactionsShimmer from '../shimmers/TransactionsShimmer';
 type Props = {};
 
 const AllTransactions: FC<Props> = () => {
+  const [hasMore, setHasMore] = useState(true);
   const { data, loading, fetchMore } = useDaTransactionsQuery({
-    variables: { request: { limit: 50 } }
+    variables: { request: { cursor: null, limit: 50 } }
   });
 
-  const allTransactions = data?.dataAvailabilityTransactions?.items as DataAvailabilityTransactionUnion[];
+  const allTransactions = data?.dataAvailabilityTransactions?.items;
   const pageInfo = data?.dataAvailabilityTransactions.pageInfo;
 
   const { observe } = useInView({
-    rootMargin: '60% 0px',
-    onEnter: async () => {
+    onChange: async ({ inView }) => {
+      if (!inView || !hasMore) {
+        return;
+      }
+
       await fetchMore({
-        variables: {
-          request: {
-            limit: 50,
-            cursor: pageInfo?.next
-          }
-        }
+        variables: { request: { limit: 50, cursor: pageInfo?.next } }
+      }).then(({ data }) => {
+        setHasMore(data?.dataAvailabilityTransactions?.items?.length > 0);
       });
     }
   });
@@ -60,77 +62,80 @@ const AllTransactions: FC<Props> = () => {
               </tr>
             </thead>
             <tbody>
-              {allTransactions?.map((txn, i) => (
-                <tr key={i} className="overflow-hidden bg-white dark:bg-gray-900">
-                  <td className="rounded-l-xl px-3 py-2 text-sm text-gray-900">
-                    <div className="flex items-center space-x-2">
-                      <span className="rounded-xl bg-gray-100 p-2 dark:bg-gray-800">
-                        <ArrowsRightLeftIcon className="h-4 w-4 text-green-700" />
-                      </span>
-                      <div className="flex flex-col truncate">
-                        <Link
-                          href={`/tx/${txn.transactionId}`}
-                          className="truncate text-indigo-400 text-opacity-80 hover:text-opacity-100"
-                        >
-                          {truncate(txn.transactionId, 30)}
-                        </Link>
+              {allTransactions?.map((txn, index, items) => {
+                const isLast = index === items.length - 1;
+
+                return (
+                  <tr
+                    key={txn.transactionId}
+                    className="overflow-hidden bg-white dark:bg-gray-900"
+                    ref={isLast ? observe : undefined}
+                  >
+                    <td className="rounded-l-xl px-3 py-2 text-sm text-gray-900">
+                      <div className="flex items-center space-x-2">
+                        <span className="rounded-xl bg-gray-100 p-2 dark:bg-gray-800">
+                          <ArrowsRightLeftIcon className="h-4 w-4 text-green-700" />
+                        </span>
+                        <div className="flex flex-col truncate">
+                          <Link
+                            href={`/tx/${txn.transactionId}`}
+                            className="truncate text-indigo-400 text-opacity-80 hover:text-opacity-100"
+                          >
+                            {truncate(txn.transactionId, 30)}
+                          </Link>
+                        </div>
                       </div>
-                    </div>
-                  </td>
-                  <td className="w-20 whitespace-nowrap px-3 py-2 text-sm text-gray-700 dark:text-gray-300">
-                    <span className="inline-flex w-20 items-center justify-center space-x-1 rounded-lg border bg-gray-50 px-3 py-1.5 text-xs dark:border-gray-950 dark:bg-gray-800">
-                      {getDAActionType(txn.__typename)}
-                    </span>
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-2 text-sm text-gray-600 dark:text-gray-400">
-                    {getRelativeTime(txn.createdAt)}
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-2 text-gray-500">
-                    <span className="inline-flex items-center space-x-1.5 px-2 py-0.5 text-sm">
-                      <span className="flex-none">
-                        <img
-                          className="h-4 w-4 rounded-2xl"
-                          src={getProfilePicture(txn.profile as Profile)}
-                          alt="pfp"
-                          draggable={false}
-                        />
+                    </td>
+                    <td className="w-20 whitespace-nowrap px-3 py-2 text-sm text-gray-700 dark:text-gray-300">
+                      <span className="inline-flex w-20 items-center justify-center space-x-1 rounded-lg border bg-gray-50 px-3 py-1.5 text-xs dark:border-gray-950 dark:bg-gray-800">
+                        {getDAActionType(txn.__typename)}
                       </span>
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-2 text-sm text-gray-600 dark:text-gray-400">
+                      {getRelativeTime(txn.createdAt)}
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-2 text-gray-500">
+                      <span className="inline-flex items-center space-x-1.5 px-2 py-0.5 text-sm">
+                        <span className="flex-none">
+                          <img
+                            className="h-4 w-4 rounded-2xl"
+                            src={getProfilePicture(txn.profile as Profile)}
+                            alt="pfp"
+                            draggable={false}
+                          />
+                        </span>
+                        <Link
+                          href={`https://lensfrens.xyz/${txn.profile.handle}`}
+                          target="_blank"
+                          className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
+                        >
+                          {txn.profile.handle}
+                        </Link>
+                      </span>
+                    </td>
+                    <td className="whitespace-nowrap px-3 py-2 text-gray-500">
                       <Link
-                        href={`https://lensfrens.xyz/${txn.profile.handle}`}
-                        target="_blank"
+                        href="/submitters"
                         className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
                       >
-                        {txn.profile.handle}
+                        {txn.submitter}
                       </Link>
-                    </span>
-                  </td>
-                  <td className="whitespace-nowrap px-3 py-2 text-gray-500">
-                    <Link
-                      href="/submitters"
-                      className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
-                    >
-                      {txn.submitter}
-                    </Link>
-                  </td>
-                  <td className="whitespace-nowrap rounded-r-xl px-3 py-2 text-right text-sm">
-                    <Link
-                      href={getPostAppLink(txn.publicationId)}
-                      target="_blank"
-                      className="opacity-70 hover:opacity-100"
-                    >
-                      <span className="inline-flex items-center space-x-1 text-xs">
-                        <span>View</span>
-                        <ArrowTopRightOnSquareIcon className="h-3.5 w-3.5 text-gray-700 dark:text-gray-300" />
-                      </span>
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-              {pageInfo?.next && (
-                <span ref={observe} className="flex justify-center p-10">
-                  Loading...
-                </span>
-              )}
+                    </td>
+                    <td className="whitespace-nowrap rounded-r-xl px-3 py-2 text-right text-sm">
+                      <Link
+                        href={getPostAppLink(txn.publicationId)}
+                        target="_blank"
+                        className="opacity-70 hover:opacity-100"
+                      >
+                        <span className="inline-flex items-center space-x-1 text-xs">
+                          <span>View</span>
+                          <ArrowTopRightOnSquareIcon className="h-3.5 w-3.5 text-gray-700 dark:text-gray-300" />
+                        </span>
+                      </Link>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         )}

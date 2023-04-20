@@ -2,36 +2,22 @@ import type { FieldPolicy, StoreValue } from '@apollo/client/core';
 
 import type { PaginatedResultInfo } from '@/generated';
 
-type CursorBasedPagination<T = StoreValue> = {
+interface CursorBasedPagination<T = StoreValue> {
   items: T[];
   pageInfo: PaginatedResultInfo;
-};
+}
 
 type SafeReadonly<T> = T extends object ? Readonly<T> : T;
 
 /**
- * @param obj Object to search for a __ref property.
- * @returns the __ref property if found, otherwise null.
+ * Generates a field policy for cursor-based pagination.
+ *
+ * @param keyArgs Key args for the field.
+ * @returns Field policy for cursor-based pagination.
  */
-const getRef = (obj: any): string | null => {
-  if (typeof obj === 'object' && obj !== null) {
-    if ('__ref' in obj) {
-      return obj['__ref'];
-    } else {
-      for (const key in obj) {
-        const ref = getRef(obj[key]);
-        if (ref) {
-          return ref;
-        }
-      }
-    }
-  }
-  return null;
-};
-
-function cursorBasedPagination<T extends CursorBasedPagination>(
+export const cursorBasedPagination = <T extends CursorBasedPagination>(
   keyArgs: FieldPolicy['keyArgs']
-): FieldPolicy<T> {
+): FieldPolicy<T> => {
   return {
     keyArgs,
 
@@ -40,6 +26,7 @@ function cursorBasedPagination<T extends CursorBasedPagination>(
         return existing;
       }
       const { items, pageInfo } = existing;
+
       return {
         ...existing,
         items,
@@ -53,29 +40,17 @@ function cursorBasedPagination<T extends CursorBasedPagination>(
       if (!existing) {
         return incoming;
       }
-      const { items: existingItems, pageInfo: existingPageInfo } = existing;
-      const { items: incomingItems, pageInfo: incomingPageInfo } = incoming;
 
-      const items = [...existingItems, ...incomingItems];
-      const pageInfo = { ...existingPageInfo, ...incomingPageInfo };
+      const existingItems = existing.items ?? [];
+      const incomingItems = incoming.items ?? [];
 
-      // remove duplicates from items
-      const seen = new Set();
-      const dedupedItems = items.filter((item) => {
-        const ref = getRef(item);
-        if (ref && seen.has(ref)) {
-          return false;
-        }
-        seen.add(ref);
-        return true;
-      });
       return {
         ...incoming,
-        items: dedupedItems,
-        pageInfo
+        items: existingItems?.concat(incomingItems),
+        pageInfo: incoming.pageInfo
       } as SafeReadonly<T>;
     }
   };
-}
+};
 
 export default cursorBasedPagination;

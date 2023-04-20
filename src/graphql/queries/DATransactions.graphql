@@ -12,7 +12,6 @@ query DATransactions($request: DataAvailabilityTransactionsRequest!) {
       }
     }
     pageInfo {
-      prev
       next
     }
   }
