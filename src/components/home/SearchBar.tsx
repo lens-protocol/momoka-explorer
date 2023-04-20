@@ -1,4 +1,5 @@
 import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import clsx from 'clsx';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
 
@@ -13,7 +14,7 @@ const SearchBar = () => {
   const debouncedValue = useDebounce<string>(keyword, 500);
   const inputElement = useRef<HTMLInputElement>(null);
 
-  const [fetchTxn] = useDataAvailabilityTransactionLazyQuery();
+  const [fetchTxn, { loading }] = useDataAvailabilityTransactionLazyQuery();
 
   useEffect(() => {
     if (inputElement.current) {
@@ -46,7 +47,11 @@ const SearchBar = () => {
         onChange={(event) => setKeyword(event.target.value)}
         placeholder="Search transaction Id"
         autoComplete="off"
-        className="flex-1 bg-transparent px-6 py-4 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none dark:text-gray-100 sm:leading-6 md:text-lg"
+        autoCorrect="false"
+        className={clsx(
+          'flex-1 bg-transparent px-6 py-4 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none dark:text-gray-100 sm:leading-6 md:text-lg',
+          loading && 'animate-pulse'
+        )}
       />
       {keyword.length && txn?.transactionId ? (
         <div className="absolute left-0 right-0 top-16 flex w-full rounded-xl border bg-white p-2 px-2 dark:border-gray-950 dark:bg-gray-800">

@@ -17,6 +17,7 @@ const Network = () => {
   useEffect(() => {
     // TEMP: default staging
     setSelectedEnvironment(networks[1]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
