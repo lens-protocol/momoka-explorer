@@ -1,11 +1,12 @@
-import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
-import { createClient } from 'graphql-ws';
+import { SubscriptionClient } from 'subscriptions-transport-ws/dist/client';
+import { WebSocketLink } from '@apollo/client/link/ws';
 
 const wsLink =
   typeof window !== 'undefined'
-    ? new GraphQLWsLink(
-        createClient({
-          url: 'wss://staging-api-social-mumbai.lens.crtlkey.com'
+    ? new WebSocketLink(
+        new SubscriptionClient('wss://staging-api-social-mumbai.lens.crtlkey.com', {
+          reconnect: true,
+          reconnectionAttempts: 5
         })
       )
     : null;

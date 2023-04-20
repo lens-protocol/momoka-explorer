@@ -27,10 +27,25 @@ const LatestTransactions: FC<Props> = () => {
     }
   });
 
-  // const { data } = useSubscription(NewTransactionDocument);
+  const {} = useNewTransactionSubscription();
 
-  const { data } = useNewTransactionSubscription();
-  console.log('🚀 ~ file: LatestTransactions.tsx:30 ~ data:', data);
+  useNewTransactionSubscription({
+    onError: (data) => {
+      console.log('🚀 ~ Socket Error:', data);
+    },
+    onSubscriptionData: ({ subscriptionData }) => {
+      const { data } = subscriptionData;
+      if (!data) {
+        return;
+      }
+      const txn = data?.newDataAvailabilityTransaction as DataAvailabilityTransactionUnion;
+      let oldTxns = [...(latestTransactions as DataAvailabilityTransactionUnion[])];
+      oldTxns.unshift(txn);
+      oldTxns.pop();
+      setLatestTransactions(oldTxns);
+    },
+    shouldResubscribe: true
+  });
 
   // useEffect(() => {
   //   const intervalId = setInterval(() => {
