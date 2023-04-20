@@ -49,7 +49,7 @@ const MoreDetails: FC<MoreDetailsProps> = ({ dataAvailabilityTransaction }) => {
                 title="Transaction Data"
                 value={
                   transactionData ? (
-                    <div className="max-h-[20rem] w-full overflow-auto rounded-lg border bg-gray-100 leading-5 dark:border-gray-900 dark:bg-gray-700">
+                    <div className="max-w-[90%] overflow-auto rounded-lg border bg-gray-100 leading-5 dark:border-gray-900 dark:bg-gray-700">
                       <ReactJson
                         style={{ padding: 10 }}
                         theme={resolvedTheme === 'dark' ? 'apathy' : 'rjv-default'}
