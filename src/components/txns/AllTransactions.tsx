@@ -1,11 +1,11 @@
-import { ArrowsRightLeftIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+import { ArrowsRightLeftIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import type { FC } from 'react';
 import { useState } from 'react';
 import { useInView } from 'react-cool-inview';
 
 import type { Profile } from '@/generated';
-import { useDaTransactionsQuery } from '@/generated';
+import { useDaSummaryQuery, useDaTransactionsQuery } from '@/generated';
 import { getRelativeTime } from '@/utils/formatTime';
 import getDAActionType from '@/utils/getDAActionType';
 import getPostAppLink from '@/utils/getPostAppLink';
@@ -21,6 +21,10 @@ const AllTransactions: FC<Props> = () => {
   const [hasMore, setHasMore] = useState(true);
   const [transactions, setTransactions] = useState<any[]>([]);
   const [pageInfo, setPageInfo] = useState<any>(null);
+
+  const { data, loading: loadingSummary } = useDaSummaryQuery();
+  const summary = data?.dataAvailabilitySummary;
+
   const { loading, fetchMore } = useDaTransactionsQuery({
     variables: { request: { cursor: null, limit: 50 } },
     onCompleted: ({ dataAvailabilityTransactions }) => {
@@ -51,7 +55,9 @@ const AllTransactions: FC<Props> = () => {
       <div className="left-0 right-0 flex flex-wrap items-center justify-between gap-y-3">
         <div>
           <h1 className="font-medium opacity-90">All Transactions</h1>
-          <p className="text-sm opacity-60">More than 1,939,672,686 transactions found</p>
+          <p className="text-sm opacity-60">
+            {loadingSummary ? 'Loading...' : `${summary?.totalTransactions} transactions found`}
+          </p>
         </div>
       </div>
       <div className="overflow-x-auto">
@@ -128,16 +134,26 @@ const AllTransactions: FC<Props> = () => {
                         {getSubmitterName(txn.submitter)}
                       </Link>
                     </td>
-                    <td className="whitespace-nowrap rounded-r-xl px-3 py-2 text-right text-sm">
+                    <td className="whitespace-nowrap px-3 py-4">
                       <Link
+                        href={`/tx/${txn.transactionId}`}
+                        className="opacity-60 hover:text-indigo-400 hover:opacity-100"
+                      >
+                        View
+                      </Link>
+                    </td>
+                    <td className="rounded-r-xl px-3 py-4">
+                      <Link
+                        className="flex justify-center opacity-70 hover:opacity-100"
                         href={getPostAppLink(txn.publicationId)}
                         target="_blank"
-                        className="opacity-70 hover:opacity-100"
                       >
-                        <span className="inline-flex items-center space-x-1 text-xs">
-                          <span>View</span>
-                          <ArrowTopRightOnSquareIcon className="h-3.5 w-3.5 text-gray-700 dark:text-gray-300" />
-                        </span>
+                        <img
+                          src={`https://static-assets.lenster.xyz/images/source/lenster.jpeg`}
+                          className="h-5 w-5 rounded-full"
+                          alt="lenster"
+                          draggable={false}
+                        />
                       </Link>
                     </td>
                   </tr>

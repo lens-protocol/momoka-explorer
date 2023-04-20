@@ -223,6 +223,7 @@ const Transaction: FC = () => {
                     src={`https://static-assets.lenster.xyz/images/source/${dataAvailabilityTransaction?.appId}.jpeg`}
                     className="h-5 w-5 rounded-full"
                     alt={dataAvailabilityTransaction?.appId}
+                    draggable={false}
                   />
                 )}
                 <span>{capitalizeCase(dataAvailabilityTransaction?.appId)}</span>

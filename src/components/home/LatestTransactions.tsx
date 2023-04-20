@@ -1,4 +1,4 @@
-import { ArrowRightIcon, ArrowsRightLeftIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline';
+import { ArrowRightIcon, ArrowsRightLeftIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import Link from 'next/link';
 import type { FC } from 'react';
@@ -150,16 +150,26 @@ const LatestTransactions: FC<Props> = () => {
                     </span>
                   </div>
                 </td>
-                <td className="whitespace-nowrap rounded-r-xl px-3 py-4 text-right text-sm">
+                <td className="whitespace-nowrap px-3 py-4">
                   <Link
+                    href={`/tx/${txn.transactionId}`}
+                    className="opacity-60 hover:text-indigo-400 hover:opacity-100"
+                  >
+                    View
+                  </Link>
+                </td>
+                <td className="rounded-r-xl px-3 py-4">
+                  <Link
+                    className="flex justify-center opacity-70 hover:opacity-100"
                     href={getPostAppLink(txn.publicationId)}
                     target="_blank"
-                    className="opacity-70 hover:opacity-100"
                   >
-                    <span className="inline-flex items-center space-x-1 text-xs">
-                      <span>View</span>
-                      <ArrowTopRightOnSquareIcon className="h-3.5 w-3.5 text-gray-700 dark:text-gray-300" />
-                    </span>
+                    <img
+                      src={`https://static-assets.lenster.xyz/images/source/lenster.jpeg`}
+                      className="h-5 w-5 rounded-full"
+                      alt="lenster"
+                      draggable={false}
+                    />
                   </Link>
                 </td>
               </tr>
