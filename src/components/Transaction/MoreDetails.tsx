@@ -2,6 +2,7 @@ import { Disclosure } from '@headlessui/react';
 import { ChevronUpIcon } from '@heroicons/react/20/solid';
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
+import ReactJson from 'react-json-view';
 
 import type { DataAvailabilityTransactionUnion } from '@/generated';
 
@@ -27,7 +28,6 @@ const MoreDetails: FC<MoreDetailsProps> = ({ dataAvailabilityTransaction }) => {
 
   return (
     <div className="relative mt-6 space-y-4 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 dark:border-gray-950 dark:bg-gray-800 md:p-5">
-      {JSON.stringify(transactionData)}
       <Disclosure>
         {({ open }) => (
           <>
@@ -36,7 +36,21 @@ const MoreDetails: FC<MoreDetailsProps> = ({ dataAvailabilityTransaction }) => {
               <ChevronUpIcon className={`${open ? 'rotate-180 transform' : ''} h-5 w-5`} />
             </Disclosure.Button>
             <Disclosure.Panel className="pb-2 text-sm">
-              <Meta title="Transaction Data" value="gm" />
+              <Meta
+                title="Transaction Data"
+                value={
+                  transactionData ? (
+                    <div className="max-h-[20rem] w-full overflow-auto rounded-lg border bg-gray-100 p-5 leading-5 dark:border-gray-900 dark:bg-gray-700">
+                      <ReactJson
+                        src={transactionData}
+                        enableClipboard={false}
+                        collapsed={2}
+                        indentWidth={2}
+                      />
+                    </div>
+                  ) : null
+                }
+              />
             </Disclosure.Panel>
           </>
         )}
