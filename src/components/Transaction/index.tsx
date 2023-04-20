@@ -140,7 +140,7 @@ const Transaction: FC = () => {
             }
           />
           <Meta
-            title="Created At"
+            title="Submitter"
             value={
               <div className="flex items-center space-x-2">
                 <BoltIcon className="h-4 w-4" />
