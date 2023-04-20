@@ -8,12 +8,14 @@ import type { DataAvailabilityTransactionUnion } from '@/generated';
 import { usePublicationQuery } from '@/generated';
 
 import { Meta } from '.';
+import { useTheme } from 'next-themes';
 
 interface MoreDetailsProps {
   dataAvailabilityTransaction: DataAvailabilityTransactionUnion;
 }
 
 const MoreDetails: FC<MoreDetailsProps> = ({ dataAvailabilityTransaction }) => {
+  const { resolvedTheme } = useTheme();
   const [transactionData, setTransactionData] = useState<any>(null);
 
   const { data } = usePublicationQuery({
@@ -47,8 +49,10 @@ const MoreDetails: FC<MoreDetailsProps> = ({ dataAvailabilityTransaction }) => {
                 title="Transaction Data"
                 value={
                   transactionData ? (
-                    <div className="max-h-[20rem] w-full overflow-auto rounded-lg border bg-gray-100 p-5 leading-5 dark:border-gray-900 dark:bg-gray-700">
+                    <div className="max-h-[20rem] w-full overflow-auto rounded-lg border bg-gray-100 leading-5 dark:border-gray-900 dark:bg-gray-700">
                       <ReactJson
+                        style={{ padding: 10 }}
+                        theme={resolvedTheme === 'dark' ? 'apathy' : 'rjv-default'}
                         src={transactionData}
                         enableClipboard={false}
                         collapsed={2}
