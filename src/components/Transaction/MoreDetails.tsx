@@ -33,13 +33,13 @@ const MoreDetails: FC<MoreDetailsProps> = ({ dataAvailabilityTransaction }) => {
   }, []);
 
   return (
-    <div className="relative mt-6 space-y-4 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 dark:border-gray-950 dark:bg-gray-800 md:p-5">
+    <div className="relative mt-6 space-y-4 rounded-xl border border-gray-100 bg-gray-50 px-2 py-3 dark:border-gray-950 dark:bg-gray-800 md:px-5">
       <Disclosure>
         {({ open }) => (
           <>
-            <Disclosure.Button className="flex w-full justify-between rounded-lg py-2 text-left font-medium tracking-wide">
-              <span>Click to see more details</span>
-              <ChevronUpIcon className={`${open ? 'rotate-180 transform' : ''} h-5 w-5`} />
+            <Disclosure.Button className="flex w-full items-center justify-between rounded-lg py-2 text-left font-medium tracking-wide opacity-70 hover:opacity-100 focus:outline-none">
+              <span>See more details</span>
+              <ChevronUpIcon className={`${!open ? 'rotate-180 transform' : ''} h-5 w-5`} />
             </Disclosure.Button>
             <Disclosure.Panel className="pb-2 text-sm">
               <Meta title="On-chain Content URI" value={data?.publication?.onChainContentURI} />
