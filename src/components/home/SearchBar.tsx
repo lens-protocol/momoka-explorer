@@ -1,4 +1,4 @@
-import { MagnifyingGlassIcon } from '@heroicons/react/24/outline';
+import { ClockIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
@@ -100,7 +100,11 @@ const SearchBar = () => {
               href={`/tx/${recent.transactionId}`}
               className="flex w-full items-center justify-between rounded-xl px-4 py-2 hover:bg-gray-100 hover:dark:bg-gray-900"
             >
-              {recent.transactionId} <span className="text-xs opacity-50">{recent.publicationId}</span>
+              <span className="flex items-center gap-2">
+                <ClockIcon className="h-4 w-4 opacity-70" />
+                <span>{recent.transactionId}</span>
+              </span>
+              <span className="text-xs opacity-50">{recent.publicationId}</span>
             </Link>
           ))}
         </div>
