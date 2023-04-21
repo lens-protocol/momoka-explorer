@@ -2,17 +2,17 @@ import '@/styles/globals.css';
 import '@rainbow-me/rainbowkit/styles.css';
 
 import { ApolloProvider } from '@apollo/client';
-import { getDefaultWallets, RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import { darkTheme, getDefaultWallets, lightTheme, RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import type { ThemeOptions } from '@rainbow-me/rainbowkit/dist/themes/baseTheme';
 import type { AppProps } from 'next/app';
 import localFont from 'next/font/local';
-import { ThemeProvider } from 'next-themes';
+import { ThemeProvider, useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
 import { configureChains, createClient, mainnet, WagmiConfig } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
 
 import client from '@/apollo';
 import Navbar from '@/components/Navbar';
-
 const ginto = localFont({
   src: [
     {
@@ -74,6 +74,7 @@ const wagmiClient = createClient({
 
 export default function App({ Component, pageProps }: AppProps) {
   const [mounted, setMounted] = useState(false);
+  const { theme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
@@ -83,11 +84,20 @@ export default function App({ Component, pageProps }: AppProps) {
     return <div />;
   }
 
+  const themeOptions: ThemeOptions = {
+    fontStack: 'system',
+    accentColor: '#3D794E'
+  };
+
   return (
     <ApolloProvider client={client}>
       <ThemeProvider defaultTheme="light" attribute="class">
         <WagmiConfig client={wagmiClient}>
-          <RainbowKitProvider chains={chains}>
+          <RainbowKitProvider
+            chains={chains}
+            modalSize="compact"
+            theme={theme === 'dark' ? darkTheme(themeOptions) : lightTheme(themeOptions)}
+          >
             <Navbar />
             <style jsx global>{`
               body {
