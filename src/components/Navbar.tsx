@@ -1,4 +1,4 @@
-import { MoonIcon, SunIcon } from '@heroicons/react/24/outline';
+import { MoonIcon, StarIcon, SunIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import type { FC } from 'react';
@@ -15,6 +15,10 @@ const Navbar: FC = () => {
           <LensLogo className="h-12 w-12" />
         </Link>
         <div className="flex items-center space-x-2">
+          <Link href="/favorites" className="mr-5 flex items-center space-x-2">
+            <StarIcon className="h-4 w-4 text-yellow-500" />
+            <b>Favorites</b>
+          </Link>
           <button
             onClick={() => {
               setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
