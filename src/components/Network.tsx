@@ -2,7 +2,7 @@ import { Listbox, Transition } from '@headlessui/react';
 import { BeakerIcon, ChevronUpDownIcon, CubeIcon, WrenchIcon } from '@heroicons/react/24/outline';
 import React, { Fragment } from 'react';
 
-import { useAppStore } from '@/store/app';
+import { useAppPersistStore } from '@/store/app';
 
 export const networks = [
   { name: 'Mainnet', id: 'mainnet', icon: <CubeIcon className="h-4 w-4" /> },
@@ -11,8 +11,8 @@ export const networks = [
 ];
 
 const Network = () => {
-  const selectedEnvironment = useAppStore((state) => state.selectedEnvironment);
-  const setSelectedEnvironment = useAppStore((state) => state.setSelectedEnvironment);
+  const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
+  const setSelectedEnvironment = useAppPersistStore((state) => state.setSelectedEnvironment);
 
   return (
     <Listbox

@@ -1,11 +1,7 @@
-import { useAppStore } from '@/store/app';
-
 import getConfig from './getConfig';
 
-const { selectedEnvironment } = useAppStore.getState();
-
-const getLensterLink = () => {
-  return getConfig(selectedEnvironment.id).lensterUrl;
+const getLensterLink = (networkId: string) => {
+  return getConfig(networkId).lensterUrl;
 };
 
 export default getLensterLink;

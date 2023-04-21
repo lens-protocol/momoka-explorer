@@ -15,7 +15,7 @@ import { useEffect, useState } from 'react';
 import { apps } from '@/data/apps';
 import type { DataAvailabilityTransactionUnion, Profile as TProfile } from '@/generated';
 import { useDataAvailabilityTransactionQuery } from '@/generated';
-import { useAppStore } from '@/store/app';
+import { useAppPersistStore } from '@/store/app';
 import { useFavoritesPersistStore } from '@/store/favorites';
 import capitalizeCase from '@/utils/capitalizeCase';
 import { getRelativeTime } from '@/utils/formatTime';
@@ -71,7 +71,7 @@ export const Meta: FC<MetaProps> = ({ title, value, copyValue = null }) => {
 
 const Transaction: FC = () => {
   const { query } = useRouter();
-  const selectedEnvironment = useAppStore((state) => state.selectedEnvironment);
+  const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
   const addFavorite = useFavoritesPersistStore((state) => state.addFavorite);
   const removeFavorite = useFavoritesPersistStore((state) => state.removeFavorite);
   const favorites = useFavoritesPersistStore((state) => state.favorites);
@@ -179,7 +179,9 @@ const Transaction: FC = () => {
             value={
               <Link
                 className="flex items-center space-x-2 underline"
-                href={`${getLensterLink()}/posts/${dataAvailabilityTransaction?.publicationId}`}
+                href={`${getLensterLink(selectedEnvironment.id)}/posts/${
+                  dataAvailabilityTransaction?.publicationId
+                }`}
                 target="_blank"
               >
                 <span>{dataAvailabilityTransaction?.publicationId}</span>
@@ -196,7 +198,9 @@ const Transaction: FC = () => {
                   <div className="space-y-4">
                     <Link
                       className="flex items-center space-x-2 underline"
-                      href={`${getLensterLink()}/posts/${dataAvailabilityTransaction?.mirrorOfPublicationId}`}
+                      href={`${getLensterLink(selectedEnvironment.id)}/posts/${
+                        dataAvailabilityTransaction?.mirrorOfPublicationId
+                      }`}
                       target="_blank"
                     >
                       <span>{dataAvailabilityTransaction?.mirrorOfPublicationId}</span>
@@ -219,7 +223,7 @@ const Transaction: FC = () => {
                   <div className="space-y-4">
                     <Link
                       className="flex items-center space-x-2 underline"
-                      href={`${getLensterLink()}/posts/${
+                      href={`${getLensterLink(selectedEnvironment.id)}/posts/${
                         dataAvailabilityTransaction?.commentedOnPublicationId
                       }`}
                       target="_blank"

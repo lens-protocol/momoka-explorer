@@ -7,9 +7,7 @@ import { useDaSummaryQuery, useDaTransactionsQuery } from '@/generated';
 import TransactionsShimmer from '../shimmers/TransactionsShimmer';
 import SingleTransaction from './SingleTransaction';
 
-type Props = {};
-
-const AllTransactions: FC<Props> = () => {
+const AllTransactions: FC = () => {
   const [hasMore, setHasMore] = useState(true);
   const [transactions, setTransactions] = useState<any[]>([]);
   const [pageInfo, setPageInfo] = useState<any>(null);
@@ -68,7 +66,7 @@ const AllTransactions: FC<Props> = () => {
             </thead>
             <tbody>
               {transactions?.map((txn) => {
-                return <SingleTransaction key={txn?.id} txn={txn} />;
+                return <SingleTransaction key={txn?.transactionId} txn={txn} />;
               })}
             </tbody>
           </table>

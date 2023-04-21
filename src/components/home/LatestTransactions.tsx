@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 import type { DataAvailabilityTransactionUnion, Profile } from '@/generated';
 import { useDaTransactionsQuery, useNewTransactionSubscription } from '@/generated';
-import { useAppStore } from '@/store/app';
+import { useAppPersistStore, useAppStore } from '@/store/app';
 import { getRelativeTime } from '@/utils/formatTime';
 import getDAActionType from '@/utils/getDAActionType';
 import getLensterLink from '@/utils/getLensterLink';
@@ -19,6 +19,7 @@ type Props = {};
 
 const LatestTransactions: FC<Props> = () => {
   const setLastFinalizedTransaction = useAppStore((state) => state.setLastFinalizedTransaction);
+  const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
   const [latestTransactions, setLatestTransactions] = useState<Array<DataAvailabilityTransactionUnion>>();
 
   const { loading } = useDaTransactionsQuery({
@@ -50,31 +51,6 @@ const LatestTransactions: FC<Props> = () => {
     },
     shouldResubscribe: true
   });
-
-  // useEffect(() => {
-  //   const intervalId = setInterval(() => {
-  //     refetch().then(({ data }) => {
-  //       const newItems = data?.explorePublications.items.filter((item) => {
-  //         return (
-  //           !previousData?.explorePublications.items.some(
-  //             (prevItem: Publication) => prevItem.id === item.id
-  //           ) && !newlyAddedItemIds.includes(item.id)
-  //         );
-  //       });
-
-  //       setNewlyAddedItemIds(newlyAddedItemIds.concat(newItems.map((item) => item.id)));
-
-  //       setTimeout(() => {
-  //         setNewlyAddedItemIds([]);
-  //       }, 500);
-
-  //       setPreviousData(data);
-  //     });
-  //   }, 5000);
-
-  //   return () => clearInterval(intervalId);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [newlyAddedItemIds, previousData]);
 
   return (
     <div className="relative rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 dark:border-gray-950 dark:bg-gray-800 md:space-y-2 md:p-5">
@@ -165,7 +141,7 @@ const LatestTransactions: FC<Props> = () => {
                 <td className="rounded-r-xl px-3 py-4">
                   <Link
                     className="flex flex-none justify-center opacity-70 hover:opacity-100"
-                    href={`${getLensterLink()}/posts/${txn.publicationId}`}
+                    href={`${getLensterLink(selectedEnvironment.id)}/posts/${txn.publicationId}`}
                     target="_blank"
                   >
                     <img

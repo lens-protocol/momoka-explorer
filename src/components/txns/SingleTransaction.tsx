@@ -3,6 +3,7 @@ import Link from 'next/link';
 import type { FC } from 'react';
 
 import type { DataAvailabilityTransactionUnion, Profile } from '@/generated';
+import { useAppPersistStore } from '@/store/app';
 import { getRelativeTime } from '@/utils/formatTime';
 import getDAActionType from '@/utils/getDAActionType';
 import getLensterLink from '@/utils/getLensterLink';
@@ -15,6 +16,8 @@ interface Props {
 }
 
 const SingleTransaction: FC<Props> = ({ txn }) => {
+  const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
+
   return (
     <tr key={txn.transactionId} className="overflow-hidden bg-white dark:bg-gray-900">
       <td className="rounded-l-xl px-3 py-2 text-sm text-gray-900">
@@ -75,7 +78,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
       <td className="rounded-r-xl px-3 py-4">
         <Link
           className="flex flex-none justify-center opacity-70  hover:opacity-100"
-          href={`${getLensterLink()}/posts/${txn.publicationId}`}
+          href={`${getLensterLink(selectedEnvironment.id)}/posts/${txn.publicationId}`}
           target="_blank"
         >
           <img

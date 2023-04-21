@@ -3,7 +3,7 @@ import { persist } from 'zustand/middleware';
 
 import type { DataAvailabilityTransactionUnion } from '@/generated';
 
-type DataAvailabilityTransactionUnionWithNetwork = DataAvailabilityTransactionUnion & {
+export type DataAvailabilityTransactionUnionWithNetwork = DataAvailabilityTransactionUnion & {
   network: string;
 };
 
