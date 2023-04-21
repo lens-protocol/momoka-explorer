@@ -9,3 +9,9 @@ export enum LensEndpoint {
   TESTNET = 'https://api-mumbai.lens.dev',
   PRODUCTION = 'https://api.lens.dev'
 }
+
+export enum VerifierNetwork {
+  POLYGON = 'POLYGON',
+  MUMBAI = 'MUMBAI',
+  SANDBOX = 'SANDBOX'
+}

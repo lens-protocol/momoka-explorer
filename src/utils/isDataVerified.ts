@@ -1,10 +1,12 @@
-import type { EthereumNode } from '@lens-protocol/data-availability-verifier/client';
-import { checkDAProof, Environment } from '@lens-protocol/data-availability-verifier/client';
+import type { Environment, EthereumNode } from '@lens-protocol/data-availability-verifier/client';
+import { checkDAProof } from '@lens-protocol/data-availability-verifier/client';
 
-const isDataVerified = async (id: string, network: string) => {
+import getConfig from './getConfig';
+
+const isDataVerified = async (id: string, nodeUrl: string, network: string) => {
   const ethereumNode: EthereumNode = {
-    environment: Environment.MUMBAI,
-    nodeUrl: 'https://rpc.brovider.xyz/80001'
+    environment: getConfig(network).verifierNetwork as Environment,
+    nodeUrl: nodeUrl
   };
 
   try {
