@@ -1,7 +1,12 @@
 import { HttpLink } from '@apollo/client';
 
+import { useAppPersistStore } from '@/store/app';
+import getConfig from '@/utils/getConfig';
+
+const { selectedEnvironment } = useAppPersistStore.getState();
+
 const httpLink = new HttpLink({
-  uri: 'https://staging-api-social-mumbai.lens.crtlkey.com',
+  uri: getConfig(selectedEnvironment.id).apiEndpoint,
   fetchOptions: 'no-cors',
   fetch
 });
