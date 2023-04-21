@@ -1,4 +1,5 @@
-import { ArrowsRightLeftIcon } from '@heroicons/react/24/outline';
+import { ArrowsRightLeftIcon, StarIcon } from '@heroicons/react/24/outline';
+import { StarIcon as StarIconSolid } from '@heroicons/react/24/solid';
 import Link from 'next/link';
 import type { FC } from 'react';
 
@@ -10,6 +11,8 @@ import getLensterLink from '@/utils/getLensterLink';
 import getProfilePicture from '@/utils/getProfilePicture';
 import getSubmitterName from '@/utils/getSubmitterName';
 import truncate from '@/utils/truncate';
+
+import Favorite from '../shared/Favorite';
 
 interface Props {
   txn: DataAvailabilityTransactionUnion;
@@ -75,9 +78,21 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
           View
         </Link>
       </td>
+      <td className="whitespace-nowrap px-3 py-4">
+        <Favorite
+          dataAvailabilityTransaction={txn}
+          renderItem={(isFavorite) =>
+            isFavorite ? (
+              <StarIconSolid className="h-4 w-4 text-yellow-500" />
+            ) : (
+              <StarIcon className="h-4 w-4 text-yellow-500" />
+            )
+          }
+        />
+      </td>
       <td className="rounded-r-xl px-3 py-4">
         <Link
-          className="flex flex-none justify-center opacity-70  hover:opacity-100"
+          className="flex flex-none justify-center opacity-70 hover:opacity-100"
           href={`${getLensterLink(selectedEnvironment.id)}/posts/${txn.publicationId}`}
           target="_blank"
         >
