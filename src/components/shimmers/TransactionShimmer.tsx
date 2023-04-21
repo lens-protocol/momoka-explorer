@@ -12,16 +12,16 @@ const TransactionShimmer = () => {
           <h3 className="font-medium opacity-80">Transaction Details</h3>
           <p className="text-sm opacity-60">All Transaction related information will be displayed here.</p>
         </div>
-        <div className="h-8 w-40 animate-pulse rounded-xl dark:bg-[#23222A]" />
+        <div className="h-8 w-40 animate-pulse rounded-xl bg-gray-100 dark:bg-[#23222A]" />
       </div>
       <div className="mt-6 border-t border-gray-200 dark:border-gray-900">
         {txns.map((_, i) => (
           <Meta
             key={i}
-            title={<div className="h-4 w-28 animate-pulse rounded-xl dark:bg-[#23222A]" />}
+            title={<div className="h-4 w-28 animate-pulse rounded-xl bg-gray-100 dark:bg-[#23222A]" />}
             value={
               <div
-                className="h-4 animate-pulse rounded-xl dark:bg-[#23222A]"
+                className="h-4 animate-pulse rounded-xl bg-gray-100 dark:bg-[#23222A]"
                 style={{ width: i % 2 === 0 ? '30%' : '50%' }}
               />
             }
