@@ -3,11 +3,22 @@ import '@/styles/globals.css';
 import { ApolloProvider } from '@apollo/client';
 import type { AppProps } from 'next/app';
 import { ThemeProvider } from 'next-themes';
+import { useEffect, useState } from 'react';
 
 import client from '@/apollo';
 import Navbar from '@/components/Navbar';
 
 export default function App({ Component, pageProps }: AppProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return <div />;
+  }
+
   return (
     <ApolloProvider client={client}>
       <ThemeProvider defaultTheme="light" attribute="class">

@@ -2,9 +2,10 @@ import {
   ArrowTopRightOnSquareIcon,
   BoltIcon,
   ClockIcon,
-  DocumentDuplicateIcon
+  DocumentDuplicateIcon,
+  StarIcon
 } from '@heroicons/react/24/outline';
-import { CheckCircleIcon } from '@heroicons/react/24/solid';
+import { CheckCircleIcon, StarIcon as StarIconSolid } from '@heroicons/react/24/solid';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -14,12 +15,16 @@ import { useEffect, useState } from 'react';
 import { apps } from '@/data/apps';
 import type { DataAvailabilityTransactionUnion, Profile as TProfile } from '@/generated';
 import { useDataAvailabilityTransactionQuery } from '@/generated';
+import { useAppPersistStore } from '@/store/app';
+import { useFavoritesPersistStore } from '@/store/favorites';
 import capitalizeCase from '@/utils/capitalizeCase';
 import { getRelativeTime } from '@/utils/formatTime';
 import getLensterLink from '@/utils/getLensterLink';
 import getSubmitterName from '@/utils/getSubmitterName';
+import isInFavorites from '@/utils/isInFavorites';
 
 import Profile from '../shared/Profile';
+import { Button } from '../ui/Button';
 import MoreDetails from './MoreDetails';
 
 interface MetaProps {
@@ -66,6 +71,10 @@ export const Meta: FC<MetaProps> = ({ title, value, copyValue = null }) => {
 
 const Transaction: FC = () => {
   const { query } = useRouter();
+  const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
+  const addFavorite = useFavoritesPersistStore((state) => state.addFavorite);
+  const removeFavorite = useFavoritesPersistStore((state) => state.removeFavorite);
+  const favorites = useFavoritesPersistStore((state) => state.favorites);
 
   const { data, loading } = useDataAvailabilityTransactionQuery({
     variables: { request: { transactionId: query.transactionId as string } },
@@ -77,13 +86,41 @@ const Transaction: FC = () => {
   }
 
   const { dataAvailabilityTransaction } = data;
+  const isFavorite = isInFavorites(
+    favorites,
+    dataAvailabilityTransaction?.transactionId as string,
+    selectedEnvironment.id
+  );
 
   return (
     <>
       <div className="relative mt-6 space-y-4 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 dark:border-gray-950 dark:bg-gray-800 md:p-5">
-        <div className="px-4 sm:px-0">
-          <h3 className="font-medium opacity-80">Transaction Details</h3>
-          <p className="text-sm opacity-60">All Transaction related information will be displayed here.</p>
+        <div className="flex flex-wrap items-center justify-between space-y-3 px-4 sm:px-0">
+          <div>
+            <h3 className="font-medium opacity-80">Transaction Details</h3>
+            <p className="text-sm opacity-60">All Transaction related information will be displayed here.</p>
+          </div>
+          <Button
+            className="flex items-center space-x-2 text-xs sm:text-sm"
+            onClick={() => {
+              isFavorite
+                ? removeFavorite(
+                    dataAvailabilityTransaction as DataAvailabilityTransactionUnion,
+                    selectedEnvironment.id
+                  )
+                : addFavorite(
+                    dataAvailabilityTransaction as DataAvailabilityTransactionUnion,
+                    selectedEnvironment.id
+                  );
+            }}
+          >
+            {isFavorite ? (
+              <StarIconSolid className="h-3 w-3 text-yellow-500 sm:h-4 sm:w-4" />
+            ) : (
+              <StarIcon className="h-3 w-3 text-yellow-500 sm:h-4 sm:w-4" />
+            )}
+            <span>{isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}</span>
+          </Button>
         </div>
         <div className="mt-6 border-t border-gray-200 dark:border-gray-900">
           <Meta
@@ -142,7 +179,9 @@ const Transaction: FC = () => {
             value={
               <Link
                 className="flex items-center space-x-2 underline"
-                href={`${getLensterLink()}/posts/${dataAvailabilityTransaction?.publicationId}`}
+                href={`${getLensterLink(selectedEnvironment.id)}/posts/${
+                  dataAvailabilityTransaction?.publicationId
+                }`}
                 target="_blank"
               >
                 <span>{dataAvailabilityTransaction?.publicationId}</span>
@@ -159,7 +198,9 @@ const Transaction: FC = () => {
                   <div className="space-y-4">
                     <Link
                       className="flex items-center space-x-2 underline"
-                      href={`${getLensterLink()}/posts/${dataAvailabilityTransaction?.mirrorOfPublicationId}`}
+                      href={`${getLensterLink(selectedEnvironment.id)}/posts/${
+                        dataAvailabilityTransaction?.mirrorOfPublicationId
+                      }`}
                       target="_blank"
                     >
                       <span>{dataAvailabilityTransaction?.mirrorOfPublicationId}</span>
@@ -182,7 +223,7 @@ const Transaction: FC = () => {
                   <div className="space-y-4">
                     <Link
                       className="flex items-center space-x-2 underline"
-                      href={`${getLensterLink()}/posts/${
+                      href={`${getLensterLink(selectedEnvironment.id)}/posts/${
                         dataAvailabilityTransaction?.commentedOnPublicationId
                       }`}
                       target="_blank"
