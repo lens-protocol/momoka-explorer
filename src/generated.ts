@@ -4685,6 +4685,30 @@ export type DaTransactionsQuery = {
   };
 };
 
+export type ProfileQueryVariables = Exact<{
+  request: SingleProfileQueryRequest;
+}>;
+
+export type ProfileQuery = {
+  __typename?: 'Query';
+  profile?: {
+    __typename?: 'Profile';
+    isDefault: boolean;
+    id: any;
+    name?: string | null;
+    handle: any;
+    bio?: string | null;
+    ownedBy: any;
+    isFollowedByMe: boolean;
+    stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+    attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+    picture?:
+      | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+      | { __typename?: 'NftImage'; uri: any }
+      | null;
+  } | null;
+};
+
 export type ProfilesQueryVariables = Exact<{
   request: ProfileQueryRequest;
 }>;
@@ -5213,6 +5237,45 @@ export function useDaTransactionsLazyQuery(
 export type DaTransactionsQueryHookResult = ReturnType<typeof useDaTransactionsQuery>;
 export type DaTransactionsLazyQueryHookResult = ReturnType<typeof useDaTransactionsLazyQuery>;
 export type DaTransactionsQueryResult = Apollo.QueryResult<DaTransactionsQuery, DaTransactionsQueryVariables>;
+export const ProfileDocument = gql`
+  query Profile($request: SingleProfileQueryRequest!) {
+    profile(request: $request) {
+      ...ProfileFields
+      isDefault
+    }
+  }
+  ${ProfileFieldsFragmentDoc}
+`;
+
+/**
+ * __useProfileQuery__
+ *
+ * To run a query within a React component, call `useProfileQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProfileQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProfileQuery({
+ *   variables: {
+ *      request: // value for 'request'
+ *   },
+ * });
+ */
+export function useProfileQuery(baseOptions: Apollo.QueryHookOptions<ProfileQuery, ProfileQueryVariables>) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<ProfileQuery, ProfileQueryVariables>(ProfileDocument, options);
+}
+export function useProfileLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<ProfileQuery, ProfileQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<ProfileQuery, ProfileQueryVariables>(ProfileDocument, options);
+}
+export type ProfileQueryHookResult = ReturnType<typeof useProfileQuery>;
+export type ProfileLazyQueryHookResult = ReturnType<typeof useProfileLazyQuery>;
+export type ProfileQueryResult = Apollo.QueryResult<ProfileQuery, ProfileQueryVariables>;
 export const ProfilesDocument = gql`
   query Profiles($request: ProfileQueryRequest!) {
     profiles(request: $request) {

@@ -1,0 +1,6 @@
+query Profile($request: SingleProfileQueryRequest!) {
+  profile(request: $request) {
+    ...ProfileFields
+    isDefault
+  }
+}
