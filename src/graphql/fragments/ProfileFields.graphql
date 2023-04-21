@@ -8,6 +8,9 @@ fragment ProfileFields on Profile {
   stats {
     totalFollowers
     totalFollowing
+    totalPosts
+    totalComments
+    totalMirrors
   }
   attributes {
     key

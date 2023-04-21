@@ -4332,7 +4332,14 @@ export type DaCommentFieldsFragment = {
     bio?: string | null;
     ownedBy: any;
     isFollowedByMe: boolean;
-    stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+    stats: {
+      __typename?: 'ProfileStats';
+      totalFollowers: number;
+      totalFollowing: number;
+      totalPosts: number;
+      totalComments: number;
+      totalMirrors: number;
+    };
     attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
     picture?:
       | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4347,7 +4354,14 @@ export type DaCommentFieldsFragment = {
     bio?: string | null;
     ownedBy: any;
     isFollowedByMe: boolean;
-    stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+    stats: {
+      __typename?: 'ProfileStats';
+      totalFollowers: number;
+      totalFollowing: number;
+      totalPosts: number;
+      totalComments: number;
+      totalMirrors: number;
+    };
     attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
     picture?:
       | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4372,7 +4386,14 @@ export type DaMirrorFieldsFragment = {
     bio?: string | null;
     ownedBy: any;
     isFollowedByMe: boolean;
-    stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+    stats: {
+      __typename?: 'ProfileStats';
+      totalFollowers: number;
+      totalFollowing: number;
+      totalPosts: number;
+      totalComments: number;
+      totalMirrors: number;
+    };
     attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
     picture?:
       | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4387,7 +4408,14 @@ export type DaMirrorFieldsFragment = {
     bio?: string | null;
     ownedBy: any;
     isFollowedByMe: boolean;
-    stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+    stats: {
+      __typename?: 'ProfileStats';
+      totalFollowers: number;
+      totalFollowing: number;
+      totalPosts: number;
+      totalComments: number;
+      totalMirrors: number;
+    };
     attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
     picture?:
       | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4411,7 +4439,14 @@ export type DaPostFieldsFragment = {
     bio?: string | null;
     ownedBy: any;
     isFollowedByMe: boolean;
-    stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+    stats: {
+      __typename?: 'ProfileStats';
+      totalFollowers: number;
+      totalFollowing: number;
+      totalPosts: number;
+      totalComments: number;
+      totalMirrors: number;
+    };
     attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
     picture?:
       | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4428,7 +4463,14 @@ export type ProfileFieldsFragment = {
   bio?: string | null;
   ownedBy: any;
   isFollowedByMe: boolean;
-  stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+  stats: {
+    __typename?: 'ProfileStats';
+    totalFollowers: number;
+    totalFollowing: number;
+    totalPosts: number;
+    totalComments: number;
+    totalMirrors: number;
+  };
   attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
   picture?:
     | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4482,7 +4524,14 @@ export type DataAvailabilityTransactionQuery = {
           bio?: string | null;
           ownedBy: any;
           isFollowedByMe: boolean;
-          stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+          stats: {
+            __typename?: 'ProfileStats';
+            totalFollowers: number;
+            totalFollowing: number;
+            totalPosts: number;
+            totalComments: number;
+            totalMirrors: number;
+          };
           attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
           picture?:
             | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4497,7 +4546,14 @@ export type DataAvailabilityTransactionQuery = {
           bio?: string | null;
           ownedBy: any;
           isFollowedByMe: boolean;
-          stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+          stats: {
+            __typename?: 'ProfileStats';
+            totalFollowers: number;
+            totalFollowing: number;
+            totalPosts: number;
+            totalComments: number;
+            totalMirrors: number;
+          };
           attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
           picture?:
             | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4521,7 +4577,14 @@ export type DataAvailabilityTransactionQuery = {
           bio?: string | null;
           ownedBy: any;
           isFollowedByMe: boolean;
-          stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+          stats: {
+            __typename?: 'ProfileStats';
+            totalFollowers: number;
+            totalFollowing: number;
+            totalPosts: number;
+            totalComments: number;
+            totalMirrors: number;
+          };
           attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
           picture?:
             | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4536,7 +4599,14 @@ export type DataAvailabilityTransactionQuery = {
           bio?: string | null;
           ownedBy: any;
           isFollowedByMe: boolean;
-          stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+          stats: {
+            __typename?: 'ProfileStats';
+            totalFollowers: number;
+            totalFollowing: number;
+            totalPosts: number;
+            totalComments: number;
+            totalMirrors: number;
+          };
           attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
           picture?:
             | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4559,7 +4629,14 @@ export type DataAvailabilityTransactionQuery = {
           bio?: string | null;
           ownedBy: any;
           isFollowedByMe: boolean;
-          stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+          stats: {
+            __typename?: 'ProfileStats';
+            totalFollowers: number;
+            totalFollowing: number;
+            totalPosts: number;
+            totalComments: number;
+            totalMirrors: number;
+          };
           attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
           picture?:
             | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4595,7 +4672,14 @@ export type DaTransactionsQuery = {
             bio?: string | null;
             ownedBy: any;
             isFollowedByMe: boolean;
-            stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+            stats: {
+              __typename?: 'ProfileStats';
+              totalFollowers: number;
+              totalFollowing: number;
+              totalPosts: number;
+              totalComments: number;
+              totalMirrors: number;
+            };
             attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
             picture?:
               | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4610,7 +4694,14 @@ export type DaTransactionsQuery = {
             bio?: string | null;
             ownedBy: any;
             isFollowedByMe: boolean;
-            stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+            stats: {
+              __typename?: 'ProfileStats';
+              totalFollowers: number;
+              totalFollowing: number;
+              totalPosts: number;
+              totalComments: number;
+              totalMirrors: number;
+            };
             attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
             picture?:
               | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4634,7 +4725,14 @@ export type DaTransactionsQuery = {
             bio?: string | null;
             ownedBy: any;
             isFollowedByMe: boolean;
-            stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+            stats: {
+              __typename?: 'ProfileStats';
+              totalFollowers: number;
+              totalFollowing: number;
+              totalPosts: number;
+              totalComments: number;
+              totalMirrors: number;
+            };
             attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
             picture?:
               | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4649,7 +4747,14 @@ export type DaTransactionsQuery = {
             bio?: string | null;
             ownedBy: any;
             isFollowedByMe: boolean;
-            stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+            stats: {
+              __typename?: 'ProfileStats';
+              totalFollowers: number;
+              totalFollowing: number;
+              totalPosts: number;
+              totalComments: number;
+              totalMirrors: number;
+            };
             attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
             picture?:
               | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4672,7 +4777,14 @@ export type DaTransactionsQuery = {
             bio?: string | null;
             ownedBy: any;
             isFollowedByMe: boolean;
-            stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+            stats: {
+              __typename?: 'ProfileStats';
+              totalFollowers: number;
+              totalFollowing: number;
+              totalPosts: number;
+              totalComments: number;
+              totalMirrors: number;
+            };
             attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
             picture?:
               | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4700,7 +4812,14 @@ export type ProfileQuery = {
     bio?: string | null;
     ownedBy: any;
     isFollowedByMe: boolean;
-    stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+    stats: {
+      __typename?: 'ProfileStats';
+      totalFollowers: number;
+      totalFollowing: number;
+      totalPosts: number;
+      totalComments: number;
+      totalMirrors: number;
+    };
     attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
     picture?:
       | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4726,7 +4845,14 @@ export type ProfilesQuery = {
       handle: any;
       bio?: string | null;
       ownedBy: any;
-      stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+      stats: {
+        __typename?: 'ProfileStats';
+        totalFollowers: number;
+        totalFollowing: number;
+        totalPosts: number;
+        totalComments: number;
+        totalMirrors: number;
+      };
       attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
       picture?:
         | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4787,7 +4913,14 @@ export type NewTransactionSubscription = {
           bio?: string | null;
           ownedBy: any;
           isFollowedByMe: boolean;
-          stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+          stats: {
+            __typename?: 'ProfileStats';
+            totalFollowers: number;
+            totalFollowing: number;
+            totalPosts: number;
+            totalComments: number;
+            totalMirrors: number;
+          };
           attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
           picture?:
             | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4802,7 +4935,14 @@ export type NewTransactionSubscription = {
           bio?: string | null;
           ownedBy: any;
           isFollowedByMe: boolean;
-          stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+          stats: {
+            __typename?: 'ProfileStats';
+            totalFollowers: number;
+            totalFollowing: number;
+            totalPosts: number;
+            totalComments: number;
+            totalMirrors: number;
+          };
           attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
           picture?:
             | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4826,7 +4966,14 @@ export type NewTransactionSubscription = {
           bio?: string | null;
           ownedBy: any;
           isFollowedByMe: boolean;
-          stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+          stats: {
+            __typename?: 'ProfileStats';
+            totalFollowers: number;
+            totalFollowing: number;
+            totalPosts: number;
+            totalComments: number;
+            totalMirrors: number;
+          };
           attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
           picture?:
             | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4841,7 +4988,14 @@ export type NewTransactionSubscription = {
           bio?: string | null;
           ownedBy: any;
           isFollowedByMe: boolean;
-          stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+          stats: {
+            __typename?: 'ProfileStats';
+            totalFollowers: number;
+            totalFollowing: number;
+            totalPosts: number;
+            totalComments: number;
+            totalMirrors: number;
+          };
           attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
           picture?:
             | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4864,7 +5018,14 @@ export type NewTransactionSubscription = {
           bio?: string | null;
           ownedBy: any;
           isFollowedByMe: boolean;
-          stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+          stats: {
+            __typename?: 'ProfileStats';
+            totalFollowers: number;
+            totalFollowing: number;
+            totalPosts: number;
+            totalComments: number;
+            totalMirrors: number;
+          };
           attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
           picture?:
             | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
@@ -4946,6 +5107,9 @@ export const ProfileFieldsFragmentDoc = gql`
     stats {
       totalFollowers
       totalFollowing
+      totalPosts
+      totalComments
+      totalMirrors
     }
     attributes {
       key
