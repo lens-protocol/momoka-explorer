@@ -2,9 +2,10 @@ import {
   ArrowTopRightOnSquareIcon,
   BoltIcon,
   ClockIcon,
-  DocumentDuplicateIcon
+  DocumentDuplicateIcon,
+  StarIcon
 } from '@heroicons/react/24/outline';
-import { CheckCircleIcon } from '@heroicons/react/24/solid';
+import { CheckCircleIcon, StarIcon as StarIconSolid } from '@heroicons/react/24/solid';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -94,13 +95,13 @@ const Transaction: FC = () => {
   return (
     <>
       <div className="relative mt-6 space-y-4 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 dark:border-gray-950 dark:bg-gray-800 md:p-5">
-        <div className="flex items-center justify-between px-4 sm:px-0">
+        <div className="flex flex-wrap items-center justify-between space-y-3 px-4 sm:px-0">
           <div>
             <h3 className="font-medium opacity-80">Transaction Details</h3>
             <p className="text-sm opacity-60">All Transaction related information will be displayed here.</p>
           </div>
           <Button
-            className="text-sm"
+            className="flex items-center space-x-2 text-xs sm:text-sm"
             onClick={() => {
               isFavorite
                 ? removeFavorite(
@@ -113,6 +114,11 @@ const Transaction: FC = () => {
                   );
             }}
           >
+            {isFavorite ? (
+              <StarIconSolid className="h-3 w-3 text-yellow-500 sm:h-4 sm:w-4" />
+            ) : (
+              <StarIcon className="h-3 w-3 text-yellow-500 sm:h-4 sm:w-4" />
+            )}
             <span>{isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}</span>
           </Button>
         </div>
