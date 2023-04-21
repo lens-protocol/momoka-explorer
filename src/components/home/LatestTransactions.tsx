@@ -73,7 +73,7 @@ const LatestTransactions: FC<Props> = () => {
                 <td className="w-48 whitespace-nowrap rounded-l-xl px-3 py-4 text-sm text-[#16161B]">
                   <div className="flex items-center space-x-2">
                     <span className="rounded-xl bg-gray-100 p-2 dark:bg-[#1C1B22]">
-                      <ArrowsRightLeftIcon className="h-4 w-4 text-green-700" />
+                      <ArrowsRightLeftIcon className="h-4 w-4 text-[#3D794E] dark:text-[#D0DBFF]" />
                     </span>
                     <div className="flex flex-col">
                       <Link
