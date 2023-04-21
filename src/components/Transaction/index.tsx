@@ -14,10 +14,13 @@ import { useEffect, useState } from 'react';
 import { apps } from '@/data/apps';
 import type { DataAvailabilityTransactionUnion, Profile as TProfile } from '@/generated';
 import { useDataAvailabilityTransactionQuery } from '@/generated';
+import { useAppStore } from '@/store/app';
+import { useFavoritesPersistStore } from '@/store/favorites';
 import capitalizeCase from '@/utils/capitalizeCase';
 import { getRelativeTime } from '@/utils/formatTime';
 import getLensterLink from '@/utils/getLensterLink';
 import getSubmitterName from '@/utils/getSubmitterName';
+import isInFavorites from '@/utils/isInFavorites';
 
 import Profile from '../shared/Profile';
 import { Button } from '../ui/Button';
@@ -67,6 +70,10 @@ export const Meta: FC<MetaProps> = ({ title, value, copyValue = null }) => {
 
 const Transaction: FC = () => {
   const { query } = useRouter();
+  const selectedEnvironment = useAppStore((state) => state.selectedEnvironment);
+  const addFavorite = useFavoritesPersistStore((state) => state.addFavorite);
+  const removeFavorite = useFavoritesPersistStore((state) => state.removeFavorite);
+  const favorites = useFavoritesPersistStore((state) => state.favorites);
 
   const { data, loading } = useDataAvailabilityTransactionQuery({
     variables: { request: { transactionId: query.transactionId as string } },
@@ -78,6 +85,11 @@ const Transaction: FC = () => {
   }
 
   const { dataAvailabilityTransaction } = data;
+  const isFavorite = isInFavorites(
+    favorites,
+    dataAvailabilityTransaction?.transactionId as string,
+    selectedEnvironment.id
+  );
 
   return (
     <>
@@ -87,8 +99,21 @@ const Transaction: FC = () => {
             <h3 className="font-medium opacity-80">Transaction Details</h3>
             <p className="text-sm opacity-60">All Transaction related information will be displayed here.</p>
           </div>
-          <Button className="text-sm">
-            <span>Add to favorites</span>
+          <Button
+            className="text-sm"
+            onClick={() => {
+              isFavorite
+                ? removeFavorite(
+                    dataAvailabilityTransaction as DataAvailabilityTransactionUnion,
+                    selectedEnvironment.id
+                  )
+                : addFavorite(
+                    dataAvailabilityTransaction as DataAvailabilityTransactionUnion,
+                    selectedEnvironment.id
+                  );
+            }}
+          >
+            <span>{isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}</span>
           </Button>
         </div>
         <div className="mt-6 border-t border-gray-200 dark:border-gray-900">

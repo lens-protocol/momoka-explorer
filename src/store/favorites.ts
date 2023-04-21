@@ -9,35 +9,32 @@ type DataAvailabilityTransactionUnionWithNetwork = DataAvailabilityTransactionUn
 
 interface AppFavoritesState {
   favorites: DataAvailabilityTransactionUnionWithNetwork[];
-  addFavorite: (favorite: DataAvailabilityTransactionUnionWithNetwork) => void;
-  removeFavorite: (favorite: DataAvailabilityTransactionUnionWithNetwork) => void;
+  addFavorite: (favorite: DataAvailabilityTransactionUnion, network: string) => void;
+  removeFavorite: (favorite: DataAvailabilityTransactionUnion, network: string) => void;
   getFavorites: (network: string) => DataAvailabilityTransactionUnionWithNetwork[];
-  isInFavorites: (network: string, transactionId: string) => boolean;
 }
 
 export const useFavoritesPersistStore = create(
   persist<AppFavoritesState>(
     (set, get) => ({
       favorites: [],
-      addFavorite: (favorite) => {
+      addFavorite: (favorite, network) => {
         set((state) => ({
-          favorites: [...state.favorites, favorite]
+          favorites: [...state.favorites, { ...favorite, network }]
         }));
       },
-      removeFavorite: (favorite) => {
+      removeFavorite: (favorite, network) => {
         set((state) => ({
-          favorites: state.favorites.filter((f) => f.transactionId !== favorite.transactionId)
+          favorites: state.favorites.filter(
+            (f) => f.network !== network || f.transactionId !== favorite.transactionId
+          )
         }));
       },
       getFavorites: (network) => {
         const { favorites } = get();
         return favorites.filter((f) => f.network === network);
-      },
-      isInFavorites: (network, transactionId) => {
-        const { favorites } = get();
-        return favorites.some((f) => f.network === network && f.transactionId === transactionId);
       }
     }),
-    { name: 'explorer' }
+    { name: 'favorites' }
   )
 );
