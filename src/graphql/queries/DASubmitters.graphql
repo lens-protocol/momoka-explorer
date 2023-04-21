@@ -2,6 +2,8 @@ query DataAvailabilitySubmitters {
   dataAvailabilitySubmitters {
     items {
       address
+      name
+      totalTransactions
     }
     pageInfo {
       next

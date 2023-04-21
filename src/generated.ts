@@ -1081,6 +1081,8 @@ export type DataAvailabilityPost = {
 export type DataAvailabilitySubmitterResult = {
   __typename?: 'DataAvailabilitySubmitterResult';
   address: Scalars['EthereumAddress'];
+  name: Scalars['String'];
+  totalTransactions: Scalars['Int'];
 };
 
 /** The paginated submitter results */
@@ -1096,8 +1098,8 @@ export type DataAvailabilitySummaryResult = {
 };
 
 export type DataAvailabilityTransactionRequest = {
-  /** The DA transaction id */
-  transactionId: Scalars['String'];
+  /** The DA transaction id or internal publiation id */
+  id: Scalars['String'];
 };
 
 export type DataAvailabilityTransactionUnion =
@@ -4439,7 +4441,12 @@ export type DataAvailabilitySubmittersQuery = {
   __typename?: 'Query';
   dataAvailabilitySubmitters: {
     __typename?: 'DataAvailabilitySubmittersResult';
-    items: Array<{ __typename?: 'DataAvailabilitySubmitterResult'; address: any }>;
+    items: Array<{
+      __typename?: 'DataAvailabilitySubmitterResult';
+      address: any;
+      name: string;
+      totalTransactions: number;
+    }>;
     pageInfo: { __typename?: 'PaginatedResultInfo'; next?: any | null };
   };
 };
@@ -4955,6 +4962,8 @@ export const DataAvailabilitySubmittersDocument = gql`
     dataAvailabilitySubmitters {
       items {
         address
+        name
+        totalTransactions
       }
       pageInfo {
         next
