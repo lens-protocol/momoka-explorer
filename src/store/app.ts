@@ -13,5 +13,3 @@ export const useAppStore = create<State>((set) => ({
   selectedEnvironment: { name: 'Mainnet', id: 'mainnet' },
   setSelectedEnvironment: (selectedEnvironment) => set({ selectedEnvironment })
 }));
-
-export default useAppStore;

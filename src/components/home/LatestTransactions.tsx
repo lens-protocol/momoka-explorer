@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 import type { DataAvailabilityTransactionUnion, Profile } from '@/generated';
 import { useDaTransactionsQuery, useNewTransactionSubscription } from '@/generated';
-import useAppStore from '@/store/app';
+import { useAppStore } from '@/store/app';
 import { getRelativeTime } from '@/utils/formatTime';
 import getDAActionType from '@/utils/getDAActionType';
 import getLensterLink from '@/utils/getLensterLink';

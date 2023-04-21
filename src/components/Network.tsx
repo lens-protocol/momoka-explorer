@@ -2,7 +2,7 @@ import { Listbox, Transition } from '@headlessui/react';
 import { BeakerIcon, ChevronUpDownIcon, CubeIcon, WrenchIcon } from '@heroicons/react/24/outline';
 import React, { Fragment, useEffect } from 'react';
 
-import useAppStore from '@/store/app';
+import { useAppStore } from '@/store/app';
 
 export const networks = [
   { name: 'Mainnet', id: 'mainnet', icon: <CubeIcon className="h-4 w-4" /> },
