@@ -85,22 +85,22 @@ const SearchBar = () => {
         )}
       />
       {keyword.length && txn?.transactionId ? (
-        <div className="absolute left-0 right-0 top-16 flex w-full rounded-xl border bg-white p-2 px-2 dark:border-[#16161B] dark:bg-[#1C1B22]">
+        <div className="absolute left-0 right-0 top-16 flex w-full rounded-2xl border bg-white p-2 px-2 dark:border-[#16161B] dark:bg-[#1C1B22]">
           <Link
             href={`/tx/${txn?.transactionId}`}
             onClick={() => storeToRecents(txn)}
-            className="flex w-full items-center justify-between rounded-xl px-4 py-2 hover:bg-gray-100 hover:dark:bg-[#16161B]"
+            className="flex w-full items-center justify-between rounded-2xl px-4 py-2 hover:bg-gray-100 hover:dark:bg-[#16161B]"
           >
             {txn?.transactionId} <span className="text-xs opacity-50">{txn.publicationId}</span>
           </Link>
         </div>
       ) : recentsByNetwork.length && inputClicked && !loading ? (
-        <div className="absolute left-0 right-0 top-16 z-10 flex w-full flex-col rounded-xl border bg-white p-2 px-2 shadow dark:border-[#16161B] dark:bg-[#1C1B22]">
+        <div className="absolute left-0 right-0 top-16 z-10 flex w-full flex-col rounded-2xl border bg-white p-2 px-2 shadow dark:border-[#16161B] dark:bg-[#1C1B22]">
           {recentsByNetwork.map((recent) => (
             <Link
               key={recent.transactionId}
               href={`/tx/${recent.transactionId}`}
-              className="flex w-full items-center justify-between rounded-xl px-4 py-2.5 hover:bg-gray-100 hover:dark:bg-[#16161B]"
+              className="flex w-full items-center justify-between rounded-2xl px-4 py-2.5 hover:bg-gray-100 hover:dark:bg-[#16161B]"
             >
               <span className="flex items-center gap-2 text-sm opacity-80">
                 <ClockIcon className="h-4 w-4" />
