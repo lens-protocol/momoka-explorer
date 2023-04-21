@@ -47,7 +47,7 @@ const UserMenu: FC<UserMenuProps> = ({ profiles }) => {
               <Menu.Item key={profile.id}>
                 {({ active }) => (
                   <Link
-                    href={`/profile/${profile.handle}`}
+                    href={`/profile/${profile.id}`}
                     className={clsx(
                       'group flex w-full items-center rounded-xl px-2 py-2 text-sm',
                       active

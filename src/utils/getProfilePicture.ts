@@ -3,14 +3,14 @@ import type { Profile } from '@/generated';
 import getPfp from './getpfp';
 import sanitizeDStorageUrl from './sanitizeDStorageUrl';
 
-const getProfilePicture = (channel: Profile): string => {
+const getProfilePicture = (profile: Profile): string => {
   const url =
-    channel.picture && channel.picture.__typename === 'MediaSet'
-      ? channel?.picture?.original?.url
-      : channel.picture?.__typename === 'NftImage'
-      ? channel?.picture?.uri
-      : getPfp(channel?.ownedBy);
-  const sanitized = url?.includes('ipfs://') ? sanitizeDStorageUrl(url) : getPfp(channel?.ownedBy);
+    profile.picture && profile.picture.__typename === 'MediaSet'
+      ? profile?.picture?.original?.url
+      : profile.picture?.__typename === 'NftImage'
+      ? profile?.picture?.uri
+      : getPfp(profile?.ownedBy);
+  const sanitized = url?.includes('ipfs://') ? sanitizeDStorageUrl(url) : getPfp(profile?.ownedBy);
   return sanitized;
 };
 
