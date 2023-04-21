@@ -14,11 +14,12 @@ const Navbar: FC = () => {
         <Link href="/" className="flex items-center justify-center">
           <LensLogo className="h-12 w-12" />
         </Link>
-        <div className="flex items-center space-x-2">
-          <Link href="/favorites" className="mr-5 flex items-center space-x-2">
+        <div className="flex items-center space-x-4">
+          <Link href="/favorites" className="flex items-center space-x-2 text-sm">
             <StarIcon className="h-4 w-4 text-yellow-500" />
-            <b>Favorites</b>
+            <span>Favorites</span>
           </Link>
+          <Network />
           <button
             onClick={() => {
               setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
@@ -26,7 +27,6 @@ const Navbar: FC = () => {
           >
             {resolvedTheme === 'dark' ? <SunIcon className="h-4 w-4" /> : <MoonIcon className="h-4 w-4" />}
           </button>
-          <Network />
         </div>
       </div>
     </nav>
