@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+import { IS_STAGING_ENVIRONMENT } from '@/constants';
 import type { DataAvailabilityTransactionUnion } from '@/generated';
 
 interface State {
@@ -21,7 +22,9 @@ interface AppPersistState {
 export const useAppPersistStore = create(
   persist<AppPersistState>(
     (set) => ({
-      selectedEnvironment: { name: 'Staging', id: 'staging' },
+      selectedEnvironment: IS_STAGING_ENVIRONMENT
+        ? { name: 'Staging', id: 'staging' }
+        : { name: 'Mainnet', id: 'mainnet' },
       setSelectedEnvironment: (selectedEnvironment) => set({ selectedEnvironment })
     }),
     { name: 'explorer' }

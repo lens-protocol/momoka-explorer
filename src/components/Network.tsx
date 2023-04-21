@@ -2,15 +2,17 @@ import { Listbox, Transition } from '@headlessui/react';
 import { BeakerIcon, ChevronUpDownIcon, CubeIcon, WrenchIcon } from '@heroicons/react/24/outline';
 import React, { Fragment } from 'react';
 
+import { IS_STAGING_ENVIRONMENT } from '@/constants';
 import { useAppPersistStore } from '@/store/app';
 
-export const networks = [
+export const allNetworks = [
   { name: 'Mainnet', id: 'mainnet', icon: <CubeIcon className="h-4 w-4" /> },
   { name: 'Staging', id: 'staging', icon: <BeakerIcon className="h-4 w-4" /> },
   { name: 'Testnet', id: 'testnet', icon: <WrenchIcon className="h-4 w-4" /> }
 ];
 
 const Network = () => {
+  const networks = IS_STAGING_ENVIRONMENT ? allNetworks : allNetworks.filter((n) => n.id !== 'staging');
   const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
   const setSelectedEnvironment = useAppPersistStore((state) => state.setSelectedEnvironment);
 
