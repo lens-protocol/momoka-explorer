@@ -30,7 +30,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
           <div className="flex flex-col truncate">
             <Link
               href={`/tx/${txn.transactionId}`}
-              className="truncate text-[#3D794E] text-opacity-80 hover:text-opacity-100 dark:text-[#D0DBFF]"
+              className="truncate text-[#3D794E] opacity-80 hover:opacity-100 dark:text-[#D0DBFF]"
             >
               {truncate(txn.transactionId, 30)}
             </Link>
@@ -58,17 +58,14 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
           <Link
             href={`https://lensfrens.xyz/${txn.profile.handle}`}
             target="_blank"
-            className="text-[#3D794E] text-opacity-80 hover:text-opacity-100 dark:text-[#D0DBFF]"
+            className="text-[#3D794E] opacity-80 hover:opacity-100 dark:text-[#D0DBFF]"
           >
             {txn.profile.handle}
           </Link>
         </span>
       </td>
       <td className="whitespace-nowrap px-3 py-2 text-sm text-gray-500">
-        <Link
-          href="/submitters"
-          className="text-[#3D794E] text-opacity-80 hover:text-opacity-100 dark:text-[#D0DBFF]"
-        >
+        <Link href="/submitters" className="text-[#3D794E] opacity-80 hover:opacity-100 dark:text-[#D0DBFF]">
           {txn.submitter}
         </Link>
       </td>

@@ -78,7 +78,7 @@ const LatestTransactions: FC<Props> = () => {
                     <div className="flex flex-col">
                       <Link
                         href={`/tx/${txn.transactionId}`}
-                        className="text-[#3D794E] text-opacity-80 hover:text-opacity-100 dark:text-[#D0DBFF]"
+                        className="text-[#3D794E] opacity-80 hover:opacity-100 dark:text-[#D0DBFF]"
                       >
                         {txn.transactionId}
                       </Link>
@@ -107,7 +107,7 @@ const LatestTransactions: FC<Props> = () => {
                         <Link
                           href={`https://lensfrens.xyz/${txn.profile.handle}`}
                           target="_blank"
-                          className="text-[#3D794E] text-opacity-80 hover:text-opacity-100 dark:text-[#D0DBFF]"
+                          className="text-[#3D794E] opacity-80 hover:opacity-100 dark:text-[#D0DBFF]"
                         >
                           {txn.profile.handle}
                         </Link>
@@ -117,7 +117,7 @@ const LatestTransactions: FC<Props> = () => {
                       <span className="text-xs opacity-70">via</span>
                       <Link
                         href="/submitters"
-                        className="text-[#3D794E] text-opacity-80 hover:text-opacity-100 dark:text-[#D0DBFF]"
+                        className="text-[#3D794E] opacity-80 hover:opacity-100 dark:text-[#D0DBFF]"
                       >
                         {txn.submitter}
                       </Link>
