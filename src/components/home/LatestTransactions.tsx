@@ -26,7 +26,7 @@ const LatestTransactions: FC<Props> = () => {
     variables: { request: { limit: 10 } },
     onCompleted: (data) => {
       const txns = data?.dataAvailabilityTransactions.items;
-      setLastFinalizedTransaction(txns[0]?.transactionId);
+      setLastFinalizedTransaction(txns[0] as DataAvailabilityTransactionUnion);
       setLatestTransactions(txns as Array<DataAvailabilityTransactionUnion>);
     }
   });
@@ -43,7 +43,7 @@ const LatestTransactions: FC<Props> = () => {
         return;
       }
       const txn = data?.newDataAvailabilityTransaction as DataAvailabilityTransactionUnion;
-      setLastFinalizedTransaction(txn?.transactionId);
+      setLastFinalizedTransaction(txn);
       let oldTxns = [...(latestTransactions as DataAvailabilityTransactionUnion[])];
       oldTxns.unshift(txn);
       oldTxns.pop();

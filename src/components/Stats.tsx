@@ -5,6 +5,7 @@ import { useDaSummaryQuery, useDataAvailabilitySubmittersQuery } from '@/generat
 import { useAppStore } from '@/store/app';
 import formatAddress from '@/utils/formatAddress';
 import formatNumber from '@/utils/formatNumber';
+import { getRelativeTime } from '@/utils/formatTime';
 import sanitizeDStorageUrl from '@/utils/sanitizeDStorageUrl';
 
 import StatsShimmer from './shimmers/StatsShimmer';
@@ -33,10 +34,15 @@ const Stats = () => {
       <div className="flex flex-col space-y-1.5 truncate rounded-xl border border-gray-100 bg-gray-50 px-6 py-5 dark:border-[#16161B] dark:bg-[#1C1B22]">
         <span className="text-xs font-medium uppercase tracking-wider opacity-50">Last Finalized</span>
         <Link
-          href={`/tx/${sanitizeDStorageUrl(lastFinalizedTransaction)}`}
-          className="truncate font-gintoNord hover:text-[#3D794E] dark:hover:text-[#D0DBFF]"
+          href={`/tx/${sanitizeDStorageUrl(lastFinalizedTransaction?.transactionId as string)}`}
+          className="space-x-2 truncate font-gintoNord hover:text-[#3D794E] dark:hover:text-[#D0DBFF]"
         >
-          <span className="truncate text-2xl font-medium">{formatAddress(lastFinalizedTransaction)}</span>
+          <span className="truncate text-2xl font-medium">
+            {formatAddress(lastFinalizedTransaction?.transactionId as string)}
+          </span>
+          <span className="truncate text-xs opacity-70">
+            {getRelativeTime(lastFinalizedTransaction?.createdAt)}
+          </span>
         </Link>
       </div>
       <div className="flex flex-col space-y-1.5 truncate rounded-xl border border-gray-100 bg-gray-50 px-6 py-5 dark:border-[#16161B] dark:bg-[#1C1B22]">

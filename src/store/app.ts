@@ -1,13 +1,15 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+import type { DataAvailabilityTransactionUnion } from '@/generated';
+
 interface State {
-  lastFinalizedTransaction: string;
-  setLastFinalizedTransaction: (id: string) => void;
+  lastFinalizedTransaction: DataAvailabilityTransactionUnion | null;
+  setLastFinalizedTransaction: (id: DataAvailabilityTransactionUnion) => void;
 }
 
 export const useAppStore = create<State>((set) => ({
-  lastFinalizedTransaction: '',
+  lastFinalizedTransaction: null,
   setLastFinalizedTransaction: (lastFinalizedTransaction) => set({ lastFinalizedTransaction })
 }));
 
