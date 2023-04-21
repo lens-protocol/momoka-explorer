@@ -1,8 +1,15 @@
 import { Menu, Transition } from '@headlessui/react';
+import type { FC } from 'react';
 import { Fragment } from 'react';
 import { useDisconnect } from 'wagmi';
 
-const UserMenu = () => {
+import type { Profile } from '@/generated';
+
+interface UserMenuProps {
+  profiles: Profile[];
+}
+
+const UserMenu: FC<UserMenuProps> = ({ profiles }) => {
   const { disconnect } = useDisconnect();
 
   return (
@@ -35,6 +42,22 @@ const UserMenu = () => {
                 </button>
               )}
             </Menu.Item>
+            {profiles?.map((profile: Profile) => (
+              <Menu.Item key={profile.id}>
+                {({ active }) => (
+                  <button
+                    className={`${
+                      active ? 'bg-gray-100' : 'text-gray-900'
+                    } group flex w-full items-center rounded-xl px-2 py-2 text-sm`}
+                    onClick={() => {
+                      disconnect?.();
+                    }}
+                  >
+                    {profile.handle}
+                  </button>
+                )}
+              </Menu.Item>
+            ))}
           </div>
         </Menu.Items>
       </Transition>

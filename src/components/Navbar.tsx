@@ -5,6 +5,9 @@ import { useTheme } from 'next-themes';
 import type { FC } from 'react';
 import { useAccount } from 'wagmi';
 
+import type { Profile } from '@/generated';
+import { useProfilesQuery } from '@/generated';
+
 import LensLogo from './LensLogo';
 import Network from './Network';
 import { Button } from './ui/Button';
@@ -13,7 +16,13 @@ import UserMenu from './UserMenu';
 const Navbar: FC = () => {
   const { setTheme, resolvedTheme } = useTheme();
   const { openConnectModal } = useConnectModal();
-  const { connector, isConnected } = useAccount();
+  const { isConnected } = useAccount();
+  const { address } = useAccount();
+
+  const { data, loading } = useProfilesQuery({
+    variables: { request: { ownedBy: [address] } },
+    skip: !address
+  });
 
   return (
     <nav className="fixed z-10 mx-auto w-full max-w-full bg-white px-2 dark:bg-[#16161B] sm:px-6 lg:px-14">
@@ -36,7 +45,7 @@ const Navbar: FC = () => {
           </button>
           <div>
             {isConnected ? (
-              <UserMenu />
+              <UserMenu profiles={data?.profiles.items as Profile[]} />
             ) : (
               <Button
                 onClick={() => {
