@@ -75,7 +75,7 @@ const SearchBar = () => {
         type="text"
         onChange={(event) => setKeyword(event.target.value)}
         onClick={() => setInputClicked(true)}
-        placeholder="Search transaction Id"
+        placeholder="Search by transaction or publication Id"
         autoComplete="off"
         autoCorrect="false"
         style={{ boxShadow: 'none' }}
