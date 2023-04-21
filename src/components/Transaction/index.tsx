@@ -103,7 +103,7 @@ const Transaction: FC = () => {
             title="Transaction ID"
             value={
               <Link
-                className="flex items-center space-x-2 underline"
+                className="flex items-center space-x-2 break-all underline"
                 href={`https://arweave.net/${dataAvailabilityTransaction?.transactionId}`}
                 target="_blank"
               >
@@ -142,7 +142,7 @@ const Transaction: FC = () => {
           <Meta
             title="Submitter"
             value={
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 break-all">
                 <BoltIcon className="h-4 w-4" />
                 <b>{getSubmitterName(dataAvailabilityTransaction?.submitter)}</b>
               </div>
