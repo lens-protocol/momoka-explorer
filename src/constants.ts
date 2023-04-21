@@ -1,4 +1,4 @@
-export const IS_STAGING_ENVIRONMENT = process.env.IS_STAGING === 'true';
+export const IS_STAGING_ENVIRONMENT = process.env.NEXT_PUBLIC_IS_STAGING === 'true';
 
 export enum LensterUrl {
   STAGING = 'https://staging.lenster.xyz',
