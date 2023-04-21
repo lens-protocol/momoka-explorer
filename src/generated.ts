@@ -1110,6 +1110,7 @@ export type DataAvailabilityTransactionUnion =
 export type DataAvailabilityTransactionsRequest = {
   cursor?: InputMaybe<Scalars['Cursor']>;
   limit?: InputMaybe<Scalars['LimitScalar']>;
+  profileId?: InputMaybe<Scalars['ProfileId']>;
 };
 
 export type DataAvailabilityTransactionsResult = {
@@ -4684,6 +4685,34 @@ export type DaTransactionsQuery = {
   };
 };
 
+export type ProfilesQueryVariables = Exact<{
+  request: ProfileQueryRequest;
+}>;
+
+export type ProfilesQuery = {
+  __typename?: 'Query';
+  profiles: {
+    __typename?: 'PaginatedProfileResult';
+    items: Array<{
+      __typename?: 'Profile';
+      isDefault: boolean;
+      isFollowedByMe: boolean;
+      id: any;
+      name?: string | null;
+      handle: any;
+      bio?: string | null;
+      ownedBy: any;
+      stats: { __typename?: 'ProfileStats'; totalFollowers: number; totalFollowing: number };
+      attributes?: Array<{ __typename?: 'Attribute'; key: string; value: string }> | null;
+      picture?:
+        | { __typename?: 'MediaSet'; original: { __typename?: 'Media'; url: any } }
+        | { __typename?: 'NftImage'; uri: any }
+        | null;
+    }>;
+    pageInfo: { __typename?: 'PaginatedResultInfo'; next?: any | null };
+  };
+};
+
 export type PublicationQueryVariables = Exact<{
   request: PublicationQueryRequest;
 }>;
@@ -5184,6 +5213,53 @@ export function useDaTransactionsLazyQuery(
 export type DaTransactionsQueryHookResult = ReturnType<typeof useDaTransactionsQuery>;
 export type DaTransactionsLazyQueryHookResult = ReturnType<typeof useDaTransactionsLazyQuery>;
 export type DaTransactionsQueryResult = Apollo.QueryResult<DaTransactionsQuery, DaTransactionsQueryVariables>;
+export const ProfilesDocument = gql`
+  query Profiles($request: ProfileQueryRequest!) {
+    profiles(request: $request) {
+      items {
+        ...ProfileFields
+        isDefault
+        isFollowedByMe
+      }
+      pageInfo {
+        next
+      }
+    }
+  }
+  ${ProfileFieldsFragmentDoc}
+`;
+
+/**
+ * __useProfilesQuery__
+ *
+ * To run a query within a React component, call `useProfilesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProfilesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProfilesQuery({
+ *   variables: {
+ *      request: // value for 'request'
+ *   },
+ * });
+ */
+export function useProfilesQuery(
+  baseOptions: Apollo.QueryHookOptions<ProfilesQuery, ProfilesQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<ProfilesQuery, ProfilesQueryVariables>(ProfilesDocument, options);
+}
+export function useProfilesLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<ProfilesQuery, ProfilesQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<ProfilesQuery, ProfilesQueryVariables>(ProfilesDocument, options);
+}
+export type ProfilesQueryHookResult = ReturnType<typeof useProfilesQuery>;
+export type ProfilesLazyQueryHookResult = ReturnType<typeof useProfilesLazyQuery>;
+export type ProfilesQueryResult = Apollo.QueryResult<ProfilesQuery, ProfilesQueryVariables>;
 export const PublicationDocument = gql`
   query Publication($request: PublicationQueryRequest!) {
     publication(request: $request) {
