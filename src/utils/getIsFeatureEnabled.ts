@@ -6,6 +6,7 @@ const getIsFeatureEnabled = (flag: FEATURE_FLAGS, address: string) => {
     return false;
   }
   const feature = featureFlags.find((f) => f.flag === flag);
+
   return feature?.enabledFor.includes(address);
 };
 
