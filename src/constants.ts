@@ -31,7 +31,7 @@ export const featureFlags: FeatureFlag[] = [
     enabledFor: [
       '0x4A1a2197f307222cD67A1762D9A352F64558d9Be', // josh
       '0x01d79BcEaEaaDfb8fD2F2f53005289CFcF483464', // sasi
-      '0x3A5bd1E37b099aE3386D13947b6a90d97675e5e3', // yogi
+      '0x3A5bd1E37b099aE3386D13947b6a90d97675e5e3', // yoginth
       '0x7241DDDec3A6aF367882eAF9651b87E1C7549Dff', // stani
       '0xcA1F6d7d8E902617f8Bdd87866e00f9844C40a77' // jouni
     ]
