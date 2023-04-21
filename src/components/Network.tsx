@@ -21,6 +21,9 @@ const Network = () => {
       value={selectedEnvironment}
       onChange={(selected) => {
         setSelectedEnvironment(selected);
+        setTimeout(() => {
+          window.location.reload();
+        }, 100);
       }}
     >
       <div className="relative">
