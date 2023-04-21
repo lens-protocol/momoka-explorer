@@ -1,3 +1,11 @@
-export const STAGING_LENSTER_URL = 'https://staging.lenster.app';
-export const TESTNET_LENSTER_URL = 'https://testnet.lenster.app';
-export const PRODUCTION_LENSTER_URL = 'https://lenster.app';
+export enum LensterUrl {
+  STAGING = 'https://staging.lenster.app',
+  TESTNET = 'https://testnet.lenster.app',
+  PRODUCTION = 'https://lenster.app'
+}
+
+export enum LensEndpoint {
+  STAGING = 'https://staging-api-social-mumbai.lens.crtlkey.com',
+  TESTNET = 'https://api-mumbai.lens.dev',
+  PRODUCTION = 'https://api.lens.dev'
+}
