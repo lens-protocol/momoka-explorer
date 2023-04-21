@@ -112,7 +112,7 @@ const Transaction: FC = () => {
             title="Transaction ID"
             value={
               <Link
-                className="flex items-center space-x-2 break-all underline"
+                className="flex items-center space-x-2 break-all text-[#3D794E] underline dark:text-[#D0DBFF]"
                 href={`https://arweave.net/${dataAvailabilityTransaction?.transactionId}`}
                 target="_blank"
               >
@@ -163,7 +163,7 @@ const Transaction: FC = () => {
             title="Publication ID"
             value={
               <Link
-                className="flex items-center space-x-2 underline"
+                className="flex items-center space-x-2 text-[#3D794E] underline dark:text-[#D0DBFF]"
                 href={`${getLensterLink(selectedEnvironment.id)}/posts/${
                   dataAvailabilityTransaction?.publicationId
                 }`}
@@ -182,7 +182,7 @@ const Transaction: FC = () => {
                 value={
                   <div className="space-y-4">
                     <Link
-                      className="flex items-center space-x-2 underline"
+                      className="flex items-center space-x-2 text-[#3D794E] underline dark:text-[#D0DBFF]"
                       href={`${getLensterLink(selectedEnvironment.id)}/posts/${
                         dataAvailabilityTransaction?.mirrorOfPublicationId
                       }`}
@@ -207,7 +207,7 @@ const Transaction: FC = () => {
                 value={
                   <div className="space-y-4">
                     <Link
-                      className="flex items-center space-x-2 underline"
+                      className="flex items-center space-x-2 text-[#3D794E] underline dark:text-[#D0DBFF]"
                       href={`${getLensterLink(selectedEnvironment.id)}/posts/${
                         dataAvailabilityTransaction?.commentedOnPublicationId
                       }`}
