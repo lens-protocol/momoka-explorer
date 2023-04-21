@@ -39,14 +39,14 @@ const Network = () => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="absolute right-0 mt-2 w-36 overflow-auto rounded-xl bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-gray-800 sm:text-sm">
+          <Listbox.Options className="absolute right-0 mt-2 w-36 overflow-auto rounded-xl bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-[#1C1B22] sm:text-sm">
             {networks.map((network, idx) => (
               <Listbox.Option
                 key={idx}
                 className={({ active }) =>
                   `relative select-none py-2 pl-10 pr-4 ${
                     active
-                      ? 'bg-green-50 text-green-900 dark:bg-green-900 dark:text-green-100'
+                      ? 'bg-green-900 text-[#3D794E] dark:bg-[#3D794E] dark:text-green-100'
                       : 'text-gray-900 dark:text-gray-100'
                   }`
                 }

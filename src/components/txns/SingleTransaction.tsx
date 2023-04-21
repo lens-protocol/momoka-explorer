@@ -22,10 +22,10 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
   const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
 
   return (
-    <tr key={txn.transactionId} className="overflow-hidden bg-white dark:bg-gray-900">
+    <tr key={txn.transactionId} className="overflow-hidden bg-white dark:bg-[#16161B]">
       <td className="rounded-l-xl px-3 py-2 text-sm text-gray-900">
         <div className="flex items-center space-x-2">
-          <span className="rounded-xl bg-gray-100 p-2 dark:bg-gray-800">
+          <span className="rounded-xl bg-gray-100 p-2 dark:bg-[#1C1B22]">
             <ArrowsRightLeftIcon className="h-4 w-4 text-green-700" />
           </span>
           <div className="flex flex-col truncate">
@@ -39,7 +39,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
         </div>
       </td>
       <td className="w-20 whitespace-nowrap px-3 py-2 text-sm text-gray-700 dark:text-gray-300">
-        <span className="inline-flex w-20 items-center justify-center space-x-1 rounded-lg border bg-gray-50 px-3 py-1.5 text-xs dark:border-gray-950 dark:bg-gray-800">
+        <span className="inline-flex w-20 items-center justify-center space-x-1 rounded-lg border bg-gray-50 px-3 py-1.5 text-xs dark:border-[#16161B] dark:bg-[#1C1B22]">
           {getDAActionType(txn.__typename)}
         </span>
       </td>

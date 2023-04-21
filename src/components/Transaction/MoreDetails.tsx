@@ -36,7 +36,7 @@ const MoreDetails: FC<MoreDetailsProps> = ({ dataAvailabilityTransaction }) => {
   }, []);
 
   return (
-    <div className="relative mt-6 space-y-4 rounded-xl border border-gray-100 bg-gray-50 px-2 py-3 dark:border-gray-950 dark:bg-gray-800 md:px-5">
+    <div className="relative mt-6 space-y-4 rounded-xl border border-gray-100 bg-gray-50 px-2 py-3 dark:border-[#1C1B22] dark:bg-[#1C1B22] md:px-5">
       <Disclosure>
         {({ open }) => (
           <>

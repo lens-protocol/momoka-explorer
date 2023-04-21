@@ -41,7 +41,7 @@ const AllTransactions: FC = () => {
   });
 
   return (
-    <div className="relative mt-6 space-y-4 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 dark:border-gray-950 dark:bg-gray-800 md:p-5">
+    <div className="relative mt-6 space-y-4 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 dark:border-[#16161B] dark:bg-[#1C1B22] md:p-5">
       <div className="left-0 right-0 flex flex-wrap items-center justify-between gap-y-3">
         <div>
           <h1 className="font-medium opacity-90">All Transactions</h1>
@@ -73,9 +73,9 @@ const AllTransactions: FC = () => {
         )}
         {hasMore && transactions.length ? (
           <div className="space-y-1" ref={observe}>
-            <div className="h-14 w-full animate-pulse overflow-hidden rounded-xl bg-white dark:bg-gray-900" />
-            <div className="h-14 w-full animate-pulse overflow-hidden rounded-xl bg-white dark:bg-gray-900" />
-            <div className="h-14 w-full animate-pulse overflow-hidden rounded-xl bg-white dark:bg-gray-900" />
+            <div className="h-14 w-full animate-pulse overflow-hidden rounded-xl bg-white dark:bg-[#16161B]" />
+            <div className="h-14 w-full animate-pulse overflow-hidden rounded-xl bg-white dark:bg-[#16161B]" />
+            <div className="h-14 w-full animate-pulse overflow-hidden rounded-xl bg-white dark:bg-[#16161B]" />
           </div>
         ) : null}
       </div>
