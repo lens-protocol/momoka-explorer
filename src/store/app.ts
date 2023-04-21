@@ -21,7 +21,7 @@ interface AppPersistState {
 export const useAppPersistStore = create(
   persist<AppPersistState>(
     (set) => ({
-      selectedEnvironment: { name: 'Staging', id: 'staging' },
+      selectedEnvironment: { name: 'Mainnet', id: 'mainnet' },
       setSelectedEnvironment: (selectedEnvironment) => set({ selectedEnvironment })
     }),
     { name: 'explorer' }
