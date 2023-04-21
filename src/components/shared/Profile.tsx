@@ -11,11 +11,7 @@ interface ProfileProps {
 
 const Profile: FC<ProfileProps> = ({ profile }) => {
   return (
-    <Link
-      className="inline-flex items-center space-x-2 rounded-lg text-sm"
-      href={`/profile/${profile?.id}`}
-      target="_blank"
-    >
+    <Link className="inline-flex items-center space-x-2 rounded-lg text-sm" href={`/profile/${profile?.id}`}>
       <img
         className="h-8 w-8 rounded-full"
         src={getProfilePicture(profile as TProfile)}
