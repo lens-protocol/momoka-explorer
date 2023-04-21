@@ -4,8 +4,7 @@ import {
   ClockIcon,
   DocumentDuplicateIcon
 } from '@heroicons/react/24/outline';
-import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/solid';
-import clsx from 'clsx';
+import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -18,7 +17,6 @@ import { useDataAvailabilityTransactionQuery } from '@/generated';
 import capitalizeCase from '@/utils/capitalizeCase';
 import { getRelativeTime } from '@/utils/formatTime';
 import getSubmitterName from '@/utils/getSubmitterName';
-import isDataVerified from '@/utils/isDataVerified';
 
 import Profile from '../shared/Profile';
 import MoreDetails from './MoreDetails';
@@ -67,23 +65,11 @@ export const Meta: FC<MetaProps> = ({ title, value, copyValue = null }) => {
 
 const Transaction: FC = () => {
   const { query } = useRouter();
-  const [daVerified, setDaVerified] = useState(false);
 
   const { data, loading } = useDataAvailabilityTransactionQuery({
     variables: { request: { transactionId: query.transactionId as string } },
     skip: !query.transactionId
   });
-
-  useEffect(() => {
-    const setStatus = async () => {
-      const status = await isDataVerified(query.transactionId as string, 'mainnet');
-      setDaVerified(status);
-    };
-
-    if (query.transactionId) {
-      setStatus();
-    }
-  }, [query.transactionId]);
 
   if (loading || !data) {
     return <div>Loading...</div>;
@@ -127,15 +113,9 @@ const Transaction: FC = () => {
           <Meta
             title="Status"
             value={
-              <div
-                className={clsx(
-                  { 'border-green-300 bg-green-400 text-green-500 dark:text-green-400': daVerified },
-                  { 'border-yellow-300 bg-yellow-400 text-yellow-500 dark:text-yellow-400': !daVerified },
-                  'inline-flex items-center space-x-2 rounded-lg border bg-opacity-25 px-1.5 py-1 text-xs'
-                )}
-              >
-                {daVerified ? <CheckCircleIcon className="w- h-4" /> : <XCircleIcon className="h-4 w-4" />}
-                <span>{daVerified ? 'Verified' : 'Not Verified'}</span>
+              <div className="inline-flex items-center space-x-2 rounded-lg border border-green-300 bg-green-400 bg-opacity-25 px-1.5 py-1 text-xs text-green-500 dark:text-green-400">
+                <CheckCircleIcon className="w- h-4" />
+                <span>Verified</span>
               </div>
             }
           />
