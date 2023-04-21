@@ -1,7 +1,7 @@
 export enum LensterUrl {
-  STAGING = 'https://staging.lenster.app',
-  TESTNET = 'https://testnet.lenster.app',
-  PRODUCTION = 'https://lenster.app'
+  STAGING = 'https://staging.lenster.xyz',
+  TESTNET = 'https://testnet.lenster.xyz',
+  PRODUCTION = 'https://lenster.xyz'
 }
 
 export enum LensEndpoint {

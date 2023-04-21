@@ -1,6 +1,6 @@
 import { Listbox, Transition } from '@headlessui/react';
 import { BeakerIcon, ChevronUpDownIcon, CubeIcon, WrenchIcon } from '@heroicons/react/24/outline';
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment } from 'react';
 
 import { useAppStore } from '@/store/app';
 
@@ -14,16 +14,10 @@ const Network = () => {
   const selectedEnvironment = useAppStore((state) => state.selectedEnvironment);
   const setSelectedEnvironment = useAppStore((state) => state.setSelectedEnvironment);
 
-  useEffect(() => {
-    // TEMP: default staging
-    setSelectedEnvironment(networks[1]);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <Listbox
       name="network"
-      defaultValue={networks[0]}
+      defaultValue={selectedEnvironment}
       value={selectedEnvironment}
       onChange={(selected) => {
         setSelectedEnvironment(selected);
