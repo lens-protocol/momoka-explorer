@@ -33,9 +33,9 @@ const SearchBar = () => {
   }, []);
 
   const onDebounce = async () => {
-    if (keyword.trim().length === 43) {
+    if (keyword.trim().length) {
       const { data } = await fetchTxn({
-        variables: { request: { transactionId: keyword.trim() as string } }
+        variables: { request: { id: keyword.trim() as string } }
       });
       setTxn(data?.dataAvailabilityTransaction as DataAvailabilityTransactionUnion);
     }

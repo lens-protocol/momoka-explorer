@@ -14,6 +14,10 @@ const Network = () => {
   const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
   const setSelectedEnvironment = useAppPersistStore((state) => state.setSelectedEnvironment);
 
+  const getIcon = (nId: string) => {
+    return networks.find((n) => n.id === nId)?.icon;
+  };
+
   return (
     <Listbox
       name="network"
@@ -22,7 +26,7 @@ const Network = () => {
       onChange={(selected) => {
         setSelectedEnvironment(selected);
         setTimeout(() => {
-          window.location.reload();
+          location.reload();
         }, 100);
       }}
     >
@@ -46,24 +50,18 @@ const Network = () => {
                 className={({ active }) =>
                   `relative select-none py-2 pl-10 pr-4 ${
                     active
-                      ? 'bg-green-900 text-[#3D794E] dark:bg-[#3D794E] dark:text-[#D0DBFF]'
+                      ? 'bg-green-100 text-[#3D794E] dark:bg-[#3D794E]/30 dark:text-[#D0DBFF]'
                       : 'text-gray-900 dark:text-gray-100'
                   }`
                 }
                 value={network}
               >
-                {({ selected }) => (
-                  <>
-                    <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
-                      {network.name}
-                    </span>
-                    {selected ? (
-                      <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-green-600 dark:text-green-300">
-                        {network.icon}
-                      </span>
-                    ) : null}
-                  </>
-                )}
+                <span className="block truncate">{network.name}</span>
+                {network.id === selectedEnvironment.id ? (
+                  <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-green-600 dark:text-green-300">
+                    {getIcon(selectedEnvironment.id)}
+                  </span>
+                ) : null}
               </Listbox.Option>
             ))}
           </Listbox.Options>

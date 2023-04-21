@@ -74,7 +74,7 @@ const Transaction: FC = () => {
   const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
 
   const { data, loading } = useDataAvailabilityTransactionQuery({
-    variables: { request: { transactionId: query.transactionId as string } },
+    variables: { request: { id: query.transactionId as string } },
     skip: !query.transactionId
   });
 
