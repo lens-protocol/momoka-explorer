@@ -59,7 +59,7 @@ const LatestTransactions: FC<Props> = () => {
         <h1 className="text-sm font-medium opacity-90">Latest Transactions</h1>
         <Link
           href="/txns"
-          className="flex items-center space-x-2 text-sm opacity-90 hover:text-[#3D794E] hover:opacity-100"
+          className="hover: flex items-center space-x-2 text-sm opacity-90 hover:opacity-100 dark:hover:text-[#D0DBFF]"
         >
           <span>View all</span>
           <ArrowRightIcon className="h-3.5 w-3.5" />
@@ -79,7 +79,7 @@ const LatestTransactions: FC<Props> = () => {
                     <div className="flex flex-col">
                       <Link
                         href={`/tx/${txn.transactionId}`}
-                        className="text-[#3D794E] text-opacity-80 hover:text-opacity-100"
+                        className="text-[#3D794E] text-opacity-80 hover:text-opacity-100 dark:text-[#D0DBFF]"
                       >
                         {txn.transactionId}
                       </Link>
@@ -94,10 +94,10 @@ const LatestTransactions: FC<Props> = () => {
                     {getDAActionType(txn.__typename)}
                   </span>
                 </td>
-                <td className="whitespace-nowrap px-3 py-4 text-gray-500">
+                <td className="whitespace-nowrap px-3 py-4">
                   <div className="flex flex-col">
                     <span className="inline-flex items-center space-x-2 px-2 py-0.5 text-sm">
-                      <span className="text-xs text-gray-500">From</span>
+                      <span className="text-xs opacity-70">From</span>
                       <span className="inline-flex items-center space-x-1">
                         <img
                           className="h-3 w-3 flex-none rounded-2xl"
@@ -108,17 +108,17 @@ const LatestTransactions: FC<Props> = () => {
                         <Link
                           href={`https://lensfrens.xyz/${txn.profile.handle}`}
                           target="_blank"
-                          className="text-[#3D794E] text-opacity-80 hover:text-opacity-100"
+                          className="text-[#3D794E] text-opacity-80 hover:text-opacity-100 dark:text-[#D0DBFF]"
                         >
                           {txn.profile.handle}
                         </Link>
                       </span>
                     </span>
-                    <span className="inline-flex items-center space-x-1 px-2 py-0.5 text-sm">
-                      <span className="text-xs text-gray-500">via</span>
+                    <span className="inline-flex items-center space-x-1.5 px-2 py-0.5 text-sm">
+                      <span className="text-xs opacity-70">via</span>
                       <Link
                         href="/submitters"
-                        className="text-[#3D794E] text-opacity-80 hover:text-opacity-100"
+                        className="text-[#3D794E] text-opacity-80 hover:text-opacity-100 dark:text-[#D0DBFF]"
                       >
                         {getSubmitterName(txn.submitter)}
                       </Link>
@@ -128,7 +128,7 @@ const LatestTransactions: FC<Props> = () => {
                 <td className="whitespace-nowrap px-3 py-4">
                   <Link
                     href={`/tx/${txn.transactionId}`}
-                    className="text-sm opacity-60 hover:text-[#3D794E] hover:opacity-100"
+                    className="text-sm opacity-70 hover:text-[#3D794E] hover:opacity-100 hover:dark:text-[#D0DBFF]"
                   >
                     View
                   </Link>

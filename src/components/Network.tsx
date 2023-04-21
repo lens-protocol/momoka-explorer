@@ -46,7 +46,7 @@ const Network = () => {
                 className={({ active }) =>
                   `relative select-none py-2 pl-10 pr-4 ${
                     active
-                      ? 'bg-green-900 text-[#3D794E] dark:bg-[#3D794E] dark:text-green-100'
+                      ? 'bg-green-900 text-[#3D794E] dark:bg-[#3D794E] dark:text-[#D0DBFF]'
                       : 'text-gray-900 dark:text-gray-100'
                   }`
                 }

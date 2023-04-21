@@ -31,7 +31,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
           <div className="flex flex-col truncate">
             <Link
               href={`/tx/${txn.transactionId}`}
-              className="truncate text-[#3D794E] text-opacity-80 hover:text-opacity-100"
+              className="truncate text-[#3D794E] text-opacity-80 hover:text-opacity-100 dark:text-[#D0DBFF]"
             >
               {truncate(txn.transactionId, 30)}
             </Link>
@@ -59,21 +59,24 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
           <Link
             href={`https://lensfrens.xyz/${txn.profile.handle}`}
             target="_blank"
-            className="text-[#3D794E] text-opacity-80 hover:text-opacity-100"
+            className="text-[#3D794E] text-opacity-80 hover:text-opacity-100 dark:text-[#D0DBFF]"
           >
             {txn.profile.handle}
           </Link>
         </span>
       </td>
       <td className="whitespace-nowrap px-3 py-2 text-sm text-gray-500">
-        <Link href="/submitters" className="text-[#3D794E] text-opacity-80 hover:text-opacity-100">
+        <Link
+          href="/submitters"
+          className="text-[#3D794E] text-opacity-80 hover:text-opacity-100 dark:text-[#D0DBFF]"
+        >
           {getSubmitterName(txn.submitter)}
         </Link>
       </td>
       <td className="whitespace-nowrap px-3 py-4">
         <Link
           href={`/tx/${txn.transactionId}`}
-          className="text-sm opacity-60 hover:text-[#3D794E] hover:opacity-100"
+          className="text-sm opacity-60 hover:text-[#3D794E] hover:opacity-100 hover:dark:text-[#D0DBFF]"
         >
           View
         </Link>

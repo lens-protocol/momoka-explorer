@@ -34,14 +34,17 @@ const Stats = () => {
         <span className="text-xs font-medium uppercase tracking-wider opacity-50">Last Finalized</span>
         <Link
           href={`/tx/${sanitizeDStorageUrl(lastFinalizedTransaction)}`}
-          className="truncate font-gintoNord hover:text-[#3D794E]"
+          className="truncate font-gintoNord hover:text-[#3D794E] dark:hover:text-[#D0DBFF]"
         >
           <span className="truncate text-2xl font-medium">{formatAddress(lastFinalizedTransaction)}</span>
         </Link>
       </div>
       <div className="flex flex-col space-y-1.5 truncate rounded-xl border border-gray-100 bg-gray-50 px-6 py-5 dark:border-[#16161B] dark:bg-[#1C1B22]">
         <span className="text-xs font-medium uppercase tracking-wider opacity-50">All Submitters</span>
-        <Link href="/submitters" className="truncate font-gintoNord hover:text-[#3D794E]">
+        <Link
+          href="/submitters"
+          className="truncate font-gintoNord hover:text-[#3D794E] dark:hover:text-[#D0DBFF]"
+        >
           <span className="truncate text-2xl font-medium">
             1. {formatAddress(submittersData?.dataAvailabilitySubmitters?.items[0].address)}
           </span>
