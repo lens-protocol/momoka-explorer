@@ -92,8 +92,8 @@ const SearchBar = () => {
             {txn?.transactionId} <span className="text-xs opacity-50">{txn.publicationId}</span>
           </Link>
         </div>
-      ) : recentsByNetwork.length && inputClicked ? (
-        <div className="absolute left-0 right-0 top-16 flex w-full rounded-xl border bg-white p-2 px-2 dark:border-gray-950 dark:bg-gray-800">
+      ) : recentsByNetwork.length && inputClicked && !loading ? (
+        <div className="absolute left-0 right-0 top-16 z-10 flex w-full flex-col rounded-xl border bg-white p-2 px-2 shadow dark:border-gray-950 dark:bg-gray-800">
           {recentsByNetwork.map((recent) => (
             <Link
               key={recent.transactionId}
