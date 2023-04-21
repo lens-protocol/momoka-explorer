@@ -105,8 +105,7 @@ const LatestTransactions: FC<Props> = () => {
                           draggable={false}
                         />
                         <Link
-                          href={`https://lensfrens.xyz/${txn.profile.handle}`}
-                          target="_blank"
+                          href={`/profile/${txn.profile.id}`}
                           className="text-[#3D794E] opacity-80 hover:opacity-100 dark:text-[#D0DBFF]"
                         >
                           {txn.profile.handle}
