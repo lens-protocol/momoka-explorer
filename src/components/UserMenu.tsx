@@ -1,9 +1,12 @@
 import { Menu, Transition } from '@headlessui/react';
+import clsx from 'clsx';
+import Link from 'next/link';
 import type { FC } from 'react';
 import { Fragment } from 'react';
 import { useDisconnect } from 'wagmi';
 
 import type { Profile } from '@/generated';
+import getProfilePicture from '@/utils/getProfilePicture';
 
 interface UserMenuProps {
   profiles: Profile[];
@@ -12,10 +15,22 @@ interface UserMenuProps {
 const UserMenu: FC<UserMenuProps> = ({ profiles }) => {
   const { disconnect } = useDisconnect();
 
+  if (!profiles?.length) {
+    return <div className="animate pulse ml-3 h-8 w-8 rounded-full bg-gray-100 dark:bg-gray-700" />;
+  }
+
+  const defaultProfile = profiles.find((profile) => profile.isDefault);
+
   return (
-    <Menu as="div" className="relative inline-block text-left">
+    <Menu as="div" className="relative ml-3 text-left">
       <div>
-        <Menu.Button>gm</Menu.Button>
+        <Menu.Button className="flex">
+          <img
+            className="h-8 w-8 rounded-full"
+            src={getProfilePicture(defaultProfile as Profile)}
+            alt={defaultProfile?.handle}
+          />
+        </Menu.Button>
       </div>
       <Transition
         as={Fragment}
@@ -26,14 +41,40 @@ const UserMenu: FC<UserMenuProps> = ({ profiles }) => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right divide-y divide-gray-100 rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right divide-y divide-gray-100 rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-[#1C1B22]">
           <div className="px-1 py-1 ">
+            {profiles?.map((profile: Profile) => (
+              <Menu.Item key={profile.id}>
+                {({ active }) => (
+                  <Link
+                    href={`/profile/${profile.handle}`}
+                    className={clsx(
+                      'group flex w-full items-center rounded-xl px-2 py-2 text-sm',
+                      active
+                        ? 'bg-green-100 text-[#3D794E] dark:bg-[#3D794E]/30 dark:text-[#D0DBFF]'
+                        : 'text-gray-900 dark:text-gray-100'
+                    )}
+                  >
+                    <img
+                      className="mr-1 h-4 w-4 rounded-full"
+                      src={getProfilePicture(profile)}
+                      alt={profile.handle}
+                    />
+                    <span className="truncate">{profile.handle}</span>
+                  </Link>
+                )}
+              </Menu.Item>
+            ))}
+            <div className="border-b border-b-gray-100 dark:border-gray-950" />
             <Menu.Item>
               {({ active }) => (
                 <button
-                  className={`${
-                    active ? 'bg-gray-100' : 'text-gray-900'
-                  } group flex w-full items-center rounded-xl px-2 py-2 text-sm`}
+                  className={clsx(
+                    'group my-1 flex w-full items-center rounded-xl px-2 py-2 text-sm',
+                    active
+                      ? 'bg-green-100 text-[#3D794E] dark:bg-[#3D794E]/30 dark:text-[#D0DBFF]'
+                      : 'text-gray-900 dark:text-gray-100'
+                  )}
                   onClick={() => {
                     disconnect?.();
                   }}
@@ -42,22 +83,6 @@ const UserMenu: FC<UserMenuProps> = ({ profiles }) => {
                 </button>
               )}
             </Menu.Item>
-            {profiles?.map((profile: Profile) => (
-              <Menu.Item key={profile.id}>
-                {({ active }) => (
-                  <button
-                    className={`${
-                      active ? 'bg-gray-100' : 'text-gray-900'
-                    } group flex w-full items-center rounded-xl px-2 py-2 text-sm`}
-                    onClick={() => {
-                      disconnect?.();
-                    }}
-                  >
-                    {profile.handle}
-                  </button>
-                )}
-              </Menu.Item>
-            ))}
           </div>
         </Menu.Items>
       </Transition>
