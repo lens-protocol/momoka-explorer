@@ -16,13 +16,12 @@ import { apps } from '@/data/apps';
 import type { DataAvailabilityTransactionUnion, Profile as TProfile } from '@/generated';
 import { useDataAvailabilityTransactionQuery } from '@/generated';
 import { useAppPersistStore } from '@/store/app';
-import { useFavoritesPersistStore } from '@/store/favorites';
 import capitalizeCase from '@/utils/capitalizeCase';
 import { getRelativeTime } from '@/utils/formatTime';
 import getLensterLink from '@/utils/getLensterLink';
 import getSubmitterName from '@/utils/getSubmitterName';
-import isInFavorites from '@/utils/isInFavorites';
 
+import Favorite from '../shared/Favorite';
 import Profile from '../shared/Profile';
 import { Button } from '../ui/Button';
 import MoreDetails from './MoreDetails';
@@ -72,9 +71,6 @@ export const Meta: FC<MetaProps> = ({ title, value, copyValue = null }) => {
 const Transaction: FC = () => {
   const { query } = useRouter();
   const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
-  const addFavorite = useFavoritesPersistStore((state) => state.addFavorite);
-  const removeFavorite = useFavoritesPersistStore((state) => state.removeFavorite);
-  const favorites = useFavoritesPersistStore((state) => state.favorites);
 
   const { data, loading } = useDataAvailabilityTransactionQuery({
     variables: { request: { transactionId: query.transactionId as string } },
@@ -86,11 +82,6 @@ const Transaction: FC = () => {
   }
 
   const { dataAvailabilityTransaction } = data;
-  const isFavorite = isInFavorites(
-    favorites,
-    dataAvailabilityTransaction?.transactionId as string,
-    selectedEnvironment.id
-  );
 
   return (
     <>
@@ -100,27 +91,21 @@ const Transaction: FC = () => {
             <h3 className="font-medium opacity-80">Transaction Details</h3>
             <p className="text-sm opacity-60">All Transaction related information will be displayed here.</p>
           </div>
-          <Button
-            className="flex items-center space-x-2 text-xs sm:text-sm"
-            onClick={() => {
-              isFavorite
-                ? removeFavorite(
-                    dataAvailabilityTransaction as DataAvailabilityTransactionUnion,
-                    selectedEnvironment.id
-                  )
-                : addFavorite(
-                    dataAvailabilityTransaction as DataAvailabilityTransactionUnion,
-                    selectedEnvironment.id
-                  );
+          <Favorite
+            dataAvailabilityTransaction={dataAvailabilityTransaction as DataAvailabilityTransactionUnion}
+            renderItem={(isFavorite) => {
+              return (
+                <Button className="flex items-center space-x-2 text-xs sm:text-sm">
+                  {isFavorite ? (
+                    <StarIconSolid className="h-3 w-3 text-yellow-500 sm:h-4 sm:w-4" />
+                  ) : (
+                    <StarIcon className="h-3 w-3 text-yellow-500 sm:h-4 sm:w-4" />
+                  )}
+                  <span>{isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}</span>
+                </Button>
+              );
             }}
-          >
-            {isFavorite ? (
-              <StarIconSolid className="h-3 w-3 text-yellow-500 sm:h-4 sm:w-4" />
-            ) : (
-              <StarIcon className="h-3 w-3 text-yellow-500 sm:h-4 sm:w-4" />
-            )}
-            <span>{isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}</span>
-          </Button>
+          />
         </div>
         <div className="mt-6 border-t border-gray-200 dark:border-gray-900">
           <Meta
