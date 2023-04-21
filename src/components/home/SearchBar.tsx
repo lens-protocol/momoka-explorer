@@ -10,6 +10,8 @@ import { useRecentsPersistStore } from '@/store/recents';
 import useDebounce from '@/utils/useDebounce';
 import useOutsideClick from '@/utils/useOutsideClick';
 
+import { Loader } from '../ui/Loader';
+
 const SearchBar = () => {
   const [keyword, setKeyword] = useState('');
   const [inputClicked, setInputClicked] = useState(false);
@@ -66,7 +68,7 @@ const SearchBar = () => {
       className="relative flex w-full rounded-xl border bg-white px-2 dark:border-[#16161B] dark:bg-[#1C1B22] md:max-w-[50%]"
     >
       <span className="flex select-none items-center pl-3">
-        <MagnifyingGlassIcon className="h-5 w-5 opacity-50" />
+        {loading ? <Loader /> : <MagnifyingGlassIcon className="h-5 w-5 opacity-50" />}
       </span>
       <input
         ref={inputElement}
