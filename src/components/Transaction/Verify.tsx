@@ -20,13 +20,16 @@ const Verify: FC<VerifyProps> = ({ dataAvailabilityTransaction }) => {
   return (
     <div className="w-full">
       <div className="space-y-3">
-        <Input
-          label="Verify with your own node URL"
-          placeholder="Your node URL"
-          type="text"
-          value={nodeUrl}
-          onChange={(e) => setNodeUrl(e.target.value)}
-        />
+        <div>
+          <Input
+            label="Verify with your own node URL"
+            placeholder="Your node URL"
+            type="text"
+            value={nodeUrl}
+            onChange={(e) => setNodeUrl(e.target.value)}
+          />
+          <div className="mt-1 text-xs">It must be an archive node</div>
+        </div>
         <Button
           type="button"
           onClick={() => {

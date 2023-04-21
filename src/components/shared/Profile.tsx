@@ -2,9 +2,7 @@ import Link from 'next/link';
 import type { FC } from 'react';
 
 import type { Profile as TProfile } from '@/generated';
-import { useAppPersistStore } from '@/store/app';
 import formatAddress from '@/utils/formatAddress';
-import getLensterLink from '@/utils/getLensterLink';
 import getProfilePicture from '@/utils/getProfilePicture';
 
 interface ProfileProps {
@@ -12,12 +10,10 @@ interface ProfileProps {
 }
 
 const Profile: FC<ProfileProps> = ({ profile }) => {
-  const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
-
   return (
     <Link
       className="inline-flex items-center space-x-2 rounded-lg text-sm"
-      href={`${getLensterLink(selectedEnvironment.id)}/u/${profile?.handle}`}
+      href={`/profile/${profile?.id}`}
       target="_blank"
     >
       <img
