@@ -16,6 +16,7 @@ import type { DataAvailabilityTransactionUnion, Profile as TProfile } from '@/ge
 import { useDataAvailabilityTransactionQuery } from '@/generated';
 import capitalizeCase from '@/utils/capitalizeCase';
 import { getRelativeTime } from '@/utils/formatTime';
+import getLensterLink from '@/utils/getLensterLink';
 import getSubmitterName from '@/utils/getSubmitterName';
 
 import Profile from '../shared/Profile';
@@ -141,7 +142,7 @@ const Transaction: FC = () => {
             value={
               <Link
                 className="flex items-center space-x-2 underline"
-                href={`https://lenster.xyz/posts/${dataAvailabilityTransaction?.publicationId}`}
+                href={`${getLensterLink()}/posts/${dataAvailabilityTransaction?.publicationId}`}
                 target="_blank"
               >
                 <span>{dataAvailabilityTransaction?.publicationId}</span>
@@ -158,7 +159,7 @@ const Transaction: FC = () => {
                   <div className="space-y-4">
                     <Link
                       className="flex items-center space-x-2 underline"
-                      href={`https://lenster.xyz/posts/${dataAvailabilityTransaction?.mirrorOfPublicationId}`}
+                      href={`${getLensterLink()}/posts/${dataAvailabilityTransaction?.mirrorOfPublicationId}`}
                       target="_blank"
                     >
                       <span>{dataAvailabilityTransaction?.mirrorOfPublicationId}</span>
@@ -181,7 +182,9 @@ const Transaction: FC = () => {
                   <div className="space-y-4">
                     <Link
                       className="flex items-center space-x-2 underline"
-                      href={`https://lenster.xyz/posts/${dataAvailabilityTransaction?.commentedOnPublicationId}`}
+                      href={`${getLensterLink()}/posts/${
+                        dataAvailabilityTransaction?.commentedOnPublicationId
+                      }`}
                       target="_blank"
                     >
                       <span>{dataAvailabilityTransaction?.commentedOnPublicationId}</span>

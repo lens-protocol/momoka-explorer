@@ -3,6 +3,7 @@ import type { FC } from 'react';
 
 import type { Profile as TProfile } from '@/generated';
 import formatAddress from '@/utils/formatAddress';
+import getLensterLink from '@/utils/getLensterLink';
 import getProfilePicture from '@/utils/getProfilePicture';
 
 interface ProfileProps {
@@ -12,7 +13,7 @@ interface ProfileProps {
 const Profile: FC<ProfileProps> = ({ profile }) => (
   <Link
     className="inline-flex items-center space-x-2 rounded-lg text-sm"
-    href={`https://lenster.xyz/u/${profile?.handle}`}
+    href={`${getLensterLink()}/u/${profile?.handle}`}
     target="_blank"
   >
     <img
