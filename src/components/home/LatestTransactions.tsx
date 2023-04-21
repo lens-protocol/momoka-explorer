@@ -11,7 +11,6 @@ import { getRelativeTime } from '@/utils/formatTime';
 import getDAActionType from '@/utils/getDAActionType';
 import getLensterLink from '@/utils/getLensterLink';
 import getProfilePicture from '@/utils/getProfilePicture';
-import getSubmitterName from '@/utils/getSubmitterName';
 
 import Favorite from '../shared/Favorite';
 import TransactionsShimmer from '../shimmers/TransactionsShimmer';
@@ -59,7 +58,7 @@ const LatestTransactions: FC<Props> = () => {
         <h1 className="text-sm font-medium opacity-90">Latest Transactions</h1>
         <Link
           href="/txns"
-          className="hover: flex items-center space-x-2 text-sm opacity-90 hover:opacity-100 dark:hover:text-[#D0DBFF]"
+          className="flex items-center space-x-2 text-sm opacity-90 hover:text-[#3D794E] hover:opacity-100 dark:hover:text-[#D0DBFF]"
         >
           <span>View all</span>
           <ArrowRightIcon className="h-3.5 w-3.5" />
@@ -120,7 +119,7 @@ const LatestTransactions: FC<Props> = () => {
                         href="/submitters"
                         className="text-[#3D794E] text-opacity-80 hover:text-opacity-100 dark:text-[#D0DBFF]"
                       >
-                        {getSubmitterName(txn.submitter)}
+                        {txn.submitter}
                       </Link>
                     </span>
                   </div>

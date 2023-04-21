@@ -1,4 +1,7 @@
 const formatNumber = (num: number) => {
+  if (!num) {
+    return num;
+  }
   if (num < 0) {
     num = Math.abs(num);
   }

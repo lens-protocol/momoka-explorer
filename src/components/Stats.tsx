@@ -40,15 +40,22 @@ const Stats = () => {
         </Link>
       </div>
       <div className="flex flex-col space-y-1.5 truncate rounded-xl border border-gray-100 bg-gray-50 px-6 py-5 dark:border-[#16161B] dark:bg-[#1C1B22]">
-        <span className="text-xs font-medium uppercase tracking-wider opacity-50">All Submitters</span>
-        <Link
-          href="/submitters"
-          className="truncate font-gintoNord hover:text-[#3D794E] dark:hover:text-[#D0DBFF]"
-        >
+        <span className="flex items-center justify-between">
+          <span className="text-xs font-medium uppercase tracking-wider opacity-50">Top Submitters</span>
+          <Link
+            href="/submitters"
+            className="flex items-center space-x-2 text-sm opacity-90 hover:text-[#3D794E] hover:opacity-100 dark:hover:text-[#D0DBFF]"
+          >
+            View all
+          </Link>
+        </span>
+        <div className="truncate font-gintoNord">
           <span className="truncate text-2xl font-medium">
-            1. {formatAddress(submittersData?.dataAvailabilitySubmitters?.items[0].address)}
+            {submittersData?.dataAvailabilitySubmitters?.items[0].name as string}
+            {' | '}
+            {formatNumber(submittersData?.dataAvailabilitySubmitters?.items[0].totalTransactions as number)}
           </span>
-        </Link>
+        </div>
       </div>
     </div>
   );

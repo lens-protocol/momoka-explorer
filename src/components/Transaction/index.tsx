@@ -19,7 +19,6 @@ import { useAppPersistStore } from '@/store/app';
 import capitalizeCase from '@/utils/capitalizeCase';
 import { getRelativeTime } from '@/utils/formatTime';
 import getLensterLink from '@/utils/getLensterLink';
-import getSubmitterName from '@/utils/getSubmitterName';
 
 import Favorite from '../shared/Favorite';
 import Profile from '../shared/Profile';
@@ -148,7 +147,7 @@ const Transaction: FC = () => {
             value={
               <div className="flex items-center space-x-2 break-all">
                 <BoltIcon className="h-4 w-4" />
-                <b>{getSubmitterName(dataAvailabilityTransaction?.submitter)}</b>
+                <b>{dataAvailabilityTransaction?.submitter}</b>
               </div>
             }
             copyValue={dataAvailabilityTransaction?.submitter}

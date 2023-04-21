@@ -9,7 +9,6 @@ import { getRelativeTime } from '@/utils/formatTime';
 import getDAActionType from '@/utils/getDAActionType';
 import getLensterLink from '@/utils/getLensterLink';
 import getProfilePicture from '@/utils/getProfilePicture';
-import getSubmitterName from '@/utils/getSubmitterName';
 import truncate from '@/utils/truncate';
 
 import Favorite from '../shared/Favorite';
@@ -70,7 +69,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
           href="/submitters"
           className="text-[#3D794E] text-opacity-80 hover:text-opacity-100 dark:text-[#D0DBFF]"
         >
-          {getSubmitterName(txn.submitter)}
+          {txn.submitter}
         </Link>
       </td>
       <td className="whitespace-nowrap px-3 py-4">
