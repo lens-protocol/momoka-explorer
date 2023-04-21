@@ -23,12 +23,13 @@ import getSubmitterName from '@/utils/getSubmitterName';
 
 import Favorite from '../shared/Favorite';
 import Profile from '../shared/Profile';
+import TransactionShimmer from '../shimmers/TransactionShimmer';
 import { Button } from '../ui/Button';
 import MoreDetails from './MoreDetails';
 
 interface MetaProps {
   tooltip?: string;
-  title: string;
+  title: ReactNode;
   value: ReactNode;
   copyValue?: string;
 }
@@ -78,7 +79,7 @@ const Transaction: FC = () => {
   });
 
   if (loading || !data) {
-    return <div>Loading...</div>;
+    return <TransactionShimmer />;
   }
 
   const { dataAvailabilityTransaction } = data;
