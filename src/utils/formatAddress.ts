@@ -1,5 +1,3 @@
-export const ADDRESS_REGEX = /^(0x)?[\da-f]{40}$/i;
-
 /**
  * Format the given Ethereum address by displaying only the first and last few characters.
  *
@@ -12,11 +10,7 @@ const formatAddress = (address: string | null, slice = 4): string => {
     return '';
   }
 
-  if (address.match(ADDRESS_REGEX)) {
-    return `${address.slice(0, slice + 2)}…${address.slice(address.length - slice)}`;
-  }
-
-  return address;
+  return `${address.slice(0, slice)}…${address.slice(address.length - slice)}`;
 };
 
 export default formatAddress;
