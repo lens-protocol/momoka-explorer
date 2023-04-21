@@ -48,6 +48,7 @@ const Navbar: FC = () => {
               <UserMenu profiles={data?.profiles.items as Profile[]} />
             ) : (
               <Button
+                className="ml-3"
                 onClick={() => {
                   openConnectModal?.();
                 }}
