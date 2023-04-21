@@ -20,6 +20,7 @@ import getLensterLink from '@/utils/getLensterLink';
 import getSubmitterName from '@/utils/getSubmitterName';
 
 import Profile from '../shared/Profile';
+import { Button } from '../ui/Button';
 import MoreDetails from './MoreDetails';
 
 interface MetaProps {
@@ -81,9 +82,14 @@ const Transaction: FC = () => {
   return (
     <>
       <div className="relative mt-6 space-y-4 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 dark:border-gray-950 dark:bg-gray-800 md:p-5">
-        <div className="px-4 sm:px-0">
-          <h3 className="font-medium opacity-80">Transaction Details</h3>
-          <p className="text-sm opacity-60">All Transaction related information will be displayed here.</p>
+        <div className="flex items-center justify-between px-4 sm:px-0">
+          <div>
+            <h3 className="font-medium opacity-80">Transaction Details</h3>
+            <p className="text-sm opacity-60">All Transaction related information will be displayed here.</p>
+          </div>
+          <Button className="text-sm">
+            <span>Add to favorites</span>
+          </Button>
         </div>
         <div className="mt-6 border-t border-gray-200 dark:border-gray-900">
           <Meta

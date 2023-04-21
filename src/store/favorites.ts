@@ -12,6 +12,7 @@ interface AppFavoritesState {
   addFavorite: (favorite: DataAvailabilityTransactionUnionWithNetwork) => void;
   removeFavorite: (favorite: DataAvailabilityTransactionUnionWithNetwork) => void;
   getFavorites: (network: string) => DataAvailabilityTransactionUnionWithNetwork[];
+  isInFavorites: (network: string, transactionId: string) => boolean;
 }
 
 export const useFavoritesPersistStore = create(
@@ -31,6 +32,10 @@ export const useFavoritesPersistStore = create(
       getFavorites: (network) => {
         const { favorites } = get();
         return favorites.filter((f) => f.network === network);
+      },
+      isInFavorites: (network, transactionId) => {
+        const { favorites } = get();
+        return favorites.some((f) => f.network === network && f.transactionId === transactionId);
       }
     }),
     { name: 'explorer' }
