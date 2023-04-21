@@ -27,11 +27,11 @@ const Stats = () => {
 
   return (
     <div className="grid gap-4 lg:grid-cols-3">
-      <div className="flex flex-col space-y-1.5 rounded-xl border border-gray-100 bg-gray-50 px-6 py-5 dark:border-[#16161B] dark:bg-[#1C1B22]">
+      <div className="flex flex-col space-y-0.5 rounded-xl border border-gray-100 bg-gray-50 px-6 py-6 dark:border-[#16161B] dark:bg-[#1C1B22]">
         <span className="text-xs font-medium uppercase tracking-wider opacity-50">Transactions</span>
         <span className="font-gintoNord text-2xl font-medium">{formatNumber(stats.totalTransactions)}</span>
       </div>
-      <div className="flex flex-col space-y-1.5 truncate rounded-xl border border-gray-100 bg-gray-50 px-6 py-5 dark:border-[#16161B] dark:bg-[#1C1B22]">
+      <div className="flex flex-col space-y-0.5 truncate rounded-xl border border-gray-100 bg-gray-50 px-6 py-6 dark:border-[#16161B] dark:bg-[#1C1B22]">
         <span className="text-xs font-medium uppercase tracking-wider opacity-50">Last Finalized</span>
         <Link
           href={`/tx/${sanitizeDStorageUrl(lastFinalizedTransaction?.transactionId as string)}`}
@@ -45,23 +45,19 @@ const Stats = () => {
           </span>
         </Link>
       </div>
-      <div className="flex flex-col space-y-1.5 truncate rounded-xl border border-gray-100 bg-gray-50 px-6 py-5 dark:border-[#16161B] dark:bg-[#1C1B22]">
-        <span className="flex items-center justify-between">
-          <span className="text-xs font-medium uppercase tracking-wider opacity-50">Top Submitters</span>
-          <Link
-            href="/submitters"
-            className="flex items-center space-x-2 text-sm opacity-90 hover:text-[#3D794E] hover:opacity-100 dark:hover:text-[#D0DBFF]"
-          >
-            View all
-          </Link>
-        </span>
-        <div className="truncate font-gintoNord">
+      <div className="flex flex-col space-y-0.5 truncate rounded-xl border border-gray-100 bg-gray-50 px-6 py-6 dark:border-[#16161B] dark:bg-[#1C1B22]">
+        <span className="text-xs font-medium uppercase tracking-wider opacity-50">Top Submitters</span>
+        <Link
+          href="/submitters"
+          className="space-x-2 truncate font-gintoNord hover:text-[#3D794E] dark:hover:text-[#D0DBFF]"
+        >
           <span className="truncate text-2xl font-medium">
             {submittersData?.dataAvailabilitySubmitters?.items[0].name as string}
             {' | '}
             {formatNumber(submittersData?.dataAvailabilitySubmitters?.items[0].totalTransactions as number)}
           </span>
-        </div>
+          <span className="truncate text-xs opacity-70">View all</span>
+        </Link>
       </div>
     </div>
   );
