@@ -25,7 +25,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
         className={clsx(
           { 'bg-gray-500 bg-opacity-20 opacity-60': props.disabled },
           error ? '!border-red-500' : 'focus-within:ring-1',
-          'focus-within:border-brand-500 focus-within:ring-brand-400 flex w-full items-center rounded-xl border border-gray-300 bg-white dark:border-gray-700 dark:bg-gray-900'
+          'flex w-full items-center rounded-xl border border-gray-300 bg-white focus-within:border-[#3D794E]/50 focus-within:ring-[#3D794E]/50 dark:border-gray-700 dark:bg-gray-900'
         )}
       >
         <input

@@ -1,6 +1,5 @@
 import { ArrowRightIcon, ArrowsRightLeftIcon, StarIcon } from '@heroicons/react/24/outline';
 import { StarIcon as StarIconSolid } from '@heroicons/react/24/solid';
-import clsx from 'clsx';
 import Link from 'next/link';
 import type { FC } from 'react';
 import { useState } from 'react';
@@ -60,7 +59,7 @@ const LatestTransactions: FC<Props> = () => {
         <h1 className="text-sm font-medium opacity-90">Latest Transactions</h1>
         <Link
           href="/txns"
-          className="flex items-center space-x-2 text-sm opacity-90 hover:text-indigo-400 hover:opacity-100"
+          className="flex items-center space-x-2 text-sm opacity-90 hover:text-[#3D794E] hover:opacity-100"
         >
           <span>View all</span>
           <ArrowRightIcon className="h-3.5 w-3.5" />
@@ -71,13 +70,7 @@ const LatestTransactions: FC<Props> = () => {
         <table className="min-w-full table-auto border-separate border-spacing-y-3">
           <tbody>
             {latestTransactions?.map((txn, i) => (
-              <tr
-                key={i}
-                className={clsx(
-                  'overflow-hidden bg-white dark:bg-gray-900'
-                  // newlyAddedItemIds.includes(publication.id) && 'bg-yellow-100'
-                )}
-              >
+              <tr key={i} className="overflow-hidden bg-white dark:bg-gray-900">
                 <td className="w-48 whitespace-nowrap rounded-l-xl px-3 py-4 text-sm text-gray-900">
                   <div className="flex items-center space-x-2">
                     <span className="rounded-xl bg-gray-100 p-2 dark:bg-gray-800">
@@ -86,7 +79,7 @@ const LatestTransactions: FC<Props> = () => {
                     <div className="flex flex-col">
                       <Link
                         href={`/tx/${txn.transactionId}`}
-                        className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
+                        className="text-[#3D794E] text-opacity-80 hover:text-opacity-100"
                       >
                         {txn.transactionId}
                       </Link>
@@ -115,7 +108,7 @@ const LatestTransactions: FC<Props> = () => {
                         <Link
                           href={`https://lensfrens.xyz/${txn.profile.handle}`}
                           target="_blank"
-                          className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
+                          className="text-[#3D794E] text-opacity-80 hover:text-opacity-100"
                         >
                           {txn.profile.handle}
                         </Link>
@@ -125,7 +118,7 @@ const LatestTransactions: FC<Props> = () => {
                       <span className="text-xs text-gray-500">via</span>
                       <Link
                         href="/submitters"
-                        className="text-indigo-400 text-opacity-80 hover:text-opacity-100"
+                        className="text-[#3D794E] text-opacity-80 hover:text-opacity-100"
                       >
                         {getSubmitterName(txn.submitter)}
                       </Link>
@@ -135,7 +128,7 @@ const LatestTransactions: FC<Props> = () => {
                 <td className="whitespace-nowrap px-3 py-4">
                   <Link
                     href={`/tx/${txn.transactionId}`}
-                    className="opacity-60 hover:text-indigo-400 hover:opacity-100"
+                    className="text-sm opacity-60 hover:text-[#3D794E] hover:opacity-100"
                   >
                     View
                   </Link>
