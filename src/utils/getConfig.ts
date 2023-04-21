@@ -1,4 +1,4 @@
-import { LensEndpoint, LensterUrl, VerifierNetwork } from '@/constants';
+import { IS_STAGING_ENVIRONMENT, LensEndpoint, LensterUrl, VerifierNetwork } from '@/constants';
 
 const getConfig = (
   network: string
@@ -7,7 +7,8 @@ const getConfig = (
   lensterUrl: string;
   verifierNetwork: string;
 } => {
-  switch (network) {
+  const currentNetwork = IS_STAGING_ENVIRONMENT ? network : network === 'staging' ? 'mainnet' : network;
+  switch (currentNetwork) {
     case 'mainnet':
       return {
         apiEndpoint: LensEndpoint.PRODUCTION,
