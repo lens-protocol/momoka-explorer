@@ -2,7 +2,7 @@ import Link from 'next/link';
 import React from 'react';
 
 import { useDaSummaryQuery, useDataAvailabilitySubmittersQuery } from '@/generated';
-import useAppStore from '@/store/app';
+import { useAppStore } from '@/store/app';
 import formatNumber from '@/utils/formatNumber';
 import sanitizeDStorageUrl from '@/utils/sanitizeDStorageUrl';
 

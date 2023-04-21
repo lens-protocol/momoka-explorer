@@ -9,6 +9,7 @@ import type { DataAvailabilityTransactionUnion } from '@/generated';
 import { usePublicationQuery } from '@/generated';
 
 import { Meta } from '.';
+import Verify from './Verify';
 
 interface MoreDetailsProps {
   dataAvailabilityTransaction: DataAvailabilityTransactionUnion;
@@ -61,6 +62,10 @@ const MoreDetails: FC<MoreDetailsProps> = ({ dataAvailabilityTransaction }) => {
                     </div>
                   ) : null
                 }
+              />
+              <Meta
+                title="Verify"
+                value={<Verify dataAvailabilityTransaction={dataAvailabilityTransaction} />}
               />
             </Disclosure.Panel>
           </>

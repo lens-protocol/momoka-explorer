@@ -6,10 +6,10 @@ import { useState } from 'react';
 
 import type { DataAvailabilityTransactionUnion, Profile } from '@/generated';
 import { useDaTransactionsQuery, useNewTransactionSubscription } from '@/generated';
-import useAppStore from '@/store/app';
+import { useAppStore } from '@/store/app';
 import { getRelativeTime } from '@/utils/formatTime';
 import getDAActionType from '@/utils/getDAActionType';
-import getPostAppLink from '@/utils/getPostAppLink';
+import getLensterLink from '@/utils/getLensterLink';
 import getProfilePicture from '@/utils/getProfilePicture';
 import getSubmitterName from '@/utils/getSubmitterName';
 
@@ -165,7 +165,7 @@ const LatestTransactions: FC<Props> = () => {
                 <td className="rounded-r-xl px-3 py-4">
                   <Link
                     className="flex flex-none justify-center opacity-70 hover:opacity-100"
-                    href={getPostAppLink(txn.publicationId)}
+                    href={`${getLensterLink()}/posts/${txn.publicationId}`}
                     target="_blank"
                   >
                     <img

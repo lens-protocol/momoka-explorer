@@ -48,8 +48,9 @@ const SearchBar = () => {
         placeholder="Search transaction Id"
         autoComplete="off"
         autoCorrect="false"
+        style={{ boxShadow: 'none' }}
         className={clsx(
-          'flex-1 bg-transparent px-6 py-4 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none dark:text-gray-100 sm:leading-6 md:text-lg',
+          'flex-1 border-0 border-none bg-transparent px-6 py-4 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none dark:text-gray-100 sm:leading-6 md:text-lg',
           loading && 'animate-pulse'
         )}
       />
