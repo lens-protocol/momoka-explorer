@@ -1,13 +1,20 @@
 import { MoonIcon, StarIcon, SunIcon } from '@heroicons/react/24/outline';
+import { useConnectModal } from '@rainbow-me/rainbowkit';
 import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import type { FC } from 'react';
+import { useAccount } from 'wagmi';
 
 import LensLogo from './LensLogo';
 import Network from './Network';
+import { Button } from './ui/Button';
+import UserMenu from './UserMenu';
 
 const Navbar: FC = () => {
   const { setTheme, resolvedTheme } = useTheme();
+  const { openConnectModal } = useConnectModal();
+  const { connector, isConnected } = useAccount();
+
   return (
     <nav className="fixed z-10 mx-auto w-full max-w-full bg-white px-2 dark:bg-[#16161B] sm:px-6 lg:px-14">
       <div className="flex h-16 items-center justify-between">
@@ -27,6 +34,19 @@ const Navbar: FC = () => {
           >
             {resolvedTheme === 'dark' ? <SunIcon className="h-4 w-4" /> : <MoonIcon className="h-4 w-4" />}
           </button>
+          <div>
+            {isConnected ? (
+              <UserMenu />
+            ) : (
+              <Button
+                onClick={() => {
+                  openConnectModal?.();
+                }}
+              >
+                Connect Wallet
+              </Button>
+            )}
+          </div>
         </div>
       </div>
     </nav>
