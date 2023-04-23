@@ -4,7 +4,7 @@ import Link from 'next/link';
 import type { FC } from 'react';
 import { useState } from 'react';
 
-import type { DataAvailabilityTransactionUnion, Profile } from '@/generated';
+import type { DataAvailabilityTransactionUnion, DaTransactionsQuery, Profile } from '@/generated';
 import { useDaTransactionsQuery, useNewTransactionSubscription } from '@/generated';
 import { useAppPersistStore, useAppStore } from '@/store/app';
 import { getRelativeTime } from '@/utils/formatTime';
@@ -22,16 +22,16 @@ const LatestTransactions: FC<Props> = () => {
   const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
   const [latestTransactions, setLatestTransactions] = useState<Array<DataAvailabilityTransactionUnion>>();
 
+  const onCompleted = (data: DaTransactionsQuery) => {
+    const txns = data?.dataAvailabilityTransactions.items;
+    setLastFinalizedTransaction(txns[0] as DataAvailabilityTransactionUnion);
+    setLatestTransactions(txns as Array<DataAvailabilityTransactionUnion>);
+  };
+
   const { loading } = useDaTransactionsQuery({
     variables: { request: { limit: 10 } },
-    onCompleted: (data) => {
-      const txns = data?.dataAvailabilityTransactions.items;
-      setLastFinalizedTransaction(txns[0] as DataAvailabilityTransactionUnion);
-      setLatestTransactions(txns as Array<DataAvailabilityTransactionUnion>);
-    }
+    onCompleted
   });
-
-  const {} = useNewTransactionSubscription();
 
   useNewTransactionSubscription({
     onError: (data) => {
@@ -43,13 +43,12 @@ const LatestTransactions: FC<Props> = () => {
         return;
       }
       const txn = data?.newDataAvailabilityTransaction as DataAvailabilityTransactionUnion;
-      setLastFinalizedTransaction(txn);
+      setLastFinalizedTransaction({ ...txn });
       let oldTxns = [...(latestTransactions as DataAvailabilityTransactionUnion[])];
       oldTxns.unshift(txn);
       oldTxns.pop();
       setLatestTransactions(oldTxns);
-    },
-    shouldResubscribe: true
+    }
   });
 
   return (
