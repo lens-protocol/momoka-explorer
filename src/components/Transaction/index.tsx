@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import { apps } from '@/data/apps';
 import type { DataAvailabilityTransactionUnion, Profile as TProfile } from '@/generated';
 import { useDataAvailabilityTransactionQuery } from '@/generated';
+import Custom404 from '@/pages/404';
 import { useAppPersistStore } from '@/store/app';
 import capitalizeCase from '@/utils/capitalizeCase';
 import { getRelativeTime } from '@/utils/formatTime';
@@ -79,6 +80,10 @@ const Transaction: FC = () => {
 
   if (loading || !data) {
     return <TransactionShimmer />;
+  }
+
+  if (!data?.dataAvailabilityTransaction) {
+    return <Custom404 />;
   }
 
   const { dataAvailabilityTransaction } = data;

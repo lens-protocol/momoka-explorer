@@ -11,14 +11,21 @@ const isDataVerified = async (id: string, nodeUrl: string, network: string) => {
 
   try {
     const result = await checkDAProof(id, ethereumNode);
-    console.log(result);
     if (result.isSuccess()) {
-      return true;
+      return {
+        verified: true,
+        message: result.successResult
+      };
     }
-
-    return false;
+    console.log(result.failure);
+    return {
+      verified: false,
+      message: result.failure
+    };
   } catch (error) {
-    return false;
+    return {
+      verified: false
+    };
   }
 };
 
