@@ -15,6 +15,7 @@ interface VerifyProps {
 const Verify: FC<VerifyProps> = ({ dataAvailabilityTransaction }) => {
   const [nodeUrl, setNodeUrl] = useState<string>('');
   const [status, setStatus] = useState<'UNKNOWN' | 'VERIFIED' | 'NOT_VERIFIED'>('UNKNOWN');
+  const [message, setMessage] = useState<any>();
   const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
 
   return (
@@ -34,7 +35,10 @@ const Verify: FC<VerifyProps> = ({ dataAvailabilityTransaction }) => {
           type="button"
           onClick={() => {
             isDataVerified(dataAvailabilityTransaction.transactionId, nodeUrl, selectedEnvironment.id).then(
-              (isVerified) => setStatus(isVerified ? 'VERIFIED' : 'NOT_VERIFIED')
+              ({ verified, message }) => {
+                setStatus(verified ? 'VERIFIED' : 'NOT_VERIFIED');
+                setMessage(message);
+              }
             );
           }}
         >
@@ -46,6 +50,12 @@ const Verify: FC<VerifyProps> = ({ dataAvailabilityTransaction }) => {
       ) : (
         <div className="mt-5 font-bold text-yellow-500">Not verified</div>
       )}
+      {status === 'NOT_VERIFIED' && message ? (
+        <div className="mt-5">
+          <b>Message: </b>
+          <span>{JSON.stringify(message)}</span>
+        </div>
+      ) : null}
     </div>
   );
 };

@@ -78,12 +78,12 @@ const Transaction: FC = () => {
     skip: !query.transactionId
   });
 
-  if (!data?.dataAvailabilityTransaction) {
-    return <Custom404 />;
-  }
-
   if (loading || !data) {
     return <TransactionShimmer />;
+  }
+
+  if (!data?.dataAvailabilityTransaction) {
+    return <Custom404 />;
   }
 
   const { dataAvailabilityTransaction } = data;
