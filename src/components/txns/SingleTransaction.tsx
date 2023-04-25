@@ -59,7 +59,9 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
                 draggable={false}
               />
             </span>
-            <span className="hover:text-[#4C8C5E] hover:dark:text-[#FFEBB8]">{txn.profile.handle}</span>
+            <span className="truncate hover:text-[#4C8C5E] hover:dark:text-[#FFEBB8]">
+              {txn.profile.handle}
+            </span>
           </span>
         </Link>
       </td>
@@ -78,9 +80,9 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
           renderItem={(isFavorite) => <FavouriteIcon isFavourite={isFavorite} className="h-6 w-6" />}
         />
       </td>
-      <td className="rounded-r-[20px] px-2 py-4">
+      <td className="rounded-r-[20px] py-4 pr-5 md:px-2">
         <Link
-          className="mb-1.5 flex flex-none justify-center"
+          className="flex flex-none justify-center md:mb-1.5"
           onClick={(e) => e.stopPropagation()}
           href={`${getLensterLink(selectedEnvironment.id)}/posts/${txn.publicationId}`}
           target="_blank"
