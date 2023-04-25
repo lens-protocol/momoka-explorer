@@ -33,13 +33,14 @@ const Navbar: FC = () => {
         >
           Bonsai
         </Link>
-        <div className="flex items-center space-x-5">
-          <Link href="/favorites" className="flex items-center space-x-2">
+        <div className="flex items-center space-x-2 md:space-x-5">
+          <Link href="/favorites" className="hidden items-center space-x-2 md:flex">
             <FavouriteIcon className="h-5 w-5 text-yellow-500" isFavourite={false} />
             <span>Favorited</span>
           </Link>
           <Network />
           <button
+            className="hidden md:block"
             onClick={() => {
               setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
             }}
@@ -56,7 +57,7 @@ const Navbar: FC = () => {
                   openConnectModal?.();
                 }}
               >
-                Connect Wallet
+                Connect <span className="hidden md:inline">Wallet</span>
               </Button>
             )}
           </div>
