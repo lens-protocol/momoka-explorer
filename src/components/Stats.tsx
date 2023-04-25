@@ -53,11 +53,13 @@ const Stats = () => {
           href="/submitters"
           className="space-x-2 truncate font-gintoNord hover:text-[#3D794E] dark:hover:text-[#D0DBFF]"
         >
-          <span className="truncate text-2xl font-medium">
-            {submittersData?.dataAvailabilitySubmitters?.items[0].name as string}
-            {' | '}
-            {formatNumber(submittersData?.dataAvailabilitySubmitters?.items[0].totalTransactions as number)}
-          </span>
+          {submittersData?.dataAvailabilitySubmitters ? (
+            <span className="truncate text-2xl font-medium">
+              {submittersData?.dataAvailabilitySubmitters?.items[0].name as string}
+              {' | '}
+              {formatNumber(submittersData?.dataAvailabilitySubmitters?.items[0].totalTransactions as number)}
+            </span>
+          ) : null}
         </Link>
       </div>
     </div>
