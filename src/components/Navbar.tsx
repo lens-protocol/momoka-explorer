@@ -36,9 +36,9 @@ const Navbar: FC = () => {
         <div className="flex items-center space-x-2 text-[#383838] dark:text-white md:space-x-5">
           <Link
             href="/favorites"
-            className="hidden items-center space-x-2 hover:text-[#4C8C5E] hover:dark:text-[#FFEBB8] md:flex"
+            className="group hidden items-center space-x-2 hover:text-[#4C8C5E] hover:dark:text-[#FFEBB8] md:flex"
           >
-            <FavouriteIcon className="h-5 w-5" isFavourite={false} />
+            <FavouriteIcon className="mb-0.5 h-5 w-5" isFavourite={false} />
             <span>Favorited</span>
           </Link>
           <Network />

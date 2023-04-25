@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useTheme } from 'next-themes';
 import type { SVGProps } from 'react';
 import * as React from 'react';
@@ -10,9 +11,13 @@ const FavouriteIcon: React.FC<MySvgProps> = (props) => {
   const { resolvedTheme } = useTheme();
 
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" className="group" fill="none" {...props}>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" {...props}>
       <path
         stroke={resolvedTheme === 'dark' ? '#9CA19F' : '#383838'}
+        className={clsx(
+          'stroke-[#383838] group-hover:stroke-[#4C8C5E] dark:group-hover:stroke-[#FFEBB8]',
+          !props.isFavourite && 'dark:stroke-white'
+        )}
         fill={props.isFavourite ? (resolvedTheme === 'dark' ? '#9CA19F' : '#383838') : 'none'}
         strokeMiterlimit={10}
         strokeWidth={1.5}

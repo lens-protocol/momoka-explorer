@@ -24,7 +24,7 @@ const Favorite: FC<FavoriteProps> = ({ dataAvailabilityTransaction, renderItem }
 
   return (
     <button
-      className="ml-auto flex"
+      className="group ml-auto flex"
       onClick={(e) => {
         e.stopPropagation();
 

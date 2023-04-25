@@ -68,7 +68,11 @@ const SearchBar = () => {
       className="relative flex w-full rounded-full bg-[#F8FBF9] px-2 dark:bg-[#3D4B41] md:max-w-[50%]"
     >
       <span className="flex select-none items-center pl-3">
-        {loading ? <Loader className="h-6 w-6" /> : <MagnifyingGlassIcon className="h-6 w-6 opacity-50" />}
+        {loading ? (
+          <Loader className="h-6 w-6" />
+        ) : (
+          <MagnifyingGlassIcon className="h-6 w-6 dark:text-white" />
+        )}
       </span>
       <input
         ref={inputElement}
@@ -80,7 +84,7 @@ const SearchBar = () => {
         autoCorrect="false"
         style={{ boxShadow: 'none' }}
         className={clsx(
-          'flex-1 border-0 border-none bg-transparent px-4 py-4 text-sm text-[#16161B] placeholder:text-gray-400 focus:outline-none dark:text-gray-100 sm:leading-6 md:text-lg',
+          'flex-1 border-0 border-none bg-transparent px-4 py-4 text-sm text-[#16161B] placeholder:text-gray-400 focus:outline-none dark:text-white/50 sm:leading-6 md:text-lg',
           loading && 'animate-pulse'
         )}
       />
