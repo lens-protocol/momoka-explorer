@@ -54,21 +54,31 @@ const ProfileTransactions: FC = () => {
       <Card className="mt-10">
         <div className="left-0 right-0 flex flex-wrap items-center justify-between gap-y-3">
           <div>
-            <h1 className="font-medium opacity-90">All Transactions</h1>
+            <h1 className="font-medium md:text-[28px]">All transactions</h1>
           </div>
         </div>
         <div className="overflow-x-auto">
           {profileLoading || loading ? (
             <TransactionsShimmer />
           ) : (
-            <table className="min-w-full table-auto border-separate border-spacing-y-1">
+            <table className="min-w-full table-auto border-separate border-spacing-y-3">
               <thead className="text-left">
-                <tr>
-                  <th className="px-3 text-sm font-normal">Txn Id</th>
-                  <th className="w-20 px-4 text-sm font-normal">Action</th>
-                  <th className="px-3 text-sm font-normal">Age</th>
-                  <th className="px-3 text-sm font-normal">From</th>
-                  <th className="px-3 text-sm font-normal">Via</th>
+                <tr className="font-gintoNord">
+                  <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                    Txn Id
+                  </th>
+                  <th className="w-20 px-4 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                    Action
+                  </th>
+                  <th className="px-3 text-center text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                    Age
+                  </th>
+                  <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                    Sender
+                  </th>
+                  <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                    Submitter
+                  </th>
                 </tr>
               </thead>
               <tbody>
