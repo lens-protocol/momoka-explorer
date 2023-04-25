@@ -29,10 +29,8 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
       className="h-[82px] cursor-pointer overflow-hidden bg-[#F1F8F3] hover:bg-[#DFEDE3] dark:bg-[#272E29] hover:dark:bg-[#202622]"
     >
       <td className="w-48 whitespace-nowrap rounded-l-[20px] px-7 py-4 text-sm text-[#16161B]">
-        <div className="flex flex-col truncate">
-          <Link href={`/tx/${txn.transactionId}`} className="truncate text-[#3D4B41] dark:text-[#9CA19F]">
-            {truncate(txn.transactionId, 30)}
-          </Link>
+        <div className="flex flex-col truncate text-[#3D4B41] dark:text-[#9CA19F]">
+          {truncate(txn.transactionId, 30)}
         </div>
       </td>
       <td className="whitespace-nowrap px-1 py-4 text-center text-sm text-[#3D4B41] dark:text-[#C3E4CD80]">

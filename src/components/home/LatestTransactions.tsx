@@ -1,4 +1,3 @@
-import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import type { FC } from 'react';
 import { useEffect, useState } from 'react';
@@ -74,13 +73,12 @@ const LatestTransactions: FC<Props> = () => {
         <h1 className="font-medium md:text-[28px]">Latest transactions</h1>
         <Link
           href="/txns"
-          className="flex items-center space-x-2 text-sm hover:text-[#3D794E] hover:opacity-100 dark:hover:text-[#D0DBFF]"
+          className="text-[13px] font-medium uppercase leading-[15px] tracking-[-0.2px] text-[#3D4B41] dark:text-[#FFEBB8]"
         >
           <span>View all</span>
-          <ArrowRightIcon className="h-3.5 w-3.5" />
         </Link>
       </div>
-      <div className="overflow-x-auto">
+      <div className="mt-3 overflow-x-auto">
         {loading && <TransactionsShimmer />}
         <table className="min-w-full table-auto border-separate border-spacing-y-3">
           <thead className="text-left">
