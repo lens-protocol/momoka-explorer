@@ -16,6 +16,12 @@ export enum VerifierNetwork {
   SANDBOX = 'SANDBOX'
 }
 
+export enum VerifierDeployment {
+  PRODUCTION = 'PRODUCTION',
+  STAGING = 'STAGING',
+  LOCAL = 'LOCAL'
+}
+
 export enum FEATURE_FLAGS {
   STAGING_ENVIRONMENT = 'STAGING_ENVIRONMENT'
 }
