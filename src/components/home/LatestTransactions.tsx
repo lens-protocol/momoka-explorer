@@ -7,6 +7,7 @@ import useWebSocket from 'react-use-websocket';
 
 import type { DataAvailabilityTransactionUnion, DaTransactionsQuery, Profile } from '@/generated';
 import { useDaTransactionsQuery } from '@/generated';
+import { newTransactionQuery } from '@/graphql/NewTransactionSubscription';
 import { useAppPersistStore, useAppStore } from '@/store/app';
 import { getRelativeTime } from '@/utils/formatTime';
 import getConfig from '@/utils/getConfig';
@@ -49,8 +50,7 @@ const LatestTransactions: FC<Props> = () => {
           variables: {},
           extensions: {},
           operationName: 'NewTransaction',
-          query:
-            'subscription NewTransaction {\n  newDataAvailabilityTransaction {\n    ... on DataAvailabilityPost {\n      ...DAPostFields\n      __typename\n    }\n    ... on DataAvailabilityComment {\n      ...DACommentFields\n      __typename\n    }\n    ... on DataAvailabilityMirror {\n      ...DAMirrorFields\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment DAPostFields on DataAvailabilityPost {\n  transactionId\n  submitter\n  createdAt\n  appId\n  profile {\n    ...ProfileFields\n    __typename\n  }\n  publicationId\n  __typename\n}\n\nfragment ProfileFields on Profile {\n  id\n  name\n  handle\n  bio\n  ownedBy\n  isFollowedByMe\n  stats {\n    totalFollowers\n    totalFollowing\n    totalPosts\n    totalComments\n    totalMirrors\n    __typename\n  }\n  attributes {\n    key\n    value\n    __typename\n  }\n  picture {\n    ... on MediaSet {\n      original {\n        url\n        __typename\n      }\n      __typename\n    }\n    ... on NftImage {\n      uri\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n\nfragment DACommentFields on DataAvailabilityComment {\n  transactionId\n  submitter\n  createdAt\n  appId\n  profile {\n    ...ProfileFields\n    __typename\n  }\n  publicationId\n  commentedOnProfile {\n    ...ProfileFields\n    __typename\n  }\n  commentedOnPublicationId\n  __typename\n}\n\nfragment DAMirrorFields on DataAvailabilityMirror {\n  transactionId\n  submitter\n  createdAt\n  appId\n  profile {\n    ...ProfileFields\n    __typename\n  }\n  publicationId\n  mirrorOfProfile {\n    ...ProfileFields\n    __typename\n  }\n  mirrorOfPublicationId\n  __typename\n}'
+          query: newTransactionQuery
         }
       });
     }
