@@ -67,6 +67,9 @@ dependencies:
   react-json-view:
     specifier: ^1.21.3
     version: 1.21.3(@types/react@18.0.35)(react-dom@18.2.0)(react@18.2.0)
+  react-use-websocket:
+    specifier: ^4.3.1
+    version: 4.3.1(react-dom@18.2.0)(react@18.2.0)
   subscriptions-transport-ws:
     specifier: ^0.11.0
     version: 0.11.0(graphql@16.6.0)
@@ -7416,6 +7419,16 @@ packages:
       use-latest: 1.2.1(@types/react@18.0.35)(react@18.2.0)
     transitivePeerDependencies:
       - '@types/react'
+    dev: false
+
+  /react-use-websocket@4.3.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-zHPLWrgcqydJaak2O5V9hiz4q2dwkwqNQqpgFVmSuPxLZdsZlnDs8DVHy3WtHH+A6ms/8aHIyX7+7ulOcrnR0Q==}
+    peerDependencies:
+      react: '>= 18.0.0'
+      react-dom: '>= 18.0.0'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react@18.2.0:
