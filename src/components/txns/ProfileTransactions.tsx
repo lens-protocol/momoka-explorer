@@ -51,7 +51,7 @@ const ProfileTransactions: FC = () => {
   return (
     <div>
       <TxnProfile profile={profileData?.profile as Profile} />
-      <Card className="mt-6">
+      <Card className="mt-10">
         <div className="left-0 right-0 flex flex-wrap items-center justify-between gap-y-3">
           <div>
             <h1 className="font-medium opacity-90">All Transactions</h1>
