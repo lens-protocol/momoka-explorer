@@ -5,6 +5,8 @@ import type { Profile } from '@/generated';
 import formatAddress from '@/utils/formatAddress';
 import getProfilePicture from '@/utils/getProfilePicture';
 
+import Card from '../ui/Card';
+
 interface TxnProfileProps {
   profile: Profile;
 }
@@ -15,7 +17,7 @@ const TxnProfile: FC<TxnProfileProps> = ({ profile }) => {
   }
 
   return (
-    <div className="relative mt-6 space-y-4 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 dark:border-[#16161B] dark:bg-[#1C1B22] md:p-5">
+    <Card className="mt-6">
       <div className="flex flex-wrap items-center justify-between">
         <div className="flex max-w-3xl items-center space-x-5">
           <img src={getProfilePicture(profile)} alt="avatar" className="h-32 w-32 rounded-full" />
@@ -51,7 +53,7 @@ const TxnProfile: FC<TxnProfileProps> = ({ profile }) => {
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

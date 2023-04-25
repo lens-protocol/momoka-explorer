@@ -8,6 +8,7 @@ import ReactJson from 'react-json-view';
 import type { DataAvailabilityTransactionUnion } from '@/generated';
 import { usePublicationQuery } from '@/generated';
 
+import Card from '../ui/Card';
 import { Meta } from '.';
 import Verify from './Verify';
 
@@ -36,7 +37,7 @@ const MoreDetails: FC<MoreDetailsProps> = ({ dataAvailabilityTransaction }) => {
   }, []);
 
   return (
-    <div className="relative mt-6 space-y-4 rounded-xl border border-gray-100 bg-gray-50 px-2 py-3 dark:border-[#1C1B22] dark:bg-[#1C1B22] md:px-5">
+    <Card className="mt-6">
       <Disclosure>
         {({ open }) => (
           <>
@@ -71,7 +72,7 @@ const MoreDetails: FC<MoreDetailsProps> = ({ dataAvailabilityTransaction }) => {
           </>
         )}
       </Disclosure>
-    </div>
+    </Card>
   );
 };
 

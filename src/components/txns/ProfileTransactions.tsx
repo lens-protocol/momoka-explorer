@@ -8,6 +8,7 @@ import { useDaTransactionsQuery, useProfileQuery } from '@/generated';
 
 import TxnProfile from '../shared/TxnProfile';
 import TransactionsShimmer from '../shimmers/TransactionsShimmer';
+import Card from '../ui/Card';
 import SingleTransaction from './SingleTransaction';
 
 const ProfileTransactions: FC = () => {
@@ -50,7 +51,7 @@ const ProfileTransactions: FC = () => {
   return (
     <div>
       <TxnProfile profile={profileData?.profile as Profile} />
-      <div className="relative mt-6 space-y-4 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 dark:border-[#16161B] dark:bg-[#1C1B22] md:p-5">
+      <Card className="mt-6">
         <div className="left-0 right-0 flex flex-wrap items-center justify-between gap-y-3">
           <div>
             <h1 className="font-medium opacity-90">All Transactions</h1>
@@ -85,7 +86,7 @@ const ProfileTransactions: FC = () => {
             </div>
           ) : null}
         </div>
-      </div>
+      </Card>
     </div>
   );
 };

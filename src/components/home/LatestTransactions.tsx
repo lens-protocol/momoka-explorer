@@ -14,6 +14,7 @@ import getProfilePicture from '@/utils/getProfilePicture';
 
 import Favorite from '../shared/Favorite';
 import TransactionsShimmer from '../shimmers/TransactionsShimmer';
+import Card from '../ui/Card';
 
 type Props = {};
 
@@ -52,7 +53,7 @@ const LatestTransactions: FC<Props> = () => {
   });
 
   return (
-    <div className="relative rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 dark:border-[#16161B] dark:bg-[#1C1B22] md:space-y-2 md:p-5">
+    <Card>
       <div className="left-0 right-0 flex items-center justify-between gap-y-3">
         <h1 className="text-sm font-medium opacity-90">Latest Transactions</h1>
         <Link
@@ -161,7 +162,7 @@ const LatestTransactions: FC<Props> = () => {
           </tbody>
         </table>
       </div>
-    </div>
+    </Card>
   );
 };
 

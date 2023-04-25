@@ -25,6 +25,7 @@ import Favorite from '../shared/Favorite';
 import Profile from '../shared/Profile';
 import TransactionShimmer from '../shimmers/TransactionShimmer';
 import { Button } from '../ui/Button';
+import Card from '../ui/Card';
 import MoreDetails from './MoreDetails';
 
 interface MetaProps {
@@ -90,7 +91,7 @@ const Transaction: FC = () => {
 
   return (
     <>
-      <div className="relative mt-6 space-y-4 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 dark:border-[#1C1B22] dark:bg-[#1C1B22] md:p-5">
+      <Card className="mt-6">
         <div className="flex flex-wrap items-center justify-between space-y-3 px-4 sm:px-0">
           <div>
             <h3 className="font-medium opacity-80">Transaction Details</h3>
@@ -245,7 +246,7 @@ const Transaction: FC = () => {
             }
           />
         </div>
-      </div>
+      </Card>
       <MoreDetails
         dataAvailabilityTransaction={dataAvailabilityTransaction as DataAvailabilityTransactionUnion}
       />
