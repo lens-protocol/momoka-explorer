@@ -1,12 +1,13 @@
 import React, { useMemo } from 'react';
 
 import { Meta } from '../Transaction';
+import Card from '../ui/Card';
 
 const TransactionShimmer = () => {
   const txns = useMemo(() => Array(8).fill(1), []);
 
   return (
-    <div className="relative mt-6 space-y-4 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 dark:border-[#16161B] dark:bg-[#1C1B22] md:p-5">
+    <Card className="mt-6">
       <div className="flex flex-wrap items-center justify-between space-y-3 px-4 sm:px-0">
         <div>
           <h3 className="font-medium opacity-80">Transaction Details</h3>
@@ -28,7 +29,7 @@ const TransactionShimmer = () => {
           />
         ))}
       </div>
-    </div>
+    </Card>
   );
 };
 

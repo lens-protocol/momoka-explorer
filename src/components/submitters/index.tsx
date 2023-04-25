@@ -4,12 +4,13 @@ import { useDataAvailabilitySubmittersQuery } from '@/generated';
 import formatNumber from '@/utils/formatNumber';
 
 import TransactionsShimmer from '../shimmers/TransactionsShimmer';
+import Card from '../ui/Card';
 
 const Submitters = () => {
   const { loading, data } = useDataAvailabilitySubmittersQuery();
 
   return (
-    <div className="relative my-10 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 dark:border-gray-950 dark:bg-[#1C1B22] md:space-y-2 md:p-5">
+    <Card className="my-6">
       <div className="left-0 right-0 flex items-center justify-between gap-y-3">
         <h1 className="text-sm font-medium opacity-90">All Submitters</h1>
       </div>
@@ -40,7 +41,7 @@ const Submitters = () => {
           </tbody>
         </table>
       </div>
-    </div>
+    </Card>
   );
 };
 
