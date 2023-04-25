@@ -4,6 +4,7 @@ import { useAppPersistStore } from '@/store/app';
 import type { DataAvailabilityTransactionUnionWithNetwork } from '@/store/favorites';
 import { useFavoritesPersistStore } from '@/store/favorites';
 
+import Card from '../ui/Card';
 import SingleTransaction from './SingleTransaction';
 
 const AllFavorites: FC = () => {
@@ -14,7 +15,7 @@ const AllFavorites: FC = () => {
   const favoritesCount = favoritesByNetwork.length;
 
   return (
-    <div className="relative mt-6 space-y-4 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 dark:border-[#16161B] dark:bg-[#1C1B22] md:p-5">
+    <Card className="mt-6">
       <div className="left-0 right-0 flex flex-wrap items-center justify-between gap-y-3">
         <div>
           <h1 className="font-medium opacity-90">All Favorites</h1>
@@ -39,7 +40,7 @@ const AllFavorites: FC = () => {
           </tbody>
         </table>
       </div>
-    </div>
+    </Card>
   );
 };
 
