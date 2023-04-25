@@ -1,5 +1,5 @@
-import type { Deployment, Environment, EthereumNode } from '@lens-protocol/data-availability-verifier/client';
-import { checkDAProof } from '@lens-protocol/data-availability-verifier/client';
+import type { Deployment, Environment, EthereumNode } from '@lens-protocol/bonsai/client';
+import { checkDAProof } from '@lens-protocol/bonsai/client';
 
 import getConfig from './getConfig';
 

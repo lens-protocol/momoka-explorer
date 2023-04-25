@@ -15,7 +15,7 @@
     "@apollo/client": "^3.7.12",
     "@headlessui/react": "^1.7.14",
     "@heroicons/react": "^2.0.17",
-    "@lens-protocol/data-availability-verifier": "^0.0.24",
+    "@lens-protocol/bonsai": "^0.0.1",
     "@rainbow-me/rainbowkit": "^0.12.9",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",
