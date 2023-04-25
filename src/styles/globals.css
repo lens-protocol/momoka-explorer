@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  @apply min-h-screen bg-white bg-fixed dark:bg-[#16161B];
+  @apply min-h-screen bg-white bg-fixed dark:bg-[#364039];
 }
 
 .fade-enter {

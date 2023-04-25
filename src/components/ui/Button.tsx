@@ -16,7 +16,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
     <button
       ref={ref}
       className={clsx(
-        'rounded-lg border px-3 py-1 shadow-sm ring-offset-0 focus:outline-none focus:ring-2 focus:ring-[#3D794E] focus:ring-opacity-50 disabled:opacity-50 dark:border-gray-700 dark:focus:ring-[#3D794E]',
+        'rounded-full border bg-[#C3E4CD] px-3 py-1 shadow-sm ring-offset-0 focus:outline-none disabled:opacity-50',
         className
       )}
       type={rest.type}

@@ -24,8 +24,10 @@ const Favorite: FC<FavoriteProps> = ({ dataAvailabilityTransaction, renderItem }
 
   return (
     <button
-      className="flex"
-      onClick={() => {
+      className="ml-auto flex"
+      onClick={(e) => {
+        e.stopPropagation();
+
         isFavorite
           ? removeFavorite(
               dataAvailabilityTransaction as DataAvailabilityTransactionUnion,

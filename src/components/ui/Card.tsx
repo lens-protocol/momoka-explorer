@@ -7,16 +7,7 @@ interface CardProps {
 }
 
 const Card: FC<CardProps> = ({ children, className = '' }) => {
-  return (
-    <div
-      className={clsx(
-        'relative space-y-4 rounded-xl border border-gray-100 bg-gray-50 px-2 py-4 dark:border-[#16161B] dark:bg-[#1C1B22] md:p-5',
-        className
-      )}
-    >
-      {children}
-    </div>
-  );
+  return <div className={clsx('relative rounded-xl px-2 md:px-0', className)}>{children}</div>;
 };
 
 export default Card;

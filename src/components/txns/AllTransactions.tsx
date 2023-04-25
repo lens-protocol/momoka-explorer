@@ -42,27 +42,37 @@ const AllTransactions: FC = () => {
   });
 
   return (
-    <Card className="mt-5">
+    <Card className="mt-10">
       <div className="left-0 right-0 flex flex-wrap items-center justify-between gap-y-3">
         <div>
-          <h1 className="font-medium opacity-90">All Transactions</h1>
-          <p className="text-sm opacity-60">
+          <h1 className="font-medium md:text-[28px]">Latest transactions</h1>
+          <p className="text-sm opacity-70">
             {loadingSummary ? 'Loading...' : `${summary?.totalTransactions} transactions found`}
           </p>
         </div>
       </div>
-      <div className="overflow-x-auto">
+      <div className="mt-7 overflow-x-auto">
         {loading ? (
           <TransactionsShimmer />
         ) : (
           <table className="min-w-full table-auto border-separate border-spacing-y-1">
             <thead className="text-left">
               <tr>
-                <th className="px-3 text-sm font-normal">Txn Id</th>
-                <th className="w-20 px-4 text-sm font-normal">Action</th>
-                <th className="px-3 text-sm font-normal">Age</th>
-                <th className="px-3 text-sm font-normal">From</th>
-                <th className="px-3 text-sm font-normal">Via</th>
+                <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                  Txn Id
+                </th>
+                <th className="w-20 px-4 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                  Action
+                </th>
+                <th className="px-3 text-center text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                  Age
+                </th>
+                <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                  Sender
+                </th>
+                <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                  Submitter
+                </th>
               </tr>
             </thead>
             <tbody>
