@@ -14,23 +14,26 @@ interface VerifyProps {
 }
 
 const Verify: FC<VerifyProps> = ({ dataAvailabilityTransaction }) => {
-  const [nodeUrl, setNodeUrl] = useState<string>('');
+  const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
+  const [nodeUrl, setNodeUrl] = useState<string>(
+    selectedEnvironment.id === 'mainnet'
+      ? 'https://rpc.ankr.com/polygon'
+      : 'https://rpc.ankr.com/polygon_mumbai'
+  );
   const [status, setStatus] = useState<'UNKNOWN' | 'VERIFIED' | 'NOT_VERIFIED'>('UNKNOWN');
   const [message, setMessage] = useState<any>();
-  const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
 
   return (
     <div className="w-full">
       <div className="space-y-3">
         <div>
           <Input
-            label="Verify with your own node URL"
-            placeholder="Your node URL"
+            label="You can use your own node by replacing the below, it must be an archive node"
+            placeholder="Public RPC node"
             type="text"
             value={nodeUrl}
             onChange={(e) => setNodeUrl(e.target.value)}
           />
-          <div className="mt-1 text-xs">It must be an archive node</div>
         </div>
         <Button
           type="button"
