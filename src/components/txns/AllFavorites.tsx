@@ -22,7 +22,7 @@ const AllFavorites: FC = () => {
           <p className="text-sm opacity-60">{`${favoritesCount} favorites found`}</p>
         </div>
       </div>
-      <div className="overflow-x-auto">
+      <div className="mt-7 overflow-x-auto">
         <table className="min-w-full table-auto border-separate border-spacing-y-1">
           <thead className="text-left">
             <tr>
