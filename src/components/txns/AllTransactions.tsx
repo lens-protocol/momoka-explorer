@@ -55,9 +55,9 @@ const AllTransactions: FC = () => {
         {loading ? (
           <TransactionsShimmer />
         ) : (
-          <table className="min-w-full table-auto border-separate border-spacing-y-1">
+          <table className="min-w-full table-auto border-separate border-spacing-y-3">
             <thead className="text-left">
-              <tr>
+              <tr className="font-gintoNord">
                 <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
                   Txn Id
                 </th>

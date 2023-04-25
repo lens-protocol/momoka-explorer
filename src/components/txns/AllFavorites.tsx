@@ -23,14 +23,18 @@ const AllFavorites: FC = () => {
         </div>
       </div>
       <div className="mt-7 overflow-x-auto">
-        <table className="min-w-full table-auto border-separate border-spacing-y-1">
+        <table className="min-w-full table-auto border-separate border-spacing-y-3">
           <thead className="text-left">
-            <tr>
-              <th className="px-3 text-sm font-normal">Txn Id</th>
-              <th className="w-20 px-4 text-sm font-normal">Action</th>
-              <th className="px-3 text-sm font-normal">Age</th>
-              <th className="px-3 text-sm font-normal">From</th>
-              <th className="px-3 text-sm font-normal">Via</th>
+            <tr className="font-gintoNord">
+              <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">Txn Id</th>
+              <th className="px-3 text-center text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                Action
+              </th>
+              <th className="px-3 text-center text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                Age
+              </th>
+              <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">From</th>
+              <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">Via</th>
             </tr>
           </thead>
           <tbody>

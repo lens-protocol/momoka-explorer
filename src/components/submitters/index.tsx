@@ -20,7 +20,7 @@ const Submitters = () => {
         ) : (
           <table className="min-w-full table-auto border-separate border-spacing-y-3">
             <thead className="text-left">
-              <tr>
+              <tr className="font-gintoNord">
                 <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">Name</th>
                 <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
                   Address
