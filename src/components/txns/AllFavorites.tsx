@@ -18,7 +18,7 @@ const AllFavorites: FC = () => {
     <Card className="mt-6">
       <div className="left-0 right-0 flex flex-wrap items-center justify-between gap-y-3">
         <div>
-          <h1 className="font-medium opacity-90">All Favorites</h1>
+          <h1 className="font-medium md:text-[28px]">All Favorites</h1>
           <p className="text-sm opacity-60">{`${favoritesCount} favorites found`}</p>
         </div>
       </div>
