@@ -1,3 +1,4 @@
+import { StopCircleIcon } from '@heroicons/react/24/outline';
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/solid';
 import type { FC } from 'react';
 import { useState } from 'react';
@@ -21,6 +22,7 @@ const Verify: FC<VerifyProps> = ({ dataAvailabilityTransaction }) => {
       : 'https://rpc.ankr.com/polygon_mumbai'
   );
   const [status, setStatus] = useState<'UNKNOWN' | 'VERIFIED' | 'NOT_VERIFIED'>('UNKNOWN');
+  const [loading, setLoading] = useState<boolean>(false);
   const [message, setMessage] = useState<any>();
 
   return (
@@ -39,18 +41,24 @@ const Verify: FC<VerifyProps> = ({ dataAvailabilityTransaction }) => {
           type="button"
           disabled={!nodeUrl}
           onClick={() => {
-            isDataVerified(dataAvailabilityTransaction.transactionId, nodeUrl, selectedEnvironment.id).then(
-              ({ verified, message }) => {
+            setLoading(true);
+            isDataVerified(dataAvailabilityTransaction.transactionId, nodeUrl, selectedEnvironment.id)
+              .then(({ verified, message }) => {
                 setStatus(verified ? 'VERIFIED' : 'NOT_VERIFIED');
                 setMessage(message);
-              }
-            );
+              })
+              .finally(() => setLoading(false));
           }}
         >
           Verify
         </Button>
       </div>
-      {status === 'UNKNOWN' ? null : status === 'VERIFIED' ? (
+      {loading ? (
+        <div className="mt-5 flex items-center space-x-2 font-bold">
+          <StopCircleIcon className="h-5 w-5 animate-spin" />
+          <span>Verifying...</span>
+        </div>
+      ) : status === 'UNKNOWN' ? null : status === 'VERIFIED' ? (
         <div className="mt-5 flex items-center space-x-2 font-bold text-green-500">
           <CheckCircleIcon className="h-5 w-5" />
           <span>Verified</span>
