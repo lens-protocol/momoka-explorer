@@ -12,11 +12,11 @@ import StatsShimmer from './shimmers/StatsShimmer';
 const Stats = () => {
   const lastFinalizedTransaction = useAppStore((state) => state.lastFinalizedTransaction);
 
-  const { data: submittersData } = useDataAvailabilitySubmittersQuery();
+  const { data: submittersData, loading: submittersDataLoading } = useDataAvailabilitySubmittersQuery();
   const { data, loading } = useDaSummaryQuery();
   const stats = data?.dataAvailabilitySummary;
 
-  if (loading) {
+  if (loading || submittersDataLoading) {
     return <StatsShimmer />;
   }
 
