@@ -34,13 +34,16 @@ const Navbar: FC = () => {
           Bonsai
         </Link>
         <div className="flex items-center space-x-2 text-[#383838] dark:text-white md:space-x-5">
-          <Link href="/favorites" className="hidden items-center space-x-2 md:flex">
+          <Link
+            href="/favorites"
+            className="hidden items-center space-x-2 hover:text-[#4C8C5E] hover:dark:text-[#FFEBB8] md:flex"
+          >
             <FavouriteIcon className="h-5 w-5" isFavourite={false} />
             <span>Favorited</span>
           </Link>
           <Network />
           <button
-            className="hidden md:block"
+            className="hidden hover:text-[#4C8C5E] hover:dark:text-[#FFEBB8] md:block"
             onClick={() => {
               setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
             }}
@@ -52,7 +55,7 @@ const Navbar: FC = () => {
               <UserMenu profiles={data?.profiles.items as Profile[]} />
             ) : (
               <Button
-                className="px-5 py-3 text-[13px] font-bold uppercase leading-[13px] text-[#383838] dark:bg-[#FFEBB8]"
+                className="px-5 py-3 text-[13px] font-bold uppercase leading-[13px] text-[#383838]"
                 onClick={() => {
                   openConnectModal?.();
                 }}
