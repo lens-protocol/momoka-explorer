@@ -1,3 +1,6 @@
+export const ARWEAVE_GATEWAY_URL = 'https://arweave.net';
+export const IPFS_GATEWAY_URL = 'https://gateway.ipfscdn.io/ipfs';
+
 export enum LensterUrl {
   STAGING = 'https://staging.lenster.xyz',
   TESTNET = 'https://testnet.lenster.xyz',
