@@ -2,10 +2,9 @@ import {
   ArrowTopRightOnSquareIcon,
   BoltIcon,
   ClockIcon,
-  DocumentDuplicateIcon,
-  StarIcon
+  DocumentDuplicateIcon
 } from '@heroicons/react/24/outline';
-import { CheckCircleIcon, StarIcon as StarIconSolid } from '@heroicons/react/24/solid';
+import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -21,6 +20,7 @@ import capitalizeCase from '@/utils/capitalizeCase';
 import { getRelativeTime } from '@/utils/formatTime';
 import getLensterLink from '@/utils/getLensterLink';
 
+import FavouriteIcon from '../FavouriteIcon';
 import Favorite from '../shared/Favorite';
 import Profile from '../shared/Profile';
 import TransactionShimmer from '../shimmers/TransactionShimmer';
@@ -94,7 +94,7 @@ const Transaction: FC = () => {
       <Card className="mt-6 bg-[#F1F8F3] !p-5 dark:bg-[#272E29]">
         <div className="flex flex-wrap items-center justify-between space-y-3 px-4 sm:px-0">
           <div>
-            <h3 className="font-medium opacity-80">Transaction Details</h3>
+            <h1 className="font-medium md:text-[28px]">Transaction Details</h1>
             <p className="text-sm opacity-60">All Transaction related information will be displayed here.</p>
           </div>
           <Favorite
@@ -102,11 +102,7 @@ const Transaction: FC = () => {
             renderItem={(isFavorite) => {
               return (
                 <Button className="flex items-center space-x-2 text-xs sm:text-sm">
-                  {isFavorite ? (
-                    <StarIconSolid className="h-3 w-3 text-yellow-500 sm:h-4 sm:w-4" />
-                  ) : (
-                    <StarIcon className="h-3 w-3 text-yellow-500 sm:h-4 sm:w-4" />
-                  )}
+                  <FavouriteIcon className="sm:h-4 sm:w-4" isFavourite={isFavorite} />
                   <span>{isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}</span>
                 </Button>
               );

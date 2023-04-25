@@ -54,7 +54,6 @@ const LatestTransactions: FC<Props> = () => {
   useEffect(() => {
     const jsonData = JSON.parse(lastMessage?.data || '{}');
     const daData = jsonData?.payload?.data;
-    console.log('🚀 ~ daData:', daData, lastMessage);
 
     if (daData) {
       const txn = daData?.newDataAvailabilityTransaction as DataAvailabilityTransactionUnion;

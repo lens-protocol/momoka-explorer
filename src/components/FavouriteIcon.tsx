@@ -11,7 +11,7 @@ const FavouriteIcon: React.FC<MySvgProps> = (props) => {
   const { resolvedTheme } = useTheme();
 
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" {...props}>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" {...props}>
       <path
         stroke={resolvedTheme === 'dark' ? '#9CA19F' : '#383838'}
         className={clsx(
