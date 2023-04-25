@@ -13,7 +13,7 @@ const index = () => {
       <div className="flex justify-center py-10 md:py-28">
         <SearchBar />
       </div>
-      <div className="mb-10 space-y-4">
+      <div className="mb-10">
         <Stats />
         <LatestTransactions />
       </div>

@@ -3,7 +3,6 @@ import React from 'react';
 
 import { useDaSummaryQuery, useDataAvailabilitySubmittersQuery } from '@/generated';
 import { useAppStore } from '@/store/app';
-import formatAddress from '@/utils/formatAddress';
 import formatNumber from '@/utils/formatNumber';
 import { getRelativeTime } from '@/utils/formatTime';
 import sanitizeDStorageUrl from '@/utils/sanitizeDStorageUrl';
@@ -13,11 +12,11 @@ import StatsShimmer from './shimmers/StatsShimmer';
 const Stats = () => {
   const lastFinalizedTransaction = useAppStore((state) => state.lastFinalizedTransaction);
 
-  const { data: submittersData } = useDataAvailabilitySubmittersQuery();
+  const { data: submittersData, loading: submittersDataLoading } = useDataAvailabilitySubmittersQuery();
   const { data, loading } = useDaSummaryQuery();
   const stats = data?.dataAvailabilitySummary;
 
-  if (loading) {
+  if (loading || submittersDataLoading) {
     return <StatsShimmer />;
   }
 
@@ -27,36 +26,40 @@ const Stats = () => {
 
   return (
     <div className="grid gap-4 lg:grid-cols-3">
-      <div className="flex flex-col space-y-0.5 rounded-xl border border-gray-100 bg-gray-50 px-6 py-6 dark:border-[#16161B] dark:bg-[#1C1B22]">
-        <span className="text-xs font-medium uppercase tracking-wider opacity-50">Transactions</span>
+      <div className="flex flex-col items-center space-y-0.5 rounded-[20px] bg-[#F1F8F3] px-6 py-6 dark:bg-[#272E29]">
+        <span className="text-center text-xs font-medium uppercase tracking-wider opacity-50">
+          Transactions
+        </span>
         <span className="font-gintoNord text-2xl font-medium">{formatNumber(stats.totalTransactions)}</span>
       </div>
-      <div className="flex flex-col space-y-0.5 truncate rounded-xl border border-gray-100 bg-gray-50 px-6 py-6 dark:border-[#16161B] dark:bg-[#1C1B22]">
-        <span className="text-xs font-medium uppercase tracking-wider opacity-50">Last Finalized</span>
+      <div className="flex flex-col items-center space-y-0.5 truncate rounded-[20px] bg-[#F1F8F3] px-6 py-6 dark:bg-[#272E29]">
+        <span className="text-center text-xs font-medium uppercase tracking-wider opacity-50">
+          Last Finalized
+        </span>
         <Link
           href={`/tx/${sanitizeDStorageUrl(lastFinalizedTransaction?.transactionId as string)}`}
           className="space-x-2 truncate font-gintoNord hover:text-[#3D794E] dark:hover:text-[#D0DBFF]"
         >
           <span className="truncate text-2xl font-medium">
-            {formatAddress(lastFinalizedTransaction?.transactionId as string)}
-          </span>
-          <span className="truncate text-xs opacity-70">
-            {getRelativeTime(lastFinalizedTransaction?.createdAt)}
+            {lastFinalizedTransaction ? getRelativeTime(lastFinalizedTransaction?.createdAt) : ''}
           </span>
         </Link>
       </div>
-      <div className="flex flex-col space-y-0.5 truncate rounded-xl border border-gray-100 bg-gray-50 px-6 py-6 dark:border-[#16161B] dark:bg-[#1C1B22]">
-        <span className="text-xs font-medium uppercase tracking-wider opacity-50">Top Submitters</span>
+      <div className="flex flex-col items-center space-y-0.5 truncate rounded-[20px] bg-[#F1F8F3] px-6 py-6 dark:bg-[#272E29]">
+        <span className="text-center text-xs font-medium uppercase tracking-wider opacity-50">
+          Top Submitters
+        </span>
         <Link
           href="/submitters"
           className="space-x-2 truncate font-gintoNord hover:text-[#3D794E] dark:hover:text-[#D0DBFF]"
         >
-          <span className="truncate text-2xl font-medium">
-            {submittersData?.dataAvailabilitySubmitters?.items[0].name as string}
-            {' | '}
-            {formatNumber(submittersData?.dataAvailabilitySubmitters?.items[0].totalTransactions as number)}
-          </span>
-          <span className="truncate text-xs opacity-70">View all</span>
+          {submittersData?.dataAvailabilitySubmitters ? (
+            <span className="truncate text-2xl font-medium">
+              {submittersData?.dataAvailabilitySubmitters?.items[0].name as string}
+              {' | '}
+              {formatNumber(submittersData?.dataAvailabilitySubmitters?.items[0].totalTransactions as number)}
+            </span>
+          ) : null}
         </Link>
       </div>
     </div>
