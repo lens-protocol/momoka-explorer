@@ -1,24 +1,10 @@
-import { ApolloClient, split } from '@apollo/client';
-import { getMainDefinition } from '@apollo/client/utilities';
+import { ApolloClient } from '@apollo/client';
 
 import cache from './cache';
 import httpLink from './httpLink';
-import wsLink from './wsLink';
-
-const splitLink =
-  typeof window !== 'undefined' && wsLink != null
-    ? split(
-        ({ query }) => {
-          const definition = getMainDefinition(query);
-          return definition.kind === 'OperationDefinition' && definition.operation === 'subscription';
-        },
-        wsLink,
-        httpLink
-      )
-    : httpLink;
 
 const client = new ApolloClient({
-  link: splitLink,
+  link: httpLink,
   cache
 });
 

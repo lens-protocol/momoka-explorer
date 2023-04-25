@@ -2,10 +2,11 @@ import { ArrowRightIcon, ArrowsRightLeftIcon, StarIcon } from '@heroicons/react/
 import { StarIcon as StarIconSolid } from '@heroicons/react/24/solid';
 import Link from 'next/link';
 import type { FC } from 'react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import useWebSocket from 'react-use-websocket';
 
 import type { DataAvailabilityTransactionUnion, DaTransactionsQuery, Profile } from '@/generated';
-import { useDaTransactionsQuery, useNewTransactionSubscription } from '@/generated';
+import { useDaTransactionsQuery } from '@/generated';
 import { useAppPersistStore, useAppStore } from '@/store/app';
 import { getRelativeTime } from '@/utils/formatTime';
 import getDAActionType from '@/utils/getDAActionType';
@@ -22,6 +23,10 @@ const LatestTransactions: FC<Props> = () => {
   const setLastFinalizedTransaction = useAppStore((state) => state.setLastFinalizedTransaction);
   const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
   const [latestTransactions, setLatestTransactions] = useState<Array<DataAvailabilityTransactionUnion>>();
+  const { sendJsonMessage, lastMessage, readyState } = useWebSocket(
+    'wss://staging-api-social-mumbai.lens.crtlkey.com',
+    { protocols: ['graphql-ws'] }
+  );
 
   const onCompleted = (data: DaTransactionsQuery) => {
     const txns = data?.dataAvailabilityTransactions.items;
@@ -34,23 +39,38 @@ const LatestTransactions: FC<Props> = () => {
     onCompleted
   });
 
-  useNewTransactionSubscription({
-    onError: (data) => {
-      console.log('🚀 ~ Socket Error:', data);
-    },
-    onSubscriptionData: ({ subscriptionData }) => {
-      const { data } = subscriptionData;
-      if (!data) {
-        return;
-      }
-      const txn = data?.newDataAvailabilityTransaction as DataAvailabilityTransactionUnion;
+  useEffect(() => {
+    if (readyState === 1) {
+      sendJsonMessage({
+        id: '1',
+        type: 'start',
+        payload: {
+          variables: {},
+          extensions: {},
+          operationName: 'NewTransaction',
+          query:
+            'subscription NewTransaction {\n  newDataAvailabilityTransaction {\n    ... on DataAvailabilityPost {\n      ...DAPostFields\n      __typename\n    }\n    ... on DataAvailabilityComment {\n      ...DACommentFields\n      __typename\n    }\n    ... on DataAvailabilityMirror {\n      ...DAMirrorFields\n      __typename\n    }\n    __typename\n  }\n}\n\nfragment DAPostFields on DataAvailabilityPost {\n  transactionId\n  submitter\n  createdAt\n  appId\n  profile {\n    ...ProfileFields\n    __typename\n  }\n  publicationId\n  __typename\n}\n\nfragment ProfileFields on Profile {\n  id\n  name\n  handle\n  bio\n  ownedBy\n  isFollowedByMe\n  stats {\n    totalFollowers\n    totalFollowing\n    totalPosts\n    totalComments\n    totalMirrors\n    __typename\n  }\n  attributes {\n    key\n    value\n    __typename\n  }\n  picture {\n    ... on MediaSet {\n      original {\n        url\n        __typename\n      }\n      __typename\n    }\n    ... on NftImage {\n      uri\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n\nfragment DACommentFields on DataAvailabilityComment {\n  transactionId\n  submitter\n  createdAt\n  appId\n  profile {\n    ...ProfileFields\n    __typename\n  }\n  publicationId\n  commentedOnProfile {\n    ...ProfileFields\n    __typename\n  }\n  commentedOnPublicationId\n  __typename\n}\n\nfragment DAMirrorFields on DataAvailabilityMirror {\n  transactionId\n  submitter\n  createdAt\n  appId\n  profile {\n    ...ProfileFields\n    __typename\n  }\n  publicationId\n  mirrorOfProfile {\n    ...ProfileFields\n    __typename\n  }\n  mirrorOfPublicationId\n  __typename\n}'
+        }
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [readyState]);
+
+  useEffect(() => {
+    const jsonData = JSON.parse(lastMessage?.data || '{}');
+    const daData = jsonData?.payload?.data;
+    console.log('🚀 ~ daData:', daData, lastMessage);
+
+    if (daData) {
+      const txn = daData?.newDataAvailabilityTransaction as DataAvailabilityTransactionUnion;
       setLastFinalizedTransaction({ ...txn });
       let oldTxns = [...(latestTransactions as DataAvailabilityTransactionUnion[])];
       oldTxns.unshift(txn);
       oldTxns.pop();
       setLatestTransactions(oldTxns);
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lastMessage]);
 
   return (
     <Card>
