@@ -56,12 +56,18 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
                 draggable={false}
               />
             </span>
-            <span>{txn.profile.handle}</span>
+            <span className="hover:text-[#4C8C5E] hover:dark:text-[#FFEBB8]">{txn.profile.handle}</span>
           </span>
         </Link>
       </td>
       <td className="whitespace-nowrap px-3 py-2 text-sm text-[#383838] dark:text-[#C3E4CD80]">
-        {truncate(txn.submitter, 20)}
+        <Link
+          onClick={(e) => e.stopPropagation()}
+          href="submitters"
+          className="hover:text-[#4C8C5E] hover:dark:text-[#FFEBB8]"
+        >
+          {truncate(txn.submitter, 20)}
+        </Link>
       </td>
       <td className="whitespace-nowrap px-3 py-4">
         <Favorite
@@ -76,7 +82,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
           href={`${getLensterLink(selectedEnvironment.id)}/posts/${txn.publicationId}`}
           target="_blank"
         >
-          <ArrowTopRightOnSquareIcon className="h-6 w-6 text-[#3D4B41] dark:text-[#9CA19F]" />
+          <ArrowTopRightOnSquareIcon className="h-6 w-6 text-[#3D4B41] hover:text-[#4C8C5E] dark:text-[#9CA19F] hover:dark:text-[#FFEBB8]" />
         </Link>
       </td>
     </tr>

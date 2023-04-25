@@ -11,35 +11,42 @@ const Submitters = () => {
 
   return (
     <Card className="my-6">
-      <div className="left-0 right-0 flex items-center justify-between gap-y-3">
-        <h1 className="text-sm font-medium opacity-90">All Submitters</h1>
+      <div className="left-0 right-0">
+        <h1 className="font-medium md:text-[28px]">All Submitters</h1>
       </div>
       <div className="overflow-x-auto">
-        {loading && <TransactionsShimmer />}
-        <table className="min-w-full table-auto border-separate border-spacing-y-3">
-          <thead className="text-left">
-            <tr>
-              <th className="px-3 text-sm font-normal">Name</th>
-              <th className="px-3 text-sm font-normal">Address</th>
-              <th className="px-3 text-sm font-normal">Total transactions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {data?.dataAvailabilitySubmitters.items?.map((submitter, i) => (
-              <tr key={i} className="overflow-hidden bg-white dark:bg-[#16161B]">
-                <td className="whitespace-nowrap rounded-l-xl px-3 py-4 text-sm text-gray-700 dark:text-gray-300">
-                  {submitter.name}
-                </td>
-                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-700 dark:text-gray-300">
-                  {submitter.address}
-                </td>
-                <td className="whitespace-nowrap rounded-r-xl px-3 py-4 text-sm text-gray-700 dark:text-gray-300">
-                  {formatNumber(submitter.totalTransactions)}
-                </td>
+        {loading ? (
+          <TransactionsShimmer />
+        ) : (
+          <table className="min-w-full table-auto border-separate border-spacing-y-3">
+            <thead className="text-left">
+              <tr>
+                <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">Name</th>
+                <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                  Address
+                </th>
+                <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                  Total transactions
+                </th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {data?.dataAvailabilitySubmitters.items?.map((submitter, i) => (
+                <tr key={i} className="h-[82px] overflow-hidden bg-[#F1F8F3] font-medium dark:bg-[#272E29]">
+                  <td className="whitespace-nowrap rounded-l-[20px] px-7 py-4 text-gray-700 dark:text-gray-300">
+                    {submitter.name}
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-4 text-gray-700 dark:text-gray-300">
+                    {submitter.address}
+                  </td>
+                  <td className="whitespace-nowrap rounded-r-[20px] px-7 py-4 text-gray-700 dark:text-gray-300">
+                    {formatNumber(submitter.totalTransactions)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
       </div>
     </Card>
   );

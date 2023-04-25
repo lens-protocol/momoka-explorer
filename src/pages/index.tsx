@@ -10,7 +10,7 @@ const index = () => {
       <Head>
         <title>Lens DA Explorer</title>
       </Head>
-      <div className="flex justify-center py-10 md:py-28">
+      <div className="flex justify-center py-10">
         <SearchBar />
       </div>
       <div className="mb-10">

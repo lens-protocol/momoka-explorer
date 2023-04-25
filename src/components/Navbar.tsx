@@ -33,9 +33,9 @@ const Navbar: FC = () => {
         >
           Bonsai
         </Link>
-        <div className="flex items-center space-x-2 md:space-x-5">
+        <div className="flex items-center space-x-2 text-[#383838] dark:text-white md:space-x-5">
           <Link href="/favorites" className="hidden items-center space-x-2 md:flex">
-            <FavouriteIcon className="h-5 w-5 text-yellow-500" isFavourite={false} />
+            <FavouriteIcon className="h-5 w-5" isFavourite={false} />
             <span>Favorited</span>
           </Link>
           <Network />
@@ -52,7 +52,7 @@ const Navbar: FC = () => {
               <UserMenu profiles={data?.profiles.items as Profile[]} />
             ) : (
               <Button
-                className="px-5 py-3 text-[13px] font-bold uppercase leading-[13px] text-black dark:bg-[#FFEBB8]"
+                className="px-5 py-3 text-[13px] font-bold uppercase leading-[13px] text-[#383838] dark:bg-[#FFEBB8]"
                 onClick={() => {
                   openConnectModal?.();
                 }}

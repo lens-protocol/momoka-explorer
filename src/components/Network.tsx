@@ -41,7 +41,7 @@ const Network = () => {
         <Listbox.Button className="relative w-full rounded-lg py-1 pl-3 pr-8 text-left focus:outline-none">
           <span className="block truncate">{selectedEnvironment?.name ?? 'Mainnet'}</span>
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-            <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+            <ChevronUpDownIcon className="h-5 w-5 text-[#383838] dark:text-white" aria-hidden="true" />
           </span>
         </Listbox.Button>
         <Transition
