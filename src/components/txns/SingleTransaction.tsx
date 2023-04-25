@@ -38,7 +38,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
           {getDAActionType(txn.__typename)}
         </span>
       </td>
-      <td className="whitespace-nowrap px-3 py-2 text-center text-[13px] text-[#383838] dark:text-gray-400">
+      <td className="whitespace-nowrap px-3 py-2 text-center text-[13px] text-[#383838] dark:text-white">
         {getRelativeTime(txn.createdAt)}
       </td>
       <td className="whitespace-nowrap px-3 py-2">
