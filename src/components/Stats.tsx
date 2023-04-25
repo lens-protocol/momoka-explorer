@@ -41,7 +41,7 @@ const Stats = () => {
           className="space-x-2 truncate font-gintoNord hover:text-[#3D794E] dark:hover:text-[#D0DBFF]"
         >
           <span className="truncate text-2xl font-medium">
-            {getRelativeTime(lastFinalizedTransaction?.createdAt)}
+            {lastFinalizedTransaction ? getRelativeTime(lastFinalizedTransaction?.createdAt) : ''}
           </span>
         </Link>
       </div>
