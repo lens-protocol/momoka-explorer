@@ -60,7 +60,9 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
           </span>
         </Link>
       </td>
-      <td className="whitespace-nowrap px-3 py-2 text-sm">{truncate(txn.submitter, 20)}</td>
+      <td className="whitespace-nowrap px-3 py-2 text-sm text-[#383838] dark:text-[#C3E4CD80]">
+        {truncate(txn.submitter, 20)}
+      </td>
       <td className="whitespace-nowrap px-3 py-4">
         <Favorite
           dataAvailabilityTransaction={txn}
