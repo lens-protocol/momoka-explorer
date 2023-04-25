@@ -20,7 +20,6 @@ import capitalizeCase from '@/utils/capitalizeCase';
 import { getRelativeTime } from '@/utils/formatTime';
 import getLensterLink from '@/utils/getLensterLink';
 
-import FavouriteIcon from '../FavouriteIcon';
 import Favorite from '../shared/Favorite';
 import Profile from '../shared/Profile';
 import TransactionShimmer from '../shimmers/TransactionShimmer';
@@ -101,8 +100,7 @@ const Transaction: FC = () => {
             dataAvailabilityTransaction={dataAvailabilityTransaction as DataAvailabilityTransactionUnion}
             renderItem={(isFavorite) => {
               return (
-                <Button className="flex items-center space-x-2 text-xs sm:text-sm">
-                  <FavouriteIcon className="sm:h-4 sm:w-4" isFavourite={isFavorite} />
+                <Button className="text-[#383838]">
                   <span>{isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}</span>
                 </Button>
               );
