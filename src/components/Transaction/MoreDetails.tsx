@@ -65,7 +65,7 @@ const MoreDetails: FC<MoreDetailsProps> = ({ dataAvailabilityTransaction }) => {
                 }
               />
               <Meta
-                title="Verify"
+                title="Verify with a node"
                 value={<Verify dataAvailabilityTransaction={dataAvailabilityTransaction} />}
               />
             </Disclosure.Panel>

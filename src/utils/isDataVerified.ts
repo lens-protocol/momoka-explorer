@@ -1,4 +1,4 @@
-import type { Environment, EthereumNode } from '@lens-protocol/data-availability-verifier/client';
+import type { Deployment, Environment, EthereumNode } from '@lens-protocol/data-availability-verifier/client';
 import { checkDAProof } from '@lens-protocol/data-availability-verifier/client';
 
 import getConfig from './getConfig';
@@ -6,7 +6,8 @@ import getConfig from './getConfig';
 const isDataVerified = async (id: string, nodeUrl: string, network: string) => {
   const ethereumNode: EthereumNode = {
     environment: getConfig(network).verifierNetwork as Environment,
-    nodeUrl: nodeUrl
+    deployment: getConfig(network).verifierDeployment as Deployment,
+    nodeUrl
   };
 
   try {

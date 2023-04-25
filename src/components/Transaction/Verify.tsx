@@ -1,3 +1,5 @@
+import { StopCircleIcon } from '@heroicons/react/24/outline';
+import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/solid';
 import type { FC } from 'react';
 import { useState } from 'react';
 
@@ -13,42 +15,59 @@ interface VerifyProps {
 }
 
 const Verify: FC<VerifyProps> = ({ dataAvailabilityTransaction }) => {
-  const [nodeUrl, setNodeUrl] = useState<string>('');
-  const [status, setStatus] = useState<'UNKNOWN' | 'VERIFIED' | 'NOT_VERIFIED'>('UNKNOWN');
-  const [message, setMessage] = useState<any>();
   const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
+  const [nodeUrl, setNodeUrl] = useState<string>(
+    selectedEnvironment.id === 'mainnet'
+      ? 'https://rpc.ankr.com/polygon'
+      : 'https://rpc.ankr.com/polygon_mumbai'
+  );
+  const [status, setStatus] = useState<'UNKNOWN' | 'VERIFIED' | 'NOT_VERIFIED'>('UNKNOWN');
+  const [loading, setLoading] = useState<boolean>(false);
+  const [message, setMessage] = useState<any>();
 
   return (
     <div className="w-full">
       <div className="space-y-3">
         <div>
           <Input
-            label="Verify with your own node URL"
-            placeholder="Your node URL"
+            label="You can use your own node by replacing the below, it must be an archive node"
+            placeholder="Public RPC node"
             type="text"
             value={nodeUrl}
             onChange={(e) => setNodeUrl(e.target.value)}
           />
-          <div className="mt-1 text-xs">It must be an archive node</div>
         </div>
         <Button
           type="button"
+          disabled={!nodeUrl}
           onClick={() => {
-            isDataVerified(dataAvailabilityTransaction.transactionId, nodeUrl, selectedEnvironment.id).then(
-              ({ verified, message }) => {
+            setLoading(true);
+            isDataVerified(dataAvailabilityTransaction.transactionId, nodeUrl, selectedEnvironment.id)
+              .then(({ verified, message }) => {
                 setStatus(verified ? 'VERIFIED' : 'NOT_VERIFIED');
                 setMessage(message);
-              }
-            );
+              })
+              .finally(() => setLoading(false));
           }}
         >
           Verify
         </Button>
       </div>
-      {status === 'UNKNOWN' ? null : status === 'VERIFIED' ? (
-        <div className="mt-5 font-bold text-green-500">Verified</div>
+      {loading ? (
+        <div className="mt-5 flex items-center space-x-2 font-bold">
+          <StopCircleIcon className="h-5 w-5 animate-spin" />
+          <span>Verifying...</span>
+        </div>
+      ) : status === 'UNKNOWN' ? null : status === 'VERIFIED' ? (
+        <div className="mt-5 flex items-center space-x-2 font-bold text-green-500">
+          <CheckCircleIcon className="h-5 w-5" />
+          <span>Verified</span>
+        </div>
       ) : (
-        <div className="mt-5 font-bold text-yellow-500">Not verified</div>
+        <div className="mt-5 flex items-center space-x-2 font-bold text-yellow-500">
+          <XCircleIcon className="h-5 w-5" />
+          <span>Not verified</span>
+        </div>
       )}
       {status === 'NOT_VERIFIED' && message ? (
         <div className="mt-5">
