@@ -9,6 +9,7 @@ import type { DataAvailabilityTransactionUnion, DaTransactionsQuery, Profile } f
 import { useDaTransactionsQuery } from '@/generated';
 import { useAppPersistStore, useAppStore } from '@/store/app';
 import { getRelativeTime } from '@/utils/formatTime';
+import getConfig from '@/utils/getConfig';
 import getDAActionType from '@/utils/getDAActionType';
 import getLensterLink from '@/utils/getLensterLink';
 import getProfilePicture from '@/utils/getProfilePicture';
@@ -24,7 +25,7 @@ const LatestTransactions: FC<Props> = () => {
   const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
   const [latestTransactions, setLatestTransactions] = useState<Array<DataAvailabilityTransactionUnion>>();
   const { sendJsonMessage, lastMessage, readyState } = useWebSocket(
-    'wss://staging-api-social-mumbai.lens.crtlkey.com',
+    getConfig(selectedEnvironment.id).apiEndpoint.replace('http', 'ws'),
     { protocols: ['graphql-ws'] }
   );
 
