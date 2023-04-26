@@ -15,7 +15,7 @@ const Stats = () => {
   const setAllTransactionsCount = useAppStore((state) => state.setAllTransactionsCount);
 
   const { data: submittersData, loading: submittersDataLoading } = useDataAvailabilitySubmittersQuery();
-  const [fetchAllCount, { loading }] = useDaSummaryLazyQuery();
+  const [fetchAllCount, { loading }] = useDaSummaryLazyQuery({ fetchPolicy: 'no-cache' });
 
   const fetchCounts = async () => {
     const { data: countData } = await fetchAllCount();

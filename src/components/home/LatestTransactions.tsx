@@ -27,20 +27,23 @@ const LatestTransactions: FC = () => {
     { protocols: ['graphql-ws'] }
   );
 
-  const [fetchAllCount] = useDaSummaryLazyQuery();
+  const [fetchAllCount] = useDaSummaryLazyQuery({ fetchPolicy: 'no-cache' });
 
   const onCompleted = async (data: DaTransactionsQuery) => {
     const txns = data?.dataAvailabilityTransactions.items;
     setLastFinalizedTransaction(txns[0] as DataAvailabilityTransactionUnion);
     setLatestTransactions(txns as Array<DataAvailabilityTransactionUnion>);
-    const { data: countData } = await fetchAllCount();
-    setAllTransactionsCount(countData?.dataAvailabilitySummary.totalTransactions ?? 0);
   };
 
   const { loading } = useDaTransactionsQuery({
     variables: { request: { limit: LATEST_TXNS_FETCH_COUNT } },
     onCompleted
   });
+
+  const fetchCounts = async () => {
+    const { data: countData } = await fetchAllCount();
+    setAllTransactionsCount(countData?.dataAvailabilitySummary.totalTransactions ?? 0);
+  };
 
   useEffect(() => {
     if (readyState === 1) {
@@ -71,6 +74,7 @@ const LatestTransactions: FC = () => {
         oldTxns.pop();
       }
       setLatestTransactions(oldTxns);
+      fetchCounts();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lastMessage]);
