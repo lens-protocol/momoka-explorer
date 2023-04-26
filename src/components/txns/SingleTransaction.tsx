@@ -82,12 +82,12 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
       </td>
       <td className="rounded-r-[20px] py-4 pr-5 md:px-2">
         <Link
-          className="flex flex-none justify-center md:mb-1.5"
+          className="flex flex-none justify-center md:mb-0.5"
           onClick={(e) => e.stopPropagation()}
           href={`${getLensterLink(selectedEnvironment.id)}/posts/${txn.publicationId}`}
           target="_blank"
         >
-          <ArrowTopRightOnSquareIcon className="h-6 w-6 text-[#3D4B41] hover:text-[#4C8C5E] dark:text-[#9CA19F] hover:dark:text-[#FFEBB8]" />
+          <ArrowTopRightOnSquareIcon className="h-7 w-7 text-[#3D4B41] hover:text-[#4C8C5E] dark:text-[#9CA19F] hover:dark:text-[#FFEBB8]" />
         </Link>
       </td>
     </tr>
