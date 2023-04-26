@@ -35,20 +35,20 @@ const TxnProfile: FC<TxnProfileProps> = ({ profile }) => {
           <div className="flex items-center space-x-3">
             <UsersIcon className="h-4 w-4" />
             <div>
-              {profile.stats.totalPosts + profile.stats.totalComments + profile.stats.totalMirrors}{' '}
-              <b>Publications</b>
+              <b> {profile.stats.totalPosts + profile.stats.totalComments + profile.stats.totalMirrors}</b>{' '}
+              publications
             </div>
           </div>
           <div className="flex items-center space-x-3">
             <UsersIcon className="h-4 w-4" />
             <div>
-              {profile.stats.totalFollowers} <b>Followers</b>
+              <b>{profile.stats.totalFollowers}</b> followers
             </div>
           </div>
           <div className="flex items-center space-x-3">
             <UserPlusIcon className="h-4 w-4" />
             <div>
-              {profile.stats.totalFollowing} <b>Following</b>
+              <b>{profile.stats.totalFollowing}</b> followings
             </div>
           </div>
         </div>

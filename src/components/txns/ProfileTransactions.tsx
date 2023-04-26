@@ -6,6 +6,7 @@ import { useInView } from 'react-cool-inview';
 import type { Profile } from '@/generated';
 import { useDaTransactionsQuery, useProfileQuery } from '@/generated';
 
+import EmptyState from '../shared/EmptyState';
 import TxnProfile from '../shared/TxnProfile';
 import TransactionsShimmer from '../shimmers/TransactionsShimmer';
 import Card from '../ui/Card';
@@ -57,10 +58,11 @@ const ProfileTransactions: FC = () => {
             <h1 className="font-medium md:text-[28px]">All transactions</h1>
           </div>
         </div>
-        <div className="overflow-x-auto">
+        <div className="mt-3 overflow-x-auto">
+          {transactions?.length === 0 && !loading ? <EmptyState /> : null}
           {profileLoading || loading ? (
             <TransactionsShimmer />
-          ) : (
+          ) : transactions?.length ? (
             <table className="min-w-full table-auto border-separate border-spacing-y-3">
               <thead className="text-left">
                 <tr className="font-gintoNord">
@@ -87,7 +89,7 @@ const ProfileTransactions: FC = () => {
                 })}
               </tbody>
             </table>
-          )}
+          ) : null}
           {hasMore && transactions.length ? (
             <div className="space-y-1" ref={observe}>
               <div className="h-14 w-full animate-pulse overflow-hidden rounded-xl bg-white dark:bg-[#16161B]" />

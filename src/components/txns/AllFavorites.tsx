@@ -4,6 +4,7 @@ import { useAppPersistStore } from '@/store/app';
 import type { DataAvailabilityTransactionUnionWithNetwork } from '@/store/favorites';
 import { useFavoritesPersistStore } from '@/store/favorites';
 
+import EmptyState from '../shared/EmptyState';
 import Card from '../ui/Card';
 import SingleTransaction from './SingleTransaction';
 
@@ -23,26 +24,32 @@ const AllFavorites: FC = () => {
         </div>
       </div>
       <div className="mt-7 overflow-x-auto">
-        <table className="min-w-full table-auto border-separate border-spacing-y-3">
-          <thead className="text-left">
-            <tr className="font-gintoNord">
-              <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">Txn Id</th>
-              <th className="px-3 text-center text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
-                Action
-              </th>
-              <th className="px-3 text-center text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
-                Age
-              </th>
-              <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">From</th>
-              <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">Via</th>
-            </tr>
-          </thead>
-          <tbody>
-            {favoritesByNetwork.map((txn: DataAvailabilityTransactionUnionWithNetwork) => {
-              return <SingleTransaction key={txn.transactionId} txn={txn} />;
-            })}
-          </tbody>
-        </table>
+        {favoritesByNetwork?.length === 0 ? (
+          <EmptyState message="No favourites found" />
+        ) : (
+          <table className="min-w-full table-auto border-separate border-spacing-y-3">
+            <thead className="text-left">
+              <tr className="font-gintoNord">
+                <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                  Txn Id
+                </th>
+                <th className="px-3 text-center text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                  Action
+                </th>
+                <th className="px-3 text-center text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                  Age
+                </th>
+                <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">From</th>
+                <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">Via</th>
+              </tr>
+            </thead>
+            <tbody>
+              {favoritesByNetwork.map((txn: DataAvailabilityTransactionUnionWithNetwork) => {
+                return <SingleTransaction key={txn.transactionId} txn={txn} />;
+              })}
+            </tbody>
+          </table>
+        )}
       </div>
     </Card>
   );

@@ -9,6 +9,7 @@ import { newTransactionQuery } from '@/graphql/NewTransactionSubscription';
 import { useAppPersistStore, useAppStore } from '@/store/app';
 import getConfig from '@/utils/getConfig';
 
+import EmptyState from '../shared/EmptyState';
 import TransactionsShimmer from '../shimmers/TransactionsShimmer';
 import SingleTransaction from '../txns/SingleTransaction';
 import Card from '../ui/Card';
@@ -80,29 +81,37 @@ const LatestTransactions: FC = () => {
         </Link>
       </div>
       <div className="mt-3 overflow-x-auto">
-        {loading && <TransactionsShimmer />}
-        <table className="min-w-full table-auto border-separate border-spacing-y-3">
-          <thead className="text-left">
-            <tr className="font-gintoNord">
-              <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">Txn Id</th>
-              <th className="w-20 px-4 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
-                Action
-              </th>
-              <th className="px-3 text-center text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
-                Age
-              </th>
-              <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">Sender</th>
-              <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
-                Submitter
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {latestTransactions?.map((txn) => {
-              return <SingleTransaction key={txn?.transactionId} txn={txn} />;
-            })}
-          </tbody>
-        </table>
+        {latestTransactions?.length === 0 && !loading ? <EmptyState /> : null}
+        {loading ? (
+          <TransactionsShimmer />
+        ) : latestTransactions?.length ? (
+          <table className="min-w-full table-auto border-separate border-spacing-y-3">
+            <thead className="text-left">
+              <tr className="font-gintoNord">
+                <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                  Txn Id
+                </th>
+                <th className="w-20 px-4 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                  Action
+                </th>
+                <th className="px-3 text-center text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                  Age
+                </th>
+                <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                  Sender
+                </th>
+                <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                  Submitter
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {latestTransactions?.map((txn) => {
+                return <SingleTransaction key={txn?.transactionId} txn={txn} />;
+              })}
+            </tbody>
+          </table>
+        ) : null}
       </div>
     </Card>
   );

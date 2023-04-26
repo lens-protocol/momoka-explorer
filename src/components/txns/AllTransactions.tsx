@@ -4,6 +4,7 @@ import { useInView } from 'react-cool-inview';
 
 import { useDaSummaryQuery, useDaTransactionsQuery } from '@/generated';
 
+import EmptyState from '../shared/EmptyState';
 import TransactionsShimmer from '../shimmers/TransactionsShimmer';
 import Card from '../ui/Card';
 import SingleTransaction from './SingleTransaction';
@@ -52,9 +53,10 @@ const AllTransactions: FC = () => {
         </div>
       </div>
       <div className="mt-7 overflow-x-auto">
+        {transactions?.length === 0 && !loading ? <EmptyState /> : null}
         {loading ? (
           <TransactionsShimmer />
-        ) : (
+        ) : transactions?.length ? (
           <table className="min-w-full table-auto border-separate border-spacing-y-3">
             <thead className="text-left">
               <tr className="font-gintoNord">
@@ -81,7 +83,7 @@ const AllTransactions: FC = () => {
               })}
             </tbody>
           </table>
-        )}
+        ) : null}
         {hasMore && transactions.length ? (
           <div className="space-y-1" ref={observe}>
             <div className="h-14 w-full animate-pulse overflow-hidden rounded-xl bg-white dark:bg-[#16161B]" />
