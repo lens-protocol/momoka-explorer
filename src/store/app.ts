@@ -18,6 +18,7 @@ interface AppPersistState {
   setSelectedEnvironment: (env: { name: string; id: string }) => void;
 }
 
+// TODO: remove staging default once BE deployed
 export const useAppPersistStore = create(
   persist<AppPersistState>(
     (set) => ({
