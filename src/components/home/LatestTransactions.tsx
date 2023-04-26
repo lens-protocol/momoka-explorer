@@ -13,9 +13,9 @@ import TransactionsShimmer from '../shimmers/TransactionsShimmer';
 import SingleTransaction from '../txns/SingleTransaction';
 import Card from '../ui/Card';
 
-type Props = {};
+const LATEST_TXNS_FETCH_COUNT = 20;
 
-const LatestTransactions: FC<Props> = () => {
+const LatestTransactions: FC = () => {
   const setLastFinalizedTransaction = useAppStore((state) => state.setLastFinalizedTransaction);
   const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
   const [latestTransactions, setLatestTransactions] = useState<Array<DataAvailabilityTransactionUnion>>();
@@ -31,7 +31,7 @@ const LatestTransactions: FC<Props> = () => {
   };
 
   const { loading } = useDaTransactionsQuery({
-    variables: { request: { limit: 10 } },
+    variables: { request: { limit: LATEST_TXNS_FETCH_COUNT } },
     onCompleted
   });
 
@@ -60,7 +60,9 @@ const LatestTransactions: FC<Props> = () => {
       setLastFinalizedTransaction({ ...txn });
       let oldTxns = [...(latestTransactions as DataAvailabilityTransactionUnion[])];
       oldTxns.unshift(txn);
-      oldTxns.pop();
+      if (oldTxns.length > LATEST_TXNS_FETCH_COUNT) {
+        oldTxns.pop();
+      }
       setLatestTransactions(oldTxns);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
