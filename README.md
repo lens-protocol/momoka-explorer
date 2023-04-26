@@ -1,5 +1,4 @@
 <div align="center">
-    <img src="https://user-images.githubusercontent.com/69431456/183576577-2486db3f-f0a9-4252-b283-a8322e5eb8b6.png" alt="Lenster Logo">
     <h1>Bonsai Explorer</h1>
     <strong>Explorer for Lens Protocol 🌿</strong>
 </div>
@@ -16,10 +15,41 @@
     </a>
 </div>
 
+## About
+
+Bonsai Explorer is a web application that allows you to explore the Lens Protocol's Data availability transactions in realtime and detailed view of the transactions.
+
+## Features
+
+- [x] Realtime data availability transactions
+- [x] Detailed view of the transactions
+- [x] Transactions by profile
+- [x] Search for transactions
+- [x] Favorite transactions
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/en/) >= 14.0.0
+- [pnpm](https://pnpm.io/) >= 8.0.0
+
 ## Development
 
-Install all dependencies
+Install all dependencies with [pnpm](https://pnpm.io/):
 
 ```sh
 pnpm install
+```
+
+Start the development server:
+
+```sh
+pnpm dev
+```
+
+## Build
+
+Build the project:
+
+```sh
+pnpm build
 ```
