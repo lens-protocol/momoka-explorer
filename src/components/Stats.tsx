@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React, { useEffect } from 'react';
 
-import { useDaSummaryLazyQuery, useDataAvailabilitySubmittersQuery } from '@/generated';
+import { useDaSummaryLazyQuery, useDataAvailabilitySubmittersLazyQuery } from '@/generated';
 import { useAppStore } from '@/store/app';
 import formatNumber from '@/utils/formatNumber';
 import { getRelativeTime } from '@/utils/formatTime';
@@ -13,13 +13,21 @@ const Stats = () => {
   const lastFinalizedTransaction = useAppStore((state) => state.lastFinalizedTransaction);
   const allTransactionsCount = useAppStore((state) => state.allTransactionsCount);
   const setAllTransactionsCount = useAppStore((state) => state.setAllTransactionsCount);
+  const setTopSubmitter = useAppStore((state) => state.setTopSubmitter);
+  const topSubmitter = useAppStore((state) => state.topSubmitter);
 
-  const { data: submittersData, loading: submittersDataLoading } = useDataAvailabilitySubmittersQuery();
+  const [fetchTopSubmitter, { loading: submittersDataLoading }] = useDataAvailabilitySubmittersLazyQuery({
+    fetchPolicy: 'no-cache'
+  });
   const [fetchAllCount, { loading }] = useDaSummaryLazyQuery({ fetchPolicy: 'no-cache' });
 
   const fetchCounts = async () => {
     const { data: countData } = await fetchAllCount();
+    const { data: submittersData } = await fetchTopSubmitter();
     setAllTransactionsCount(countData?.dataAvailabilitySummary.totalTransactions ?? 0);
+    if (submittersData?.dataAvailabilitySubmitters?.items[0]) {
+      setTopSubmitter(submittersData?.dataAvailabilitySubmitters?.items[0]);
+    }
   };
 
   useEffect(() => {
@@ -60,11 +68,11 @@ const Stats = () => {
           href="/submitters"
           className="space-x-2 truncate font-gintoNord hover:text-[#4C8C5E] hover:dark:text-[#FFEBB8]"
         >
-          {submittersData?.dataAvailabilitySubmitters ? (
+          {topSubmitter ? (
             <span className="truncate text-2xl font-medium">
-              {submittersData?.dataAvailabilitySubmitters?.items[0].name as string}
+              {topSubmitter.name as string}
               {' | '}
-              {formatNumber(submittersData?.dataAvailabilitySubmitters?.items[0].totalTransactions as number)}
+              {formatNumber(topSubmitter.totalTransactions as number)}
             </span>
           ) : null}
         </Link>

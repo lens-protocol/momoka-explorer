@@ -1,20 +1,24 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import type { DataAvailabilityTransactionUnion } from '@/generated';
+import type { DataAvailabilitySubmitterResult, DataAvailabilityTransactionUnion } from '@/generated';
 
 interface State {
   lastFinalizedTransaction: DataAvailabilityTransactionUnion | null;
   setLastFinalizedTransaction: (id: DataAvailabilityTransactionUnion) => void;
   allTransactionsCount: number;
   setAllTransactionsCount: (latestTransactions: number) => void;
+  topSubmitter: DataAvailabilitySubmitterResult | null;
+  setTopSubmitter: (topSubmitter: DataAvailabilitySubmitterResult) => void;
 }
 
 export const useAppStore = create<State>((set) => ({
   lastFinalizedTransaction: null,
   setLastFinalizedTransaction: (lastFinalizedTransaction) => set({ lastFinalizedTransaction }),
   allTransactionsCount: 0,
-  setAllTransactionsCount: (allTransactionsCount) => set({ allTransactionsCount })
+  setAllTransactionsCount: (allTransactionsCount) => set({ allTransactionsCount }),
+  topSubmitter: null,
+  setTopSubmitter: (topSubmitter: DataAvailabilitySubmitterResult) => set({ topSubmitter })
 }));
 
 interface AppPersistState {
