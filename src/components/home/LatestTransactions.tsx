@@ -4,7 +4,11 @@ import { useEffect, useState } from 'react';
 import useWebSocket from 'react-use-websocket';
 
 import type { DataAvailabilityTransactionUnion, DaTransactionsQuery } from '@/generated';
-import { useDaSummaryLazyQuery, useDaTransactionsQuery } from '@/generated';
+import {
+  useDaSummaryLazyQuery,
+  useDataAvailabilitySubmittersLazyQuery,
+  useDaTransactionsQuery
+} from '@/generated';
 import { newTransactionQuery } from '@/graphql/NewTransactionSubscription';
 import { useAppPersistStore, useAppStore } from '@/store/app';
 import getConfig from '@/utils/getConfig';
@@ -19,6 +23,7 @@ const LATEST_TXNS_FETCH_COUNT = 20;
 const LatestTransactions: FC = () => {
   const setLastFinalizedTransaction = useAppStore((state) => state.setLastFinalizedTransaction);
   const setAllTransactionsCount = useAppStore((state) => state.setAllTransactionsCount);
+  const setTopSubmitter = useAppStore((state) => state.setTopSubmitter);
 
   const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
   const [latestTransactions, setLatestTransactions] = useState<Array<DataAvailabilityTransactionUnion>>();
@@ -28,6 +33,7 @@ const LatestTransactions: FC = () => {
   );
 
   const [fetchAllCount] = useDaSummaryLazyQuery({ fetchPolicy: 'no-cache' });
+  const [fetchTopSubmitter] = useDataAvailabilitySubmittersLazyQuery({ fetchPolicy: 'no-cache' });
 
   const onCompleted = async (data: DaTransactionsQuery) => {
     const txns = data?.dataAvailabilityTransactions.items;
@@ -43,6 +49,11 @@ const LatestTransactions: FC = () => {
   const fetchCounts = async () => {
     const { data: countData } = await fetchAllCount();
     setAllTransactionsCount(countData?.dataAvailabilitySummary.totalTransactions ?? 0);
+    const { data: submittersData } = await fetchTopSubmitter();
+    setAllTransactionsCount(countData?.dataAvailabilitySummary.totalTransactions ?? 0);
+    if (submittersData?.dataAvailabilitySubmitters?.items[0]) {
+      setTopSubmitter(submittersData?.dataAvailabilitySubmitters?.items[0]);
+    }
   };
 
   useEffect(() => {
