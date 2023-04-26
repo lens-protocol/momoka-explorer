@@ -1,5 +1,3 @@
-import Head from 'next/head';
-
 import LatestTransactions from '@/components/home/LatestTransactions';
 import SearchBar from '@/components/home/SearchBar';
 import Stats from '@/components/Stats';
@@ -7,9 +5,6 @@ import Stats from '@/components/Stats';
 const index = () => {
   return (
     <>
-      <Head>
-        <title>Lens DA Explorer</title>
-      </Head>
       <div className="flex justify-center py-10">
         <SearchBar />
       </div>
