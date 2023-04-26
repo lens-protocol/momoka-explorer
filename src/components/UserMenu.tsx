@@ -1,4 +1,5 @@
 import { Menu, Transition } from '@headlessui/react';
+import { ArrowLeftOnRectangleIcon } from '@heroicons/react/24/outline';
 import clsx from 'clsx';
 import Link from 'next/link';
 import type { FC } from 'react';
@@ -26,7 +27,7 @@ const UserMenu: FC<UserMenuProps> = ({ profiles }) => {
       <div>
         <Menu.Button className="flex">
           <img
-            className="h-8 w-8 rounded-full"
+            className="mb-1 h-8 w-8 rounded-full"
             src={getProfilePicture(defaultProfile as Profile)}
             alt={defaultProfile?.handle}
           />
@@ -49,14 +50,14 @@ const UserMenu: FC<UserMenuProps> = ({ profiles }) => {
                   <Link
                     href={`/profile/${profile.id}`}
                     className={clsx(
-                      'group flex w-full items-center rounded-xl px-2 py-2 text-sm',
+                      'group flex w-full items-center space-x-1.5 rounded-lg px-4 py-2 text-sm',
                       active
                         ? 'bg-green-100 text-[#3D794E] dark:bg-[#3D794E]/30 dark:text-[#D0DBFF]'
                         : 'text-gray-900 dark:text-gray-100'
                     )}
                   >
                     <img
-                      className="mr-1 h-4 w-4 rounded-full"
+                      className="h-4 w-4 rounded-full"
                       src={getProfilePicture(profile)}
                       alt={profile.handle}
                     />
@@ -65,21 +66,20 @@ const UserMenu: FC<UserMenuProps> = ({ profiles }) => {
                 )}
               </Menu.Item>
             ))}
-            <div className="border-b border-b-gray-100 dark:border-gray-950" />
+            <div className="mt-1 border-b border-b-gray-100 dark:border-gray-950" />
             <Menu.Item>
               {({ active }) => (
                 <button
                   className={clsx(
-                    'group my-1 flex w-full items-center rounded-xl px-2 py-2 text-sm',
-                    active
-                      ? 'bg-green-100 text-[#3D794E] dark:bg-[#3D794E]/30 dark:text-[#D0DBFF]'
-                      : 'text-gray-900 dark:text-gray-100'
+                    'group mt-1 flex w-full items-center space-x-1.5 rounded-lg px-4 py-2 text-sm',
+                    active ? 'bg-red-100 dark:bg-red-900/50' : 'text-gray-900 dark:text-gray-100'
                   )}
                   onClick={() => {
                     disconnect?.();
                   }}
                 >
-                  Logout
+                  <ArrowLeftOnRectangleIcon className="h-5 w-5" />
+                  <span>Disconnect</span>
                 </button>
               )}
             </Menu.Item>
