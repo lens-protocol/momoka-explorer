@@ -1,6 +1,9 @@
+# Bonsai Explorer
+                                                                                                                     
+<img src="./public/cover.png"/>
+
 <div align="center">
-    <h1>Bonsai Explorer</h1>
-    <strong>Explorer for Lens Protocol 🌿</strong>
+    <strong>Bonsai explorer for Lens Protocol 🌿</strong>
 </div>
 <br>
 <div align="center">
