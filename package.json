@@ -55,5 +55,6 @@
     "eslint-plugin-unicorn": "^46.0.0",
     "eslint-plugin-unused-imports": "^2.0.0",
     "prettier": "^2.8.7"
-  }
+  },
+  "packageManager": "pnpm@8.2.0"
 }
