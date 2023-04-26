@@ -40,6 +40,7 @@ const Verify: FC<VerifyProps> = ({ dataAvailabilityTransaction }) => {
         <Button
           type="button"
           disabled={!nodeUrl}
+          className="px-5 py-3 text-[13px] font-bold uppercase leading-[13px] text-[#383838]"
           onClick={() => {
             setLoading(true);
             isDataVerified(dataAvailabilityTransaction.transactionId, nodeUrl, selectedEnvironment.id)

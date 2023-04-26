@@ -100,7 +100,7 @@ const Transaction: FC = () => {
             dataAvailabilityTransaction={dataAvailabilityTransaction as DataAvailabilityTransactionUnion}
             renderItem={(isFavorite) => {
               return (
-                <Button className="text-[#383838]">
+                <Button className="px-5 py-3 text-[13px] font-bold uppercase leading-[13px] text-[#383838]">
                   <span>{isFavorite ? 'Remove from Favorites' : 'Add to Favorites'}</span>
                 </Button>
               );
