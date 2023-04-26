@@ -113,7 +113,7 @@ const Transaction: FC = () => {
             value={
               <Link
                 className="flex items-center space-x-2 break-all text-[#3D794E] underline dark:text-[#D0DBFF]"
-                href={`https://arweave.net/${dataAvailabilityTransaction?.transactionId}`}
+                href={`https://arweave.app/tx/${dataAvailabilityTransaction?.transactionId}`}
                 target="_blank"
               >
                 <span>ar://{dataAvailabilityTransaction?.transactionId}</span>
