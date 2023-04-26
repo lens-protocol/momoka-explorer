@@ -1,7 +1,7 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { useDaSummaryQuery, useDataAvailabilitySubmittersQuery } from '@/generated';
+import { useDaSummaryLazyQuery, useDataAvailabilitySubmittersQuery } from '@/generated';
 import { useAppStore } from '@/store/app';
 import formatNumber from '@/utils/formatNumber';
 import { getRelativeTime } from '@/utils/formatTime';
@@ -11,17 +11,24 @@ import StatsShimmer from './shimmers/StatsShimmer';
 
 const Stats = () => {
   const lastFinalizedTransaction = useAppStore((state) => state.lastFinalizedTransaction);
+  const allTransactionsCount = useAppStore((state) => state.allTransactionsCount);
+  const setAllTransactionsCount = useAppStore((state) => state.setAllTransactionsCount);
 
   const { data: submittersData, loading: submittersDataLoading } = useDataAvailabilitySubmittersQuery();
-  const { data, loading } = useDaSummaryQuery();
-  const stats = data?.dataAvailabilitySummary;
+  const [fetchAllCount, { loading }] = useDaSummaryLazyQuery({ fetchPolicy: 'no-cache' });
+
+  const fetchCounts = async () => {
+    const { data: countData } = await fetchAllCount();
+    setAllTransactionsCount(countData?.dataAvailabilitySummary.totalTransactions ?? 0);
+  };
+
+  useEffect(() => {
+    fetchCounts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (loading || submittersDataLoading) {
     return <StatsShimmer />;
-  }
-
-  if (!stats) {
-    return null;
   }
 
   return (
@@ -30,7 +37,7 @@ const Stats = () => {
         <span className="text-center text-xs font-medium uppercase tracking-wider opacity-50">
           Transactions
         </span>
-        <span className="font-gintoNord text-2xl font-medium">{formatNumber(stats.totalTransactions)}</span>
+        <span className="font-gintoNord text-2xl font-medium">{formatNumber(allTransactionsCount)}</span>
       </div>
       <div className="flex flex-col items-center space-y-0.5 truncate rounded-[20px] bg-[#F1F8F3] px-6 py-6 dark:bg-[#272E29]">
         <span className="text-center text-xs font-medium uppercase tracking-wider opacity-50">

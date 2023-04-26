@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import useWebSocket from 'react-use-websocket';
 
 import type { DataAvailabilityTransactionUnion, DaTransactionsQuery } from '@/generated';
-import { useDaTransactionsQuery } from '@/generated';
+import { useDaSummaryLazyQuery, useDaTransactionsQuery } from '@/generated';
 import { newTransactionQuery } from '@/graphql/NewTransactionSubscription';
 import { useAppPersistStore, useAppStore } from '@/store/app';
 import getConfig from '@/utils/getConfig';
@@ -18,6 +18,8 @@ const LATEST_TXNS_FETCH_COUNT = 20;
 
 const LatestTransactions: FC = () => {
   const setLastFinalizedTransaction = useAppStore((state) => state.setLastFinalizedTransaction);
+  const setAllTransactionsCount = useAppStore((state) => state.setAllTransactionsCount);
+
   const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
   const [latestTransactions, setLatestTransactions] = useState<Array<DataAvailabilityTransactionUnion>>();
   const { sendJsonMessage, lastMessage, readyState } = useWebSocket(
@@ -25,7 +27,9 @@ const LatestTransactions: FC = () => {
     { protocols: ['graphql-ws'] }
   );
 
-  const onCompleted = (data: DaTransactionsQuery) => {
+  const [fetchAllCount] = useDaSummaryLazyQuery({ fetchPolicy: 'no-cache' });
+
+  const onCompleted = async (data: DaTransactionsQuery) => {
     const txns = data?.dataAvailabilityTransactions.items;
     setLastFinalizedTransaction(txns[0] as DataAvailabilityTransactionUnion);
     setLatestTransactions(txns as Array<DataAvailabilityTransactionUnion>);
@@ -35,6 +39,11 @@ const LatestTransactions: FC = () => {
     variables: { request: { limit: LATEST_TXNS_FETCH_COUNT } },
     onCompleted
   });
+
+  const fetchCounts = async () => {
+    const { data: countData } = await fetchAllCount();
+    setAllTransactionsCount(countData?.dataAvailabilitySummary.totalTransactions ?? 0);
+  };
 
   useEffect(() => {
     if (readyState === 1) {
@@ -65,6 +74,7 @@ const LatestTransactions: FC = () => {
         oldTxns.pop();
       }
       setLatestTransactions(oldTxns);
+      fetchCounts();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lastMessage]);
