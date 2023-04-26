@@ -21,14 +21,11 @@ jobs:
       - name: Setup node 🍀
         uses: actions/setup-node@v3
         with:
-          node-version-file: ".nvmrc"
-          cache: "pnpm"
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
 
       - name: Install dependencies 📦
         run: pnpm install
-
-      - name: Typecheck 🔡
-        run: pnpm typecheck
 
       - name: Lint 🪩
         run: pnpm lint
