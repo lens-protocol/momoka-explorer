@@ -128,7 +128,7 @@ const Transaction: FC = () => {
                 <ClockIcon className="h-4 w-4" />
                 <span>
                   <b>{getRelativeTime(dataAvailabilityTransaction?.createdAt)}</b> (
-                  {dayjs(new Date(dataAvailabilityTransaction?.createdAt)).format('MMM-DD-YYYY hh:mm A')})
+                  {dayjs(new Date(dataAvailabilityTransaction?.createdAt)).format('MMM DD YYYY, hh:mm A')})
                 </span>
               </div>
             }
