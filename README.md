@@ -13,8 +13,8 @@
     <a href="https://github.com/lens-protocol/bonsai-explorer/stargazers">
         <img src="https://img.shields.io/github/stars/lens-protocol/bonsai-explorer?label=Stars&logo=github" alt="Stargazers">
     </a>
-    <a href="https://github.com/lens-protocol/lenster/blob/main/LICENSE">
-        <img src="https://img.shields.io/github/license/lens-protocol/bonsai-explorer?label=Licence&logo=gnu" alt="License">
+    <a href="https://github.com/lens-protocol/bonsai-explorer/blob/main/LICENSE">
+        <img src="https://img.shields.io/github/license/lens-protocol/bonsai-explorer?label=Licence&logo=mit" alt="License">
     </a>
 </div>
 
