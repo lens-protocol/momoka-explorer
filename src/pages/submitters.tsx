@@ -1,13 +1,10 @@
-import Head from 'next/head';
-
+import MetaTags from '@/components/shared/Metatags';
 import Submitters from '@/components/submitters';
 
 const index = () => {
   return (
     <>
-      <Head>
-        <title>Lens DA Submitters</title>
-      </Head>
+      <MetaTags title="Submitters" />
       <div className="mb-10 space-y-4">
         <Submitters />
       </div>

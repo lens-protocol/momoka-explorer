@@ -13,7 +13,7 @@ import { publicProvider } from 'wagmi/providers/public';
 
 import client from '@/apollo';
 import Navbar from '@/components/Navbar';
-import MetaTags from '@/components/shared/Metatags';
+
 const ginto = localFont({
   src: [
     {
@@ -99,7 +99,6 @@ export default function App({ Component, pageProps }: AppProps) {
             modalSize="compact"
             theme={theme === 'dark' ? darkTheme(themeOptions) : lightTheme(themeOptions)}
           >
-            <MetaTags />
             <Navbar />
             <style jsx global>{`
               body {
