@@ -93,7 +93,7 @@ const SearchBar = () => {
           <Link
             href={`/tx/${txn?.transactionId}`}
             onClick={() => storeToRecents(txn)}
-            className="flex w-full items-center justify-between rounded-xl px-4 py-2 hover:bg-[#F1F8F3] hover:dark:bg-[#565467]"
+            className="flex w-full items-center justify-between rounded-xl px-4 py-2 hover:bg-[#FFFFFF] hover:dark:bg-[#565467]"
           >
             {txn?.transactionId} <span className="text-xs opacity-50">{txn.publicationId}</span>
           </Link>
