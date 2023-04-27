@@ -26,7 +26,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
     <tr
       key={txn.transactionId}
       onClick={() => push(`/tx/${txn.transactionId}`)}
-      className="h-[82px] cursor-pointer overflow-hidden bg-[#F1F8F3] font-medium hover:bg-[#DFEDE3] dark:bg-[#2C2B35] hover:dark:bg-[#2C2B35]/50"
+      className="h-[82px] cursor-pointer overflow-hidden bg-[#F1F8F3] font-medium hover:bg-[#E8C7C5] dark:bg-[#2C2B35] hover:dark:bg-[#2C2B35]/80"
     >
       <td className="w-48 whitespace-nowrap rounded-l-[20px] px-7 py-4 text-sm">
         <Link
