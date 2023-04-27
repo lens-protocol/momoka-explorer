@@ -37,7 +37,7 @@ const MoreDetails: FC<MoreDetailsProps> = ({ dataAvailabilityTransaction }) => {
   }, []);
 
   return (
-    <Card className="mt-6 bg-[#F1F8F3] !p-5 dark:bg-[#2C2B35]">
+    <Card className="mt-6 bg-[#FFFFFF] !p-5 dark:bg-[#2C2B35]">
       <Disclosure>
         {({ open }) => (
           <>

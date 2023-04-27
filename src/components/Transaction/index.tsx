@@ -90,7 +90,7 @@ const Transaction: FC = () => {
 
   return (
     <>
-      <Card className="mt-6 bg-[#F1F8F3] !p-5 dark:bg-[#2C2B35]">
+      <Card className="mt-6 bg-[#FFFFFF] !p-5 dark:bg-[#2C2B35]">
         <div className="flex flex-wrap items-center justify-between space-y-3 px-4 sm:px-0">
           <div>
             <h1 className="font-medium md:text-[28px]">Transaction Details</h1>
