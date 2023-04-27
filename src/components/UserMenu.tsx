@@ -52,7 +52,7 @@ const UserMenu: FC<UserMenuProps> = ({ profiles }) => {
                     className={clsx(
                       'group flex w-full items-center space-x-1.5 rounded-lg px-4 py-2 text-sm',
                       active
-                        ? 'bg-green-100 text-[#3D794E] dark:bg-[#565467]/30 dark:text-[#D0DBFF]'
+                        ? 'bg-[#FBEEED] text-[#2C2B35] dark:bg-[#565467]/30 dark:text-[#D0DBFF]'
                         : 'text-gray-900 dark:text-gray-100'
                     )}
                   >
