@@ -14,7 +14,7 @@ const MetaTags: FC<Props> = (props) => {
   const meta = {
     title: title ?? 'Momoka Explorer - Lens Protocol',
     description: description ?? 'Momoka explorer for Lens Protocol',
-    image: image ?? 'https://momoka.lens.xyz/og.png'
+    image: image ?? 'https://momoka.lens.xyz/og.jpg'
   };
 
   return (

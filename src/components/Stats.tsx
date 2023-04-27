@@ -41,13 +41,13 @@ const Stats = () => {
 
   return (
     <div className="grid gap-4 lg:grid-cols-3">
-      <div className="flex flex-col items-center space-y-0.5 rounded-[20px] bg-[#F1F8F3] px-6 py-6 dark:bg-[#2C2B35]">
+      <div className="flex flex-col items-center space-y-0.5 rounded-[20px] bg-[#FFFFFF] px-6 py-6 dark:bg-[#2C2B35]">
         <span className="text-center text-xs font-medium uppercase tracking-wider opacity-50">
           Transactions
         </span>
         <span className="font-gintoNord text-2xl font-medium">{formatNumber(allTransactionsCount)}</span>
       </div>
-      <div className="flex flex-col items-center space-y-0.5 truncate rounded-[20px] bg-[#F1F8F3] px-6 py-6 dark:bg-[#2C2B35]">
+      <div className="flex flex-col items-center space-y-0.5 truncate rounded-[20px] bg-[#FFFFFF] px-6 py-6 dark:bg-[#2C2B35]">
         <span className="text-center text-xs font-medium uppercase tracking-wider opacity-50">
           Last Finalized
         </span>
@@ -60,7 +60,7 @@ const Stats = () => {
           </span>
         </Link>
       </div>
-      <div className="flex flex-col items-center space-y-0.5 truncate rounded-[20px] bg-[#F1F8F3] px-6 py-6 dark:bg-[#2C2B35]">
+      <div className="flex flex-col items-center space-y-0.5 truncate rounded-[20px] bg-[#FFFFFF] px-6 py-6 dark:bg-[#2C2B35]">
         <span className="text-center text-xs font-medium uppercase tracking-wider opacity-50">
           Top Submitters
         </span>
