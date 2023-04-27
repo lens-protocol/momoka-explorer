@@ -38,11 +38,11 @@ const Network = () => {
       }}
     >
       <div className="relative">
-        <Listbox.Button className="group relative w-full rounded-lg py-1 pl-3 pr-8 text-left hover:text-[#4C8C5E] focus:outline-none hover:dark:text-[#F5D4D2]">
+        <Listbox.Button className="group relative w-full rounded-lg py-1 pl-3 pr-8 text-left hover:text-[#C58C89] focus:outline-none hover:dark:text-[#F5D4D2]">
           <span className="block truncate">{selectedEnvironment?.name ?? 'Mainnet'}</span>
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             <ChevronUpDownIcon
-              className="h-5 w-5 text-[#383838] group-hover:text-[#4C8C5E] dark:text-white group-hover:dark:text-[#F5D4D2]"
+              className="h-5 w-5 text-[#383838] group-hover:text-[#C58C89] dark:text-white group-hover:dark:text-[#F5D4D2]"
               aria-hidden="true"
             />
           </span>

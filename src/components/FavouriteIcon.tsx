@@ -14,7 +14,7 @@ const FavouriteIcon: React.FC<MySvgProps> = (props) => {
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" {...props}>
       <path
         stroke={resolvedTheme === 'dark' ? '#9CA19F' : '#383838'}
-        className={clsx('group-hover:stroke-[#4C8C5E] dark:group-hover:stroke-[#F5D4D2]')}
+        className={clsx('group-hover:stroke-[#C58C89] dark:group-hover:stroke-[#F5D4D2]')}
         fill={props.isFavourite ? (resolvedTheme === 'dark' ? '#9CA19F' : '#FBEEED') : 'none'}
         strokeMiterlimit={10}
         strokeWidth={1.5}

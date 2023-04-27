@@ -104,7 +104,7 @@ const SearchBar = () => {
             <Link
               key={recent.transactionId}
               href={`/tx/${recent.transactionId}`}
-              className="flex w-full items-center justify-between rounded-xl px-4 py-2.5 hover:bg-[#F1F8F3] hover:dark:bg-[#565467]"
+              className="flex w-full items-center justify-between rounded-xl px-4 py-2.5 hover:bg-[#FBEEED] hover:dark:bg-[#565467]"
             >
               <span className="flex items-center gap-2 text-sm opacity-80">
                 <ClockIcon className="h-4 w-4" />

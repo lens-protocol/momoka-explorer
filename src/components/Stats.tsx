@@ -53,7 +53,7 @@ const Stats = () => {
         </span>
         <Link
           href={`/tx/${sanitizeDStorageUrl(lastFinalizedTransaction?.transactionId as string)}`}
-          className="space-x-2 truncate font-gintoNord hover:text-[#4C8C5E] hover:dark:text-[#F5D4D2]"
+          className="space-x-2 truncate font-gintoNord hover:text-[#C58C89] hover:dark:text-[#F5D4D2]"
         >
           <span className="truncate text-2xl font-medium">
             {lastFinalizedTransaction ? getRelativeTime(lastFinalizedTransaction?.createdAt) : '-'}
@@ -66,7 +66,7 @@ const Stats = () => {
         </span>
         <Link
           href="/submitters"
-          className="space-x-2 truncate font-gintoNord hover:text-[#4C8C5E] hover:dark:text-[#F5D4D2]"
+          className="space-x-2 truncate font-gintoNord hover:text-[#C58C89] hover:dark:text-[#F5D4D2]"
         >
           {topSubmitter ? (
             <span className="truncate text-2xl font-medium">

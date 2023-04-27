@@ -34,14 +34,14 @@ const Navbar: FC = () => {
         <div className="flex items-center space-x-2 text-[#383838] dark:text-white md:space-x-5">
           <Link
             href="/favorites"
-            className="group hidden items-center space-x-2 hover:text-[#E8C7C5] hover:dark:text-[#F5D4D2] md:flex"
+            className="group hidden items-center space-x-2 hover:text-[#C58C89] hover:dark:text-[#F5D4D2] md:flex"
           >
             <FavouriteIcon className="mb-0.5 h-5 w-5" isFavourite={false} />
             <span>Favorited</span>
           </Link>
           <Network />
           <button
-            className="hidden hover:text-[#E8C7C5] hover:dark:text-[#F5D4D2] md:block"
+            className="hidden hover:text-[#C58C89] hover:dark:text-[#F5D4D2] md:block"
             onClick={() => {
               setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
             }}

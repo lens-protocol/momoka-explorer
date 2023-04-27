@@ -31,13 +31,13 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
       <td className="w-48 whitespace-nowrap rounded-l-[20px] px-7 py-4 text-sm">
         <Link
           href={`/tx/${txn.transactionId}`}
-          className="flex flex-col truncate text-[#49454D] hover:text-[#4C8C5E] dark:text-[#9CA19F] hover:dark:text-[#F5D4D2]"
+          className="flex flex-col truncate text-[#49454D] hover:text-[#C58C89] dark:text-[#9CA19F] hover:dark:text-[#F5D4D2]"
         >
           {truncate(txn.transactionId, 30)}
         </Link>
       </td>
       <td className="whitespace-nowrap px-1 py-4 text-center font-gintoNord text-sm text-[#3D4B41] dark:text-[#F5D4D280]">
-        <span className="inline-flex items-center justify-center space-x-1 rounded-full border-2 border-[#FBEEED] px-3 py-1.5 text-[13px] dark:border-[#F5D4D230]">
+        <span className="inline-flex items-center justify-center space-x-1 rounded-full border-2 border-[#FBEEED] bg-[#FBEEED] px-3 py-1.5 text-[13px] dark:border-[#F5D4D230] dark:bg-transparent">
           {getDAActionType(txn.__typename)}
         </span>
       </td>
@@ -62,7 +62,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
                 draggable={false}
               />
             </span>
-            <span className="truncate hover:text-[#4C8C5E] hover:dark:text-[#F5D4D2]">
+            <span className="truncate hover:text-[#C58C89] hover:dark:text-[#F5D4D2]">
               {txn.profile.handle}
             </span>
           </span>
@@ -72,7 +72,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
         <Link
           onClick={(e) => e.stopPropagation()}
           href="submitters"
-          className="hover:text-[#4C8C5E] hover:dark:text-[#F5D4D2]"
+          className="hover:text-[#C58C89] hover:dark:text-[#F5D4D2]"
         >
           {truncate(txn.submitter, 20)}
         </Link>
@@ -90,7 +90,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
           href={`${getLensterLink(selectedEnvironment.id)}/posts/${txn.publicationId}`}
           target="_blank"
         >
-          <ArrowTopRightOnSquareIcon className="h-7 w-7 text-[#3D4B41] hover:text-[#4C8C5E] dark:text-[#9CA19F] hover:dark:text-[#F5D4D2]" />
+          <ArrowTopRightOnSquareIcon className="h-7 w-7 text-[#3D4B41] hover:text-[#C58C89] dark:text-[#9CA19F] hover:dark:text-[#F5D4D2]" />
         </Link>
       </td>
     </tr>
