@@ -65,7 +65,7 @@ const gintoNord = localFont({
 
 const { chains, provider } = configureChains([mainnet], [publicProvider()]);
 const { connectors } = getDefaultWallets({
-  appName: 'Bonsai Explorer',
+  appName: 'Momoka Explorer',
   chains
 });
 const wagmiClient = createClient({
@@ -92,7 +92,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const themeOptions: ThemeOptions = {
     fontStack: 'system',
-    accentColor: '#3D794E'
+    accentColor: '#2C2B35'
   };
 
   return (

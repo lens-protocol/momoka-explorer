@@ -32,7 +32,7 @@ const Submitters = () => {
             </thead>
             <tbody>
               {data?.dataAvailabilitySubmitters.items?.map((submitter, i) => (
-                <tr key={i} className="h-[82px] overflow-hidden bg-[#F1F8F3] font-medium dark:bg-[#272E29]">
+                <tr key={i} className="h-[82px] overflow-hidden bg-[#F1F8F3] font-medium dark:bg-[#2C2B35]">
                   <td className="whitespace-nowrap rounded-l-[20px] px-7 py-4 text-gray-700 dark:text-gray-300">
                     {submitter.name}
                   </td>

@@ -96,7 +96,7 @@ const LatestTransactions: FC = () => {
         <h1 className="font-medium md:text-[28px]">Latest transactions</h1>
         <Link
           href="/txns"
-          className="text-[13px] font-medium uppercase leading-[15px] tracking-[-0.2px] text-[#3D4B41] hover:opacity-70 dark:text-[#FFEBB8]"
+          className="text-[13px] font-medium uppercase leading-[15px] tracking-[-0.2px] text-[#3D4B41] hover:opacity-70 dark:text-[#F5D4D2]"
         >
           <span>View all</span>
         </Link>
