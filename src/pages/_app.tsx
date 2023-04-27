@@ -2,8 +2,17 @@ import '@/styles/globals.css';
 import '@rainbow-me/rainbowkit/styles.css';
 
 import { ApolloProvider } from '@apollo/client';
-import { darkTheme, getDefaultWallets, lightTheme, RainbowKitProvider } from '@rainbow-me/rainbowkit';
+import { connectorsForWallets, darkTheme, lightTheme, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import type { ThemeOptions } from '@rainbow-me/rainbowkit/dist/themes/baseTheme';
+import {
+  braveWallet,
+  coinbaseWallet,
+  injectedWallet,
+  ledgerWallet,
+  metaMaskWallet,
+  rainbowWallet,
+  walletConnectWallet
+} from '@rainbow-me/rainbowkit/wallets';
 import type { AppProps } from 'next/app';
 import localFont from 'next/font/local';
 import { ThemeProvider, useTheme } from 'next-themes';
@@ -64,10 +73,21 @@ const gintoNord = localFont({
 });
 
 const { chains, provider } = configureChains([mainnet], [publicProvider()]);
-const { connectors } = getDefaultWallets({
-  appName: 'Momoka Explorer',
-  chains
-});
+const connectors = connectorsForWallets([
+  {
+    groupName: 'Momoka',
+    wallets: [
+      injectedWallet({ chains, shimDisconnect: true }),
+      metaMaskWallet({ chains, shimDisconnect: true }),
+      braveWallet({ chains, shimDisconnect: true }),
+      rainbowWallet({ chains }),
+      ledgerWallet({ chains }),
+      coinbaseWallet({ appName: 'Momoka Explorer', chains }),
+      walletConnectWallet({ chains })
+    ]
+  }
+]);
+
 const wagmiClient = createClient({
   autoConnect: true,
   connectors,
