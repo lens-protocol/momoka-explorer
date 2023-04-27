@@ -1,10 +1,14 @@
+import MetaTags from '@/components/shared/Metatags';
 import AllTransactions from '@/components/txns/AllTransactions';
 
 const index = () => {
   return (
-    <div className="mb-10 space-y-4">
-      <AllTransactions />
-    </div>
+    <>
+      <MetaTags title="All Transactions" />
+      <div className="mb-10 space-y-4">
+        <AllTransactions />
+      </div>
+    </>
   );
 };
 

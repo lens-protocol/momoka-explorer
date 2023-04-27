@@ -1,10 +1,14 @@
+import MetaTags from '@/components/shared/Metatags';
 import AllFavorites from '@/components/txns/AllFavorites';
 
 const index = () => {
   return (
-    <div className="mb-10 space-y-4">
-      <AllFavorites />
-    </div>
+    <>
+      <MetaTags title="Favourites" />
+      <div className="mb-10 space-y-4">
+        <AllFavorites />
+      </div>
+    </>
   );
 };
 
