@@ -65,7 +65,7 @@ const SearchBar = () => {
   return (
     <div
       ref={resultsRef}
-      className="relative flex w-full rounded-full bg-[#F8FBF9] px-2 dark:bg-[#2C2B35] md:max-w-[50%]"
+      className="relative flex w-full rounded-full bg-[#FFFFFF] px-2 dark:bg-[#2C2B35] md:max-w-[50%]"
     >
       <span className="flex select-none items-center pl-3">
         {loading ? (
@@ -99,7 +99,7 @@ const SearchBar = () => {
           </Link>
         </div>
       ) : recentsByNetwork.length && inputClicked && !loading ? (
-        <div className="absolute left-0 right-0 top-16 z-10 flex w-full flex-col rounded-2xl bg-[#F8FBF9] p-2 px-2 shadow dark:bg-[#2C2B35]">
+        <div className="absolute left-0 right-0 top-16 z-10 flex w-full flex-col rounded-2xl bg-[#FFFFFF] p-2 px-2 shadow dark:bg-[#2C2B35]">
           {recentsByNetwork.map((recent) => (
             <Link
               key={recent.transactionId}
