@@ -36,7 +36,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
           {truncate(txn.transactionId, 30)}
         </Link>
       </td>
-      <td className="whitespace-nowrap px-1 py-4 text-center font-gintoNord text-sm text-[#3D4B41] dark:text-[#F5D4D280]">
+      <td className="whitespace-nowrap px-1 py-4 text-center font-gintoNord text-sm text-[#565467] dark:text-[#F5D4D280]">
         <span className="inline-flex items-center justify-center space-x-1 rounded-full border-2 border-[#FBEEED] bg-[#FBEEED] px-3 py-1.5 text-[13px] dark:border-[#F5D4D230] dark:bg-transparent">
           {getDAActionType(txn.__typename)}
         </span>
@@ -51,7 +51,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
         <Link
           onClick={(e) => e.stopPropagation()}
           href={`/profile/${txn.profile.id}`}
-          className="text-[#3D4B41] dark:text-[#9CA19F]"
+          className="text-[#565467] dark:text-[#9CA19F]"
         >
           <span className="inline-flex items-center space-x-2 py-0.5">
             <span className="flex-none">
@@ -90,7 +90,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
           href={`${getLensterLink(selectedEnvironment.id)}/posts/${txn.publicationId}`}
           target="_blank"
         >
-          <ArrowTopRightOnSquareIcon className="h-7 w-7 text-[#3D4B41] hover:text-[#C58C89] dark:text-[#9CA19F] hover:dark:text-[#F5D4D2]" />
+          <ArrowTopRightOnSquareIcon className="h-7 w-7 text-[#565467] hover:text-[#C58C89] dark:text-[#9CA19F] hover:dark:text-[#F5D4D2]" />
         </Link>
       </td>
     </tr>
