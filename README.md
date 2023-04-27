@@ -1,26 +1,26 @@
-# Bonsai Explorer
+# Momoka Explorer
                                                                                                                      
 <img src="./public/cover.png"/>
 
 <div align="center">
-    <strong>Bonsai explorer for Lens Protocol 🌿</strong>
+    <strong>Momoka explorer for Lens Protocol 🌿</strong>
 </div>
 <br>
 <div align="center">
     <a href="https://lenster.xyz/u/lensprotocol">
         <img src="https://lens-badge.vercel.app/api/badge/lensprotocol" alt="Lens">
     </a>
-    <a href="https://github.com/lens-protocol/bonsai-explorer/stargazers">
-        <img src="https://img.shields.io/github/stars/lens-protocol/bonsai-explorer?label=Stars&logo=github" alt="Stargazers">
+    <a href="https://github.com/lens-protocol/momoka-explorer/stargazers">
+        <img src="https://img.shields.io/github/stars/lens-protocol/momoka-explorer?label=Stars&logo=github" alt="Stargazers">
     </a>
-    <a href="https://github.com/lens-protocol/bonsai-explorer/blob/main/LICENSE">
-        <img src="https://img.shields.io/github/license/lens-protocol/bonsai-explorer?label=Licence&logo=mit" alt="License">
+    <a href="https://github.com/lens-protocol/momoka-explorer/blob/main/LICENSE">
+        <img src="https://img.shields.io/github/license/lens-protocol/momoka-explorer?label=Licence&logo=mit" alt="License">
     </a>
 </div>
 
 ## About
 
-Bonsai Explorer is a web application that allows you to explore the Lens Protocol's Data availability transactions in realtime and detailed view of the transactions.
+Momoka Explorer is a web application that allows you to explore the Lens Protocol's Data availability transactions in realtime and detailed view of the transactions.
 
 ## Features
 

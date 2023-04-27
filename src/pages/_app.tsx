@@ -65,7 +65,7 @@ const gintoNord = localFont({
 
 const { chains, provider } = configureChains([mainnet], [publicProvider()]);
 const { connectors } = getDefaultWallets({
-  appName: 'Bonsai Explorer',
+  appName: 'Momoka Explorer',
   chains
 });
 const wagmiClient = createClient({

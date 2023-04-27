@@ -8,8 +8,8 @@ import { useAccount } from 'wagmi';
 import type { Profile } from '@/generated';
 import { useProfilesQuery } from '@/generated';
 
-import BonsaiLogo from './BonsaiLogo';
 import FavouriteIcon from './FavouriteIcon';
+import MomokaLogo from './MomokaLogo';
 import Network from './Network';
 import { Button } from './ui/Button';
 import UserMenu from './UserMenu';
@@ -26,10 +26,10 @@ const Navbar: FC = () => {
   });
 
   return (
-    <nav className="fixed z-10 mx-auto w-full max-w-full bg-white px-2 dark:bg-[#364039] sm:px-6 lg:px-14">
+    <nav className="fixed z-10 mx-auto w-full max-w-full bg-white px-2 dark:bg-[#565467] sm:px-6 lg:px-14">
       <div className="flex h-16 items-center justify-between">
         <Link href="/">
-          <BonsaiLogo />
+          <MomokaLogo className="h-10" />
         </Link>
         <div className="flex items-center space-x-2 text-[#383838] dark:text-white md:space-x-5">
           <Link
