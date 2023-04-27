@@ -26,7 +26,7 @@ const Navbar: FC = () => {
   });
 
   return (
-    <nav className="fixed z-10 mx-auto w-full max-w-full bg-white px-2 dark:bg-[#565467] sm:px-6 lg:px-14">
+    <nav className="fixed z-10 mx-auto w-full max-w-full bg-[#FBEEED] px-2 dark:bg-[#565467] sm:px-6 lg:px-14">
       <div className="flex h-16 items-center justify-between">
         <Link href="/">
           <MomokaLogo className="h-10" />
@@ -34,14 +34,14 @@ const Navbar: FC = () => {
         <div className="flex items-center space-x-2 text-[#383838] dark:text-white md:space-x-5">
           <Link
             href="/favorites"
-            className="group hidden items-center space-x-2 hover:text-[#4C8C5E] hover:dark:text-[#FFEBB8] md:flex"
+            className="group hidden items-center space-x-2 hover:text-[#4C8C5E] hover:dark:text-[#F5D4D2] md:flex"
           >
             <FavouriteIcon className="mb-0.5 h-5 w-5" isFavourite={false} />
             <span>Favorited</span>
           </Link>
           <Network />
           <button
-            className="hidden hover:text-[#4C8C5E] hover:dark:text-[#FFEBB8] md:block"
+            className="hidden hover:text-[#4C8C5E] hover:dark:text-[#F5D4D2] md:block"
             onClick={() => {
               setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
             }}
@@ -53,7 +53,7 @@ const Navbar: FC = () => {
               <UserMenu profiles={data?.profiles.items as Profile[]} />
             ) : (
               <Button
-                className="px-5 py-3 text-[13px] font-bold uppercase leading-[13px] text-[#383838]"
+                className="px-5 py-3 text-[13px] font-bold uppercase leading-[13px]"
                 onClick={() => {
                   openConnectModal?.();
                 }}

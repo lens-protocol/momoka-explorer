@@ -38,11 +38,11 @@ const Network = () => {
       }}
     >
       <div className="relative">
-        <Listbox.Button className="group relative w-full rounded-lg py-1 pl-3 pr-8 text-left hover:text-[#4C8C5E] focus:outline-none hover:dark:text-[#FFEBB8]">
+        <Listbox.Button className="group relative w-full rounded-lg py-1 pl-3 pr-8 text-left hover:text-[#4C8C5E] focus:outline-none hover:dark:text-[#F5D4D2]">
           <span className="block truncate">{selectedEnvironment?.name ?? 'Mainnet'}</span>
           <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             <ChevronUpDownIcon
-              className="h-5 w-5 text-[#383838] group-hover:text-[#4C8C5E] dark:text-white group-hover:dark:text-[#FFEBB8]"
+              className="h-5 w-5 text-[#383838] group-hover:text-[#4C8C5E] dark:text-white group-hover:dark:text-[#F5D4D2]"
               aria-hidden="true"
             />
           </span>
@@ -53,14 +53,14 @@ const Network = () => {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="absolute right-0 mt-2 w-36 overflow-auto rounded-xl bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-[#202622] sm:text-sm">
+          <Listbox.Options className="absolute right-0 mt-2 w-36 overflow-auto rounded-xl bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-[#2C2B35] sm:text-sm">
             {networks.map((network, idx) => (
               <Listbox.Option
                 key={idx}
                 className={({ active }) =>
                   `relative select-none py-2 pl-10 pr-4 ${
                     active
-                      ? 'bg-[#DFEDE3] text-black dark:bg-[#272E29] dark:text-white'
+                      ? 'bg-[#FBEEED] text-black dark:bg-[#565467] dark:text-white'
                       : 'text-gray-900 dark:text-gray-100'
                   }`
                 }

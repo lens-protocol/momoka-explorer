@@ -26,18 +26,18 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
     <tr
       key={txn.transactionId}
       onClick={() => push(`/tx/${txn.transactionId}`)}
-      className="h-[82px] cursor-pointer overflow-hidden bg-[#F1F8F3] font-medium hover:bg-[#DFEDE3] dark:bg-[#2C2B35] hover:dark:bg-[#565467]"
+      className="h-[82px] cursor-pointer overflow-hidden bg-[#F1F8F3] font-medium hover:bg-[#DFEDE3] dark:bg-[#2C2B35] hover:dark:bg-[#2C2B35]/50"
     >
-      <td className="w-48 whitespace-nowrap rounded-l-[20px] px-7 py-4 text-sm text-[#16161B]">
+      <td className="w-48 whitespace-nowrap rounded-l-[20px] px-7 py-4 text-sm">
         <Link
           href={`/tx/${txn.transactionId}`}
-          className="flex flex-col truncate text-[#3D4B41] hover:text-[#4C8C5E] dark:text-[#9CA19F] hover:dark:text-[#FFEBB8]"
+          className="flex flex-col truncate text-[#49454D] hover:text-[#4C8C5E] dark:text-[#9CA19F] hover:dark:text-[#F5D4D2]"
         >
           {truncate(txn.transactionId, 30)}
         </Link>
       </td>
-      <td className="whitespace-nowrap px-1 py-4 text-center text-sm text-[#3D4B41] dark:text-[#C3E4CD80]">
-        <span className="inline-flex w-20 items-center justify-center space-x-1 rounded-full border border-[#DBEDE1] px-3 py-1.5 text-[13px] dark:border-[#DBEDE180]">
+      <td className="whitespace-nowrap px-1 py-4 text-center font-gintoNord text-sm text-[#3D4B41] dark:text-[#F5D4D280]">
+        <span className="inline-flex items-center justify-center space-x-1 rounded-full border border-[#FBEEED] bg-[#FBEEED] px-3 py-1.5 text-[13px] dark:border-[#F5D4D230]">
           {getDAActionType(txn.__typename)}
         </span>
       </td>
@@ -62,7 +62,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
                 draggable={false}
               />
             </span>
-            <span className="truncate hover:text-[#4C8C5E] hover:dark:text-[#FFEBB8]">
+            <span className="truncate hover:text-[#4C8C5E] hover:dark:text-[#F5D4D2]">
               {txn.profile.handle}
             </span>
           </span>
@@ -72,7 +72,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
         <Link
           onClick={(e) => e.stopPropagation()}
           href="submitters"
-          className="hover:text-[#4C8C5E] hover:dark:text-[#FFEBB8]"
+          className="hover:text-[#4C8C5E] hover:dark:text-[#F5D4D2]"
         >
           {truncate(txn.submitter, 20)}
         </Link>
@@ -90,7 +90,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
           href={`${getLensterLink(selectedEnvironment.id)}/posts/${txn.publicationId}`}
           target="_blank"
         >
-          <ArrowTopRightOnSquareIcon className="h-7 w-7 text-[#3D4B41] hover:text-[#4C8C5E] dark:text-[#9CA19F] hover:dark:text-[#FFEBB8]" />
+          <ArrowTopRightOnSquareIcon className="h-7 w-7 text-[#3D4B41] hover:text-[#4C8C5E] dark:text-[#9CA19F] hover:dark:text-[#F5D4D2]" />
         </Link>
       </td>
     </tr>
