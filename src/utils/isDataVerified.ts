@@ -1,5 +1,5 @@
-import type { Deployment, Environment, EthereumNode } from '@lens-protocol/bonsai/client';
-import { checkDAProof } from '@lens-protocol/bonsai/client';
+import type { Deployment, Environment, EthereumNode } from '@lens-protocol/momoka/client';
+import { checkDAProof } from '@lens-protocol/momoka/client';
 
 import getConfig from './getConfig';
 
