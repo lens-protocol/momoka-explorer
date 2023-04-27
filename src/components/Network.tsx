@@ -68,7 +68,7 @@ const Network = () => {
               >
                 <span className="block truncate">{network.name}</span>
                 {network.id === selectedEnvironment.id ? (
-                  <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-green-600 dark:text-green-300">
+                  <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-[#565467] dark:text-[#FBEEED]">
                     {getIcon(selectedEnvironment.id)}
                   </span>
                 ) : null}
