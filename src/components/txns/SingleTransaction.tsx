@@ -37,14 +37,14 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
         </Link>
       </td>
       <td className="whitespace-nowrap px-1 py-4 text-center font-gintoNord text-sm text-[#3D4B41] dark:text-[#F5D4D280]">
-        <span className="inline-flex items-center justify-center space-x-1 rounded-full border border-[#FBEEED] px-3 py-1.5 text-[13px] dark:border-[#F5D4D230]">
+        <span className="inline-flex items-center justify-center space-x-1 rounded-full border-2 border-[#FBEEED] px-3 py-1.5 text-[13px] dark:border-[#F5D4D230]">
           {getDAActionType(txn.__typename)}
         </span>
       </td>
       <td className="whitespace-nowrap px-3 py-2 text-center text-[13px] text-[#383838] dark:text-white">
         {getRelativeTime(txn.createdAt)}
       </td>
-      <td className="whitespace-nowrap px-3 py-2 text-center text-[13px] text-[#383838] dark:text-[#C3E4CD80]">
+      <td className="whitespace-nowrap px-3 py-2 text-center text-[13px] text-[#383838] dark:text-[#9CA19F]">
         {txn.appId}
       </td>
       <td className="whitespace-nowrap px-3 py-2">
@@ -68,7 +68,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
           </span>
         </Link>
       </td>
-      <td className="whitespace-nowrap px-3 py-2 text-sm text-[#383838] dark:text-[#C3E4CD80]">
+      <td className="whitespace-nowrap px-3 py-2 text-sm text-[#383838] dark:text-[#9CA19F]">
         <Link
           onClick={(e) => e.stopPropagation()}
           href="submitters"
