@@ -1,6 +1,6 @@
 # Momoka Explorer
                                                                                                                      
-<img src="./public/og.png"/>
+<img src="./public/og.jpg"/>
 
 <div align="center">
     <strong>Momoka explorer for Lens Protocol 🌿</strong>
