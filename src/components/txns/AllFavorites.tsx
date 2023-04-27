@@ -39,8 +39,15 @@ const AllFavorites: FC = () => {
                 <th className="px-3 text-center text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
                   Age
                 </th>
-                <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">From</th>
-                <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">Via</th>
+                <th className="px-3 text-center text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                  Client
+                </th>
+                <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                  Sender
+                </th>
+                <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                  Submitter
+                </th>
               </tr>
             </thead>
             <tbody>

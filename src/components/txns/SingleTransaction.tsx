@@ -44,6 +44,9 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
       <td className="whitespace-nowrap px-3 py-2 text-center text-[13px] text-[#383838] dark:text-white">
         {getRelativeTime(txn.createdAt)}
       </td>
+      <td className="whitespace-nowrap px-3 py-2 text-center text-[13px] text-[#383838] dark:text-[#C3E4CD80]">
+        {txn.appId}
+      </td>
       <td className="whitespace-nowrap px-3 py-2">
         <Link
           onClick={(e) => e.stopPropagation()}

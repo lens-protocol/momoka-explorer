@@ -118,6 +118,9 @@ const LatestTransactions: FC = () => {
                 <th className="px-3 text-center text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
                   Age
                 </th>
+                <th className="px-3 text-center text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
+                  Client
+                </th>
                 <th className="px-3 text-sm font-medium uppercase leading-[15px] tracking-[-0.2px]">
                   Sender
                 </th>
