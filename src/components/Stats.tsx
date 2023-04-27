@@ -42,15 +42,11 @@ const Stats = () => {
   return (
     <div className="grid gap-4 lg:grid-cols-3">
       <div className="flex flex-col items-center space-y-0.5 rounded-[20px] bg-[#FFFFFF] px-6 py-6 dark:bg-[#2C2B35]">
-        <span className="text-center text-xs font-medium uppercase tracking-wider opacity-50">
-          Transactions
-        </span>
+        <span className="text-center font-medium uppercase tracking-wider opacity-50">Transactions</span>
         <span className="font-gintoNord text-2xl font-medium">{formatNumber(allTransactionsCount)}</span>
       </div>
       <div className="flex flex-col items-center space-y-0.5 truncate rounded-[20px] bg-[#FFFFFF] px-6 py-6 dark:bg-[#2C2B35]">
-        <span className="text-center text-xs font-medium uppercase tracking-wider opacity-50">
-          Last Finalized
-        </span>
+        <span className="text-center font-medium uppercase tracking-wider opacity-50">Last Finalized</span>
         <Link
           href={`/tx/${sanitizeDStorageUrl(lastFinalizedTransaction?.transactionId as string)}`}
           className="space-x-2 truncate font-gintoNord hover:text-[#C58C89] hover:dark:text-[#F5D4D2]"
@@ -61,9 +57,7 @@ const Stats = () => {
         </Link>
       </div>
       <div className="flex flex-col items-center space-y-0.5 truncate rounded-[20px] bg-[#FFFFFF] px-6 py-6 dark:bg-[#2C2B35]">
-        <span className="text-center text-xs font-medium uppercase tracking-wider opacity-50">
-          Top Submitters
-        </span>
+        <span className="text-center font-medium uppercase tracking-wider opacity-50">Top Submitters</span>
         <Link
           href="/submitters"
           className="space-x-2 truncate font-gintoNord hover:text-[#C58C89] hover:dark:text-[#F5D4D2]"
