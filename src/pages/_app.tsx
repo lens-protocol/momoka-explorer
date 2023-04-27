@@ -92,7 +92,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   const themeOptions: ThemeOptions = {
     fontStack: 'system',
-    accentColor: '#3D794E'
+    accentColor: '#2C2B35'
   };
 
   return (

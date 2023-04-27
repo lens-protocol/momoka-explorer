@@ -17,7 +17,7 @@ const UserMenu: FC<UserMenuProps> = ({ profiles }) => {
   const { disconnect } = useDisconnect();
 
   if (!profiles?.length) {
-    return <div className="animate pulse ml-3 h-8 w-8 rounded-full bg-gray-100 dark:bg-gray-700" />;
+    return <div className="animate pulse ml-3 h-8 w-8 rounded-full bg-gray-100 dark:bg-[#2C2B35]" />;
   }
 
   const defaultProfile = profiles.find((profile) => profile.isDefault);
@@ -42,7 +42,7 @@ const UserMenu: FC<UserMenuProps> = ({ profiles }) => {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right divide-y divide-gray-100 rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-[#1C1B22]">
+        <Menu.Items className="absolute right-0 mt-2 w-48 origin-top-right divide-y divide-gray-100 rounded-xl bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:bg-[#2C2B35]">
           <div className="px-1 py-1">
             {profiles?.map((profile: Profile) => (
               <Menu.Item key={profile.id}>
@@ -52,7 +52,7 @@ const UserMenu: FC<UserMenuProps> = ({ profiles }) => {
                     className={clsx(
                       'group flex w-full items-center space-x-1.5 rounded-lg px-4 py-2 text-sm',
                       active
-                        ? 'bg-green-100 text-[#3D794E] dark:bg-[#3D794E]/30 dark:text-[#D0DBFF]'
+                        ? 'bg-green-100 text-[#3D794E] dark:bg-[#565467]/30 dark:text-[#D0DBFF]'
                         : 'text-gray-900 dark:text-gray-100'
                     )}
                   >

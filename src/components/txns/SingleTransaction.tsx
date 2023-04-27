@@ -37,7 +37,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
         </Link>
       </td>
       <td className="whitespace-nowrap px-1 py-4 text-center font-gintoNord text-sm text-[#3D4B41] dark:text-[#F5D4D280]">
-        <span className="inline-flex items-center justify-center space-x-1 rounded-full border border-[#FBEEED] bg-[#FBEEED] px-3 py-1.5 text-[13px] dark:border-[#F5D4D230]">
+        <span className="inline-flex items-center justify-center space-x-1 rounded-full border border-[#FBEEED] px-3 py-1.5 text-[13px] dark:border-[#F5D4D230]">
           {getDAActionType(txn.__typename)}
         </span>
       </td>
