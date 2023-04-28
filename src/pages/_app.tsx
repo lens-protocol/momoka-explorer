@@ -5,11 +5,9 @@ import { ApolloProvider } from '@apollo/client';
 import { connectorsForWallets, darkTheme, lightTheme, RainbowKitProvider } from '@rainbow-me/rainbowkit';
 import type { ThemeOptions } from '@rainbow-me/rainbowkit/dist/themes/baseTheme';
 import {
-  braveWallet,
   coinbaseWallet,
   injectedWallet,
   ledgerWallet,
-  metaMaskWallet,
   rainbowWallet,
   walletConnectWallet
 } from '@rainbow-me/rainbowkit/wallets';
@@ -78,8 +76,6 @@ const connectors = connectorsForWallets([
     groupName: 'Momoka',
     wallets: [
       injectedWallet({ chains, shimDisconnect: true }),
-      metaMaskWallet({ chains, shimDisconnect: true }),
-      braveWallet({ chains, shimDisconnect: true }),
       rainbowWallet({ chains }),
       ledgerWallet({ chains }),
       coinbaseWallet({ appName: 'Momoka Explorer', chains }),
