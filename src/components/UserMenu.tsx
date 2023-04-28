@@ -27,7 +27,7 @@ const UserMenu: FC = () => {
     return <div className="animate pulse ml-3 h-8 w-8 rounded-full bg-gray-100 dark:bg-[#2C2B35]" />;
   }
 
-  if (!profiles?.length && !loading) {
+  if (!profiles?.length) {
     return (
       <Button
         className="px-5 py-3 text-[13px] font-bold uppercase leading-[13px]"
