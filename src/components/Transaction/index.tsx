@@ -154,9 +154,10 @@ const Transaction: FC = () => {
                 </div>
                 {dataAvailabilityTransaction.verificationStatus.__typename ===
                   'DataAvailabilityVerificationStatusFailure' && (
-                  <span className="truncate text-sm leading-3">
-                    {dataAvailabilityTransaction.verificationStatus.status}
-                  </span>
+                  <div className="truncate text-sm leading-3">
+                    <b>Reason: </b>
+                    <span>{dataAvailabilityTransaction.verificationStatus.status}</span>
+                  </div>
                 )}
               </div>
             }
