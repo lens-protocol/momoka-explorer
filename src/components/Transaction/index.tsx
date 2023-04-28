@@ -170,21 +170,23 @@ const Transaction: FC = () => {
             )}ed by`}
             value={<Profile profile={dataAvailabilityTransaction?.profile as TProfile} />}
           />
-          <Meta
-            title="Publication ID"
-            value={
-              <Link
-                className="flex items-center space-x-2 text-[#3D794E] underline dark:text-[#D0DBFF]"
-                href={`${getLensterLink(selectedEnvironment.id)}/posts/${
-                  dataAvailabilityTransaction?.publicationId
-                }`}
-                target="_blank"
-              >
-                <span>{dataAvailabilityTransaction?.publicationId}</span>
-                <ArrowTopRightOnSquareIcon className="h-4 w-4" />
-              </Link>
-            }
-          />
+          {isVerified && (
+            <Meta
+              title="Publication ID"
+              value={
+                <Link
+                  className="flex items-center space-x-2 text-[#3D794E] underline dark:text-[#D0DBFF]"
+                  href={`${getLensterLink(selectedEnvironment.id)}/posts/${
+                    dataAvailabilityTransaction?.publicationId
+                  }`}
+                  target="_blank"
+                >
+                  <span>{dataAvailabilityTransaction?.publicationId}</span>
+                  <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+                </Link>
+              }
+            />
+          )}
           {dataAvailabilityTransaction?.__typename === 'DataAvailabilityMirror' && (
             <>
               <div className="border-b-[0.5px] border-b-gray-100 dark:border-gray-950" />
