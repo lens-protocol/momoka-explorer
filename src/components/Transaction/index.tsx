@@ -1,3 +1,4 @@
+import { XCircleIcon } from '@heroicons/react/20/solid';
 import {
   ArrowTopRightOnSquareIcon,
   BoltIcon,
@@ -5,6 +6,7 @@ import {
   DocumentDuplicateIcon
 } from '@heroicons/react/24/outline';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
+import clsx from 'clsx';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -87,6 +89,8 @@ const Transaction: FC = () => {
   }
 
   const { dataAvailabilityTransaction } = data;
+  const isVerified =
+    dataAvailabilityTransaction.verificationStatus.__typename === 'DataAvailabilityVerificationStatusSuccess';
 
   return (
     <>
@@ -136,9 +140,16 @@ const Transaction: FC = () => {
           <Meta
             title="Status"
             value={
-              <div className="inline-flex items-center space-x-2 rounded-lg border border-green-300 bg-green-400 bg-opacity-25 px-1.5 py-1 text-xs text-green-500 dark:text-green-400">
-                <CheckCircleIcon className="w- h-4" />
-                <span>Verified</span>
+              <div
+                className={clsx(
+                  isVerified
+                    ? 'border-green-300 bg-green-400 text-green-500 dark:text-green-400'
+                    : 'border-red-300 bg-red-400 text-red-500 dark:text-red-400',
+                  'inline-flex items-center space-x-2 rounded-lg border bg-opacity-25 px-1.5 py-1 text-xs text-green-500 dark:text-green-400'
+                )}
+              >
+                {isVerified ? <CheckCircleIcon className="w- h-4" /> : <XCircleIcon className="w- h-4" />}
+                <span>{isVerified ? 'Verified' : 'Unverified'}</span>
               </div>
             }
           />
@@ -159,21 +170,23 @@ const Transaction: FC = () => {
             )}ed by`}
             value={<Profile profile={dataAvailabilityTransaction?.profile as TProfile} />}
           />
-          <Meta
-            title="Publication ID"
-            value={
-              <Link
-                className="flex items-center space-x-2 text-[#3D794E] underline dark:text-[#D0DBFF]"
-                href={`${getLensterLink(selectedEnvironment.id)}/posts/${
-                  dataAvailabilityTransaction?.publicationId
-                }`}
-                target="_blank"
-              >
-                <span>{dataAvailabilityTransaction?.publicationId}</span>
-                <ArrowTopRightOnSquareIcon className="h-4 w-4" />
-              </Link>
-            }
-          />
+          {isVerified && (
+            <Meta
+              title="Publication ID"
+              value={
+                <Link
+                  className="flex items-center space-x-2 text-[#3D794E] underline dark:text-[#D0DBFF]"
+                  href={`${getLensterLink(selectedEnvironment.id)}/posts/${
+                    dataAvailabilityTransaction?.publicationId
+                  }`}
+                  target="_blank"
+                >
+                  <span>{dataAvailabilityTransaction?.publicationId}</span>
+                  <ArrowTopRightOnSquareIcon className="h-4 w-4" />
+                </Link>
+              }
+            />
+          )}
           {dataAvailabilityTransaction?.__typename === 'DataAvailabilityMirror' && (
             <>
               <div className="border-b-[0.5px] border-b-gray-100 dark:border-gray-950" />

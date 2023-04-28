@@ -7,4 +7,12 @@ fragment DAPostFields on DataAvailabilityPost {
     ...ProfileFields
   }
   publicationId
+  verificationStatus {
+    ... on DataAvailabilityVerificationStatusSuccess {
+      verified
+    }
+    ... on DataAvailabilityVerificationStatusFailure {
+      status
+    }
+  }
 }
