@@ -4,20 +4,38 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import type { FC } from 'react';
 import { Fragment } from 'react';
-import { useDisconnect } from 'wagmi';
+import { useAccount, useDisconnect } from 'wagmi';
 
 import type { Profile } from '@/generated';
+import { useProfilesQuery } from '@/generated';
+import formatAddress from '@/utils/formatAddress';
 import getProfilePicture from '@/utils/getProfilePicture';
 
-interface UserMenuProps {
-  profiles: Profile[];
-}
+import { Button } from './ui/Button';
 
-const UserMenu: FC<UserMenuProps> = ({ profiles }) => {
+const UserMenu: FC = () => {
   const { disconnect } = useDisconnect();
+  const { address } = useAccount();
+
+  const { data, loading } = useProfilesQuery({
+    variables: { request: { ownedBy: [address] } },
+    skip: !address
+  });
+  const profiles = data?.profiles.items as Profile[];
+
+  if (loading) {
+    return <div className="animate pulse ml-3 h-8 w-8 rounded-full bg-gray-100 dark:bg-[#2C2B35]" />;
+  }
 
   if (!profiles?.length) {
-    return <div className="animate pulse ml-3 h-8 w-8 rounded-full bg-gray-100 dark:bg-[#2C2B35]" />;
+    return (
+      <Button
+        className="px-5 py-3 text-[13px] font-bold uppercase leading-[13px]"
+        onClick={() => disconnect?.()}
+      >
+        {address ? formatAddress(address, 4) : ''}
+      </Button>
+    );
   }
 
   const defaultProfile = profiles.find((profile) => profile.isDefault);

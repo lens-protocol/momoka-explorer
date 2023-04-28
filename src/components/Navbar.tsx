@@ -5,9 +5,6 @@ import { useTheme } from 'next-themes';
 import type { FC } from 'react';
 import { useAccount } from 'wagmi';
 
-import type { Profile } from '@/generated';
-import { useProfilesQuery } from '@/generated';
-
 import FavouriteIcon from './FavouriteIcon';
 import MomokaLogo from './MomokaLogo';
 import Network from './Network';
@@ -18,12 +15,6 @@ const Navbar: FC = () => {
   const { setTheme, resolvedTheme } = useTheme();
   const { openConnectModal } = useConnectModal();
   const { isConnected } = useAccount();
-  const { address } = useAccount();
-
-  const { data } = useProfilesQuery({
-    variables: { request: { ownedBy: [address] } },
-    skip: !address
-  });
 
   return (
     <nav className="fixed z-10 mx-auto w-full max-w-full bg-[#FBEEED] px-2 dark:bg-[#565467] sm:px-6 lg:px-14">
@@ -50,7 +41,7 @@ const Navbar: FC = () => {
           </button>
           <div>
             {isConnected ? (
-              <UserMenu profiles={data?.profiles.items as Profile[]} />
+              <UserMenu />
             ) : (
               <Button
                 className="px-5 py-3 text-[13px] font-bold uppercase leading-[13px]"
