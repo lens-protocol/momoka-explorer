@@ -140,16 +140,24 @@ const Transaction: FC = () => {
           <Meta
             title="Status"
             value={
-              <div
-                className={clsx(
-                  isVerified
-                    ? 'border-green-300 bg-green-400 text-green-500 dark:text-green-400'
-                    : 'border-red-300 bg-red-400 text-red-500 dark:text-red-400',
-                  'inline-flex items-center space-x-2 rounded-lg border bg-opacity-25 px-1.5 py-1 text-xs text-green-500 dark:text-green-400'
+              <div className="flex items-center space-x-2">
+                <div
+                  className={clsx(
+                    isVerified
+                      ? 'border-green-300 bg-green-400 text-green-500 dark:text-green-400'
+                      : 'border-red-300 bg-red-400 text-red-500 dark:text-red-400',
+                    'inline-flex items-center space-x-2 rounded-lg border bg-opacity-25 px-1.5 py-1 text-xs text-green-500 dark:text-green-400'
+                  )}
+                >
+                  {isVerified ? <CheckCircleIcon className="w- h-4" /> : <XCircleIcon className="w- h-4" />}
+                  <span>{isVerified ? 'Verified' : 'Unverified'}</span>
+                </div>
+                {dataAvailabilityTransaction.verificationStatus.__typename ===
+                  'DataAvailabilityVerificationStatusFailure' && (
+                  <span className="truncate text-sm leading-3">
+                    {dataAvailabilityTransaction.verificationStatus.status}
+                  </span>
                 )}
-              >
-                {isVerified ? <CheckCircleIcon className="w- h-4" /> : <XCircleIcon className="w- h-4" />}
-                <span>{isVerified ? 'Verified' : 'Unverified'}</span>
               </div>
             }
           />
