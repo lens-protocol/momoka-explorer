@@ -11,4 +11,12 @@ fragment DACommentFields on DataAvailabilityComment {
     ...ProfileFields
   }
   commentedOnPublicationId
+  verificationStatus {
+    ... on DataAvailabilityVerificationStatusSuccess {
+      verified
+    }
+    ... on DataAvailabilityVerificationStatusFailure {
+      status
+    }
+  }
 }

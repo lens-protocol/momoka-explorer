@@ -11,4 +11,12 @@ fragment DAMirrorFields on DataAvailabilityMirror {
     ...ProfileFields
   }
   mirrorOfPublicationId
+  verificationStatus {
+    ... on DataAvailabilityVerificationStatusSuccess {
+      verified
+    }
+    ... on DataAvailabilityVerificationStatusFailure {
+      status
+    }
+  }
 }
