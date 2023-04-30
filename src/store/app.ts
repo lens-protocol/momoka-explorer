@@ -10,6 +10,10 @@ interface State {
   setAllTransactionsCount: (latestTransactions: number) => void;
   topSubmitter: DataAvailabilitySubmitterResult | null;
   setTopSubmitter: (topSubmitter: DataAvailabilitySubmitterResult) => void;
+  totalSpent: number;
+  setTotalSpent: (totalSpent: number) => void;
+  maticMarketPrice: number;
+  setMaticMarketPrice: (maticMarketPrice: number) => void;
 }
 
 export const useAppStore = create<State>((set) => ({
@@ -18,7 +22,11 @@ export const useAppStore = create<State>((set) => ({
   allTransactionsCount: 0,
   setAllTransactionsCount: (allTransactionsCount) => set({ allTransactionsCount }),
   topSubmitter: null,
-  setTopSubmitter: (topSubmitter: DataAvailabilitySubmitterResult) => set({ topSubmitter })
+  setTopSubmitter: (topSubmitter: DataAvailabilitySubmitterResult) => set({ topSubmitter }),
+  totalSpent: 0,
+  setTotalSpent: (totalSpent) => set({ totalSpent }),
+  maticMarketPrice: 0,
+  setMaticMarketPrice: (maticMarketPrice) => set({ maticMarketPrice })
 }));
 
 interface AppPersistState {

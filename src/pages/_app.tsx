@@ -21,6 +21,8 @@ import { publicProvider } from 'wagmi/providers/public';
 import client from '@/apollo';
 import Navbar from '@/components/Navbar';
 import MetaTags from '@/components/shared/Metatags';
+import { useAppStore } from '@/store/app';
+import getCoingeckoPrice from '@/utils/getMaticPrice';
 
 const ginto = localFont({
   src: [
@@ -93,8 +95,15 @@ const wagmiClient = createClient({
 export default function App({ Component, pageProps }: AppProps) {
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
+  const setMaticMarketPrice = useAppStore((state) => state.setMaticMarketPrice);
+
+  const fetchMaticPrice = async () => {
+    const price = await getCoingeckoPrice();
+    setMaticMarketPrice(price);
+  };
 
   useEffect(() => {
+    fetchMaticPrice();
     setMounted(true);
   }, []);
 
