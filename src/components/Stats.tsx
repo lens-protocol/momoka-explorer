@@ -52,11 +52,11 @@ const Stats = () => {
 
   return (
     <div className="grid gap-4 lg:grid-cols-4">
-      <div className="flex flex-col items-center space-y-0.5 rounded-[20px] bg-[#FFFFFF] px-6 py-6 dark:bg-[#2C2B35]">
+      <div className="flex flex-col items-center space-y-0.5 rounded-[20px] bg-[#FFFFFF] p-6 dark:bg-[#2C2B35]">
         <span className="text-center font-medium uppercase tracking-wider opacity-50">Transactions</span>
         <span className="font-gintoNord text-2xl font-medium">{formatNumber(allTransactionsCount)}</span>
       </div>
-      <div className="flex flex-col items-center space-y-0.5 truncate rounded-[20px] bg-[#FFFFFF] px-6 py-6 dark:bg-[#2C2B35]">
+      <div className="flex flex-col items-center space-y-0.5 truncate rounded-[20px] bg-[#FFFFFF] p-6 dark:bg-[#2C2B35]">
         <span className="text-center font-medium uppercase tracking-wider opacity-50">Last Finalized</span>
         <Link
           href={`/tx/${sanitizeDStorageUrl(lastFinalizedTransaction?.transactionId as string)}`}
@@ -67,7 +67,7 @@ const Stats = () => {
           </span>
         </Link>
       </div>
-      <div className="flex flex-col items-center space-y-0.5 truncate rounded-[20px] bg-[#FFFFFF] px-6 py-6 dark:bg-[#2C2B35]">
+      <div className="flex flex-col items-center space-y-0.5 truncate rounded-[20px] bg-[#FFFFFF] p-6 dark:bg-[#2C2B35]">
         <span className="text-center font-medium uppercase tracking-wider opacity-50">Top Submitters</span>
         <Link
           href="/submitters"
@@ -82,12 +82,9 @@ const Stats = () => {
           ) : null}
         </Link>
       </div>
-      <div className="flex flex-col items-center space-y-0.5 truncate rounded-[20px] bg-[#FFFFFF] px-6 py-6 dark:bg-[#2C2B35]">
+      <div className="flex flex-col items-center space-y-0.5 truncate rounded-[20px] bg-[#FFFFFF] p-6 dark:bg-[#2C2B35]">
         <span className="text-center font-medium uppercase tracking-wider opacity-50">Total Spent</span>
-        <Link
-          href="/submitters"
-          className="space-x-2 truncate font-gintoNord hover:text-[#C58C89] hover:dark:text-[#F5D4D2]"
-        >
+        <div className="space-x-2 truncate font-gintoNord">
           {totalSpent && topSubmitter ? (
             <span className="truncate text-2xl font-medium">
               $ {getTotalSpentInUsd().toFixed(2)} {' | '}
@@ -95,7 +92,7 @@ const Stats = () => {
               <span className="text-xs">/txn</span>
             </span>
           ) : null}
-        </Link>
+        </div>
       </div>
     </div>
   );

@@ -105,6 +105,7 @@ export default function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     fetchMaticPrice();
     setMounted(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!mounted) {
