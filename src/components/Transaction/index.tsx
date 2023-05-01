@@ -72,7 +72,7 @@ export const Meta: FC<MetaProps> = ({ title, value, copyValue = null }) => {
 };
 
 const Transaction: FC = () => {
-  const { query } = useRouter();
+  const { query, push } = useRouter();
   const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
 
   const { data, loading } = useDataAvailabilityTransactionQuery({
@@ -208,6 +208,7 @@ const Transaction: FC = () => {
                       href={`${getLensterLink(selectedEnvironment.id)}/posts/${
                         dataAvailabilityTransaction?.mirrorOfPublicationId
                       }`}
+                      onClick={() => push(`/tx/${dataAvailabilityTransaction?.mirrorOfPublicationId}`)}
                       target="_blank"
                     >
                       <span>{dataAvailabilityTransaction?.mirrorOfPublicationId}</span>
@@ -233,6 +234,7 @@ const Transaction: FC = () => {
                       href={`${getLensterLink(selectedEnvironment.id)}/posts/${
                         dataAvailabilityTransaction?.commentedOnPublicationId
                       }`}
+                      onClick={() => push(`/tx/${dataAvailabilityTransaction?.commentedOnPublicationId}`)}
                       target="_blank"
                     >
                       <span>{dataAvailabilityTransaction?.commentedOnPublicationId}</span>
