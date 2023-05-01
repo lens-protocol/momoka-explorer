@@ -74,11 +74,7 @@ const Stats = () => {
           className="space-x-2 truncate font-gintoNord hover:text-[#C58C89] hover:dark:text-[#F5D4D2]"
         >
           {topSubmitter ? (
-            <span className="truncate text-2xl font-medium">
-              {topSubmitter.name as string}
-              {' | '}
-              {formatNumber(topSubmitter.totalTransactions)}
-            </span>
+            <span className="truncate text-2xl font-medium">{topSubmitter.name as string}</span>
           ) : null}
         </Link>
       </div>
