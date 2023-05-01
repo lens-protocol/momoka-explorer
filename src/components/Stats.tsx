@@ -57,6 +57,18 @@ const Stats = () => {
         <span className="font-gintoNord text-2xl font-medium">{formatNumber(allTransactionsCount)}</span>
       </div>
       <div className="flex flex-col items-center space-y-0.5 truncate rounded-[20px] bg-[#FFFFFF] p-6 dark:bg-[#2C2B35]">
+        <span className="text-center font-medium uppercase tracking-wider opacity-50">Total Spent</span>
+        <div className="space-x-2 truncate font-gintoNord">
+          {totalSpent && topSubmitter ? (
+            <span className="truncate text-2xl font-medium">
+              $ {getTotalSpentInUsd().toFixed(2)} {' | '}${' '}
+              {(getTotalSpentInUsd() / topSubmitter.totalTransactions).toFixed(4)}{' '}
+              <span className="text-xs">/txn</span>
+            </span>
+          ) : null}
+        </div>
+      </div>
+      <div className="flex flex-col items-center space-y-0.5 truncate rounded-[20px] bg-[#FFFFFF] p-6 dark:bg-[#2C2B35]">
         <span className="text-center font-medium uppercase tracking-wider opacity-50">Last Finalized</span>
         <Link
           href={`/tx/${sanitizeDStorageUrl(lastFinalizedTransaction?.transactionId as string)}`}
@@ -77,18 +89,6 @@ const Stats = () => {
             <span className="truncate text-2xl font-medium">{topSubmitter.name as string}</span>
           ) : null}
         </Link>
-      </div>
-      <div className="flex flex-col items-center space-y-0.5 truncate rounded-[20px] bg-[#FFFFFF] p-6 dark:bg-[#2C2B35]">
-        <span className="text-center font-medium uppercase tracking-wider opacity-50">Total Spent</span>
-        <div className="space-x-2 truncate font-gintoNord">
-          {totalSpent && topSubmitter ? (
-            <span className="truncate text-2xl font-medium">
-              $ {getTotalSpentInUsd().toFixed(2)} {' | '}
-              {(getTotalSpentInUsd() / topSubmitter.totalTransactions).toFixed(4)}{' '}
-              <span className="text-xs">/txn</span>
-            </span>
-          ) : null}
-        </div>
       </div>
     </div>
   );
