@@ -10,6 +10,7 @@ import {
   useDaTransactionsQuery
 } from '@/generated';
 import { newTransactionQuery } from '@/graphql/NewTransactionSubscription';
+import useSubmitterSpent from '@/hooks/useSubmitterSpent';
 import { useAppPersistStore, useAppStore } from '@/store/app';
 import getConfig from '@/utils/getConfig';
 
@@ -46,12 +47,16 @@ const LatestTransactions: FC = () => {
     onCompleted
   });
 
+  const { fetchData: fetchSpentAmount } = useSubmitterSpent();
+
   const fetchCounts = async () => {
     const { data: countData } = await fetchAllCount();
     setAllTransactionsCount(countData?.dataAvailabilitySummary.totalTransactions ?? 0);
     const { data: submittersData } = await fetchTopSubmitter();
     setAllTransactionsCount(countData?.dataAvailabilitySummary.totalTransactions ?? 0);
     if (submittersData?.dataAvailabilitySubmitters?.items[0]) {
+      const submitters = submittersData?.dataAvailabilitySubmitters.items.map((el) => el.address);
+      fetchSpentAmount(submitters);
       setTopSubmitter(submittersData?.dataAvailabilitySubmitters?.items[0]);
     }
   };
