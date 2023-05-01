@@ -12,8 +12,8 @@ const useSubmitterSpent = () => {
   const fetchData = async (submitters: string[]) => {
     try {
       const response = await axios.post(BUNDLR_SPENT_API, submitters);
-      const { sum } = await response.data;
-      setTotalSpent(sum);
+      const { amount } = await response.data;
+      setTotalSpent(amount);
     } catch (error: any) {
       setError(error);
     } finally {
