@@ -10,10 +10,11 @@ const useSubmitterSpent = () => {
   const setTotalSpent = useAppStore((state) => state.setTotalSpent);
 
   const fetchData = async (submitters: string[]) => {
+    setLoading(true);
     try {
       const response = await axios.post(BUNDLR_SPENT_API, submitters);
-      const { amount } = await response.data;
-      setTotalSpent(amount);
+      const { sum } = await response.data;
+      setTotalSpent(sum);
     } catch (error: any) {
       setError(error);
     } finally {

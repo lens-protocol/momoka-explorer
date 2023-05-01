@@ -24,7 +24,7 @@ const Stats = () => {
     fetchPolicy: 'no-cache'
   });
   const [fetchAllCount, { loading }] = useDaSummaryLazyQuery({ fetchPolicy: 'no-cache' });
-  const { fetchData: fetchSpentAmount } = useSubmitterSpent();
+  const { fetchData: fetchSpentAmount, loading: fetchingSpentAmount } = useSubmitterSpent();
 
   const fetchCounts = async () => {
     const { data: countData } = await fetchAllCount();
@@ -58,15 +58,21 @@ const Stats = () => {
       </div>
       <div className="flex flex-col items-center space-y-0.5 truncate rounded-[20px] bg-[#FFFFFF] p-6 dark:bg-[#2C2B35]">
         <span className="text-center font-medium uppercase tracking-wider opacity-50">Total Spent</span>
-        <div className="space-x-2 truncate font-gintoNord">
-          {totalSpent && topSubmitter ? (
-            <span className="truncate text-2xl font-medium">
-              $ {getTotalSpentInUsd().toFixed(2)} {' | '}${' '}
-              {(getTotalSpentInUsd() / topSubmitter.totalTransactions).toFixed(4)}{' '}
-              <span className="text-xs">/txn</span>
-            </span>
-          ) : null}
-        </div>
+        {fetchingSpentAmount ? (
+          <span className="h-[26px] w-3/4 animate-pulse rounded-lg bg-[#FBEEED] font-medium dark:bg-[#565467]" />
+        ) : (
+          <div className="space-x-2 truncate font-gintoNord">
+            {totalSpent && topSubmitter ? (
+              <span className="truncate text-2xl font-medium">
+                $ {getTotalSpentInUsd().toFixed(2)} {' | '}${' '}
+                {(getTotalSpentInUsd() / topSubmitter.totalTransactions).toFixed(4)}{' '}
+                <span className="text-xs">/txn</span>
+              </span>
+            ) : fetchingSpentAmount ? (
+              <span className="h-[12px] truncate bg-[#FFFFFF] font-medium dark:bg-[#2C2B35]" />
+            ) : null}
+          </div>
+        )}
       </div>
       <div className="flex flex-col items-center space-y-0.5 truncate rounded-[20px] bg-[#FFFFFF] p-6 dark:bg-[#2C2B35]">
         <span className="text-center font-medium uppercase tracking-wider opacity-50">Last Finalized</span>
