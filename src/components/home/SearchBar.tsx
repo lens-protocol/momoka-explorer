@@ -89,28 +89,29 @@ const SearchBar = () => {
         )}
       />
       {keyword.length && txn?.transactionId ? (
-        <div className="absolute left-0 right-0 top-16 flex w-full rounded-2xl bg-[#F8FBF9] p-2 px-2 dark:bg-[#2C2B35]">
+        <div className="absolute left-0 right-0 top-14 flex w-full rounded-2xl bg-[#F8FBF9] p-2 px-2 dark:bg-[#2C2B35] md:top-16">
           <Link
             href={`/tx/${txn?.transactionId}`}
             onClick={() => storeToRecents(txn)}
-            className="flex w-full items-center justify-between rounded-xl px-4 py-2 hover:bg-[#FFFFFF] hover:dark:bg-[#565467]"
+            className="flex w-full items-center justify-between space-x-2 rounded-xl px-4 py-2 hover:bg-[#FFFFFF] hover:dark:bg-[#565467]"
           >
-            {txn?.transactionId} <span className="text-xs opacity-50">{txn.publicationId}</span>
+            <span>{txn?.transactionId}</span>{' '}
+            <span className="truncate text-xs opacity-50">{txn.publicationId}</span>
           </Link>
         </div>
       ) : recentsByNetwork.length && inputClicked && !loading ? (
-        <div className="absolute left-0 right-0 top-16 z-10 flex w-full flex-col rounded-2xl bg-[#FFFFFF] p-2 px-2 shadow dark:bg-[#2C2B35]">
+        <div className="absolute left-0 right-0 top-14 z-10 flex w-full flex-col rounded-2xl bg-[#FFFFFF] p-2 px-2 shadow dark:bg-[#2C2B35] md:top-16">
           {recentsByNetwork.map((recent) => (
             <Link
               key={recent.transactionId}
               href={`/tx/${recent.transactionId}`}
-              className="flex w-full items-center justify-between rounded-xl px-4 py-2.5 hover:bg-[#FBEEED] hover:dark:bg-[#565467]"
+              className="flex w-full items-center justify-between space-x-2 rounded-xl px-4 py-2.5 hover:bg-[#FBEEED] hover:dark:bg-[#565467]"
             >
-              <span className="flex items-center gap-2 text-sm opacity-80">
-                <ClockIcon className="h-4 w-4" />
-                <span>{recent.transactionId}</span>
+              <span className="flex items-center gap-2 truncate text-sm opacity-80">
+                <ClockIcon className="h-4 w-4 flex-none" />
+                <span className="truncate">{recent.transactionId}</span>
               </span>
-              <span className="text-xs opacity-50">{recent.publicationId}</span>
+              <span className="hidden truncate text-xs opacity-50 lg:inline">{recent.publicationId}</span>
             </Link>
           ))}
         </div>
