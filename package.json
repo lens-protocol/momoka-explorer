@@ -14,9 +14,9 @@
   "dependencies": {
     "@apollo/client": "^3.7.14",
     "@headlessui/react": "^1.7.14",
-    "@heroicons/react": "^2.0.17",
-    "@lens-protocol/momoka": "^1.1.0",
-    "@rainbow-me/rainbowkit": "^0.12.12",
+    "@heroicons/react": "^2.0.18",
+    "@lens-protocol/momoka": "^1.1.1",
+    "@rainbow-me/rainbowkit": "^0.12.14",
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",
     "@types/react": "18.0.35",
@@ -36,25 +36,25 @@
     "react-use-websocket": "^4.3.1",
     "tailwindcss": "3.3.1",
     "typescript": "5.0.4",
-    "wagmi": "^0.12.12",
+    "wagmi": "^0.12.13",
     "zustand": "^4.3.8"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^3.3.1",
     "@graphql-codegen/fragment-matcher": "^4.0.1",
-    "prettier-plugin-tailwindcss": "^0.2.8",
     "@graphql-codegen/typescript": "^3.0.4",
     "@graphql-codegen/typescript-operations": "^3.0.4",
     "@graphql-codegen/typescript-react-apollo": "^3.3.7",
     "@types/node": "18.15.11",
-    "@typescript-eslint/eslint-plugin": "^5.59.2",
+    "@typescript-eslint/eslint-plugin": "^5.59.6",
     "eslint": "8.38.0",
     "eslint-config-next": "13.3.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-simple-import-sort": "^10.0.0",
-    "eslint-plugin-unicorn": "^46.0.0",
+    "eslint-plugin-unicorn": "^46.0.1",
     "eslint-plugin-unused-imports": "^2.0.0",
-    "prettier": "^2.8.8"
+    "prettier": "^2.8.8",
+    "prettier-plugin-tailwindcss": "^0.2.8"
   },
   "packageManager": "pnpm@8.2.0"
 }
