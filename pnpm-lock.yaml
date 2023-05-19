@@ -41,7 +41,7 @@ dependencies:
     specifier: ^1.11.7
     version: 1.11.7
   ethers:
-    specifier: ^5.7.2
+    specifier: ^5
     version: 5.7.2
   next:
     specifier: 13.3.0
