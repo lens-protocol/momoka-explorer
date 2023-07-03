@@ -51,7 +51,7 @@ export const Meta: FC<MetaProps> = ({ title, value, copyValue = null }) => {
     <div className="px-4 py-6 sm:grid sm:grid-cols-5 sm:gap-4 sm:px-0">
       <dt className="text-sm font-medium leading-6 text-gray-900 dark:text-gray-300">{title}</dt>
       <dd className="mt-1 flex items-center space-x-2 text-sm leading-6 text-gray-700 dark:text-gray-200 sm:col-span-4 sm:mt-0">
-        {value}
+        <span className="truncate">{value}</span>
         {copyValue ? (
           <button
             onClick={() => {
