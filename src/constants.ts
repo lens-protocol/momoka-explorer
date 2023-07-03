@@ -1,6 +1,7 @@
 export const ARWEAVE_GATEWAY_URL = 'https://arweave.net';
 export const IPFS_GATEWAY_URL = 'https://gateway.ipfscdn.io/ipfs';
 export const BUNDLR_SPENT_API = 'https://node1.bundlr.network/bulk/account/spending/matic';
+export const WC_PROJECT_ID = '56d00bfc0436773edd053b651aec9399';
 
 export enum LensterUrl {
   STAGING = 'https://staging.lenster.xyz',

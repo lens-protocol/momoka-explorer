@@ -21,6 +21,7 @@ import { publicProvider } from 'wagmi/providers/public';
 import client from '@/apollo';
 import Navbar from '@/components/Navbar';
 import MetaTags from '@/components/shared/Metatags';
+import { WC_PROJECT_ID } from '@/constants';
 import { useAppStore } from '@/store/app';
 import getCoingeckoPrice from '@/utils/getMaticPrice';
 
@@ -78,10 +79,10 @@ const connectors = connectorsForWallets([
     groupName: 'Momoka',
     wallets: [
       injectedWallet({ chains, shimDisconnect: true }),
-      rainbowWallet({ chains }),
-      ledgerWallet({ chains }),
+      rainbowWallet({ chains, projectId: WC_PROJECT_ID }),
+      ledgerWallet({ chains, projectId: WC_PROJECT_ID }),
       coinbaseWallet({ appName: 'Momoka Explorer', chains }),
-      walletConnectWallet({ chains })
+      walletConnectWallet({ chains, projectId: WC_PROJECT_ID })
     ]
   }
 ]);
