@@ -15,7 +15,7 @@ import type { AppProps } from 'next/app';
 import localFont from 'next/font/local';
 import { ThemeProvider, useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
-import { configureChains, createClient, mainnet, WagmiConfig } from 'wagmi';
+import { configureChains, createConfig, mainnet, WagmiConfig } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
 
 import client from '@/apollo';
@@ -73,7 +73,7 @@ const gintoNord = localFont({
   display: 'swap'
 });
 
-const { chains, provider } = configureChains([mainnet], [publicProvider()]);
+const { chains, publicClient } = configureChains([mainnet], [publicProvider()]);
 const connectors = connectorsForWallets([
   {
     groupName: 'Momoka',
@@ -87,10 +87,10 @@ const connectors = connectorsForWallets([
   }
 ]);
 
-const wagmiClient = createClient({
+const wagmiClient = createConfig({
   autoConnect: true,
   connectors,
-  provider
+  publicClient
 });
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -125,7 +125,7 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>
       <ThemeProvider defaultTheme="light" attribute="class">
-        <WagmiConfig client={wagmiClient}>
+        <WagmiConfig config={wagmiClient}>
           <RainbowKitProvider
             chains={chains}
             modalSize="compact"

@@ -33,20 +33,20 @@ Momoka Explorer is a web application that allows you to explore the Lens Protoco
 ## Prerequisites
 
 - [Node.js](https://nodejs.org/en/) >= 14.0.0
-- [pnpm](https://pnpm.io/) >= 8.0.0
+- [yarn](https://yarnpkg.com/) > 1.0.0
 
 ## Development
 
-Install all dependencies with [pnpm](https://pnpm.io/):
+Install all dependencies:
 
 ```sh
-pnpm install
+yarn install
 ```
 
 Start the development server:
 
 ```sh
-pnpm dev
+yarn dev
 ```
 
 ## Build
@@ -54,5 +54,5 @@ pnpm dev
 Build the project:
 
 ```sh
-pnpm build
+yarn build
 ```
