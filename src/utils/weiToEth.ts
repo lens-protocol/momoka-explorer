@@ -1,4 +1,4 @@
-import { formatEther } from 'viem'
+import { formatEther } from 'viem';
 
 const weiToEth = (weiValue: string) => {
   if (!weiValue) {
