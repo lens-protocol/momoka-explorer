@@ -23,7 +23,7 @@ import Navbar from '@/components/Navbar';
 import MetaTags from '@/components/shared/Metatags';
 import { WC_PROJECT_ID } from '@/constants';
 import { useAppStore } from '@/store/app';
-import getCoingeckoPrice from '@/utils/getMaticPrice';
+import getMaticPrice from '@/utils/getMaticPrice';
 
 const ginto = localFont({
   src: [
@@ -99,7 +99,7 @@ export default function App({ Component, pageProps }: AppProps) {
   const setMaticMarketPrice = useAppStore((state) => state.setMaticMarketPrice);
 
   const fetchMaticPrice = async () => {
-    const price = await getCoingeckoPrice();
+    const price = await getMaticPrice();
     setMaticMarketPrice(price);
   };
 
