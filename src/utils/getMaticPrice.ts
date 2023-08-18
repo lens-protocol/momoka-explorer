@@ -6,7 +6,7 @@ const getMaticPrice = async () => {
       'https://api.redstone.finance/prices?symbol=MATIC&provider=redstone&limit=1'
     );
 
-    return response.data[0].value;
+    return response?.data[0] ? response.data[0].value : 0;
   } catch {
     return 0;
   }
