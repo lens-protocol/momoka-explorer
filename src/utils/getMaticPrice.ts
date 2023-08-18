@@ -1,20 +1,15 @@
 import axios from 'axios';
 
-const getCoingeckoPrice = async () => {
+const getMaticPrice = async () => {
   try {
-    // MATIC address
-    const address = '0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270';
-    const response = await axios('https://api.coingecko.com/api/v3/simple/token_price/polygon-pos', {
-      params: {
-        contract_addresses: address,
-        vs_currencies: 'usd'
-      }
-    });
+    const response = await axios.get(
+      'https://api.redstone.finance/prices?symbol=MATIC&provider=redstone&limit=1'
+    );
 
-    return response.data[address].usd;
+    return response.data[0].value;
   } catch {
     return 0;
   }
 };
 
-export default getCoingeckoPrice;
+export default getMaticPrice;
