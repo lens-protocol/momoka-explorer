@@ -1,4 +1,4 @@
-import { LensEndpoint, HeyUrl, VerifierDeployment, VerifierNetwork } from '@/constants';
+import { HeyUrl, LensEndpoint, VerifierDeployment, VerifierNetwork } from '@/constants';
 
 const getConfig = (
   network: string
