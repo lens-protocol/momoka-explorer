@@ -7,7 +7,7 @@ import type { DataAvailabilityTransactionUnion, Profile } from '@/generated';
 import { useAppPersistStore } from '@/store/app';
 import { getRelativeTime } from '@/utils/formatTime';
 import getDAActionType from '@/utils/getDAActionType';
-import getLensterLink from '@/utils/getLensterLink';
+import getHeyLink from '@/utils/getHeyLink';
 import getProfilePicture from '@/utils/getProfilePicture';
 import truncate from '@/utils/truncate';
 
@@ -87,7 +87,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
         <Link
           className="flex flex-none justify-center md:mb-0.5"
           onClick={(e) => e.stopPropagation()}
-          href={`${getLensterLink(selectedEnvironment.id)}/posts/${txn.publicationId}`}
+          href={`${getHeyLink(selectedEnvironment.id)}/posts/${txn.publicationId}`}
           target="_blank"
         >
           <ArrowTopRightOnSquareIcon className="h-7 w-7 text-[#565467] hover:text-[#C58C89] dark:text-[#E9E9E9] hover:dark:text-[#F5D4D2]" />

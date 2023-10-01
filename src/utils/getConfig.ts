@@ -1,10 +1,10 @@
-import { LensEndpoint, LensterUrl, VerifierDeployment, VerifierNetwork } from '@/constants';
+import { LensEndpoint, HeyUrl, VerifierDeployment, VerifierNetwork } from '@/constants';
 
 const getConfig = (
   network: string
 ): {
   apiEndpoint: string;
-  lensterUrl: string;
+  heyUrl: string;
   verifierNetwork: string;
   verifierDeployment: string;
 } => {
@@ -12,28 +12,28 @@ const getConfig = (
     case 'mainnet':
       return {
         apiEndpoint: LensEndpoint.PRODUCTION,
-        lensterUrl: LensterUrl.PRODUCTION,
+        heyUrl: HeyUrl.PRODUCTION,
         verifierNetwork: VerifierNetwork.POLYGON,
         verifierDeployment: VerifierDeployment.PRODUCTION
       };
     case 'testnet':
       return {
         apiEndpoint: LensEndpoint.TESTNET,
-        lensterUrl: LensterUrl.TESTNET,
+        heyUrl: HeyUrl.TESTNET,
         verifierNetwork: VerifierNetwork.MUMBAI,
         verifierDeployment: VerifierDeployment.PRODUCTION
       };
     case 'staging':
       return {
         apiEndpoint: LensEndpoint.STAGING,
-        lensterUrl: LensterUrl.STAGING,
+        heyUrl: HeyUrl.STAGING,
         verifierNetwork: VerifierNetwork.MUMBAI,
         verifierDeployment: VerifierDeployment.STAGING
       };
     default:
       return {
         apiEndpoint: LensEndpoint.PRODUCTION,
-        lensterUrl: LensterUrl.PRODUCTION,
+        heyUrl: HeyUrl.PRODUCTION,
         verifierNetwork: VerifierNetwork.POLYGON,
         verifierDeployment: VerifierDeployment.PRODUCTION
       };

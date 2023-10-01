@@ -20,7 +20,7 @@ import Custom404 from '@/pages/404';
 import { useAppPersistStore } from '@/store/app';
 import capitalizeCase from '@/utils/capitalizeCase';
 import { getRelativeTime } from '@/utils/formatTime';
-import getLensterLink from '@/utils/getLensterLink';
+import getHeyLink from '@/utils/getHeyLink';
 
 import Favorite from '../shared/Favorite';
 import Profile from '../shared/Profile';
@@ -185,7 +185,7 @@ const Transaction: FC = () => {
               value={
                 <Link
                   className="flex items-center space-x-2 text-[#3D794E] underline dark:text-[#D0DBFF]"
-                  href={`${getLensterLink(selectedEnvironment.id)}/posts/${
+                  href={`${getHeyLink(selectedEnvironment.id)}/posts/${
                     dataAvailabilityTransaction?.publicationId
                   }`}
                   target="_blank"
@@ -205,7 +205,7 @@ const Transaction: FC = () => {
                   <div className="space-y-4">
                     <Link
                       className="flex items-center space-x-2 text-[#3D794E] underline dark:text-[#D0DBFF]"
-                      href={`${getLensterLink(selectedEnvironment.id)}/posts/${
+                      href={`${getHeyLink(selectedEnvironment.id)}/posts/${
                         dataAvailabilityTransaction?.mirrorOfPublicationId
                       }`}
                       onClick={() => push(`/tx/${dataAvailabilityTransaction?.mirrorOfPublicationId}`)}
@@ -231,7 +231,7 @@ const Transaction: FC = () => {
                   <div className="space-y-4">
                     <Link
                       className="flex items-center space-x-2 text-[#3D794E] underline dark:text-[#D0DBFF]"
-                      href={`${getLensterLink(selectedEnvironment.id)}/posts/${
+                      href={`${getHeyLink(selectedEnvironment.id)}/posts/${
                         dataAvailabilityTransaction?.commentedOnPublicationId
                       }`}
                       onClick={() => push(`/tx/${dataAvailabilityTransaction?.commentedOnPublicationId}`)}
@@ -253,7 +253,7 @@ const Transaction: FC = () => {
               <div className="flex items-center space-x-2">
                 {apps.includes(dataAvailabilityTransaction?.appId) && (
                   <img
-                    src={`https://static-assets.lenster.xyz/images/source/${dataAvailabilityTransaction?.appId}.jpeg`}
+                    src={`https://static-assets.hey.xyz/images/source/${dataAvailabilityTransaction?.appId}.jpeg`}
                     className="h-5 w-5 rounded-full"
                     alt={dataAvailabilityTransaction?.appId}
                     draggable={false}

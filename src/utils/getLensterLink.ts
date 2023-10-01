@@ -1,7 +1,7 @@
 import getConfig from './getConfig';
 
-const getLensterLink = (networkId: string) => {
-  return getConfig(networkId).lensterUrl;
+const getHeyLink = (networkId: string) => {
+  return getConfig(networkId).heyUrl;
 };
 
-export default getLensterLink;
+export default getHeyLink;

@@ -7,7 +7,7 @@
 </div>
 <br>
 <div align="center">
-    <a href="https://lenster.xyz/u/lensprotocol">
+    <a href="https://hey.xyz/u/lensprotocol">
         <img src="https://lens-badge.vercel.app/api/badge/lensprotocol" alt="Lens">
     </a>
     <a href="https://github.com/lens-protocol/momoka-explorer/stargazers">
