@@ -6088,6 +6088,67 @@ export type ProfileQuery = {
   } | null;
 };
 
+export type ProfilesManagedQueryVariables = Exact<{
+  request: ProfilesManagedRequest;
+}>;
+
+export type ProfilesManagedQuery = {
+  __typename?: 'Query';
+  profilesManaged: {
+    __typename?: 'PaginatedProfileResult';
+    items: Array<{
+      __typename?: 'Profile';
+      id: any;
+      handle?: any | null;
+      ownedBy: { __typename?: 'NetworkAddress'; address: any };
+      operations: {
+        __typename?: 'ProfileOperations';
+        id: any;
+        canBlock: boolean;
+        canUnblock: boolean;
+        canFollow: TriStateValue;
+        canUnfollow: boolean;
+        isBlockedByMe: { __typename?: 'OptimisticStatusResult'; value: boolean };
+        isFollowedByMe: { __typename?: 'OptimisticStatusResult'; value: boolean };
+        isFollowingMe: { __typename?: 'OptimisticStatusResult'; value: boolean };
+      };
+      stats: {
+        __typename?: 'ProfileStats';
+        id: any;
+        followers: number;
+        following: number;
+        comments: number;
+        posts: number;
+        mirrors: number;
+        quotes: number;
+        publications: number;
+        reactions: number;
+        reacted: number;
+        countOpenActions: number;
+      };
+      metadata?: {
+        __typename?: 'ProfileMetadata';
+        displayName?: string | null;
+        bio?: any | null;
+        rawURI: any;
+        appId?: any | null;
+        picture?:
+          | {
+              __typename?: 'ImageSet';
+              raw: { __typename?: 'Image'; uri: any };
+              optimized?: { __typename?: 'Image'; uri: any } | null;
+            }
+          | {
+              __typename?: 'NftImage';
+              image: { __typename?: 'ImageSet'; raw: { __typename?: 'Image'; uri: any } };
+            }
+          | null;
+      } | null;
+    }>;
+    pageInfo: { __typename?: 'PaginatedResultInfo'; next?: any | null };
+  };
+};
+
 export type PublicationQueryVariables = Exact<{
   request: PublicationRequest;
 }>;
@@ -6796,6 +6857,60 @@ export function useProfileLazyQuery(
 export type ProfileQueryHookResult = ReturnType<typeof useProfileQuery>;
 export type ProfileLazyQueryHookResult = ReturnType<typeof useProfileLazyQuery>;
 export type ProfileQueryResult = Apollo.QueryResult<ProfileQuery, ProfileQueryVariables>;
+export const ProfilesManagedDocument = gql`
+  query ProfilesManaged($request: ProfilesManagedRequest!) {
+    profilesManaged(request: $request) {
+      items {
+        ...ProfileFields
+      }
+      pageInfo {
+        next
+      }
+    }
+  }
+  ${ProfileFieldsFragmentDoc}
+`;
+
+/**
+ * __useProfilesManagedQuery__
+ *
+ * To run a query within a React component, call `useProfilesManagedQuery` and pass it any options that fit your needs.
+ * When your component renders, `useProfilesManagedQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useProfilesManagedQuery({
+ *   variables: {
+ *      request: // value for 'request'
+ *   },
+ * });
+ */
+export function useProfilesManagedQuery(
+  baseOptions: Apollo.QueryHookOptions<ProfilesManagedQuery, ProfilesManagedQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useQuery<ProfilesManagedQuery, ProfilesManagedQueryVariables>(
+    ProfilesManagedDocument,
+    options
+  );
+}
+export function useProfilesManagedLazyQuery(
+  baseOptions?: Apollo.LazyQueryHookOptions<ProfilesManagedQuery, ProfilesManagedQueryVariables>
+) {
+  const options = { ...defaultOptions, ...baseOptions };
+  return Apollo.useLazyQuery<ProfilesManagedQuery, ProfilesManagedQueryVariables>(
+    ProfilesManagedDocument,
+    options
+  );
+}
+export type ProfilesManagedQueryHookResult = ReturnType<typeof useProfilesManagedQuery>;
+export type ProfilesManagedLazyQueryHookResult = ReturnType<typeof useProfilesManagedLazyQuery>;
+export type ProfilesManagedQueryResult = Apollo.QueryResult<
+  ProfilesManagedQuery,
+  ProfilesManagedQueryVariables
+>;
 export const PublicationDocument = gql`
   query Publication($request: PublicationRequest!) {
     publication(request: $request) {

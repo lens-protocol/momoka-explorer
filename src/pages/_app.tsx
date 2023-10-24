@@ -132,7 +132,7 @@ export default function App({ Component, pageProps }: AppProps) {
             theme={theme === 'dark' ? darkTheme(themeOptions) : lightTheme(themeOptions)}
           >
             <Navbar />
-            <style jsx global>{`
+            <style>{`
               body {
                 font-family: ${ginto.style.fontFamily};
               }

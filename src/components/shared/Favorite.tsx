@@ -2,6 +2,7 @@ import type { FC, ReactNode } from 'react';
 
 import type { MomokaTransaction } from '@/generated';
 import { useAppPersistStore } from '@/store/app';
+import type { MomokaTransactionTransactionWithNetwork } from '@/store/favorites';
 import { useFavoritesPersistStore } from '@/store/favorites';
 import isInFavorites from '@/utils/isInFavorites';
 
@@ -29,8 +30,11 @@ const Favorite: FC<FavoriteProps> = ({ momokaTransaction, renderItem }) => {
         e.stopPropagation();
 
         isFavorite
-          ? removeFavorite(momokaTransaction as MomokaTransaction, selectedEnvironment.id)
-          : addFavorite(momokaTransaction as MomokaTransaction, selectedEnvironment.id);
+          ? removeFavorite(
+              momokaTransaction as MomokaTransactionTransactionWithNetwork,
+              selectedEnvironment.id
+            )
+          : addFavorite(momokaTransaction as MomokaTransactionTransactionWithNetwork, selectedEnvironment.id);
       }}
     >
       {renderItem(isFavorite)}

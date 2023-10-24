@@ -83,7 +83,7 @@ const LatestTransactions: FC = () => {
     const daData = jsonData?.payload?.data;
 
     if (daData) {
-      const txn = daData?.newDataAvailabilityTransaction as MomokaTransaction;
+      const txn = daData?.newMomokaTransaction as MomokaTransaction;
       setLastFinalizedTransaction({ ...txn });
       let oldTxns = [...(latestTransactions as MomokaTransaction[])];
       oldTxns.unshift(txn);

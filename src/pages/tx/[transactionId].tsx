@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>DA Transaction</title>
+        <title>Momoka Transaction</title>
       </Head>
       <div className="mb-10">
         <DTransactionNoSSR />

@@ -24,10 +24,10 @@ const TxnProfile: FC<TxnProfileProps> = ({ profile }) => {
           <div>
             <div>
               <h1 className="text-2xl font-medium opacity-90">
-                {profile.name ?? formatAddress(profile.ownedBy)}
+                {profile.metadata?.displayName ?? formatAddress(profile.ownedBy.address)}
               </h1>
-              <h3 className="text-sm font-medium opacity-60">@{profile.handle}</h3>
-              <p className="mt-3 text-sm font-medium opacity-60">{profile.bio ?? ''}</p>
+              <h3 className="text-sm font-medium opacity-60">@{profile.handle || profile.id}</h3>
+              <p className="mt-3 text-sm font-medium opacity-60">{profile.metadata?.bio ?? ''}</p>
             </div>
           </div>
         </div>
@@ -35,20 +35,23 @@ const TxnProfile: FC<TxnProfileProps> = ({ profile }) => {
           <div className="flex items-center space-x-3">
             <UsersIcon className="h-4 w-4" />
             <div>
-              <b> {profile.stats.totalPosts + profile.stats.totalComments + profile.stats.totalMirrors}</b>{' '}
+              <b>
+                {' '}
+                {profile.stats.posts + profile.stats.comments + profile.stats.mirrors + profile.stats.quotes}
+              </b>{' '}
               publications
             </div>
           </div>
           <div className="flex items-center space-x-3">
             <UsersIcon className="h-4 w-4" />
             <div>
-              <b>{profile.stats.totalFollowers}</b> followers
+              <b>{profile.stats.followers}</b> followers
             </div>
           </div>
           <div className="flex items-center space-x-3">
             <UserPlusIcon className="h-4 w-4" />
             <div>
-              <b>{profile.stats.totalFollowing}</b> followings
+              <b>{profile.stats.following}</b> followings
             </div>
           </div>
         </div>

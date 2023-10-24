@@ -6,8 +6,7 @@ import type { FC } from 'react';
 import { Fragment } from 'react';
 import { useAccount, useDisconnect } from 'wagmi';
 
-import type { Profile } from '@/generated';
-import { useProfilesQuery } from '@/generated';
+import { type Profile, useProfilesManagedQuery } from '@/generated';
 import formatAddress from '@/utils/formatAddress';
 import getProfilePicture from '@/utils/getProfilePicture';
 
@@ -17,11 +16,11 @@ const UserMenu: FC = () => {
   const { disconnect } = useDisconnect();
   const { address } = useAccount();
 
-  const { data, loading } = useProfilesQuery({
-    variables: { request: { ownedBy: [address] } },
+  const { data, loading } = useProfilesManagedQuery({
+    variables: { request: { for: [address] } },
     skip: !address
   });
-  const profiles = data?.profiles.items as Profile[];
+  const profiles = data?.profilesManaged.items as Profile[];
 
   if (loading) {
     return <div className="animate pulse ml-3 h-8 w-8 rounded-full bg-gray-100 dark:bg-[#2C2B35]" />;
@@ -38,7 +37,7 @@ const UserMenu: FC = () => {
     );
   }
 
-  const defaultProfile = profiles.find((profile) => profile.isDefault);
+  const defaultProfile = profiles[0];
 
   return (
     <Menu as="div" className="relative ml-3 text-left">
