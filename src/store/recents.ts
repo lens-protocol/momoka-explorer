@@ -1,15 +1,13 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import type { DataAvailabilityTransactionUnion } from '@/generated';
+import type { MomokaTransaction } from '@/generated';
 
-export type DataAvailabilityTransactionUnionWithNetwork = DataAvailabilityTransactionUnion & {
-  network: string;
-};
+import type { MomokaTransactionTransactionWithNetwork } from './favorites';
 
 interface AppRecentsState {
-  recents: DataAvailabilityTransactionUnionWithNetwork[];
-  setRecents: (favorite: DataAvailabilityTransactionUnion, network: string) => void;
+  recents: MomokaTransactionTransactionWithNetwork[];
+  setRecents: (favorite: MomokaTransaction, network: string) => void;
 }
 
 export const useRecentsPersistStore = create(
