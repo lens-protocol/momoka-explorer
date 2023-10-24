@@ -63,6 +63,7 @@ const LatestTransactions: FC = () => {
   };
 
   useEffect(() => {
+    sendJsonMessage({ type: 'connection_init' });
     if (readyState === 1) {
       sendJsonMessage({
         id: '1',
