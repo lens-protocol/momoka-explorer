@@ -11,7 +11,7 @@ export enum HeyUrl {
 
 export enum LensEndpoint {
   STAGING = 'https://staging-api-social-mumbai.lens.crtlkey.com',
-  TESTNET = 'https://api-mumbai.lens.dev',
+  TESTNET = 'https://api-v2-mumbai.lens.dev',
   PRODUCTION = 'https://api.lens.dev'
 }
 
