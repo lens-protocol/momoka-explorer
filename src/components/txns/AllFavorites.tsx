@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 
+import type { MomokaTransaction } from '@/generated';
 import { useAppPersistStore } from '@/store/app';
-import type { DataAvailabilityTransactionUnionWithNetwork } from '@/store/favorites';
 import { useFavoritesPersistStore } from '@/store/favorites';
 
 import EmptyState from '../shared/EmptyState';
@@ -51,7 +51,7 @@ const AllFavorites: FC = () => {
               </tr>
             </thead>
             <tbody>
-              {favoritesByNetwork.map((txn: DataAvailabilityTransactionUnionWithNetwork) => {
+              {favoritesByNetwork.map((txn: MomokaTransaction) => {
                 return <SingleTransaction key={txn.transactionId} txn={txn} />;
               })}
             </tbody>

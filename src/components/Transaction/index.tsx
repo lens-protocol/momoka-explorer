@@ -171,10 +171,9 @@ const Transaction: FC = () => {
             copyValue={momokaTransaction?.submitter}
           />
           <Meta
-            title={`${capitalizeCase(momokaTransaction?.__typename as string)?.replace(
-              'DataAvailability',
-              ''
-            )}ed by`}
+            title={`${capitalizeCase(momokaTransaction?.__typename as string)
+              ?.replace('Momoka', '')
+              .replace('Transaction', '')}ed by`}
             value={<Profile profile={momokaTransaction?.publication.by as TProfile} />}
           />
           {isVerified && (

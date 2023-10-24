@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useInView } from 'react-cool-inview';
 
 import type { Profile } from '@/generated';
-import { useDaTransactionsQuery, useProfileQuery } from '@/generated';
+import { LimitType, useMomokaTransactionsQuery, useProfileQuery } from '@/generated';
 
 import EmptyState from '../shared/EmptyState';
 import TxnProfile from '../shared/TxnProfile';
@@ -19,16 +19,16 @@ const ProfileTransactions: FC = () => {
   const [pageInfo, setPageInfo] = useState<any>(null);
 
   const { data: profileData, loading: profileLoading } = useProfileQuery({
-    variables: { request: { profileId: query.id } },
+    variables: { request: { forProfileId: query.id } },
     skip: !query.id
   });
 
-  const { loading, fetchMore } = useDaTransactionsQuery({
-    variables: { request: { cursor: null, limit: 50, profileId: query.id } },
+  const { loading, fetchMore } = useMomokaTransactionsQuery({
+    variables: { request: { cursor: null, limit: LimitType.Fifty, for: query.id } },
     skip: !query.id,
-    onCompleted: ({ dataAvailabilityTransactions }) => {
-      setTransactions(dataAvailabilityTransactions?.items);
-      setPageInfo(dataAvailabilityTransactions?.pageInfo);
+    onCompleted: ({ momokaTransactions }) => {
+      setTransactions(momokaTransactions?.items);
+      setPageInfo(momokaTransactions?.pageInfo);
     }
   });
 
@@ -42,9 +42,9 @@ const ProfileTransactions: FC = () => {
       await fetchMore({
         variables: { request: { limit: 50, cursor: pageInfo?.next, profileId: query.id } }
       }).then(({ data }) => {
-        setTransactions((prev) => [...prev, ...(data?.dataAvailabilityTransactions?.items || [])]);
-        setPageInfo(data?.dataAvailabilityTransactions?.pageInfo);
-        setHasMore(data?.dataAvailabilityTransactions?.items?.length > 0);
+        setTransactions((prev) => [...prev, ...(data?.momokaTransactions?.items || [])]);
+        setPageInfo(data?.momokaTransactions?.pageInfo);
+        setHasMore(data?.momokaTransactions?.items?.length > 0);
       });
     }
   });

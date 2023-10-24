@@ -3,10 +3,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
 
-import type { DataAvailabilityTransactionUnion, Profile } from '@/generated';
+import type { MomokaTransaction, Profile } from '@/generated';
 import { useAppPersistStore } from '@/store/app';
 import { getRelativeTime } from '@/utils/formatTime';
-import getDAActionType from '@/utils/getDAActionType';
 import getHeyLink from '@/utils/getHeyLink';
 import getProfilePicture from '@/utils/getProfilePicture';
 import truncate from '@/utils/truncate';
@@ -15,7 +14,7 @@ import FavouriteIcon from '../FavouriteIcon';
 import Favorite from '../shared/Favorite';
 
 interface Props {
-  txn: DataAvailabilityTransactionUnion;
+  txn: MomokaTransaction;
 }
 
 const SingleTransaction: FC<Props> = ({ txn }) => {
@@ -38,32 +37,32 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
       </td>
       <td className="whitespace-nowrap px-1 py-4 text-center font-gintoNord text-[#565467] dark:text-[#F5D4D280]">
         <span className="inline-flex items-center justify-center space-x-1 rounded-full border-2 border-[#FBEEED] bg-[#FBEEED] px-3 py-1.5 text-[13px] dark:border-[#F5D4D230] dark:bg-transparent">
-          {getDAActionType(txn.__typename)}
+          {txn.__typename?.replace('Momoka', '').replace('Transaction', '')}
         </span>
       </td>
       <td className="whitespace-nowrap px-3 py-2 text-center text-[#383838] dark:text-white">
         {getRelativeTime(txn.createdAt)}
       </td>
       <td className="whitespace-nowrap px-3 py-2 text-center text-[#383838] dark:text-[#E9E9E9]">
-        {txn.appId}
+        {txn.app?.id}
       </td>
       <td className="whitespace-nowrap px-3 py-2">
         <Link
           onClick={(e) => e.stopPropagation()}
-          href={`/profile/${txn.profile.id}`}
+          href={`/profile/${txn.publication.by.id}`}
           className="text-[#565467] dark:text-[#E9E9E9]"
         >
           <span className="inline-flex items-center space-x-2 py-0.5">
             <span className="flex-none">
               <img
                 className="h-7 w-7 rounded-2xl"
-                src={getProfilePicture(txn.profile as Profile)}
+                src={getProfilePicture(txn.publication.by as Profile)}
                 alt="pfp"
                 draggable={false}
               />
             </span>
             <span className="truncate hover:text-[#C58C89] hover:dark:text-[#F5D4D2]">
-              {txn.profile.handle}
+              {txn.publication.by.handle || txn.publication.by.id}
             </span>
           </span>
         </Link>
@@ -79,7 +78,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
       </td>
       <td className="whitespace-nowrap px-3 py-4">
         <Favorite
-          dataAvailabilityTransaction={txn}
+          momokaTransaction={txn}
           renderItem={(isFavorite) => <FavouriteIcon isFavourite={isFavorite} className="h-6 w-6" />}
         />
       </td>
@@ -87,7 +86,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
         <Link
           className="flex flex-none justify-center md:mb-0.5"
           onClick={(e) => e.stopPropagation()}
-          href={`${getHeyLink(selectedEnvironment.id)}/posts/${txn.publicationId}`}
+          href={`${getHeyLink(selectedEnvironment.id)}/posts/${txn.publication.id}`}
           target="_blank"
         >
           <ArrowTopRightOnSquareIcon className="h-7 w-7 text-[#565467] hover:text-[#C58C89] dark:text-[#E9E9E9] hover:dark:text-[#F5D4D2]" />

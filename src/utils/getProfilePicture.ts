@@ -5,12 +5,12 @@ import sanitizeDStorageUrl from './sanitizeDStorageUrl';
 
 const getProfilePicture = (profile: Profile): string => {
   const url =
-    profile.picture && profile.picture.__typename === 'MediaSet'
-      ? profile?.picture?.original?.url
-      : profile.picture?.__typename === 'NftImage'
-      ? profile?.picture?.uri
-      : getPfp(profile?.ownedBy);
-  const sanitized = url?.includes('ipfs://') ? sanitizeDStorageUrl(url) : getPfp(profile?.ownedBy);
+    profile.metadata?.picture && profile.metadata.picture.__typename === 'ImageSet'
+      ? profile?.metadata.picture?.optimized?.uri
+      : profile.metadata?.picture?.__typename === 'NftImage'
+      ? profile?.metadata.picture?.image.optimized?.uri
+      : getPfp(profile?.ownedBy.address);
+  const sanitized = url?.includes('ipfs://') ? sanitizeDStorageUrl(url) : getPfp(profile?.ownedBy.address);
   return sanitized;
 };
 
