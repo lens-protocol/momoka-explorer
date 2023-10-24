@@ -10,6 +10,9 @@ query MomokaTransactions($request: MomokaTransactionsRequest!) {
       ... on MomokaMirrorTransaction {
         ...MomokaMirrorFields
       }
+      ... on MomokaQuoteTransaction {
+        ...MomokaQuoteFields
+      }
     }
     pageInfo {
       next

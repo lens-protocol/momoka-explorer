@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { useState } from 'react';
 import { useInView } from 'react-cool-inview';
 
-import { useDaSummaryQuery, useDaTransactionsQuery } from '@/generated';
+import { LimitType, useMomokaSummaryQuery, useMomokaTransactionsQuery } from '@/generated';
 
 import EmptyState from '../shared/EmptyState';
 import TransactionsShimmer from '../shimmers/TransactionsShimmer';
@@ -14,14 +14,14 @@ const AllTransactions: FC = () => {
   const [transactions, setTransactions] = useState<any[]>([]);
   const [pageInfo, setPageInfo] = useState<any>(null);
 
-  const { data, loading: loadingSummary } = useDaSummaryQuery();
-  const summary = data?.dataAvailabilitySummary;
+  const { data, loading: loadingSummary } = useMomokaSummaryQuery();
+  const summary = data?.momokaSummary;
 
-  const { loading, fetchMore } = useDaTransactionsQuery({
-    variables: { request: { cursor: null, limit: 50 } },
-    onCompleted: ({ dataAvailabilityTransactions }) => {
-      setTransactions(dataAvailabilityTransactions?.items);
-      setPageInfo(dataAvailabilityTransactions?.pageInfo);
+  const { loading, fetchMore } = useMomokaTransactionsQuery({
+    variables: { request: { cursor: null, limit: LimitType.Fifty } },
+    onCompleted: ({ momokaTransactions }) => {
+      setTransactions(momokaTransactions?.items);
+      setPageInfo(momokaTransactions?.pageInfo);
     }
   });
 
@@ -35,9 +35,9 @@ const AllTransactions: FC = () => {
       await fetchMore({
         variables: { request: { limit: 50, cursor: pageInfo?.next } }
       }).then(({ data }) => {
-        setTransactions((prev) => [...prev, ...(data?.dataAvailabilityTransactions?.items || [])]);
-        setPageInfo(data?.dataAvailabilityTransactions?.pageInfo);
-        setHasMore(data?.dataAvailabilityTransactions?.items?.length > 0);
+        setTransactions((prev) => [...prev, ...(data?.momokaTransactions?.items || [])]);
+        setPageInfo(data?.momokaTransactions?.pageInfo);
+        setHasMore(data?.momokaTransactions?.items?.length > 0);
       });
     }
   });

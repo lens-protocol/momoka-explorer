@@ -14,8 +14,8 @@ import type { FC, ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 
 import { apps } from '@/data/apps';
-import type { DataAvailabilityTransactionUnion, Profile as TProfile } from '@/generated';
-import { useDataAvailabilityTransactionQuery } from '@/generated';
+import type { MomokaTransaction, Profile as TProfile } from '@/generated';
+import { useMomokaTransactionQuery } from '@/generated';
 import Custom404 from '@/pages/404';
 import { useAppPersistStore } from '@/store/app';
 import capitalizeCase from '@/utils/capitalizeCase';
@@ -75,8 +75,8 @@ const Transaction: FC = () => {
   const { query, push } = useRouter();
   const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
 
-  const { data, loading } = useDataAvailabilityTransactionQuery({
-    variables: { request: { id: query.transactionId as string } },
+  const { data, loading } = useMomokaTransactionQuery({
+    variables: { request: { for: query.transactionId as string } },
     skip: !query.transactionId
   });
 
@@ -84,13 +84,12 @@ const Transaction: FC = () => {
     return <TransactionShimmer />;
   }
 
-  if (!data?.dataAvailabilityTransaction) {
+  if (!data?.momokaTransaction) {
     return <Custom404 />;
   }
 
-  const { dataAvailabilityTransaction } = data;
-  const isVerified =
-    dataAvailabilityTransaction.verificationStatus.__typename === 'DataAvailabilityVerificationStatusSuccess';
+  const { momokaTransaction } = data;
+  const isVerified = momokaTransaction.verificationStatus.__typename === 'MomokaVerificationStatusSuccess';
 
   return (
     <>
@@ -101,7 +100,7 @@ const Transaction: FC = () => {
             <p className="text-sm opacity-60">All Transaction related information will be displayed here.</p>
           </div>
           <Favorite
-            dataAvailabilityTransaction={dataAvailabilityTransaction as DataAvailabilityTransactionUnion}
+            momokaTransaction={momokaTransaction as MomokaTransaction}
             renderItem={(isFavorite) => {
               return (
                 <Button className="px-5 py-3 text-[13px] font-bold uppercase leading-[13px] text-[#383838]">
@@ -117,10 +116,10 @@ const Transaction: FC = () => {
             value={
               <Link
                 className="flex items-center space-x-2 break-all text-[#3D794E] underline dark:text-[#D0DBFF]"
-                href={`https://arweave.app/tx/${dataAvailabilityTransaction?.transactionId}`}
+                href={`https://arweave.app/tx/${momokaTransaction?.transactionId}`}
                 target="_blank"
               >
-                <span>ar://{dataAvailabilityTransaction?.transactionId}</span>
+                <span>ar://{momokaTransaction?.transactionId}</span>
                 <ArrowTopRightOnSquareIcon className="h-4 w-4" />
               </Link>
             }
@@ -131,8 +130,8 @@ const Transaction: FC = () => {
               <div className="flex items-center space-x-2">
                 <ClockIcon className="h-4 w-4" />
                 <span>
-                  <b>{getRelativeTime(dataAvailabilityTransaction?.createdAt)}</b> (
-                  {dayjs(new Date(dataAvailabilityTransaction?.createdAt)).format('MMM DD YYYY, hh:mm A')})
+                  <b>{getRelativeTime(momokaTransaction?.createdAt)}</b> (
+                  {dayjs(new Date(momokaTransaction?.createdAt)).format('MMM DD YYYY, hh:mm A')})
                 </span>
               </div>
             }
@@ -152,11 +151,10 @@ const Transaction: FC = () => {
                   {isVerified ? <CheckCircleIcon className="w- h-4" /> : <XCircleIcon className="w- h-4" />}
                   <span>{isVerified ? 'Verified' : 'Unverified'}</span>
                 </div>
-                {dataAvailabilityTransaction.verificationStatus.__typename ===
-                  'DataAvailabilityVerificationStatusFailure' && (
+                {momokaTransaction.verificationStatus.__typename === 'MomokaVerificationStatusFailure' && (
                   <div className="truncate text-sm leading-3">
                     <b>Reason: </b>
-                    <span>{dataAvailabilityTransaction.verificationStatus.status}</span>
+                    <span>{momokaTransaction.verificationStatus.status}</span>
                   </div>
                 )}
               </div>
@@ -167,17 +165,17 @@ const Transaction: FC = () => {
             value={
               <div className="flex items-center space-x-2 break-all">
                 <BoltIcon className="h-4 w-4" />
-                <b>{dataAvailabilityTransaction?.submitter}</b>
+                <b>{momokaTransaction?.submitter}</b>
               </div>
             }
-            copyValue={dataAvailabilityTransaction?.submitter}
+            copyValue={momokaTransaction?.submitter}
           />
           <Meta
-            title={`${capitalizeCase(dataAvailabilityTransaction?.__typename as string)?.replace(
+            title={`${capitalizeCase(momokaTransaction?.__typename as string)?.replace(
               'DataAvailability',
               ''
             )}ed by`}
-            value={<Profile profile={dataAvailabilityTransaction?.profile as TProfile} />}
+            value={<Profile profile={momokaTransaction?.publication.by as TProfile} />}
           />
           {isVerified && (
             <Meta
@@ -185,18 +183,16 @@ const Transaction: FC = () => {
               value={
                 <Link
                   className="flex items-center space-x-2 text-[#3D794E] underline dark:text-[#D0DBFF]"
-                  href={`${getHeyLink(selectedEnvironment.id)}/posts/${
-                    dataAvailabilityTransaction?.publicationId
-                  }`}
+                  href={`${getHeyLink(selectedEnvironment.id)}/posts/${momokaTransaction?.publication.id}`}
                   target="_blank"
                 >
-                  <span>{dataAvailabilityTransaction?.publicationId}</span>
+                  <span>{momokaTransaction?.publication.id}</span>
                   <ArrowTopRightOnSquareIcon className="h-4 w-4" />
                 </Link>
               }
             />
           )}
-          {dataAvailabilityTransaction?.__typename === 'DataAvailabilityMirror' && (
+          {momokaTransaction?.__typename === 'MomokaMirrorTransaction' && (
             <>
               <div className="border-b-[0.5px] border-b-gray-100 dark:border-gray-950" />
               <Meta
@@ -206,22 +202,22 @@ const Transaction: FC = () => {
                     <Link
                       className="flex items-center space-x-2 text-[#3D794E] underline dark:text-[#D0DBFF]"
                       href={`${getHeyLink(selectedEnvironment.id)}/posts/${
-                        dataAvailabilityTransaction?.mirrorOfPublicationId
+                        momokaTransaction?.publication.id
                       }`}
-                      onClick={() => push(`/tx/${dataAvailabilityTransaction?.mirrorOfPublicationId}`)}
+                      onClick={() => push(`/tx/${momokaTransaction?.publication.id}`)}
                       target="_blank"
                     >
-                      <span>{dataAvailabilityTransaction?.mirrorOfPublicationId}</span>
+                      <span>{momokaTransaction?.publication.id}</span>
                       <ArrowTopRightOnSquareIcon className="h-4 w-4" />
                     </Link>
-                    <Profile profile={dataAvailabilityTransaction?.mirrorOfProfile as TProfile} />
+                    <Profile profile={momokaTransaction?.publication.by as TProfile} />
                   </div>
                 }
               />
               <div className="border-b-[0.5px] border-b-gray-100 dark:border-gray-950" />
             </>
           )}
-          {dataAvailabilityTransaction?.__typename === 'DataAvailabilityComment' && (
+          {momokaTransaction?.__typename === 'MomokaCommentTransaction' && (
             <>
               <div className="border-b-[0.5px] border-b-gray-100 dark:border-gray-950" />
 
@@ -232,15 +228,15 @@ const Transaction: FC = () => {
                     <Link
                       className="flex items-center space-x-2 text-[#3D794E] underline dark:text-[#D0DBFF]"
                       href={`${getHeyLink(selectedEnvironment.id)}/posts/${
-                        dataAvailabilityTransaction?.commentedOnPublicationId
+                        momokaTransaction?.publication.id
                       }`}
-                      onClick={() => push(`/tx/${dataAvailabilityTransaction?.commentedOnPublicationId}`)}
+                      onClick={() => push(`/tx/${momokaTransaction?.publication.id}`)}
                       target="_blank"
                     >
-                      <span>{dataAvailabilityTransaction?.commentedOnPublicationId}</span>
+                      <span>{momokaTransaction?.publication.id}</span>
                       <ArrowTopRightOnSquareIcon className="h-4 w-4" />
                     </Link>
-                    <Profile profile={dataAvailabilityTransaction?.commentedOnProfile as TProfile} />
+                    <Profile profile={momokaTransaction?.publication.by as TProfile} />
                   </div>
                 }
               />
@@ -251,23 +247,21 @@ const Transaction: FC = () => {
             title="Posted via"
             value={
               <div className="flex items-center space-x-2">
-                {apps.includes(dataAvailabilityTransaction?.appId) && (
+                {apps.includes(momokaTransaction?.app?.id) && (
                   <img
-                    src={`https://static-assets.hey.xyz/images/source/${dataAvailabilityTransaction?.appId}.jpeg`}
+                    src={`https://static-assets.hey.xyz/images/source/${momokaTransaction?.app?.id}.jpeg`}
                     className="h-5 w-5 rounded-full"
-                    alt={dataAvailabilityTransaction?.appId}
+                    alt={momokaTransaction?.app?.id}
                     draggable={false}
                   />
                 )}
-                <span>{capitalizeCase(dataAvailabilityTransaction?.appId)}</span>
+                <span>{capitalizeCase(momokaTransaction?.app?.id)}</span>
               </div>
             }
           />
         </div>
       </Card>
-      <MoreDetails
-        dataAvailabilityTransaction={dataAvailabilityTransaction as DataAvailabilityTransactionUnion}
-      />
+      <MoreDetails momokaTransaction={momokaTransaction as MomokaTransaction} />
     </>
   );
 };

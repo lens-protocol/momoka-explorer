@@ -9,5 +9,8 @@ query MomokaTransaction($request: MomokaTransactionRequest!) {
     ... on MomokaMirrorTransaction {
       ...MomokaMirrorFields
     }
+    ... on MomokaQuoteTransaction {
+      ...MomokaQuoteFields
+    }
   }
 }

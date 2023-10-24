@@ -3,11 +3,12 @@ import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import useWebSocket from 'react-use-websocket';
 
-import type { DataAvailabilityTransactionUnion, DaTransactionsQuery } from '@/generated';
+import type { MomokaTransaction, MomokaTransactionsQuery } from '@/generated';
 import {
-  useDaSummaryLazyQuery,
-  useDataAvailabilitySubmittersLazyQuery,
-  useDaTransactionsQuery
+  LimitType,
+  useMomokaSubmittersLazyQuery,
+  useMomokaSummaryLazyQuery,
+  useMomokaTransactionsQuery
 } from '@/generated';
 import { newTransactionQuery } from '@/graphql/NewTransactionSubscription';
 import useSubmitterSpent from '@/hooks/useSubmitterSpent';
@@ -19,7 +20,7 @@ import TransactionsShimmer from '../shimmers/TransactionsShimmer';
 import SingleTransaction from '../txns/SingleTransaction';
 import Card from '../ui/Card';
 
-const LATEST_TXNS_FETCH_COUNT = 20;
+const LATEST_TXNS_FETCH_COUNT = 25;
 
 const LatestTransactions: FC = () => {
   const setLastFinalizedTransaction = useAppStore((state) => state.setLastFinalizedTransaction);
@@ -27,23 +28,23 @@ const LatestTransactions: FC = () => {
   const setTopSubmitter = useAppStore((state) => state.setTopSubmitter);
 
   const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
-  const [latestTransactions, setLatestTransactions] = useState<Array<DataAvailabilityTransactionUnion>>();
+  const [latestTransactions, setLatestTransactions] = useState<Array<MomokaTransaction>>();
   const { sendJsonMessage, lastMessage, readyState } = useWebSocket(
     getConfig(selectedEnvironment.id).apiEndpoint.replace('http', 'ws'),
     { protocols: ['graphql-ws'] }
   );
 
-  const [fetchAllCount] = useDaSummaryLazyQuery({ fetchPolicy: 'no-cache' });
-  const [fetchTopSubmitter] = useDataAvailabilitySubmittersLazyQuery({ fetchPolicy: 'no-cache' });
+  const [fetchAllCount] = useMomokaSummaryLazyQuery({ fetchPolicy: 'no-cache' });
+  const [fetchTopSubmitter] = useMomokaSubmittersLazyQuery({ fetchPolicy: 'no-cache' });
 
-  const onCompleted = async (data: DaTransactionsQuery) => {
-    const txns = data?.dataAvailabilityTransactions.items;
-    setLastFinalizedTransaction(txns[0] as DataAvailabilityTransactionUnion);
-    setLatestTransactions(txns as Array<DataAvailabilityTransactionUnion>);
+  const onCompleted = async (data: MomokaTransactionsQuery) => {
+    const txns = data?.momokaTransactions.items;
+    setLastFinalizedTransaction(txns[0] as MomokaTransaction);
+    setLatestTransactions(txns as Array<MomokaTransaction>);
   };
 
-  const { loading } = useDaTransactionsQuery({
-    variables: { request: { limit: LATEST_TXNS_FETCH_COUNT } },
+  const { loading } = useMomokaTransactionsQuery({
+    variables: { request: { limit: LimitType.TwentyFive } },
     onCompleted
   });
 
@@ -51,13 +52,13 @@ const LatestTransactions: FC = () => {
 
   const fetchCounts = async () => {
     const { data: countData } = await fetchAllCount();
-    setAllTransactionsCount(countData?.dataAvailabilitySummary.totalTransactions ?? 0);
+    setAllTransactionsCount(countData?.momokaSummary.totalTransactions ?? 0);
     const { data: submittersData } = await fetchTopSubmitter();
-    setAllTransactionsCount(countData?.dataAvailabilitySummary.totalTransactions ?? 0);
-    if (submittersData?.dataAvailabilitySubmitters?.items[0]) {
-      const submitters = submittersData?.dataAvailabilitySubmitters.items.map((el) => el.address);
+    setAllTransactionsCount(countData?.momokaSummary.totalTransactions ?? 0);
+    if (submittersData?.momokaSubmitters?.items[0]) {
+      const submitters = submittersData?.momokaSubmitters.items.map((el) => el.address);
       fetchSpentAmount(submitters);
-      setTopSubmitter(submittersData?.dataAvailabilitySubmitters?.items[0]);
+      setTopSubmitter(submittersData?.momokaSubmitters?.items[0]);
     }
   };
 
@@ -82,9 +83,9 @@ const LatestTransactions: FC = () => {
     const daData = jsonData?.payload?.data;
 
     if (daData) {
-      const txn = daData?.newDataAvailabilityTransaction as DataAvailabilityTransactionUnion;
+      const txn = daData?.newDataAvailabilityTransaction as MomokaTransaction;
       setLastFinalizedTransaction({ ...txn });
-      let oldTxns = [...(latestTransactions as DataAvailabilityTransactionUnion[])];
+      let oldTxns = [...(latestTransactions as MomokaTransaction[])];
       oldTxns.unshift(txn);
       if (oldTxns.length > LATEST_TXNS_FETCH_COUNT) {
         oldTxns.pop();

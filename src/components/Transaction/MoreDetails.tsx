@@ -5,7 +5,7 @@ import type { FC } from 'react';
 import { useEffect, useState } from 'react';
 import ReactJson from 'react-json-view';
 
-import type { DataAvailabilityTransactionUnion } from '@/generated';
+import type { MomokaTransaction } from '@/generated';
 import { usePublicationQuery } from '@/generated';
 
 import Card from '../ui/Card';
@@ -13,21 +13,21 @@ import { Meta } from '.';
 import Verify from './Verify';
 
 interface MoreDetailsProps {
-  dataAvailabilityTransaction: DataAvailabilityTransactionUnion;
+  momokaTransaction: MomokaTransaction;
 }
 
-const MoreDetails: FC<MoreDetailsProps> = ({ dataAvailabilityTransaction }) => {
+const MoreDetails: FC<MoreDetailsProps> = ({ momokaTransaction }) => {
   const { resolvedTheme } = useTheme();
   const [transactionData, setTransactionData] = useState<any>(null);
 
   const { data } = usePublicationQuery({
-    variables: { request: { publicationId: dataAvailabilityTransaction.publicationId } },
-    skip: !dataAvailabilityTransaction.publicationId
+    variables: { request: { forId: momokaTransaction.publication.id } },
+    skip: !momokaTransaction.publication.id
   });
 
   useEffect(() => {
     const getData = async () => {
-      const data = await fetch(`https://arweave.net/${dataAvailabilityTransaction.transactionId}`);
+      const data = await fetch(`https://arweave.net/${momokaTransaction.transactionId}`);
       const dataJson = await data.json();
       setTransactionData(dataJson);
     };
@@ -46,7 +46,7 @@ const MoreDetails: FC<MoreDetailsProps> = ({ dataAvailabilityTransaction }) => {
               <ChevronUpIcon className={`${!open ? 'rotate-180 transform' : ''} h-5 w-5`} />
             </Disclosure.Button>
             <Disclosure.Panel className="pb-2 text-sm">
-              <Meta title="On-chain Content URI" value={data?.publication?.onChainContentURI} />
+              <Meta title="On-chain Content URI" value={data?.publication?.metadata.rawUri} />
               <Meta
                 title="Transaction Data"
                 value={
@@ -64,10 +64,7 @@ const MoreDetails: FC<MoreDetailsProps> = ({ dataAvailabilityTransaction }) => {
                   ) : null
                 }
               />
-              <Meta
-                title="Verify with a node"
-                value={<Verify dataAvailabilityTransaction={dataAvailabilityTransaction} />}
-              />
+              <Meta title="Verify with a node" value={<Verify momokaTransaction={momokaTransaction} />} />
             </Disclosure.Panel>
           </>
         )}

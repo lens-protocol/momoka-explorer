@@ -5366,6 +5366,70 @@ export type MomokaPostFieldsFragment = {
     | { __typename?: 'MomokaVerificationStatusSuccess'; verified: boolean };
 };
 
+export type MomokaQuoteFieldsFragment = {
+  __typename?: 'MomokaQuoteTransaction';
+  transactionId: string;
+  submitter: any;
+  createdAt: any;
+  app?: { __typename?: 'App'; id: any } | null;
+  publication: {
+    __typename?: 'Quote';
+    id: any;
+    by: {
+      __typename?: 'Profile';
+      id: any;
+      handle?: any | null;
+      ownedBy: { __typename?: 'NetworkAddress'; address: any };
+      operations: {
+        __typename?: 'ProfileOperations';
+        id: any;
+        canBlock: boolean;
+        canUnblock: boolean;
+        canFollow: TriStateValue;
+        canUnfollow: boolean;
+        isBlockedByMe: { __typename?: 'OptimisticStatusResult'; value: boolean };
+        isFollowedByMe: { __typename?: 'OptimisticStatusResult'; value: boolean };
+        isFollowingMe: { __typename?: 'OptimisticStatusResult'; value: boolean };
+      };
+      stats: {
+        __typename?: 'ProfileStats';
+        id: any;
+        followers: number;
+        following: number;
+        comments: number;
+        posts: number;
+        mirrors: number;
+        quotes: number;
+        publications: number;
+        reactions: number;
+        reacted: number;
+        countOpenActions: number;
+      };
+      metadata?: {
+        __typename?: 'ProfileMetadata';
+        displayName?: string | null;
+        bio?: any | null;
+        rawURI: any;
+        appId?: any | null;
+        picture?:
+          | {
+              __typename?: 'ImageSet';
+              raw: { __typename?: 'Image'; uri: any };
+              optimized?: { __typename?: 'Image'; uri: any } | null;
+            }
+          | {
+              __typename?: 'NftImage';
+              image: { __typename?: 'ImageSet'; raw: { __typename?: 'Image'; uri: any } };
+            }
+          | null;
+      } | null;
+    };
+  };
+  verificationStatus:
+    | { __typename?: 'MomokaVerificationStatusFailure'; status: MomokaValidatorError }
+    | { __typename?: 'MomokaVerificationStatusSuccess'; verified: boolean };
+};
+
 export type ProfileFieldsFragment = {
   __typename?: 'Profile';
   id: any;
@@ -5635,7 +5699,69 @@ export type MomokaTransactionQuery = {
           | { __typename?: 'MomokaVerificationStatusFailure'; status: MomokaValidatorError }
           | { __typename?: 'MomokaVerificationStatusSuccess'; verified: boolean };
       }
-    | { __typename?: 'MomokaQuoteTransaction' }
+    | {
+        __typename?: 'MomokaQuoteTransaction';
+        transactionId: string;
+        submitter: any;
+        createdAt: any;
+        app?: { __typename?: 'App'; id: any } | null;
+        publication: {
+          __typename?: 'Quote';
+          id: any;
+          by: {
+            __typename?: 'Profile';
+            id: any;
+            handle?: any | null;
+            ownedBy: { __typename?: 'NetworkAddress'; address: any };
+            operations: {
+              __typename?: 'ProfileOperations';
+              id: any;
+              canBlock: boolean;
+              canUnblock: boolean;
+              canFollow: TriStateValue;
+              canUnfollow: boolean;
+              isBlockedByMe: { __typename?: 'OptimisticStatusResult'; value: boolean };
+              isFollowedByMe: { __typename?: 'OptimisticStatusResult'; value: boolean };
+              isFollowingMe: { __typename?: 'OptimisticStatusResult'; value: boolean };
+            };
+            stats: {
+              __typename?: 'ProfileStats';
+              id: any;
+              followers: number;
+              following: number;
+              comments: number;
+              posts: number;
+              mirrors: number;
+              quotes: number;
+              publications: number;
+              reactions: number;
+              reacted: number;
+              countOpenActions: number;
+            };
+            metadata?: {
+              __typename?: 'ProfileMetadata';
+              displayName?: string | null;
+              bio?: any | null;
+              rawURI: any;
+              appId?: any | null;
+              picture?:
+                | {
+                    __typename?: 'ImageSet';
+                    raw: { __typename?: 'Image'; uri: any };
+                    optimized?: { __typename?: 'Image'; uri: any } | null;
+                  }
+                | {
+                    __typename?: 'NftImage';
+                    image: { __typename?: 'ImageSet'; raw: { __typename?: 'Image'; uri: any } };
+                  }
+                | null;
+            } | null;
+          };
+        };
+        verificationStatus:
+          | { __typename?: 'MomokaVerificationStatusFailure'; status: MomokaValidatorError }
+          | { __typename?: 'MomokaVerificationStatusSuccess'; verified: boolean };
+      }
     | null;
 };
 
@@ -5837,7 +5963,69 @@ export type MomokaTransactionsQuery = {
             | { __typename?: 'MomokaVerificationStatusFailure'; status: MomokaValidatorError }
             | { __typename?: 'MomokaVerificationStatusSuccess'; verified: boolean };
         }
-      | { __typename?: 'MomokaQuoteTransaction' }
+      | {
+          __typename?: 'MomokaQuoteTransaction';
+          transactionId: string;
+          submitter: any;
+          createdAt: any;
+          app?: { __typename?: 'App'; id: any } | null;
+          publication: {
+            __typename?: 'Quote';
+            id: any;
+            by: {
+              __typename?: 'Profile';
+              id: any;
+              handle?: any | null;
+              ownedBy: { __typename?: 'NetworkAddress'; address: any };
+              operations: {
+                __typename?: 'ProfileOperations';
+                id: any;
+                canBlock: boolean;
+                canUnblock: boolean;
+                canFollow: TriStateValue;
+                canUnfollow: boolean;
+                isBlockedByMe: { __typename?: 'OptimisticStatusResult'; value: boolean };
+                isFollowedByMe: { __typename?: 'OptimisticStatusResult'; value: boolean };
+                isFollowingMe: { __typename?: 'OptimisticStatusResult'; value: boolean };
+              };
+              stats: {
+                __typename?: 'ProfileStats';
+                id: any;
+                followers: number;
+                following: number;
+                comments: number;
+                posts: number;
+                mirrors: number;
+                quotes: number;
+                publications: number;
+                reactions: number;
+                reacted: number;
+                countOpenActions: number;
+              };
+              metadata?: {
+                __typename?: 'ProfileMetadata';
+                displayName?: string | null;
+                bio?: any | null;
+                rawURI: any;
+                appId?: any | null;
+                picture?:
+                  | {
+                      __typename?: 'ImageSet';
+                      raw: { __typename?: 'Image'; uri: any };
+                      optimized?: { __typename?: 'Image'; uri: any } | null;
+                    }
+                  | {
+                      __typename?: 'NftImage';
+                      image: { __typename?: 'ImageSet'; raw: { __typename?: 'Image'; uri: any } };
+                    }
+                  | null;
+              } | null;
+            };
+          };
+          verificationStatus:
+            | { __typename?: 'MomokaVerificationStatusFailure'; status: MomokaValidatorError }
+            | { __typename?: 'MomokaVerificationStatusSuccess'; verified: boolean };
+        }
     >;
     pageInfo: { __typename?: 'PaginatedResultInfo'; next?: any | null };
   };
@@ -5988,7 +6176,25 @@ export type PublicationQuery = {
           | { __typename?: 'TransactionMetadataV3'; rawURI: any }
           | { __typename?: 'VideoMetadataV3'; rawURI: any };
       }
-    | { __typename?: 'Quote' }
+    | {
+        __typename?: 'Quote';
+        metadata:
+          | { __typename?: 'ArticleMetadataV3'; rawURI: any }
+          | { __typename?: 'AudioMetadataV3'; rawURI: any }
+          | { __typename?: 'CheckingInMetadataV3'; rawURI: any }
+          | { __typename?: 'EmbedMetadataV3'; rawURI: any }
+          | { __typename?: 'EventMetadataV3'; rawURI: any }
+          | { __typename?: 'ImageMetadataV3'; rawURI: any }
+          | { __typename?: 'LinkMetadataV3'; rawURI: any }
+          | { __typename?: 'LiveStreamMetadataV3'; rawURI: any }
+          | { __typename?: 'MintMetadataV3'; rawURI: any }
+          | { __typename?: 'SpaceMetadataV3'; rawURI: any }
+          | { __typename?: 'StoryMetadataV3'; rawURI: any }
+          | { __typename?: 'TextOnlyMetadataV3'; rawURI: any }
+          | { __typename?: 'ThreeDMetadataV3'; rawURI: any }
+          | { __typename?: 'TransactionMetadataV3'; rawURI: any }
+          | { __typename?: 'VideoMetadataV3'; rawURI: any };
+      }
     | null;
 };
 
@@ -6304,6 +6510,31 @@ export const MomokaPostFieldsFragmentDoc = gql`
   }
   ${ProfileFieldsFragmentDoc}
 `;
+export const MomokaQuoteFieldsFragmentDoc = gql`
+  fragment MomokaQuoteFields on MomokaQuoteTransaction {
+    transactionId
+    submitter
+    createdAt
+    app {
+      id
+    }
+    publication {
+      id
+      by {
+        ...ProfileFields
+      }
+    }
+    verificationStatus {
+      ... on MomokaVerificationStatusSuccess {
+        verified
+      }
+      ... on MomokaVerificationStatusFailure {
+        status
+      }
+    }
+  }
+  ${ProfileFieldsFragmentDoc}
+`;
 export const MomokaSubmittersDocument = gql`
   query MomokaSubmitters {
     momokaSubmitters {
@@ -6408,11 +6639,15 @@ export const MomokaTransactionDocument = gql`
       ... on MomokaMirrorTransaction {
         ...MomokaMirrorFields
       }
+      ... on MomokaQuoteTransaction {
+        ...MomokaQuoteFields
+      }
     }
   }
   ${MomokaPostFieldsFragmentDoc}
   ${MomokaCommentFieldsFragmentDoc}
   ${MomokaMirrorFieldsFragmentDoc}
+  ${MomokaQuoteFieldsFragmentDoc}
 `;
 
 /**
@@ -6468,6 +6703,9 @@ export const MomokaTransactionsDocument = gql`
         ... on MomokaMirrorTransaction {
           ...MomokaMirrorFields
         }
+        ... on MomokaQuoteTransaction {
+          ...MomokaQuoteFields
+        }
       }
       pageInfo {
         next
@@ -6477,6 +6715,7 @@ export const MomokaTransactionsDocument = gql`
   ${MomokaPostFieldsFragmentDoc}
   ${MomokaCommentFieldsFragmentDoc}
   ${MomokaMirrorFieldsFragmentDoc}
+  ${MomokaQuoteFieldsFragmentDoc}
 `;
 
 /**
@@ -6566,6 +6805,11 @@ export const PublicationDocument = gql`
         }
       }
       ... on Comment {
+        metadata {
+          ...AnyPublicationMetadataFields
+        }
+      }
+      ... on Quote {
         metadata {
           ...AnyPublicationMetadataFields
         }

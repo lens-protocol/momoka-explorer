@@ -10,6 +10,11 @@ query Publication($request: PublicationRequest!) {
         ...AnyPublicationMetadataFields
       }
     }
+    ... on Quote {
+      metadata {
+        ...AnyPublicationMetadataFields
+      }
+    }
     ... on Mirror {
       mirrorOn {
         ... on Post {

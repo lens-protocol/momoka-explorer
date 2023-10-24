@@ -11,9 +11,9 @@ const getConfig = (
   switch (network) {
     case 'mainnet':
       return {
-        apiEndpoint: LensEndpoint.PRODUCTION,
-        heyUrl: HeyUrl.PRODUCTION,
-        verifierNetwork: VerifierNetwork.POLYGON,
+        apiEndpoint: LensEndpoint.TESTNET,
+        heyUrl: HeyUrl.TESTNET,
+        verifierNetwork: VerifierNetwork.MUMBAI,
         verifierDeployment: VerifierDeployment.PRODUCTION
       };
     case 'testnet':
@@ -25,16 +25,16 @@ const getConfig = (
       };
     case 'staging':
       return {
-        apiEndpoint: LensEndpoint.STAGING,
-        heyUrl: HeyUrl.STAGING,
+        apiEndpoint: LensEndpoint.TESTNET,
+        heyUrl: HeyUrl.TESTNET,
         verifierNetwork: VerifierNetwork.MUMBAI,
-        verifierDeployment: VerifierDeployment.STAGING
+        verifierDeployment: VerifierDeployment.PRODUCTION
       };
     default:
       return {
-        apiEndpoint: LensEndpoint.PRODUCTION,
-        heyUrl: HeyUrl.PRODUCTION,
-        verifierNetwork: VerifierNetwork.POLYGON,
+        apiEndpoint: LensEndpoint.TESTNET,
+        heyUrl: HeyUrl.TESTNET,
+        verifierNetwork: VerifierNetwork.MUMBAI,
         verifierDeployment: VerifierDeployment.PRODUCTION
       };
   }

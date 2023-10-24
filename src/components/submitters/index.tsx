@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { useDataAvailabilitySubmittersQuery } from '@/generated';
+import { useMomokaSubmittersQuery } from '@/generated';
 import formatNumber from '@/utils/formatNumber';
 
 import TransactionsShimmer from '../shimmers/TransactionsShimmer';
 import Card from '../ui/Card';
 
 const Submitters = () => {
-  const { loading, data } = useDataAvailabilitySubmittersQuery();
+  const { loading, data } = useMomokaSubmittersQuery();
 
   return (
     <Card className="my-6">
@@ -31,7 +31,7 @@ const Submitters = () => {
               </tr>
             </thead>
             <tbody>
-              {data?.dataAvailabilitySubmitters.items?.map((submitter, i) => (
+              {data?.momokaSubmitters.items?.map((submitter, i) => (
                 <tr key={i} className="h-[82px] overflow-hidden bg-[#FFFFFF] font-medium dark:bg-[#2C2B35]">
                   <td className="whitespace-nowrap rounded-l-[20px] px-7 py-4 text-gray-700 dark:text-gray-300">
                     {submitter.name}

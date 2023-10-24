@@ -1,16 +1,16 @@
 import type { FC, ReactNode } from 'react';
 
-import type { DataAvailabilityTransactionUnion } from '@/generated';
+import type { MomokaTransaction } from '@/generated';
 import { useAppPersistStore } from '@/store/app';
 import { useFavoritesPersistStore } from '@/store/favorites';
 import isInFavorites from '@/utils/isInFavorites';
 
 interface FavoriteProps {
-  dataAvailabilityTransaction: DataAvailabilityTransactionUnion;
+  momokaTransaction: MomokaTransaction;
   renderItem: (isFavorite: boolean) => ReactNode;
 }
 
-const Favorite: FC<FavoriteProps> = ({ dataAvailabilityTransaction, renderItem }) => {
+const Favorite: FC<FavoriteProps> = ({ momokaTransaction, renderItem }) => {
   const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
   const addFavorite = useFavoritesPersistStore((state) => state.addFavorite);
   const removeFavorite = useFavoritesPersistStore((state) => state.removeFavorite);
@@ -18,7 +18,7 @@ const Favorite: FC<FavoriteProps> = ({ dataAvailabilityTransaction, renderItem }
 
   const isFavorite = isInFavorites(
     favorites,
-    dataAvailabilityTransaction?.transactionId as string,
+    momokaTransaction?.transactionId as string,
     selectedEnvironment.id
   );
 
@@ -29,14 +29,8 @@ const Favorite: FC<FavoriteProps> = ({ dataAvailabilityTransaction, renderItem }
         e.stopPropagation();
 
         isFavorite
-          ? removeFavorite(
-              dataAvailabilityTransaction as DataAvailabilityTransactionUnion,
-              selectedEnvironment.id
-            )
-          : addFavorite(
-              dataAvailabilityTransaction as DataAvailabilityTransactionUnion,
-              selectedEnvironment.id
-            );
+          ? removeFavorite(momokaTransaction as MomokaTransaction, selectedEnvironment.id)
+          : addFavorite(momokaTransaction as MomokaTransaction, selectedEnvironment.id);
       }}
     >
       {renderItem(isFavorite)}
