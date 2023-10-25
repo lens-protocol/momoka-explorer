@@ -12,16 +12,12 @@ interface ProfileProps {
 const Profile: FC<ProfileProps> = ({ profile }) => {
   return (
     <Link className="inline-flex items-center space-x-2 rounded-lg text-sm" href={`/profile/${profile?.id}`}>
-      <img
-        className="h-8 w-8 rounded-full"
-        src={getProfilePicture(profile as TProfile)}
-        alt={profile?.handle}
-      />
+      <img className="h-8 w-8 rounded-full" src={getProfilePicture(profile as TProfile)} alt={profile?.id} />
       <div>
         <div className="font-bold">
           {profile?.metadata?.displayName ?? formatAddress(profile?.ownedBy.address)}
         </div>
-        <div className="text-xs">@{profile?.handle}</div>
+        <div className="text-xs">@{profile?.handle?.suggestedFormatted.localName || profile?.id}</div>
       </div>
     </Link>
   );

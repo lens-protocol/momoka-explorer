@@ -115,7 +115,24 @@ export const newTransactionQuery = `
 
   fragment ProfileFields on Profile {
     id
-    handle
+    handle {
+      id
+      fullHandle
+      namespace
+      localName
+      suggestedFormatted {
+        full
+        localName
+      }
+      linkedTo {
+        contract {
+          address
+          chainId
+        }
+        nftTokenId
+      }
+      ownedBy
+    }
     ownedBy {
       address
     }

@@ -46,7 +46,7 @@ const UserMenu: FC = () => {
           <img
             className="mb-1 h-8 w-8 rounded-full"
             src={getProfilePicture(defaultProfile as Profile)}
-            alt={defaultProfile?.handle}
+            alt={defaultProfile?.handle?.suggestedFormatted.localName || defaultProfile.id}
           />
         </Menu.Button>
       </div>
@@ -73,12 +73,10 @@ const UserMenu: FC = () => {
                         : 'text-gray-900 dark:text-gray-100'
                     )}
                   >
-                    <img
-                      className="h-4 w-4 rounded-full"
-                      src={getProfilePicture(profile)}
-                      alt={profile.handle}
-                    />
-                    <span className="truncate">{profile.handle}</span>
+                    <img className="h-4 w-4 rounded-full" src={getProfilePicture(profile)} alt={profile.id} />
+                    <span className="truncate">
+                      {profile.handle?.suggestedFormatted.localName || profile.id}
+                    </span>
                   </Link>
                 )}
               </Menu.Item>

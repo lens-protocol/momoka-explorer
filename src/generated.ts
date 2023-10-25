@@ -272,7 +272,8 @@ export enum ChangeProfileManagerActionType {
 }
 
 export type ChangeProfileManagersRequest = {
-  approveLensManager?: InputMaybe<Scalars['Boolean']>;
+  /** if you define this true will enable it and false will disable it within the same tx as any other managers you are changing state for. Leave it blank if you do not want to change its current state */
+  approveSignless?: InputMaybe<Scalars['Boolean']>;
   changeManagers?: InputMaybe<Array<ChangeProfileManager>>;
 };
 
@@ -366,12 +367,15 @@ export type Comment = {
   commentOn: PrimaryPublication;
   createdAt: Scalars['DateTime'];
   firstComment?: Maybe<Comment>;
+  hashtagsMentioned: Array<Scalars['String']>;
   id: Scalars['PublicationId'];
+  isEncrypted: Scalars['Boolean'];
   isHidden: Scalars['Boolean'];
   metadata: PublicationMetadata;
   momoka?: Maybe<MomokaInfo>;
   openActionModules?: Maybe<Array<OpenActionModule>>;
   operations: PublicationOperations;
+  profilesMentioned: Array<ProfileMentioned>;
   publishedOn?: Maybe<App>;
   referenceModule?: Maybe<ReferenceModule>;
   root: Post;
@@ -550,72 +554,6 @@ export type CreateFollowEip712TypedDataValue = {
   nonce: Scalars['Nonce'];
 };
 
-export type CreateHandleLinkToProfileBroadcastItemResult = {
-  __typename?: 'CreateHandleLinkToProfileBroadcastItemResult';
-  /** The date the broadcast item expiries */
-  expiresAt: Scalars['DateTime'];
-  /** This broadcast item ID */
-  id: Scalars['BroadcastId'];
-  /** The typed data */
-  typedData: CreateHandleLinkToProfileEip712TypedData;
-};
-
-export type CreateHandleLinkToProfileEip712TypedData = {
-  __typename?: 'CreateHandleLinkToProfileEIP712TypedData';
-  /** The typed data domain */
-  domain: Eip712TypedDataDomain;
-  /** The types */
-  types: CreateHandleLinkToProfileEip712TypedDataTypes;
-  /** The values */
-  value: CreateHandleLinkToProfileEip712TypedDataValue;
-};
-
-export type CreateHandleLinkToProfileEip712TypedDataTypes = {
-  __typename?: 'CreateHandleLinkToProfileEIP712TypedDataTypes';
-  Link: Array<Eip712TypedDataField>;
-};
-
-export type CreateHandleLinkToProfileEip712TypedDataValue = {
-  __typename?: 'CreateHandleLinkToProfileEIP712TypedDataValue';
-  deadline: Scalars['UnixTimestamp'];
-  handleId: Scalars['TokenId'];
-  nonce: Scalars['Nonce'];
-  profileId: Scalars['ProfileId'];
-};
-
-export type CreateHandleUnlinkFromProfileBroadcastItemResult = {
-  __typename?: 'CreateHandleUnlinkFromProfileBroadcastItemResult';
-  /** The date the broadcast item expiries */
-  expiresAt: Scalars['DateTime'];
-  /** This broadcast item ID */
-  id: Scalars['BroadcastId'];
-  /** The typed data */
-  typedData: CreateHandleUnlinkFromProfileEip712TypedData;
-};
-
-export type CreateHandleUnlinkFromProfileEip712TypedData = {
-  __typename?: 'CreateHandleUnlinkFromProfileEIP712TypedData';
-  /** The typed data domain */
-  domain: Eip712TypedDataDomain;
-  /** The types */
-  types: CreateHandleUnlinkFromProfileEip712TypedDataTypes;
-  /** The values */
-  value: CreateHandleUnlinkFromProfileEip712TypedDataValue;
-};
-
-export type CreateHandleUnlinkFromProfileEip712TypedDataTypes = {
-  __typename?: 'CreateHandleUnlinkFromProfileEIP712TypedDataTypes';
-  Unlink: Array<Eip712TypedDataField>;
-};
-
-export type CreateHandleUnlinkFromProfileEip712TypedDataValue = {
-  __typename?: 'CreateHandleUnlinkFromProfileEIP712TypedDataValue';
-  deadline: Scalars['UnixTimestamp'];
-  handleId: Scalars['TokenId'];
-  nonce: Scalars['Nonce'];
-  profileId: Scalars['ProfileId'];
-};
-
 export type CreateLegacyCollectBroadcastItemResult = {
   __typename?: 'CreateLegacyCollectBroadcastItemResult';
   /** The date the broadcast item expiries */
@@ -624,6 +562,39 @@ export type CreateLegacyCollectBroadcastItemResult = {
   id: Scalars['BroadcastId'];
   /** The typed data */
   typedData: CreateActOnOpenActionEip712TypedData;
+};
+
+export type CreateLinkHandleToProfileBroadcastItemResult = {
+  __typename?: 'CreateLinkHandleToProfileBroadcastItemResult';
+  /** The date the broadcast item expiries */
+  expiresAt: Scalars['DateTime'];
+  /** This broadcast item ID */
+  id: Scalars['BroadcastId'];
+  /** The typed data */
+  typedData: CreateLinkHandleToProfileEip712TypedData;
+};
+
+export type CreateLinkHandleToProfileEip712TypedData = {
+  __typename?: 'CreateLinkHandleToProfileEIP712TypedData';
+  /** The typed data domain */
+  domain: Eip712TypedDataDomain;
+  /** The types */
+  types: CreateLinkHandleToProfileEip712TypedDataTypes;
+  /** The values */
+  value: CreateLinkHandleToProfileEip712TypedDataValue;
+};
+
+export type CreateLinkHandleToProfileEip712TypedDataTypes = {
+  __typename?: 'CreateLinkHandleToProfileEIP712TypedDataTypes';
+  Link: Array<Eip712TypedDataField>;
+};
+
+export type CreateLinkHandleToProfileEip712TypedDataValue = {
+  __typename?: 'CreateLinkHandleToProfileEIP712TypedDataValue';
+  deadline: Scalars['UnixTimestamp'];
+  handleId: Scalars['TokenId'];
+  nonce: Scalars['Nonce'];
+  profileId: Scalars['ProfileId'];
 };
 
 export type CreateMomokaCommentBroadcastItemResult = {
@@ -1108,6 +1079,39 @@ export type CreateUnfollowEip712TypedDataValue = {
   unfollowerProfileId: Scalars['ProfileId'];
 };
 
+export type CreateUnlinkHandleFromProfileBroadcastItemResult = {
+  __typename?: 'CreateUnlinkHandleFromProfileBroadcastItemResult';
+  /** The date the broadcast item expiries */
+  expiresAt: Scalars['DateTime'];
+  /** This broadcast item ID */
+  id: Scalars['BroadcastId'];
+  /** The typed data */
+  typedData: CreateUnlinkHandleFromProfileEip712TypedData;
+};
+
+export type CreateUnlinkHandleFromProfileEip712TypedData = {
+  __typename?: 'CreateUnlinkHandleFromProfileEIP712TypedData';
+  /** The typed data domain */
+  domain: Eip712TypedDataDomain;
+  /** The types */
+  types: CreateUnlinkHandleFromProfileEip712TypedDataTypes;
+  /** The values */
+  value: CreateUnlinkHandleFromProfileEip712TypedDataValue;
+};
+
+export type CreateUnlinkHandleFromProfileEip712TypedDataTypes = {
+  __typename?: 'CreateUnlinkHandleFromProfileEIP712TypedDataTypes';
+  Unlink: Array<Eip712TypedDataField>;
+};
+
+export type CreateUnlinkHandleFromProfileEip712TypedDataValue = {
+  __typename?: 'CreateUnlinkHandleFromProfileEIP712TypedDataValue';
+  deadline: Scalars['UnixTimestamp'];
+  handleId: Scalars['TokenId'];
+  nonce: Scalars['Nonce'];
+  profileId: Scalars['ProfileId'];
+};
+
 export enum CustomFiltersType {
   Gardeners = 'GARDENERS'
 }
@@ -1159,19 +1163,6 @@ export type DegreesOfSeparationReferenceModuleSettings = {
 
 export type DismissRecommendedProfilesRequest = {
   dismiss: Array<Scalars['ProfileId']>;
-};
-
-export type DoesFollowRequest = {
-  cursor?: InputMaybe<Scalars['Cursor']>;
-  followers: Array<Scalars['ProfileId']>;
-  for: Scalars['ProfileId'];
-  limit?: InputMaybe<LimitType>;
-};
-
-export type DoesFollowResult = {
-  __typename?: 'DoesFollowResult';
-  followerProfileId: Scalars['ProfileId'];
-  status: OptimisticStatusResult;
 };
 
 /** The eip 712 typed data domain */
@@ -1514,6 +1505,22 @@ export type FollowRevenueResult = {
   revenues: Array<RevenueAggregate>;
 };
 
+export type FollowStatusBulk = {
+  follower: Scalars['ProfileId'];
+  profileId: Scalars['ProfileId'];
+};
+
+export type FollowStatusBulkRequest = {
+  followInfos: Array<FollowStatusBulk>;
+};
+
+export type FollowStatusBulkResult = {
+  __typename?: 'FollowStatusBulkResult';
+  follower: Scalars['ProfileId'];
+  profileId: Scalars['ProfileId'];
+  status: OptimisticStatusResult;
+};
+
 export type FollowersRequest = {
   cursor?: InputMaybe<Scalars['Cursor']>;
   limit?: InputMaybe<LimitType>;
@@ -1560,17 +1567,29 @@ export type GetProfileMetadataArgs = {
   useFallback?: InputMaybe<Scalars['Boolean']>;
 };
 
-export type HandleLinkToProfileRequest = {
-  handle: Scalars['Handle'];
+export type HandleInfo = {
+  __typename?: 'HandleInfo';
+  /** The full handle - namespace/localname */
+  fullHandle: Scalars['Handle'];
+  /** The handle nft token id */
+  id: Scalars['TokenId'];
+  /** If null its not linked to anything */
+  linkedTo?: Maybe<HandleLinkedTo>;
+  /** The localname */
+  localName: Scalars['String'];
+  /** The namespace */
+  namespace: Scalars['String'];
+  ownedBy: Scalars['EvmAddress'];
+  /** The suggested format to use on UI for ease but you can innovate and slice and dice as you want */
+  suggestedFormatted: SuggestedFormattedHandle;
 };
 
-export type HandleResult = {
-  __typename?: 'HandleResult';
-  handle: Scalars['Handle'];
-};
-
-export type HandleUnlinkFromProfileRequest = {
-  handle: Scalars['Handle'];
+export type HandleLinkedTo = {
+  __typename?: 'HandleLinkedTo';
+  /** The contract address it is linked to */
+  contract: NetworkAddress;
+  /** The nft token id it is linked to (this can be the profile Id) */
+  nftTokenId: Scalars['TokenId'];
 };
 
 export type HidePublicationRequest = {
@@ -1688,6 +1707,7 @@ export type InternalCuratedTagsRequest = {
 };
 
 export type InternalCuratedUpdateRequest = {
+  /** The full handle - namespace/localname */
   handle: Scalars['Handle'];
   remove: Scalars['Boolean'];
   secret: Scalars['String'];
@@ -1998,6 +2018,11 @@ export enum LimitType {
   TwentyFive = 'TwentyFive'
 }
 
+export type LinkHandleToProfileRequest = {
+  /** The full handle - namespace/localname */
+  handle: Scalars['Handle'];
+};
+
 export type LinkMetadataV3 = {
   __typename?: 'LinkMetadataV3';
   appId?: Maybe<Scalars['AppId']>;
@@ -2063,47 +2088,30 @@ export type MentionNotification = {
   publication: PrimaryPublication;
 };
 
-export type MetadataAttribute =
-  | MetadataBooleanAttribute
-  | MetadataDateAttribute
-  | MetadataJsonAttribute
-  | MetadataNumberAttribute
-  | MetadataStringAttribute;
-
-export type MetadataBooleanAttribute = {
-  __typename?: 'MetadataBooleanAttribute';
+export type MetadataAttribute = {
+  __typename?: 'MetadataAttribute';
   key: Scalars['String'];
-  /** A JS boolean value serialized as string. It's consumer responsibility to parse it. */
+  /**
+   * The type of the attribute. When:
+   * - BOOLEAN: the `value` is `true`|`false`
+   * - DATE: the `value` is a valid ISO 8601 date string
+   * - NUMBER: the `value` is a valid JS number as string
+   * - STRING: the `value` is a string.
+   * - JSON: the `value` is a valid JSON serialized as string
+   *
+   */
+  type: MetadataAttributeType;
+  /** The value serialized as string. It's consumer responsibility to parse it according to `type`. */
   value: Scalars['String'];
 };
 
-export type MetadataDateAttribute = {
-  __typename?: 'MetadataDateAttribute';
-  key: Scalars['String'];
-  /** A valid ISO 8601 date string.  It's consumer responsibility to parse it. */
-  value: Scalars['String'];
-};
-
-export type MetadataJsonAttribute = {
-  __typename?: 'MetadataJSONAttribute';
-  key: Scalars['String'];
-  /** A JSON string. It's consumer responsibility to validate and parse it. */
-  value: Scalars['String'];
-};
-
-export type MetadataNumberAttribute = {
-  __typename?: 'MetadataNumberAttribute';
-  key: Scalars['String'];
-  /** A valid JS number serialized as string. It's consumer responsibility to parse it. */
-  value: Scalars['String'];
-};
-
-export type MetadataStringAttribute = {
-  __typename?: 'MetadataStringAttribute';
-  key: Scalars['String'];
-  /** Any string value. */
-  value: Scalars['String'];
-};
+export enum MetadataAttributeType {
+  Boolean = 'BOOLEAN',
+  Date = 'DATE',
+  Json = 'JSON',
+  Number = 'NUMBER',
+  String = 'STRING'
+}
 
 export type MintMetadataV3 = {
   __typename?: 'MintMetadataV3';
@@ -2181,6 +2189,8 @@ export type MomokaInfo = {
 };
 
 export type MomokaMirrorRequest = {
+  /** You can add information like app on a mirror or tracking stuff */
+  metadataURI?: InputMaybe<Scalars['URI']>;
   mirrorOn: Scalars['PublicationId'];
 };
 
@@ -2356,9 +2366,8 @@ export type Mutation = {
   createBlockProfilesTypedData: CreateBlockProfilesBroadcastItemResult;
   createChangeProfileManagersTypedData: CreateChangeProfileManagersBroadcastItemResult;
   createFollowTypedData: CreateFollowBroadcastItemResult;
-  createHandleLinkToProfileTypedData: CreateHandleLinkToProfileBroadcastItemResult;
-  createHandleUnlinkFromProfileTypedData: CreateHandleUnlinkFromProfileBroadcastItemResult;
   createLegacyCollectTypedData: CreateLegacyCollectBroadcastItemResult;
+  createLinkHandleToProfileTypedData: CreateLinkHandleToProfileBroadcastItemResult;
   createMomokaCommentTypedData: CreateMomokaCommentBroadcastItemResult;
   createMomokaMirrorTypedData: CreateMomokaMirrorBroadcastItemResult;
   createMomokaPostTypedData: CreateMomokaPostBroadcastItemResult;
@@ -2374,11 +2383,10 @@ export type Mutation = {
   createSetFollowModuleTypedData: CreateSetFollowModuleBroadcastItemResult;
   createUnblockProfilesTypedData: CreateUnblockProfilesBroadcastItemResult;
   createUnfollowTypedData: CreateUnfollowBroadcastItemResult;
+  createUnlinkHandleFromProfileTypedData: CreateUnlinkHandleFromProfileBroadcastItemResult;
   deleteNftGallery?: Maybe<Scalars['Void']>;
   dismissRecommendedProfiles?: Maybe<Scalars['Void']>;
   follow: LensProfileManagerRelayResult;
-  handleLinkToProfile: LensProfileManagerRelayResult;
-  handleUnlinkFromProfile: LensProfileManagerRelayResult;
   hidePublication?: Maybe<Scalars['Void']>;
   idKitPhoneVerifyWebhook: IdKitPhoneVerifyWebhookResultStatusType;
   internalAddCuratedTag?: Maybe<Scalars['Void']>;
@@ -2392,6 +2400,7 @@ export type Mutation = {
   internalUpdateProfileStatus?: Maybe<Scalars['Void']>;
   invite?: Maybe<Scalars['Void']>;
   legacyCollect: LensProfileManagerRelayResult;
+  linkHandleToProfile: LensProfileManagerRelayResult;
   mirrorOnMomoka: RelayMomokaResult;
   mirrorOnchain: LensProfileManagerRelayResult;
   nftOwnershipChallenge: NftOwnershipChallengeResult;
@@ -2412,6 +2421,7 @@ export type Mutation = {
   unblock: LensProfileManagerRelayResult;
   undoPublicationNotInterested?: Maybe<Scalars['Void']>;
   unfollow: LensProfileManagerRelayResult;
+  unlinkHandleFromProfile: LensProfileManagerRelayResult;
   updateNftGalleryInfo?: Maybe<Scalars['Void']>;
   updateNftGalleryItems?: Maybe<Scalars['Void']>;
   updateNftGalleryOrder?: Maybe<Scalars['Void']>;
@@ -2486,19 +2496,14 @@ export type MutationCreateFollowTypedDataArgs = {
   request: FollowRequest;
 };
 
-export type MutationCreateHandleLinkToProfileTypedDataArgs = {
-  options?: InputMaybe<TypedDataOptions>;
-  request: HandleLinkToProfileRequest;
-};
-
-export type MutationCreateHandleUnlinkFromProfileTypedDataArgs = {
-  options?: InputMaybe<TypedDataOptions>;
-  request: HandleUnlinkFromProfileRequest;
-};
-
 export type MutationCreateLegacyCollectTypedDataArgs = {
   options?: InputMaybe<TypedDataOptions>;
   request: LegacyCollectRequest;
+};
+
+export type MutationCreateLinkHandleToProfileTypedDataArgs = {
+  options?: InputMaybe<TypedDataOptions>;
+  request: LinkHandleToProfileRequest;
 };
 
 export type MutationCreateMomokaCommentTypedDataArgs = {
@@ -2569,6 +2574,11 @@ export type MutationCreateUnfollowTypedDataArgs = {
   request: UnfollowRequest;
 };
 
+export type MutationCreateUnlinkHandleFromProfileTypedDataArgs = {
+  options?: InputMaybe<TypedDataOptions>;
+  request: UnlinkHandleFromProfileRequest;
+};
+
 export type MutationDeleteNftGalleryArgs = {
   request: NftGalleryDeleteRequest;
 };
@@ -2579,14 +2589,6 @@ export type MutationDismissRecommendedProfilesArgs = {
 
 export type MutationFollowArgs = {
   request: FollowLensManagerRequest;
-};
-
-export type MutationHandleLinkToProfileArgs = {
-  request: HandleLinkToProfileRequest;
-};
-
-export type MutationHandleUnlinkFromProfileArgs = {
-  request: HandleUnlinkFromProfileRequest;
 };
 
 export type MutationHidePublicationArgs = {
@@ -2639,6 +2641,10 @@ export type MutationInviteArgs = {
 
 export type MutationLegacyCollectArgs = {
   request: LegacyCollectRequest;
+};
+
+export type MutationLinkHandleToProfileArgs = {
+  request: LinkHandleToProfileRequest;
 };
 
 export type MutationMirrorOnMomokaArgs = {
@@ -2719,6 +2725,10 @@ export type MutationUndoPublicationNotInterestedArgs = {
 
 export type MutationUnfollowArgs = {
   request: UnfollowRequest;
+};
+
+export type MutationUnlinkHandleFromProfileArgs = {
+  request: UnlinkHandleFromProfileRequest;
 };
 
 export type MutationUpdateNftGalleryInfoArgs = {
@@ -3151,7 +3161,7 @@ export type PaginatedFeedResult = {
 
 export type PaginatedHandlesResult = {
   __typename?: 'PaginatedHandlesResult';
-  items: Array<HandleResult>;
+  items: Array<HandleInfo>;
   pageInfo: PaginatedResultInfo;
 };
 
@@ -3363,12 +3373,15 @@ export type Post = {
   __typename?: 'Post';
   by: Profile;
   createdAt: Scalars['DateTime'];
+  hashtagsMentioned: Array<Scalars['String']>;
   id: Scalars['PublicationId'];
+  isEncrypted: Scalars['Boolean'];
   isHidden: Scalars['Boolean'];
   metadata: PublicationMetadata;
   momoka?: Maybe<MomokaInfo>;
   openActionModules?: Maybe<Array<OpenActionModule>>;
   operations: PublicationOperations;
+  profilesMentioned: Array<ProfileMentioned>;
   publishedOn?: Maybe<App>;
   referenceModule?: Maybe<ReferenceModule>;
   stats: PublicationStats;
@@ -3398,15 +3411,13 @@ export type Profile = {
   followNftAddress?: Maybe<NetworkAddress>;
   guardian?: Maybe<ProfileGuardianResult>;
   /** The profile handle - a profile may not have one */
-  handle?: Maybe<Scalars['Handle']>;
+  handle?: Maybe<HandleInfo>;
   /** The profile id */
   id: Scalars['ProfileId'];
   interests: Array<Scalars['String']>;
   invitedBy?: Maybe<Profile>;
   /** The number of invites left */
   invitesLeft: Scalars['Int'];
-  /** If the profile has got the lens manager enabled - supports signless experience */
-  lensManager: Scalars['Boolean'];
   /** The profile metadata. You can optionally query profile metadata by app id.  */
   metadata?: Maybe<ProfileMetadata>;
   /** The on chain identity */
@@ -3414,7 +3425,9 @@ export type Profile = {
   operations: ProfileOperations;
   /** Who owns the profile */
   ownedBy: NetworkAddress;
-  /** If lens API will sponsor this persons for gasless experience */
+  /** If the profile has got signless enabled */
+  signless: Scalars['Boolean'];
+  /** If lens API will sponsor this persons for gasless experience, note they can have signless on but sponsor false which means it be rejected */
   sponsor: Scalars['Boolean'];
   stats: ProfileStats;
   txHash: Scalars['TxHash'];
@@ -3550,6 +3563,13 @@ export type ProfileManagersRequest = {
   limit?: InputMaybe<LimitType>;
 };
 
+export type ProfileMentioned = {
+  __typename?: 'ProfileMentioned';
+  profile: Profile;
+  snapshotHandleMentioned: HandleInfo;
+  stillOwnsHandle: Scalars['Boolean'];
+};
+
 export type ProfileMetadata = {
   __typename?: 'ProfileMetadata';
   /** The app that this metadata is displayed on */
@@ -3633,7 +3653,7 @@ export type ProfileRecommendationsRequest = {
 };
 
 export type ProfileRequest = {
-  /** The handle for profile you want to fetch */
+  /** The handle for profile you want to fetch - namespace/localname */
   forHandle?: InputMaybe<Scalars['Handle']>;
   /** The profile you want to fetch */
   forProfileId?: InputMaybe<Scalars['ProfileId']>;
@@ -4081,15 +4101,9 @@ export type PublicationValidateMetadataResult = {
   valid: Scalars['Boolean'];
 };
 
-export enum PublicationsOrderByType {
-  CommentOfQueryRanking = 'COMMENT_OF_QUERY_RANKING',
-  Latest = 'LATEST'
-}
-
 export type PublicationsRequest = {
   cursor?: InputMaybe<Scalars['Cursor']>;
   limit?: InputMaybe<LimitType>;
-  orderBy?: InputMaybe<PublicationsOrderByType>;
   where: PublicationsWhere;
 };
 
@@ -4119,21 +4133,22 @@ export type PublicationsWhere = {
 
 export type Query = {
   __typename?: 'Query';
-  approvedAuthentication?: Maybe<PaginatedApprovedAuthenticationResult>;
+  approvedAuthentications: PaginatedApprovedAuthenticationResult;
   approvedModuleAllowanceAmount: Array<ApprovedAllowanceAmountResult>;
   challenge: AuthChallengeResult;
   claimableProfiles: ClaimableProfilesResult;
   claimableStatus: ClaimProfileStatusType;
   /** Get all enabled currencies */
   currencies: PaginatedCurrenciesResult;
+  currentSession: ApprovedAuthentication;
   /** Get the default profile for a given EvmAddress. If no default is explicitly set, you will get the oldest profile owned by the address. */
   defaultProfile?: Maybe<Profile>;
-  doesFollow: Array<DoesFollowResult>;
   exploreProfiles: PaginatedProfileResult;
   explorePublications: PaginatedExplorePublicationResult;
   feed: PaginatedFeedResult;
   feedHighlights: PaginatedFeedHighlightsResult;
   followRevenues: FollowRevenueResult;
+  followStatusBulk: Array<FollowStatusBulkResult>;
   followers: PaginatedProfileResult;
   following: PaginatedProfileResult;
   generateModuleCurrencyApprovalData: GenerateModuleCurrencyApprovalResult;
@@ -4145,6 +4160,7 @@ export type Query = {
   internalProfileStatus: PrfResult;
   invitedProfiles: Array<InvitedResult>;
   lastLoggedInProfile?: Maybe<Profile>;
+  lensAPIOwnedEOAs: Array<Scalars['EvmAddress']>;
   lensProtocolVersion: LensProtocolVersion;
   lensTransactionStatus?: Maybe<LensTransactionResult>;
   momokaSubmitters: MomokaSubmittersResult;
@@ -4201,7 +4217,7 @@ export type Query = {
   whoReactedPublication: PaginatedWhoReactedResult;
 };
 
-export type QueryApprovedAuthenticationArgs = {
+export type QueryApprovedAuthenticationsArgs = {
   request: ApprovedAuthenticationRequest;
 };
 
@@ -4219,10 +4235,6 @@ export type QueryCurrenciesArgs = {
 
 export type QueryDefaultProfileArgs = {
   request: DefaultProfileRequest;
-};
-
-export type QueryDoesFollowArgs = {
-  request: DoesFollowRequest;
 };
 
 export type QueryExploreProfilesArgs = {
@@ -4243,6 +4255,10 @@ export type QueryFeedHighlightsArgs = {
 
 export type QueryFollowRevenuesArgs = {
   request: FollowRevenueRequest;
+};
+
+export type QueryFollowStatusBulkArgs = {
+  request: FollowStatusBulkRequest;
 };
 
 export type QueryFollowersArgs = {
@@ -4453,12 +4469,15 @@ export type Quote = {
   __typename?: 'Quote';
   by: Profile;
   createdAt: Scalars['DateTime'];
+  hashtagsMentioned: Array<Scalars['String']>;
   id: Scalars['PublicationId'];
+  isEncrypted: Scalars['Boolean'];
   isHidden: Scalars['Boolean'];
   metadata: PublicationMetadata;
   momoka?: Maybe<MomokaInfo>;
   openActionModules?: Maybe<Array<OpenActionModule>>;
   operations: PublicationOperations;
+  profilesMentioned: Array<ProfileMentioned>;
   publishedOn?: Maybe<App>;
   quoteOn: PrimaryPublication;
   referenceModule?: Maybe<ReferenceModule>;
@@ -4645,6 +4664,7 @@ export type ReservedClaimable = {
   expiry: Scalars['DateTime'];
   id: Scalars['String'];
   source: Scalars['AppId'];
+  /** The full handle - namespace/localname */
   withHandle: Scalars['Handle'];
 };
 
@@ -4794,10 +4814,15 @@ export type StoryMetadataV3 = {
 
 export type Subscription = {
   __typename?: 'Subscription';
+  authorizationRecordRevoked?: Maybe<Scalars['Void']>;
   newMomokaTransaction: MomokaTransaction;
-  newNotification: Notification;
+  newNotification?: Maybe<Notification>;
   newPublicationStats: PublicationStats;
   userSigNonces: UserSigNonces;
+};
+
+export type SubscriptionAuthorizationRecordRevokedArgs = {
+  authorizationId: Scalars['UUID'];
 };
 
 export type SubscriptionNewNotificationArgs = {
@@ -4810,6 +4835,14 @@ export type SubscriptionNewPublicationStatsArgs = {
 
 export type SubscriptionUserSigNoncesArgs = {
   address: Scalars['EvmAddress'];
+};
+
+export type SuggestedFormattedHandle = {
+  __typename?: 'SuggestedFormattedHandle';
+  /** The full formatted handle - namespace/@localname */
+  full: Scalars['String'];
+  /** The formatted handle - @localname */
+  localName: Scalars['String'];
 };
 
 export enum SupportedFiatType {
@@ -5008,6 +5041,11 @@ export type UnknownSupportedModule = {
   moduleName: Scalars['String'];
 };
 
+export type UnlinkHandleFromProfileRequest = {
+  /** The full handle - namespace/localname */
+  handle: Scalars['Handle'];
+};
+
 export type UserPoapsQueryRequest = {
   cursor?: InputMaybe<Scalars['Cursor']>;
   for: Scalars['ProfileId'];
@@ -5186,7 +5224,20 @@ export type MomokaCommentFieldsFragment = {
     by: {
       __typename?: 'Profile';
       id: any;
-      handle?: any | null;
+      handle?: {
+        __typename?: 'HandleInfo';
+        id: any;
+        fullHandle: any;
+        namespace: string;
+        localName: string;
+        ownedBy: any;
+        suggestedFormatted: { __typename?: 'SuggestedFormattedHandle'; full: string; localName: string };
+        linkedTo?: {
+          __typename?: 'HandleLinkedTo';
+          nftTokenId: any;
+          contract: { __typename?: 'NetworkAddress'; address: any; chainId: any };
+        } | null;
+      } | null;
       ownedBy: { __typename?: 'NetworkAddress'; address: any };
       operations: {
         __typename?: 'ProfileOperations';
@@ -5250,7 +5301,20 @@ export type MomokaMirrorFieldsFragment = {
     by: {
       __typename?: 'Profile';
       id: any;
-      handle?: any | null;
+      handle?: {
+        __typename?: 'HandleInfo';
+        id: any;
+        fullHandle: any;
+        namespace: string;
+        localName: string;
+        ownedBy: any;
+        suggestedFormatted: { __typename?: 'SuggestedFormattedHandle'; full: string; localName: string };
+        linkedTo?: {
+          __typename?: 'HandleLinkedTo';
+          nftTokenId: any;
+          contract: { __typename?: 'NetworkAddress'; address: any; chainId: any };
+        } | null;
+      } | null;
       ownedBy: { __typename?: 'NetworkAddress'; address: any };
       operations: {
         __typename?: 'ProfileOperations';
@@ -5314,7 +5378,20 @@ export type MomokaPostFieldsFragment = {
     by: {
       __typename?: 'Profile';
       id: any;
-      handle?: any | null;
+      handle?: {
+        __typename?: 'HandleInfo';
+        id: any;
+        fullHandle: any;
+        namespace: string;
+        localName: string;
+        ownedBy: any;
+        suggestedFormatted: { __typename?: 'SuggestedFormattedHandle'; full: string; localName: string };
+        linkedTo?: {
+          __typename?: 'HandleLinkedTo';
+          nftTokenId: any;
+          contract: { __typename?: 'NetworkAddress'; address: any; chainId: any };
+        } | null;
+      } | null;
       ownedBy: { __typename?: 'NetworkAddress'; address: any };
       operations: {
         __typename?: 'ProfileOperations';
@@ -5378,7 +5455,20 @@ export type MomokaQuoteFieldsFragment = {
     by: {
       __typename?: 'Profile';
       id: any;
-      handle?: any | null;
+      handle?: {
+        __typename?: 'HandleInfo';
+        id: any;
+        fullHandle: any;
+        namespace: string;
+        localName: string;
+        ownedBy: any;
+        suggestedFormatted: { __typename?: 'SuggestedFormattedHandle'; full: string; localName: string };
+        linkedTo?: {
+          __typename?: 'HandleLinkedTo';
+          nftTokenId: any;
+          contract: { __typename?: 'NetworkAddress'; address: any; chainId: any };
+        } | null;
+      } | null;
       ownedBy: { __typename?: 'NetworkAddress'; address: any };
       operations: {
         __typename?: 'ProfileOperations';
@@ -5433,7 +5523,20 @@ export type MomokaQuoteFieldsFragment = {
 export type ProfileFieldsFragment = {
   __typename?: 'Profile';
   id: any;
-  handle?: any | null;
+  handle?: {
+    __typename?: 'HandleInfo';
+    id: any;
+    fullHandle: any;
+    namespace: string;
+    localName: string;
+    ownedBy: any;
+    suggestedFormatted: { __typename?: 'SuggestedFormattedHandle'; full: string; localName: string };
+    linkedTo?: {
+      __typename?: 'HandleLinkedTo';
+      nftTokenId: any;
+      contract: { __typename?: 'NetworkAddress'; address: any; chainId: any };
+    } | null;
+  } | null;
   ownedBy: { __typename?: 'NetworkAddress'; address: any };
   operations: {
     __typename?: 'ProfileOperations';
@@ -5522,7 +5625,24 @@ export type MomokaTransactionQuery = {
           by: {
             __typename?: 'Profile';
             id: any;
-            handle?: any | null;
+            handle?: {
+              __typename?: 'HandleInfo';
+              id: any;
+              fullHandle: any;
+              namespace: string;
+              localName: string;
+              ownedBy: any;
+              suggestedFormatted: {
+                __typename?: 'SuggestedFormattedHandle';
+                full: string;
+                localName: string;
+              };
+              linkedTo?: {
+                __typename?: 'HandleLinkedTo';
+                nftTokenId: any;
+                contract: { __typename?: 'NetworkAddress'; address: any; chainId: any };
+              } | null;
+            } | null;
             ownedBy: { __typename?: 'NetworkAddress'; address: any };
             operations: {
               __typename?: 'ProfileOperations';
@@ -5585,7 +5705,24 @@ export type MomokaTransactionQuery = {
           by: {
             __typename?: 'Profile';
             id: any;
-            handle?: any | null;
+            handle?: {
+              __typename?: 'HandleInfo';
+              id: any;
+              fullHandle: any;
+              namespace: string;
+              localName: string;
+              ownedBy: any;
+              suggestedFormatted: {
+                __typename?: 'SuggestedFormattedHandle';
+                full: string;
+                localName: string;
+              };
+              linkedTo?: {
+                __typename?: 'HandleLinkedTo';
+                nftTokenId: any;
+                contract: { __typename?: 'NetworkAddress'; address: any; chainId: any };
+              } | null;
+            } | null;
             ownedBy: { __typename?: 'NetworkAddress'; address: any };
             operations: {
               __typename?: 'ProfileOperations';
@@ -5648,7 +5785,24 @@ export type MomokaTransactionQuery = {
           by: {
             __typename?: 'Profile';
             id: any;
-            handle?: any | null;
+            handle?: {
+              __typename?: 'HandleInfo';
+              id: any;
+              fullHandle: any;
+              namespace: string;
+              localName: string;
+              ownedBy: any;
+              suggestedFormatted: {
+                __typename?: 'SuggestedFormattedHandle';
+                full: string;
+                localName: string;
+              };
+              linkedTo?: {
+                __typename?: 'HandleLinkedTo';
+                nftTokenId: any;
+                contract: { __typename?: 'NetworkAddress'; address: any; chainId: any };
+              } | null;
+            } | null;
             ownedBy: { __typename?: 'NetworkAddress'; address: any };
             operations: {
               __typename?: 'ProfileOperations';
@@ -5711,7 +5865,24 @@ export type MomokaTransactionQuery = {
           by: {
             __typename?: 'Profile';
             id: any;
-            handle?: any | null;
+            handle?: {
+              __typename?: 'HandleInfo';
+              id: any;
+              fullHandle: any;
+              namespace: string;
+              localName: string;
+              ownedBy: any;
+              suggestedFormatted: {
+                __typename?: 'SuggestedFormattedHandle';
+                full: string;
+                localName: string;
+              };
+              linkedTo?: {
+                __typename?: 'HandleLinkedTo';
+                nftTokenId: any;
+                contract: { __typename?: 'NetworkAddress'; address: any; chainId: any };
+              } | null;
+            } | null;
             ownedBy: { __typename?: 'NetworkAddress'; address: any };
             operations: {
               __typename?: 'ProfileOperations';
@@ -5786,7 +5957,24 @@ export type MomokaTransactionsQuery = {
             by: {
               __typename?: 'Profile';
               id: any;
-              handle?: any | null;
+              handle?: {
+                __typename?: 'HandleInfo';
+                id: any;
+                fullHandle: any;
+                namespace: string;
+                localName: string;
+                ownedBy: any;
+                suggestedFormatted: {
+                  __typename?: 'SuggestedFormattedHandle';
+                  full: string;
+                  localName: string;
+                };
+                linkedTo?: {
+                  __typename?: 'HandleLinkedTo';
+                  nftTokenId: any;
+                  contract: { __typename?: 'NetworkAddress'; address: any; chainId: any };
+                } | null;
+              } | null;
               ownedBy: { __typename?: 'NetworkAddress'; address: any };
               operations: {
                 __typename?: 'ProfileOperations';
@@ -5849,7 +6037,24 @@ export type MomokaTransactionsQuery = {
             by: {
               __typename?: 'Profile';
               id: any;
-              handle?: any | null;
+              handle?: {
+                __typename?: 'HandleInfo';
+                id: any;
+                fullHandle: any;
+                namespace: string;
+                localName: string;
+                ownedBy: any;
+                suggestedFormatted: {
+                  __typename?: 'SuggestedFormattedHandle';
+                  full: string;
+                  localName: string;
+                };
+                linkedTo?: {
+                  __typename?: 'HandleLinkedTo';
+                  nftTokenId: any;
+                  contract: { __typename?: 'NetworkAddress'; address: any; chainId: any };
+                } | null;
+              } | null;
               ownedBy: { __typename?: 'NetworkAddress'; address: any };
               operations: {
                 __typename?: 'ProfileOperations';
@@ -5912,7 +6117,24 @@ export type MomokaTransactionsQuery = {
             by: {
               __typename?: 'Profile';
               id: any;
-              handle?: any | null;
+              handle?: {
+                __typename?: 'HandleInfo';
+                id: any;
+                fullHandle: any;
+                namespace: string;
+                localName: string;
+                ownedBy: any;
+                suggestedFormatted: {
+                  __typename?: 'SuggestedFormattedHandle';
+                  full: string;
+                  localName: string;
+                };
+                linkedTo?: {
+                  __typename?: 'HandleLinkedTo';
+                  nftTokenId: any;
+                  contract: { __typename?: 'NetworkAddress'; address: any; chainId: any };
+                } | null;
+              } | null;
               ownedBy: { __typename?: 'NetworkAddress'; address: any };
               operations: {
                 __typename?: 'ProfileOperations';
@@ -5975,7 +6197,24 @@ export type MomokaTransactionsQuery = {
             by: {
               __typename?: 'Profile';
               id: any;
-              handle?: any | null;
+              handle?: {
+                __typename?: 'HandleInfo';
+                id: any;
+                fullHandle: any;
+                namespace: string;
+                localName: string;
+                ownedBy: any;
+                suggestedFormatted: {
+                  __typename?: 'SuggestedFormattedHandle';
+                  full: string;
+                  localName: string;
+                };
+                linkedTo?: {
+                  __typename?: 'HandleLinkedTo';
+                  nftTokenId: any;
+                  contract: { __typename?: 'NetworkAddress'; address: any; chainId: any };
+                } | null;
+              } | null;
               ownedBy: { __typename?: 'NetworkAddress'; address: any };
               operations: {
                 __typename?: 'ProfileOperations';
@@ -6040,7 +6279,20 @@ export type ProfileQuery = {
   profile?: {
     __typename?: 'Profile';
     id: any;
-    handle?: any | null;
+    handle?: {
+      __typename?: 'HandleInfo';
+      id: any;
+      fullHandle: any;
+      namespace: string;
+      localName: string;
+      ownedBy: any;
+      suggestedFormatted: { __typename?: 'SuggestedFormattedHandle'; full: string; localName: string };
+      linkedTo?: {
+        __typename?: 'HandleLinkedTo';
+        nftTokenId: any;
+        contract: { __typename?: 'NetworkAddress'; address: any; chainId: any };
+      } | null;
+    } | null;
     ownedBy: { __typename?: 'NetworkAddress'; address: any };
     operations: {
       __typename?: 'ProfileOperations';
@@ -6099,7 +6351,20 @@ export type ProfilesManagedQuery = {
     items: Array<{
       __typename?: 'Profile';
       id: any;
-      handle?: any | null;
+      handle?: {
+        __typename?: 'HandleInfo';
+        id: any;
+        fullHandle: any;
+        namespace: string;
+        localName: string;
+        ownedBy: any;
+        suggestedFormatted: { __typename?: 'SuggestedFormattedHandle'; full: string; localName: string };
+        linkedTo?: {
+          __typename?: 'HandleLinkedTo';
+          nftTokenId: any;
+          contract: { __typename?: 'NetworkAddress'; address: any; chainId: any };
+        } | null;
+      } | null;
       ownedBy: { __typename?: 'NetworkAddress'; address: any };
       operations: {
         __typename?: 'ProfileOperations';
@@ -6287,13 +6552,6 @@ const result: PossibleTypesResultData = {
     FeedHighlight: ['Post', 'Quote'],
     FollowModule: ['FeeFollowModuleSettings', 'RevertFollowModuleSettings', 'UnknownFollowModuleSettings'],
     LensProfileManagerRelayResult: ['LensProfileManagerRelayError', 'RelaySuccess'],
-    MetadataAttribute: [
-      'MetadataBooleanAttribute',
-      'MetadataDateAttribute',
-      'MetadataJSONAttribute',
-      'MetadataNumberAttribute',
-      'MetadataStringAttribute'
-    ],
     MirrorablePublication: ['Comment', 'Post', 'Quote'],
     MomokaTransaction: [
       'MomokaCommentTransaction',
@@ -6438,7 +6696,24 @@ export const AnyPublicationMetadataFieldsFragmentDoc = gql`
 export const ProfileFieldsFragmentDoc = gql`
   fragment ProfileFields on Profile {
     id
-    handle
+    handle {
+      id
+      fullHandle
+      namespace
+      localName
+      suggestedFormatted {
+        full
+        localName
+      }
+      linkedTo {
+        contract {
+          address
+          chainId
+        }
+        nftTokenId
+      }
+      ownedBy
+    }
     ownedBy {
       address
     }

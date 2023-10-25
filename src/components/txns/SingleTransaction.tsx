@@ -62,7 +62,7 @@ const SingleTransaction: FC<Props> = ({ txn }) => {
               />
             </span>
             <span className="truncate hover:text-[#C58C89] hover:dark:text-[#F5D4D2]">
-              {txn.publication.by.handle || txn.publication.by.id}
+              {txn.publication.by.handle?.suggestedFormatted.localName || txn.publication.by.id}
             </span>
           </span>
         </Link>
