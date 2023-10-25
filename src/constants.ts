@@ -5,7 +5,8 @@ export const WC_PROJECT_ID = '56d00bfc0436773edd053b651aec9399';
 
 export enum HeyUrl {
   STAGING = 'https://staging.hey.xyz',
-  TESTNET = 'https://testnet.hey.xyz',
+  // TODO: revert to testnet once we have a testnet deployment
+  TESTNET = 'https://v2.hey.xyz',
   PRODUCTION = 'https://hey.xyz'
 }
 
