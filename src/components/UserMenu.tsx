@@ -17,7 +17,7 @@ const UserMenu: FC = () => {
   const { address } = useAccount();
 
   const { data, loading } = useProfilesManagedQuery({
-    variables: { request: { for: [address] } },
+    variables: { request: { for: address } },
     skip: !address
   });
   const profiles = data?.profilesManaged.items as Profile[];
