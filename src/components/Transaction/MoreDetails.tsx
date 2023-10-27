@@ -10,7 +10,6 @@ import { usePublicationQuery } from '@/generated';
 
 import Card from '../ui/Card';
 import { Meta } from '.';
-import Verify from './Verify';
 
 interface MoreDetailsProps {
   momokaTransaction: MomokaTransaction;
@@ -64,7 +63,7 @@ const MoreDetails: FC<MoreDetailsProps> = ({ momokaTransaction }) => {
                   ) : null
                 }
               />
-              <Meta title="Verify with a node" value={<Verify momokaTransaction={momokaTransaction} />} />
+              {/* <Meta title="Verify with a node" value={<Verify momokaTransaction={momokaTransaction} />} /> */}
             </Disclosure.Panel>
           </>
         )}
