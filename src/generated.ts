@@ -247,6 +247,16 @@ export type BroadcastRequest = {
   signature: Scalars['Signature'];
 };
 
+export type CanClaimRequest = {
+  addresses: Array<Scalars['EvmAddress']>;
+};
+
+export type CanClaimResult = {
+  __typename?: 'CanClaimResult';
+  address: Scalars['EvmAddress'];
+  canClaim: Scalars['Boolean'];
+};
+
 export type CanDecryptResponse = {
   __typename?: 'CanDecryptResponse';
   extraDetails?: Maybe<Scalars['String']>;
@@ -378,7 +388,7 @@ export type Comment = {
   profilesMentioned: Array<ProfileMentioned>;
   publishedOn?: Maybe<App>;
   referenceModule?: Maybe<ReferenceModule>;
-  root: Post;
+  root: CommentablePublication;
   stats: PublicationStats;
   txHash?: Maybe<Scalars['TxHash']>;
 };
@@ -398,6 +408,8 @@ export enum CommentRankingFilterType {
   NoneRelevant = 'NONE_RELEVANT',
   Relevant = 'RELEVANT'
 }
+
+export type CommentablePublication = Post | Quote;
 
 export enum ComparisonOperatorConditionType {
   Equal = 'EQUAL',
@@ -561,7 +573,34 @@ export type CreateLegacyCollectBroadcastItemResult = {
   /** This broadcast item ID */
   id: Scalars['BroadcastId'];
   /** The typed data */
-  typedData: CreateActOnOpenActionEip712TypedData;
+  typedData: CreateLegacyCollectEip712TypedData;
+};
+
+export type CreateLegacyCollectEip712TypedData = {
+  __typename?: 'CreateLegacyCollectEIP712TypedData';
+  /** The typed data domain */
+  domain: Eip712TypedDataDomain;
+  /** The types */
+  types: CreateLegacyCollectEip712TypedDataTypes;
+  /** The values */
+  value: CreateLegacyCollectEip712TypedDataValue;
+};
+
+export type CreateLegacyCollectEip712TypedDataTypes = {
+  __typename?: 'CreateLegacyCollectEIP712TypedDataTypes';
+  CollectLegacy: Array<Eip712TypedDataField>;
+};
+
+export type CreateLegacyCollectEip712TypedDataValue = {
+  __typename?: 'CreateLegacyCollectEIP712TypedDataValue';
+  collectModuleData: Scalars['BlockchainData'];
+  collectorProfileId: Scalars['ProfileId'];
+  deadline: Scalars['UnixTimestamp'];
+  nonce: Scalars['Nonce'];
+  publicationCollectedId: Scalars['OnchainPublicationId'];
+  publicationCollectedProfileId: Scalars['ProfileId'];
+  referrerProfileId: Scalars['ProfileId'];
+  referrerPubId: Scalars['OnchainPublicationId'];
 };
 
 export type CreateLinkHandleToProfileBroadcastItemResult = {
@@ -1129,7 +1168,8 @@ export enum DecryptFailReasonType {
   ProfileDoesNotExist = 'PROFILE_DOES_NOT_EXIST',
   PublicationIsNotGated = 'PUBLICATION_IS_NOT_GATED',
   UnauthorizedAddress = 'UNAUTHORIZED_ADDRESS',
-  UnauthorizedBalance = 'UNAUTHORIZED_BALANCE'
+  UnauthorizedBalance = 'UNAUTHORIZED_BALANCE',
+  Unsupported = 'UNSUPPORTED'
 }
 
 export type DefaultProfileRequest = {
@@ -1685,8 +1725,8 @@ export type InternalAllowedDomainsRequest = {
 
 export type InternalClaimRequest = {
   address: Scalars['EvmAddress'];
-  freeTextHandle: Scalars['Boolean'];
-  handle: Scalars['CreateHandle'];
+  freeTextHandle?: InputMaybe<Scalars['Boolean']>;
+  handle?: InputMaybe<Scalars['CreateHandle']>;
   overrideAlreadyClaimed: Scalars['Boolean'];
   overrideTradeMark: Scalars['Boolean'];
   secret: Scalars['String'];
@@ -3613,6 +3653,7 @@ export type ProfileOperations = {
   canFollow: TriStateValue;
   canUnblock: Scalars['Boolean'];
   canUnfollow: Scalars['Boolean'];
+  hasBlockedMe: OptimisticStatusResult;
   id: Scalars['ProfileId'];
   isBlockedByMe: OptimisticStatusResult;
   isFollowedByMe: OptimisticStatusResult;
@@ -3771,8 +3812,6 @@ export type PublicationBookmarksRequest = {
 };
 
 export type PublicationBookmarksWhere = {
-  cursor?: InputMaybe<Scalars['Cursor']>;
-  limit?: InputMaybe<LimitType>;
   metadata?: InputMaybe<PublicationMetadataFilters>;
 };
 
@@ -4135,6 +4174,7 @@ export type Query = {
   __typename?: 'Query';
   approvedAuthentications: PaginatedApprovedAuthenticationResult;
   approvedModuleAllowanceAmount: Array<ApprovedAllowanceAmountResult>;
+  canClaim: Array<CanClaimResult>;
   challenge: AuthChallengeResult;
   claimableProfiles: ClaimableProfilesResult;
   claimableStatus: ClaimProfileStatusType;
@@ -4223,6 +4263,10 @@ export type QueryApprovedAuthenticationsArgs = {
 
 export type QueryApprovedModuleAllowanceAmountArgs = {
   request: ApprovedModuleAllowanceAmountRequest;
+};
+
+export type QueryCanClaimArgs = {
+  request: CanClaimRequest;
 };
 
 export type QueryChallengeArgs = {
@@ -5126,8 +5170,6 @@ export type WhoReactedPublicationRequest = {
 
 export type WhoReactedPublicationWhere = {
   anyOf?: InputMaybe<Array<PublicationReactionType>>;
-  cursor?: InputMaybe<Scalars['Cursor']>;
-  limit?: InputMaybe<LimitType>;
 };
 
 export type WorldcoinIdentity = {
@@ -6547,6 +6589,7 @@ const result: PossibleTypesResultData = {
     Asset: ['Erc20'],
     BroadcastMomokaResult: ['CreateMomokaPublicationResult', 'RelayError'],
     ClaimProfileWithHandleResult: ['ClaimProfileWithHandleErrorResult', 'RelaySuccess'],
+    CommentablePublication: ['Post', 'Quote'],
     CreateProfileWithHandleResult: ['CreateProfileWithHandleErrorResult', 'RelaySuccess'],
     ExplorePublication: ['Post', 'Quote'],
     FeedHighlight: ['Post', 'Quote'],
