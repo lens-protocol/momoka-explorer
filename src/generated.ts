@@ -1327,6 +1327,8 @@ export type EventMetadataV3 = {
   appId?: Maybe<Scalars['AppId']>;
   attachments?: Maybe<Array<PublicationMetadataMedia>>;
   attributes?: Maybe<Array<MetadataAttribute>>;
+  /** Optional content. Empty if not set. */
+  content: Scalars['EncryptableMarkdown'];
   contentWarning?: Maybe<PublicationContentWarningType>;
   encryptedWith?: Maybe<PublicationMetadataEncryptionStrategy>;
   endsAt: Scalars['EncryptableDateTime'];
@@ -1340,6 +1342,8 @@ export type EventMetadataV3 = {
   rawURI: Scalars['URI'];
   startsAt: Scalars['EncryptableDateTime'];
   tags?: Maybe<Array<Scalars['String']>>;
+  /** The optional title of the event. Empty if not set. */
+  title: Scalars['String'];
 };
 
 /** Possible sort criteria for exploring profiles */

@@ -11,16 +11,9 @@ const getConfig = (
   switch (network) {
     case 'mainnet':
       return {
-        apiEndpoint: LensEndpoint.TESTNET,
-        heyUrl: HeyUrl.TESTNET,
-        verifierNetwork: VerifierNetwork.MUMBAI,
-        verifierDeployment: VerifierDeployment.PRODUCTION
-      };
-    case 'testnet':
-      return {
-        apiEndpoint: LensEndpoint.TESTNET,
-        heyUrl: HeyUrl.TESTNET,
-        verifierNetwork: VerifierNetwork.MUMBAI,
+        apiEndpoint: LensEndpoint.PRODUCTION,
+        heyUrl: HeyUrl.PRODUCTION,
+        verifierNetwork: VerifierNetwork.POLYGON,
         verifierDeployment: VerifierDeployment.PRODUCTION
       };
     default:
