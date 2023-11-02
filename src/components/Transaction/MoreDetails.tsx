@@ -45,7 +45,9 @@ const MoreDetails: FC<MoreDetailsProps> = ({ momokaTransaction }) => {
               <ChevronUpIcon className={`${!open ? 'rotate-180 transform' : ''} h-5 w-5`} />
             </Disclosure.Button>
             <Disclosure.Panel className="pb-2 text-sm">
-              <Meta title="On-chain Content URI" value={(data?.publication as any)?.metadata.rawUri} />
+              {(data?.publication as any)?.metadata.rawUri ? (
+                <Meta title="On-chain Content URI" value={(data?.publication as any)?.metadata.rawUri} />
+              ) : null}
               <Meta
                 title="Transaction Data"
                 value={
