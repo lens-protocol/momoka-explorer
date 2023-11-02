@@ -1,4 +1,3 @@
-import { XCircleIcon } from '@heroicons/react/20/solid';
 import {
   ArrowTopRightOnSquareIcon,
   BoltIcon,
@@ -6,7 +5,6 @@ import {
   DocumentDuplicateIcon
 } from '@heroicons/react/24/outline';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
-import clsx from 'clsx';
 import dayjs from 'dayjs';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -136,7 +134,7 @@ const Transaction: FC = () => {
               </div>
             }
           />
-          <Meta
+          {/* <Meta
             title="Status"
             value={
               <div className="flex items-center space-x-2">
@@ -159,7 +157,7 @@ const Transaction: FC = () => {
                 )}
               </div>
             }
-          />
+          /> */}
           <Meta
             title="Submitter"
             value={
