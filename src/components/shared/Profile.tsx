@@ -17,7 +17,7 @@ const Profile: FC<ProfileProps> = ({ profile }) => {
         <div className="font-bold">
           {profile?.metadata?.displayName ?? formatAddress(profile?.ownedBy.address)}
         </div>
-        <div className="text-xs">@{profile?.handle?.suggestedFormatted.localName || profile?.id}</div>
+        <div className="text-xs">{profile?.handle?.suggestedFormatted.localName || profile?.id}</div>
       </div>
     </Link>
   );
