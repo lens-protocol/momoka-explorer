@@ -1,23 +1,16 @@
 import { Listbox, Transition } from '@headlessui/react';
-import { BeakerIcon, ChevronUpDownIcon, CubeIcon, WrenchIcon } from '@heroicons/react/24/outline';
+import { ChevronUpDownIcon, CubeIcon, WrenchIcon } from '@heroicons/react/24/outline';
 import React, { Fragment } from 'react';
-import { useAccount } from 'wagmi';
 
-import { FEATURE_FLAGS } from '@/constants';
 import { useAppPersistStore } from '@/store/app';
-import getIsFeatureEnabled from '@/utils/getIsFeatureEnabled';
 
 export const allNetworks = [
   { name: 'Mainnet', id: 'mainnet', icon: <CubeIcon className="h-4 w-4" /> },
-  { name: 'Staging', id: 'staging', icon: <BeakerIcon className="h-4 w-4" /> },
   { name: 'Testnet', id: 'testnet', icon: <WrenchIcon className="h-4 w-4" /> }
 ];
 
 const Network = () => {
-  const { address } = useAccount();
-  const networks = getIsFeatureEnabled(FEATURE_FLAGS.STAGING_ENVIRONMENT, address as string)
-    ? allNetworks
-    : allNetworks.filter((n) => n.id !== 'staging');
+  const networks = allNetworks;
   const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
   const setSelectedEnvironment = useAppPersistStore((state) => state.setSelectedEnvironment);
 

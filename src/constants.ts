@@ -4,16 +4,13 @@ export const BUNDLR_SPENT_API = 'https://node1.bundlr.network/bulk/account/spend
 export const WC_PROJECT_ID = '56d00bfc0436773edd053b651aec9399';
 
 export enum HeyUrl {
-  STAGING = 'https://staging.hey.xyz',
-  // TODO: revert to testnet once we have a testnet deployment
-  TESTNET = 'https://v2.hey.xyz',
+  TESTNET = 'https://testnet.hey.xyz',
   PRODUCTION = 'https://hey.xyz'
 }
 
 export enum LensEndpoint {
-  STAGING = 'https://staging-api-social-mumbai.lens.crtlkey.com',
   TESTNET = 'https://api-v2-mumbai.lens.dev',
-  PRODUCTION = 'https://api.lens.dev'
+  PRODUCTION = 'https://api-v2.lens.dev'
 }
 
 export enum VerifierNetwork {
@@ -24,7 +21,6 @@ export enum VerifierNetwork {
 
 export enum VerifierDeployment {
   PRODUCTION = 'PRODUCTION',
-  STAGING = 'STAGING',
   LOCAL = 'LOCAL'
 }
 

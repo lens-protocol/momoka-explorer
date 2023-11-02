@@ -23,13 +23,6 @@ const getConfig = (
         verifierNetwork: VerifierNetwork.MUMBAI,
         verifierDeployment: VerifierDeployment.PRODUCTION
       };
-    case 'staging':
-      return {
-        apiEndpoint: LensEndpoint.TESTNET,
-        heyUrl: HeyUrl.TESTNET,
-        verifierNetwork: VerifierNetwork.MUMBAI,
-        verifierDeployment: VerifierDeployment.PRODUCTION
-      };
     default:
       return {
         apiEndpoint: LensEndpoint.TESTNET,
