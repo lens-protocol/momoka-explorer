@@ -1,13 +1,33 @@
-query Publication($request: PublicationQueryRequest!) {
+query Publication($request: PublicationRequest!) {
   publication(request: $request) {
     ... on Post {
-      onChainContentURI
+      metadata {
+        ...AnyPublicationMetadataFields
+      }
     }
     ... on Comment {
-      onChainContentURI
+      metadata {
+        ...AnyPublicationMetadataFields
+      }
+    }
+    ... on Quote {
+      metadata {
+        ...AnyPublicationMetadataFields
+      }
     }
     ... on Mirror {
-      onChainContentURI
+      mirrorOn {
+        ... on Post {
+          metadata {
+            ...AnyPublicationMetadataFields
+          }
+        }
+        ... on Comment {
+          metadata {
+            ...AnyPublicationMetadataFields
+          }
+        }
+      }
     }
   }
 }

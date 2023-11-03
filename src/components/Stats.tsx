@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React, { useEffect } from 'react';
 
-import { useDaSummaryLazyQuery, useDataAvailabilitySubmittersLazyQuery } from '@/generated';
+import { useMomokaSubmittersLazyQuery, useMomokaSummaryLazyQuery } from '@/generated';
 import useSubmitterSpent from '@/hooks/useSubmitterSpent';
 import { useAppStore } from '@/store/app';
 import formatNumber from '@/utils/formatNumber';
@@ -20,20 +20,20 @@ const Stats = () => {
   const totalSpent = useAppStore((state) => state.totalSpent);
   const maticMarketPrice = useAppStore((state) => state.maticMarketPrice);
 
-  const [fetchTopSubmitter, { loading: submittersDataLoading }] = useDataAvailabilitySubmittersLazyQuery({
+  const [fetchTopSubmitter, { loading: submittersDataLoading }] = useMomokaSubmittersLazyQuery({
     fetchPolicy: 'no-cache'
   });
-  const [fetchAllCount, { loading }] = useDaSummaryLazyQuery({ fetchPolicy: 'no-cache' });
+  const [fetchAllCount, { loading }] = useMomokaSummaryLazyQuery({ fetchPolicy: 'no-cache' });
   const { fetchData: fetchSpentAmount, loading: fetchingSpentAmount } = useSubmitterSpent();
 
   const fetchCounts = async () => {
     const { data: countData } = await fetchAllCount();
     const { data: submittersData } = await fetchTopSubmitter();
-    setAllTransactionsCount(countData?.dataAvailabilitySummary.totalTransactions ?? 0);
-    if (submittersData?.dataAvailabilitySubmitters?.items[0]) {
-      const submitters = submittersData?.dataAvailabilitySubmitters.items.map((el) => el.address);
+    setAllTransactionsCount(countData?.momokaSummary.totalTransactions ?? 0);
+    if (submittersData?.momokaSubmitters?.items[0]) {
+      const submitters = submittersData?.momokaSubmitters.items.map((el) => el.address);
       fetchSpentAmount(submitters);
-      setTopSubmitter(submittersData?.dataAvailabilitySubmitters?.items[0]);
+      setTopSubmitter(submittersData?.momokaSubmitters?.items[0]);
     }
   };
 

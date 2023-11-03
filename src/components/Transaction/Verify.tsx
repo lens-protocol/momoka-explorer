@@ -3,7 +3,7 @@ import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/24/solid';
 import type { FC } from 'react';
 import { useState } from 'react';
 
-import type { DataAvailabilityTransactionUnion } from '@/generated';
+import type { MomokaTransaction } from '@/generated';
 import { useAppPersistStore } from '@/store/app';
 import isDataVerified from '@/utils/isDataVerified';
 
@@ -11,10 +11,10 @@ import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
 
 interface VerifyProps {
-  dataAvailabilityTransaction: DataAvailabilityTransactionUnion;
+  momokaTransaction: MomokaTransaction;
 }
 
-const Verify: FC<VerifyProps> = ({ dataAvailabilityTransaction }) => {
+const Verify: FC<VerifyProps> = ({ momokaTransaction }) => {
   const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
   const [nodeUrl, setNodeUrl] = useState<string>(
     selectedEnvironment.id === 'mainnet'
@@ -43,7 +43,7 @@ const Verify: FC<VerifyProps> = ({ dataAvailabilityTransaction }) => {
           className="px-5 py-3 text-[13px] font-bold uppercase leading-[13px] text-[#383838]"
           onClick={() => {
             setLoading(true);
-            isDataVerified(dataAvailabilityTransaction.transactionId, nodeUrl, selectedEnvironment.id)
+            isDataVerified(momokaTransaction.transactionId, nodeUrl, selectedEnvironment.id)
               .then(({ verified, message }) => {
                 setStatus(verified ? 'VERIFIED' : 'NOT_VERIFIED');
                 setMessage(message);

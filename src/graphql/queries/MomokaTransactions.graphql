@@ -1,0 +1,21 @@
+query MomokaTransactions($request: MomokaTransactionsRequest!) {
+  momokaTransactions(request: $request) {
+    items {
+      ... on MomokaPostTransaction {
+        ...MomokaPostFields
+      }
+      ... on MomokaCommentTransaction {
+        ...MomokaCommentFields
+      }
+      ... on MomokaMirrorTransaction {
+        ...MomokaMirrorFields
+      }
+      ... on MomokaQuoteTransaction {
+        ...MomokaQuoteFields
+      }
+    }
+    pageInfo {
+      next
+    }
+  }
+}

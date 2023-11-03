@@ -1,15 +1,15 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import type { DataAvailabilitySubmitterResult, DataAvailabilityTransactionUnion } from '@/generated';
+import type { MomokaSubmitterResult, MomokaTransaction } from '@/generated';
 
 interface State {
-  lastFinalizedTransaction: DataAvailabilityTransactionUnion | null;
-  setLastFinalizedTransaction: (id: DataAvailabilityTransactionUnion) => void;
+  lastFinalizedTransaction: MomokaTransaction | null;
+  setLastFinalizedTransaction: (id: MomokaTransaction) => void;
   allTransactionsCount: number;
   setAllTransactionsCount: (latestTransactions: number) => void;
-  topSubmitter: DataAvailabilitySubmitterResult | null;
-  setTopSubmitter: (topSubmitter: DataAvailabilitySubmitterResult) => void;
+  topSubmitter: MomokaSubmitterResult | null;
+  setTopSubmitter: (topSubmitter: MomokaSubmitterResult) => void;
   totalSpent: number;
   setTotalSpent: (totalSpent: number) => void;
   maticMarketPrice: number;
@@ -22,7 +22,7 @@ export const useAppStore = create<State>((set) => ({
   allTransactionsCount: 0,
   setAllTransactionsCount: (allTransactionsCount) => set({ allTransactionsCount }),
   topSubmitter: null,
-  setTopSubmitter: (topSubmitter: DataAvailabilitySubmitterResult) => set({ topSubmitter }),
+  setTopSubmitter: (topSubmitter: MomokaSubmitterResult) => set({ topSubmitter }),
   totalSpent: 0,
   setTotalSpent: (totalSpent) => set({ totalSpent }),
   maticMarketPrice: 0,

@@ -3,8 +3,8 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
 
-import type { DataAvailabilityTransactionUnion } from '@/generated';
-import { useDataAvailabilityTransactionLazyQuery } from '@/generated';
+import type { MomokaTransaction } from '@/generated';
+import { useMomokaTransactionLazyQuery } from '@/generated';
 import { useAppPersistStore } from '@/store/app';
 import { useRecentsPersistStore } from '@/store/recents';
 import useDebounce from '@/utils/useDebounce';
@@ -15,7 +15,7 @@ import { Loader } from '../ui/Loader';
 const SearchBar = () => {
   const [keyword, setKeyword] = useState('');
   const [inputClicked, setInputClicked] = useState(false);
-  const [txn, setTxn] = useState<DataAvailabilityTransactionUnion>();
+  const [txn, setTxn] = useState<MomokaTransaction>();
 
   const selectedEnvironment = useAppPersistStore((state) => state.selectedEnvironment);
   const recents = useRecentsPersistStore((state) => state.recents);
@@ -26,7 +26,7 @@ const SearchBar = () => {
   const debouncedValue = useDebounce<string>(keyword, 500);
   const inputElement = useRef<HTMLInputElement>(null);
 
-  const [fetchTxn, { loading }] = useDataAvailabilityTransactionLazyQuery();
+  const [fetchTxn, { loading }] = useMomokaTransactionLazyQuery();
 
   useEffect(() => {
     if (inputElement.current) {
@@ -37,13 +37,13 @@ const SearchBar = () => {
   const onDebounce = async () => {
     if (keyword.trim().length) {
       const { data } = await fetchTxn({
-        variables: { request: { id: keyword.trim() as string } }
+        variables: { request: { for: keyword.trim() as string } }
       });
-      setTxn(data?.dataAvailabilityTransaction as DataAvailabilityTransactionUnion);
+      setTxn(data?.momokaTransaction as MomokaTransaction);
     }
   };
 
-  const storeToRecents = (txn: DataAvailabilityTransactionUnion) => {
+  const storeToRecents = (txn: MomokaTransaction) => {
     const data = {
       network: selectedEnvironment.id,
       ...txn
@@ -96,7 +96,7 @@ const SearchBar = () => {
             className="flex w-full items-center justify-between space-x-2 rounded-xl px-4 py-2 hover:bg-[#FFFFFF] hover:dark:bg-[#565467]"
           >
             <span>{txn?.transactionId}</span>{' '}
-            <span className="truncate text-xs opacity-50">{txn.publicationId}</span>
+            <span className="truncate text-xs opacity-50">{txn.publication.id}</span>
           </Link>
         </div>
       ) : recentsByNetwork.length && inputClicked && !loading ? (
@@ -111,7 +111,7 @@ const SearchBar = () => {
                 <ClockIcon className="h-4 w-4 flex-none" />
                 <span className="truncate">{recent.transactionId}</span>
               </span>
-              <span className="hidden truncate text-xs opacity-50 lg:inline">{recent.publicationId}</span>
+              <span className="hidden truncate text-xs opacity-50 lg:inline">{recent.publication.id}</span>
             </Link>
           ))}
         </div>

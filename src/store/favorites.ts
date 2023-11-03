@@ -1,17 +1,17 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
-import type { DataAvailabilityTransactionUnion } from '@/generated';
+import type { MomokaTransaction } from '@/generated';
 
-export type DataAvailabilityTransactionUnionWithNetwork = DataAvailabilityTransactionUnion & {
+export type MomokaTransactionTransactionWithNetwork = MomokaTransaction & {
   network: string;
 };
 
 interface AppFavoritesState {
-  favorites: DataAvailabilityTransactionUnionWithNetwork[];
-  addFavorite: (favorite: DataAvailabilityTransactionUnion, network: string) => void;
-  removeFavorite: (favorite: DataAvailabilityTransactionUnion, network: string) => void;
-  getFavorites: (network: string) => DataAvailabilityTransactionUnionWithNetwork[];
+  favorites: MomokaTransactionTransactionWithNetwork[];
+  addFavorite: (favorite: MomokaTransactionTransactionWithNetwork, network: string) => void;
+  removeFavorite: (favorite: MomokaTransactionTransactionWithNetwork, network: string) => void;
+  getFavorites: (network: string) => MomokaTransactionTransactionWithNetwork[];
 }
 
 export const useFavoritesPersistStore = create(

@@ -1,99 +1,192 @@
 export const newTransactionQuery = `
-    subscription NewTransaction {
-        newDataAvailabilityTransaction {
-            ... on DataAvailabilityPost {
-                ...DAPostFields
-                __typename
-            }
-            ... on DataAvailabilityComment {
-                ...DACommentFields
-                __typename
-            }
-            ... on DataAvailabilityMirror {
-                ...DAMirrorFields
-                __typename
-            }
-            __typename
-        }
-    }
-    
-    fragment DAPostFields on DataAvailabilityPost {
-        transactionId
-        submitter
-        createdAt
-        appId
-        profile {
-            ...ProfileFields
-            __typename
-        }
-        publicationId
+  subscription NewTransaction {
+    newMomokaTransaction {
+      ... on MomokaPostTransaction {
+        ...MomokaPostFields
         __typename
-    }
-    
-    fragment DACommentFields on DataAvailabilityComment {
-        transactionId
-        submitter
-        createdAt
-        appId
-        profile {
-            ...ProfileFields
-            __typename
-        }
-        publicationId
-        commentedOnProfile {
-            ...ProfileFields
-            __typename
-        }
-        commentedOnPublicationId
+      }
+      ... on MomokaCommentTransaction {
+        ...MomokaCommentFields
         __typename
-    }
-    
-    fragment DAMirrorFields on DataAvailabilityMirror {
-        transactionId
-        submitter
-        createdAt
-        appId
-        profile {
-            ...ProfileFields
-            __typename
-        }
-        publicationId
-        mirrorOfProfile {
-            ...ProfileFields
-            __typename
-        }
-        mirrorOfPublicationId
+      }
+      ... on MomokaMirrorTransaction {
+        ...MomokaMirrorFields
         __typename
+      }
+      ... on MomokaQuoteTransaction {
+        ...MomokaQuoteFields
+        __typename
+      }
+      __typename
     }
+  }
 
-    fragment ProfileFields on Profile {
-        id
-        name
-        handle
-        bio
-        ownedBy
-        stats {
-            totalFollowers
-            totalFollowing
-            totalPosts
-            totalComments
-            totalMirrors
-            __typename
-        }
-        picture {
-            ... on MediaSet {
-                original {
-                    url
-                    __typename
-                }
-                __typename
-            }
-            ... on NftImage {
-                uri
-                __typename
-            }
-            __typename
-        }
-        __typename
+  fragment MomokaPostFields on MomokaPostTransaction {
+    transactionId
+    submitter
+    createdAt
+    app {
+      id
     }
+    publication {
+      id
+      by {
+        ...ProfileFields
+      }
+    }
+    verificationStatus {
+      ... on MomokaVerificationStatusSuccess {
+        verified
+      }
+      ... on MomokaVerificationStatusFailure {
+        status
+      }
+    }
+  }
+
+  fragment MomokaCommentFields on MomokaCommentTransaction {
+    transactionId
+    submitter
+    createdAt
+    app {
+      id
+    }
+    publication {
+      id
+      by {
+        ...ProfileFields
+      }
+    }
+    verificationStatus {
+      ... on MomokaVerificationStatusSuccess {
+        verified
+      }
+      ... on MomokaVerificationStatusFailure {
+        status
+      }
+    }
+  }
+
+  fragment MomokaMirrorFields on MomokaMirrorTransaction {
+    transactionId
+    submitter
+    createdAt
+    app {
+      id
+    }
+    publication {
+      id
+      by {
+        ...ProfileFields
+      }
+    }
+    verificationStatus {
+      ... on MomokaVerificationStatusSuccess {
+        verified
+      }
+      ... on MomokaVerificationStatusFailure {
+        status
+      }
+    }
+  }
+
+  fragment MomokaQuoteFields on MomokaQuoteTransaction {
+    transactionId
+    submitter
+    createdAt
+    app {
+      id
+    }
+    publication {
+      id
+      by {
+        ...ProfileFields
+      }
+    }
+    verificationStatus {
+      ... on MomokaVerificationStatusSuccess {
+        verified
+      }
+      ... on MomokaVerificationStatusFailure {
+        status
+      }
+    }
+  }
+
+  fragment ProfileFields on Profile {
+    id
+    handle {
+      id
+      fullHandle
+      namespace
+      localName
+      suggestedFormatted {
+        full
+        localName
+      }
+      linkedTo {
+        contract {
+          address
+          chainId
+        }
+        nftTokenId
+      }
+      ownedBy
+    }
+    ownedBy {
+      address
+    }
+    operations {
+      id
+      isBlockedByMe {
+        value
+      }
+      isFollowedByMe {
+        value
+      }
+      isFollowingMe {
+        value
+      }
+      canBlock
+      canUnblock
+      canFollow
+      canUnfollow
+    }
+    stats {
+      id
+      followers
+      following
+      comments
+      posts
+      mirrors
+      quotes
+      publications
+      reactions
+      reacted
+      countOpenActions
+    }
+    metadata {
+      displayName
+      bio
+      rawURI
+      appId
+      picture {
+        ... on ImageSet {
+          raw {
+            uri
+          }
+          optimized {
+            uri
+          }
+        }
+        ... on NftImage {
+          image {
+            raw {
+              uri
+            }
+          }
+        }
+      }
+    }
+  }
 `;

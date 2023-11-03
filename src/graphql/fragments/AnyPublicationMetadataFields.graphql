@@ -1,0 +1,47 @@
+fragment AnyPublicationMetadataFields on PublicationMetadata {
+  ... on VideoMetadataV3 {
+    rawURI
+  }
+  ... on ArticleMetadataV3 {
+    rawURI
+  }
+  ... on AudioMetadataV3 {
+    rawURI
+  }
+  ... on CheckingInMetadataV3 {
+    rawURI
+  }
+  ... on EmbedMetadataV3 {
+    rawURI
+  }
+  ... on EventMetadataV3 {
+    rawURI
+  }
+  ... on ImageMetadataV3 {
+    rawURI
+  }
+  ... on LinkMetadataV3 {
+    rawURI
+  }
+  ... on LiveStreamMetadataV3 {
+    rawURI
+  }
+  ... on MintMetadataV3 {
+    rawURI
+  }
+  ... on SpaceMetadataV3 {
+    rawURI
+  }
+  ... on StoryMetadataV3 {
+    rawURI
+  }
+  ... on TextOnlyMetadataV3 {
+    rawURI
+  }
+  ... on ThreeDMetadataV3 {
+    rawURI
+  }
+  ... on TransactionMetadataV3 {
+    rawURI
+  }
+}

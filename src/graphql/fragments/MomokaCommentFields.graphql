@@ -1,0 +1,22 @@
+fragment MomokaCommentFields on MomokaCommentTransaction {
+  transactionId
+  submitter
+  createdAt
+  app {
+    id
+  }
+  publication {
+    id
+    by {
+      ...ProfileFields
+    }
+  }
+  verificationStatus {
+    ... on MomokaVerificationStatusSuccess {
+      verified
+    }
+    ... on MomokaVerificationStatusFailure {
+      status
+    }
+  }
+}

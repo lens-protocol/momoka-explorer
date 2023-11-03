@@ -1,5 +1,5 @@
-query DataAvailabilitySubmitters {
-  dataAvailabilitySubmitters {
+query MomokaSubmitters {
+  momokaSubmitters {
     items {
       address
       name

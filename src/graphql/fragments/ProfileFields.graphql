@@ -1,29 +1,76 @@
 fragment ProfileFields on Profile {
   id
-  name
-  handle
-  bio
-  ownedBy
-  isFollowedByMe
-  stats {
-    totalFollowers
-    totalFollowing
-    totalPosts
-    totalComments
-    totalMirrors
-  }
-  attributes {
-    key
-    value
-  }
-  picture {
-    ... on MediaSet {
-      original {
-        url
-      }
+  handle {
+    id
+    fullHandle
+    namespace
+    localName
+    suggestedFormatted {
+      full
+      localName
     }
-    ... on NftImage {
-      uri
+    linkedTo {
+      contract {
+        address
+        chainId
+      }
+      nftTokenId
+    }
+    ownedBy
+  }
+  ownedBy {
+    address
+  }
+  operations {
+    id
+    isBlockedByMe {
+      value
+    }
+    isFollowedByMe {
+      value
+    }
+    isFollowingMe {
+      value
+    }
+    canBlock
+    canUnblock
+    canFollow
+    canUnfollow
+  }
+  stats {
+    id
+    followers
+    following
+    comments
+    posts
+    mirrors
+    quotes
+    publications
+    reactions
+    reacted
+    countOpenActions
+  }
+  metadata {
+    displayName
+    bio
+    rawURI
+    appId
+    picture {
+      ... on ImageSet {
+        raw {
+          uri
+        }
+        optimized {
+          uri
+        }
+      }
+      ... on NftImage {
+        image {
+          raw {
+            uri
+          }
+        }
+      }
     }
   }
 }

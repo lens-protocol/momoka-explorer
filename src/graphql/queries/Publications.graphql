@@ -4,10 +4,7 @@ query Publications($request: ExplorePublicationRequest!) {
       ... on Post {
         id
       }
-      ... on Comment {
-        id
-      }
-      ... on Mirror {
+      ... on Quote {
         id
       }
     }
