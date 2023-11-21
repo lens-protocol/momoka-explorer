@@ -17,7 +17,6 @@ const Stats = () => {
   const setTopSubmitter = useAppStore((state) => state.setTopSubmitter);
   const topSubmitter = useAppStore((state) => state.topSubmitter);
   const totalSpent = useAppStore((state) => state.totalSpent);
-  const maticMarketPrice = useAppStore((state) => state.maticMarketPrice);
 
   const [fetchTopSubmitter, { loading: submittersDataLoading }] = useMomokaSubmittersLazyQuery({
     fetchPolicy: 'no-cache'
