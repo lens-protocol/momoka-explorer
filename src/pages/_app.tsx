@@ -22,8 +22,6 @@ import client from '@/apollo';
 import Navbar from '@/components/Navbar';
 import MetaTags from '@/components/shared/Metatags';
 import { WC_PROJECT_ID } from '@/constants';
-import { useAppStore } from '@/store/app';
-import getMaticPrice from '@/utils/getMaticPrice';
 
 const ginto = localFont({
   src: [
@@ -96,15 +94,8 @@ const wagmiClient = createConfig({
 export default function App({ Component, pageProps }: AppProps) {
   const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
-  const setMaticMarketPrice = useAppStore((state) => state.setMaticMarketPrice);
-
-  const fetchMaticPrice = async () => {
-    const price = await getMaticPrice();
-    setMaticMarketPrice(price);
-  };
 
   useEffect(() => {
-    fetchMaticPrice();
     setMounted(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -12,8 +12,6 @@ interface State {
   setTopSubmitter: (topSubmitter: MomokaSubmitterResult) => void;
   totalSpent: number;
   setTotalSpent: (totalSpent: number) => void;
-  maticMarketPrice: number;
-  setMaticMarketPrice: (maticMarketPrice: number) => void;
 }
 
 export const useAppStore = create<State>((set) => ({
@@ -24,9 +22,7 @@ export const useAppStore = create<State>((set) => ({
   topSubmitter: null,
   setTopSubmitter: (topSubmitter: MomokaSubmitterResult) => set({ topSubmitter }),
   totalSpent: 0,
-  setTotalSpent: (totalSpent) => set({ totalSpent }),
-  maticMarketPrice: 0,
-  setMaticMarketPrice: (maticMarketPrice) => set({ maticMarketPrice })
+  setTotalSpent: (totalSpent) => set({ totalSpent })
 }));
 
 interface AppPersistState {
