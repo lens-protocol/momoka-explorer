@@ -7,7 +7,6 @@ import { useAppStore } from '@/store/app';
 import formatNumber from '@/utils/formatNumber';
 import { getRelativeTime } from '@/utils/formatTime';
 import sanitizeDStorageUrl from '@/utils/sanitizeDStorageUrl';
-import weiToEth from '@/utils/weiToEth';
 
 import StatsShimmer from './shimmers/StatsShimmer';
 
@@ -46,10 +45,6 @@ const Stats = () => {
     return <StatsShimmer />;
   }
 
-  const getTotalSpentInUsd = () => {
-    return totalSpent ? weiToEth(totalSpent.toString()) * maticMarketPrice : 0;
-  };
-
   return (
     <div className="grid gap-4 lg:grid-cols-4">
       <div className="flex flex-col items-center space-y-0.5 rounded-[20px] bg-[#FFFFFF] p-6 dark:bg-[#2C2B35]">
@@ -64,8 +59,8 @@ const Stats = () => {
           <div className="space-x-2 truncate font-gintoNord">
             {totalSpent && topSubmitter ? (
               <span className="truncate text-2xl font-medium">
-                $ {getTotalSpentInUsd().toFixed(2)} {' | '}${' '}
-                {(getTotalSpentInUsd() / topSubmitter.totalTransactions).toFixed(4)}{' '}
+                $ {Number(totalSpent).toFixed(2)} {' | '}${' '}
+                {(Number(totalSpent) / topSubmitter.totalTransactions).toFixed(4)}{' '}
                 <span className="text-xs">/txn</span>
               </span>
             ) : fetchingSpentAmount ? (

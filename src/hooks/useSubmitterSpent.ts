@@ -13,8 +13,8 @@ const useSubmitterSpent = () => {
     setLoading(true);
     try {
       const response = await axios.post(BUNDLR_SPENT_API, submitters);
-      const { sum } = await response.data;
-      setTotalSpent(sum);
+      const { sumUSD } = await response.data;
+      setTotalSpent(sumUSD);
     } catch (error: any) {
       setError(error);
     } finally {
