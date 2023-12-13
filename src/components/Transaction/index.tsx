@@ -11,7 +11,6 @@ import { useRouter } from 'next/router';
 import type { FC, ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 
-import { apps } from '@/data/apps';
 import type { MomokaTransaction, Profile as TProfile } from '@/generated';
 import { useMomokaTransactionQuery } from '@/generated';
 import Custom404 from '@/pages/404';
@@ -244,14 +243,14 @@ const Transaction: FC = () => {
             title="Posted via"
             value={
               <div className="flex items-center space-x-2">
-                {apps.includes(momokaTransaction?.app?.id) && (
+                {/* {apps.includes(momokaTransaction?.app?.id) && (
                   <img
                     src={`https://static-assets.hey.xyz/images/source/${momokaTransaction?.app?.id}.jpeg`}
                     className="h-5 w-5 rounded-full"
                     alt={momokaTransaction?.app?.id}
                     draggable={false}
                   />
-                )}
+                )} */}
                 <span>{capitalizeCase(momokaTransaction?.app?.id)}</span>
               </div>
             }
