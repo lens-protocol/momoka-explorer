@@ -9,7 +9,7 @@ export enum HeyUrl {
 }
 
 export enum LensEndpoint {
-  TESTNET = 'https://api-v2-mumbai.lens.dev',
+  TESTNET = 'https://api-v2-mumbai-live.lens.dev',
   PRODUCTION = 'https://api-v2.lens.dev'
 }
 
