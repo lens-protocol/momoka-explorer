@@ -27,7 +27,7 @@ const TxnProfile: FC<TxnProfileProps> = ({ profile }) => {
                 {profile.metadata?.displayName ?? formatAddress(profile.ownedBy.address)}
               </h1>
               <h3 className="text-sm font-medium opacity-60">
-                @{profile.handle?.suggestedFormatted.localName || profile.id}
+                {profile.handle?.suggestedFormatted.localName || profile.id}
               </h3>
               <p className="mt-3 text-sm font-medium opacity-60">{profile.metadata?.bio ?? ''}</p>
             </div>
