@@ -9,13 +9,13 @@ export enum HeyUrl {
 }
 
 export enum LensEndpoint {
-  TESTNET = 'https://api-v2-mumbai-live.lens.dev',
+  TESTNET = 'https://api-amoy.lens-v2.crtlkey.com',
   PRODUCTION = 'https://api-v2.lens.dev'
 }
 
 export enum VerifierNetwork {
   POLYGON = 'POLYGON',
-  MUMBAI = 'MUMBAI',
+  AMOY = 'AMOY',
   SANDBOX = 'SANDBOX'
 }
 

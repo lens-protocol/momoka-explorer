@@ -19,7 +19,7 @@ const Verify: FC<VerifyProps> = ({ momokaTransaction }) => {
   const [nodeUrl, setNodeUrl] = useState<string>(
     selectedEnvironment.id === 'mainnet'
       ? 'https://rpc.ankr.com/polygon'
-      : 'https://rpc.ankr.com/polygon_mumbai'
+      : 'https://rpc.ankr.com/polygon_amoy'
   );
   const [status, setStatus] = useState<'UNKNOWN' | 'VERIFIED' | 'NOT_VERIFIED'>('UNKNOWN');
   const [loading, setLoading] = useState<boolean>(false);

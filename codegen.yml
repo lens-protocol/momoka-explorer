@@ -1,4 +1,4 @@
-schema: https://api-v2-mumbai.lens.dev
+schema: https://api-amoy.lens-v2.crtlkey.com
 documents: ['./src/graphql/queries/*.graphql', './src/graphql/fragments/*.graphql']
 
 hooks:
