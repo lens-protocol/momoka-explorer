@@ -1503,10 +1503,10 @@
   resolved "https://registry.yarnpkg.com/@ledgerhq/connect-kit-loader/-/connect-kit-loader-1.1.1.tgz#7f495de1565e393d2d3a9d54c5831ed045e403a2"
   integrity sha512-Jq/CMEw+o5+u6YEcVtkE5UiEDhTjyqro1vo0hDDScf1WdDkxBHahYn/1bL9QEhA4nG5JyfygcL1+CKT+2BilWw==
 
-"@lens-protocol/momoka@^1.1.3":
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/@lens-protocol/momoka/-/momoka-1.1.3.tgz#aa583fb8322ca3d3b547c8a80c72030c6cb1b57a"
-  integrity sha512-Zd367gpt4bhLJOyo6/TASN2VTDG9P1qrkJ9CsQjU8mtvUIei4zVaroz70QtmOWdGfR+V48QMJF+k/gfBX8z8Ag==
+"@lens-protocol/momoka@^2.1.1":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@lens-protocol/momoka/-/momoka-2.1.1.tgz#6f438abaaa12316b309fde4f0eb7aa560a755b31"
+  integrity sha512-UDxAoII0JB2DYM+m8kwlOjY8PvYw4thAfHUjKrimmZ+Imoc1a1pDWprI4K0SR5GEGkeIY4DHTofr0RWL+kHnVg==
   dependencies:
     "@ethersproject/abstract-provider" "^5.7.0"
     "@ethersproject/bytes" "^5.7.0"
@@ -1515,7 +1515,7 @@
     arweave "^1.13.3"
     axios "^1.3.4"
     bluebird "^3.7.2"
-    ethereum-multicall "^2.16.1"
+    ethereum-multicall "^2.24.0"
     ethers "^5.7.2"
     graphql "^16.6.0"
     level "^8.0.0"
@@ -4399,10 +4399,10 @@ eth-rpc-errors@^4.0.2:
   dependencies:
     fast-safe-stringify "^2.0.6"
 
-ethereum-multicall@^2.16.1:
-  version "2.19.0"
-  resolved "https://registry.yarnpkg.com/ethereum-multicall/-/ethereum-multicall-2.19.0.tgz#28462bf48792bf7bb0b2db1ca546f439b2adab96"
-  integrity sha512-ECMxdf1ffxBWTCLeAzEGGWUYNdlNq4zXPj/ZPXdaixbx/qZ/gw4ongwpuR5UGy6D5epWDftvFvIAEzmkwGZ1lQ==
+ethereum-multicall@^2.24.0:
+  version "2.24.0"
+  resolved "https://registry.yarnpkg.com/ethereum-multicall/-/ethereum-multicall-2.24.0.tgz#b6ff351a632cae7882ca24224bd3ea2426b6e213"
+  integrity sha512-+xWNmtWdpL4zOdAF2zeLYa1ZsrHLeU7KLmBAsc0el140qdQmF9ubyM9SwKHzy+xztTHi+eCnmCjknqhEU25gFA==
   dependencies:
     "@ethersproject/providers" "^5.0.10"
     ethers "^5.0.15"

@@ -20,7 +20,7 @@ const getConfig = (
       return {
         apiEndpoint: LensEndpoint.TESTNET,
         heyUrl: HeyUrl.TESTNET,
-        verifierNetwork: VerifierNetwork.MUMBAI,
+        verifierNetwork: VerifierNetwork.AMOY,
         verifierDeployment: VerifierDeployment.PRODUCTION
       };
   }
